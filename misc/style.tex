@@ -1,0 +1,53 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Style
+
+%% Font styles
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[oldstylenums]{kpfonts} 
+\usepackage[osf,sc]{mathpazo} 
+\linespread{1.025}
+\usepackage[scaled=0.85]{beramono} 
+\usepackage{caption}
+\captionsetup{justification=centering,font=sf}
+\renewcommand{\captionsize}{\small}
+
+%% Typography
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{ellipsis} 
+\usepackage{ragged2e}
+
+%% Header
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[headsepline, plainheadsepline, footsepline, plainfootsepline]{scrpage2}
+\pagestyle{scrheadings}
+\automark[chapter]{section}
+\clearscrheadfoot
+\ohead[\headmark]{\headmark}
+\ofoot[\pagemark]{\pagemark}
+\setheadsepline{0.4pt}
+\setfootsepline{0.0pt}
+
+%% Footnote
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[flushmargin,hang]{footmisc}
+
+% Linebreak of source URLs
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[hyphens]{url}
+
+%% Links
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[colorlinks=true,urlcolor=urlcolor,linkcolor=linkcolor,citecolor=citecolor,breaklinks=true,final]{hyperref}
+\urlstyle{same}
+
+
+%% Abstract
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{abstract}
+\renewcommand{\abstractnamefont}{\normalfont\sffamily\bfseries\small}
+\renewcommand{\abstracttextfont}{\normalfont\small}
+
+
+%% Moves Text to the beginning of the line after new paragraph
+%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parindent}{0em} 

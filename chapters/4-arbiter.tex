@@ -1,0 +1,343 @@
+\chapter{Arbiter \acsp{PUF}}
+\label{cap:arbiter}
+
+\todo{change cite Form to [43,32]}
+\apufs were mentioned already in 2002 as new delay-based \puf \cite{Gassend2002SiliconFunctions}.
+Over the last year they got more attention as their implementation is resource-efficient and low cost. \cite{Becker2014ActiveDesigns,Suh2007PhysicalGeneration}
+On the other side there are still major issues due to the security concerns of classic \apufs as described in Sec. \ref{sec:attacksonarbiter} \cite{Ganji2016PACPUFs} \cite{Ruhrmair2014PUFOverview}.
+The relatively simple theoretical design of this \puf makes it appealing to people to seek new improved possible varieties.
+Thereof one of the most known improved version is the \xpuf which will be presented in Sec. \ref{sec:xorarbiterpufs}.
+\xpufs are experiencing still problems which makes it impossible to realize them securely.
+So there is still further improvement based on known enhancements like the \xpuf needed to call \apufs to be practical secure.
+That's why I chose to study \apufs in this thesis.
+
+\section{\apufs}
+\label{sec:arbiter}
+
+The concept of an \apufs is based on the difference of the transit times of two signals which leads to a single bit response. 
+To implement this concept an \apuf has multiple connected stages and an arbiter at the end, see Figure \ref{fig:arbiter}.
+Both signals propagate on parallel paths with the same layout length through all stages until they reach the arbiter.
+The arbiter then outputs the response bit depending on which input of the arbiter was triggered first by one of the signals.
+\textcolor{red}{Every stage has three inputs, two for both signals and one for one bit of the challenge.}
+This challenge bit determines if the signal paths will be crossed in this stage. 
+If the bit is 0, both signals will flow parallel through the stage.
+If the bit is 1, the stage will swapped the signal flow.
+So the paths for the signals through the stages exclusively depends on the challenge $\gls{c} = (c_1, c_2, \cdots, c_n)$.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.00\textwidth]{images/arbiter_puf.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption{\apuf}
+\label{fig:arbiter}
+\end{figure}
+
+The challenge bit length must match the number of stages in the \apuf that every stage gets a challenge bit assigned. 
+This is called the size $\gls{n}$ of the \apuf in this work.
+The circuit is laid out to have equal length on all paths regarding the layout.
+% "Although the circuit is laid out to have equal length on all paths, any physical realization will have different signal delays that are due to chip imperfections."
+But due to the inaccuracies in the manufacturing process of the electronic devices used for the stages which can not be influenced by the producer there is a slight difference in every path of every stage.
+These differences could be seen as the intrinsic unique key of an instance of every \apuf.
+One stage for itself has 4 different signal paths: 
+
+\begin{itemize}
+\item top input - top output: $\gls{t}_0$
+\item bottom input - bottom output: $\gls{t}_1$
+\item top input - bottom output: $\gls{t}_2$
+\item bottom input - top output: $\gls{t}_3$
+\end{itemize}
+
+However there are just two combinations possible as the stage input is a Boolean value.
+Either its top input to top output and bottom output to bottom output or its top input to bottom output and bottom input to top output.
+These combinations leads to the delay differences $\gls{t}_0 - \gls{t}_1 = \delta_0$ and $\gls{t}_2 - \gls{t}_3 = \delta_1$ for the possible input 0 or 1 per stage.
+Additional to the delay differences, which remain constant, deviations are occurring during the \apuf is queried.
+These deviations are called noise and one way to model them is to use two distinct random variables.
+Both variables are normally distributed with mean zero described as follows:
+
+\begin{itemize}
+\item At every stage of the \apuf additionally to the chosen delay differences $\delta_0$ or $\delta_1$ normally distributed noise with zero mean and give variance occurs.
+\item At the arbiter normally distributed noise with zero mean and given variance leads to a different output of the comparison some of the time.
+\end{itemize}
+
+This internal noise leads to a certain amount of so called ‘‘unstable’’ challenges for a specific \apuf. 
+Unstable challenges tend to lead to different responses when evaluating multiple times.
+That is because challenges in combination with the different path delay values can result in a very small difference between the appearing signals on the arbiter.
+This small difference can be changed by the introduced noise or the arbiter can decide wrong due to its own noise every time the \apuf is queried and so the final response can be changed.
+Every challenge has its own stability value.
+Hence if a challenge is called unstable depends on if its stability value is in the stability range which is seen to be unstable.
+
+These are all parts to evaluate and describe an \apuf.
+The constructive \xpuf will be described in Sec. \ref{sec:xorarbiterpufs}.
+One way how a \apuf can be built and its possible internal structure will be presented in Sec. \ref{sec:physical}.
+%A more detailed description how it is build and what the physical features are will be presented in Sec. \ref{sec:physical}.
+The theoretical characterizations as requirement for attacks are part of Sec. \ref{sec:theoretical}.
+Successful attacks on \apufs has been already developed and will be explained in Sec. \ref{sec:attacksonarbiter}.
+
+%========================================
+% n restriction by the size of the chip or costs \cite{Ganji2015WhyPUFs}
+
+\section{\acs{XOR} \apufs}
+\label{sec:xorarbiterpufs}
+
+The \xpuf is one attempt to improve the security of \apufs and has been proposed by Suh and Devadas in 2007 \cite{Suh2007PhysicalGeneration}.
+It combines multiple individual \apufs with a \acf{XOR} function to an \xpuf as shown in Figure \ref{fig:xorarbiter}.
+The added non-linearity increases the complexity to make machine learning attacks more difficult but can not prevent them \cite{Greibach2010OnBifurcation} \cite{Lim2005ExtractingCircuits}.
+Another approach to add non-linearity are Feed-forward \apufs mentioned by Lim et al. \cite{Lim2005ExtractingCircuits}.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.00\textwidth]{images/xor_arbiter.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption{\xpuf}
+\label{fig:xorarbiter}
+\end{figure}
+
+Every \apuf acts as described in Sec. \ref{sec:arbiter}. 
+To improve the security the exclusive or function adds up all responses to hide the response of every single \apuf instance.
+Without knowing the response of an \apuf this prevents them from being directly attacked. 
+To be successful the attacker has to model the whole \xpuf.
+
+The number of combined \apufs $\gls{k}$ has different impacts on the \puf.
+Using more \apufs increases the resistance against modeling attacks but also decreases the robustness which makes the \puf less reliable \cite{Becker2015ThePUFs} \cite{Ganji2015WhyPUFs}.
+Robustness, also called stability, here means the likelihood that the \apuf responses equally when processing the same challenge under the same environmental conditions.
+This opposed relation between robustness and number of \apufs is due the fact that the errors are accumulated by the exclusive or function which leads to a maximum in the number of used \apufs for real applications \cite{Rostami2014RobustMatching}.
+The robustness of an \apuf designed on a 65 nm technology is supposed to be $96 \%$ \cite{Rostami2014RobustMatching}.
+Using $12$ \apufs in a \xpuf leads to a total robustness of approximately $50 \%$ and is not usable as the response is not stable reproducible \cite{Ganji2015WhyPUFs}.
+Considering that the limit for size $\gls{k}$ of a \xpuf is below $12$ \apufs.
+
+The size of the challenge of a \xpuf is the same as the size $\gls{n}$ of the underling \apufs.
+All internal \apufs have the same size.
+The challenge must be distributed to all internal \apufs.
+The approach for \xpufs is to just apply the same challenge to every \apuf.
+However each input bit of an \apuf has a different high likelihood to affect the response.
+This effect will remain with applying the same challenge to all \apufs.
+A better way is to shift the challenge depending on the size of the \puf and the number of \apufs every time before it will be applied to the next \apuf.
+With that in the best case every challenge bit takes every place in the challenge once when getting applied to different \apufs.
+By transforming the challenge the likelihood of every bit to affect the response becomes more balanced which makes the \puf less predictable and more difficult to attack.
+As this challenge transformation is part of Lightweight \pufs it will not be part of this work.
+For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoobi2008LightweightPUFs} .
+
+%========================================
+% Further points
+% Difference between arbiter puf and xor arbiter puf?
+% Why attackers win: On the learnability of XOR arbiter PUFs: LTF Darstellung
+% Warum Stage Distribution und Noice etc: Seite 15 unten \cite{Becker2015ThePUFs}
+% k restriction by the size of the chip or costs
+% the number of noisy response of an XOR PUF is virtually equal to the sum of the number of noisy response of each individual arbiter PUF [21]. In the literature majority voting is suggested as a solution to deal with noisy responses [18,23]. \cite{Ganji2015WhyPUFs}
+% large XOR Arbiter PUFs are infeasible to build, as their stability will decrease exponentially with growing k [8]. Why-Attackers-Lose
+
+\section{Model}
+
+An \apuf and so its intrinsic secret can be manifested in different ways.
+In this work the physical model and theoretical model are studied.
+The physical model is the description how \apufs are build that they can be used for real purpose.
+The theoretical model displays an \apuf which is not unclonable any more and serves thus as representation used as result of attacks explained in Sec. \ref{cap:mla}.
+
+\subsection{Physical}
+\label{sec:physical}
+
+For real world use cases \apufs have to be build as circuits to include them into devices.
+There are different possible engineering techniques to realize them.
+An \ac{ASIC}, \ac{FPGA} or \ac{CPLD} are the most common ones \cite{Maes2012ExperimentalCMOS} \cite{Majzoobi2010FPGALines} \cite{Soybali2011ImplementationFPGA} \cite{Tajik2014PhysicalPUFs}.
+
+\ac{ASIC} makes the most accurate solution, means the circuit fits the logical layout of an \apuf best, possible.
+However for development purpose this technique is very expensive due to high manufacturing costs for producing new wafers as core of an \ac{ASIC} by semiconductor manufacturers every time the layout changes. % because producing wafers as core of an ASIC by semiconductor manufacturers every time the layout changes is complex. 
+Due to that \ac{ASIC} are used when high amount of chips is needed.
+A cheaper way is to use an \ac{FPGA} or \ac{CPLD}. 
+An \ac{FPGA} is an programmable \ac{IC} which can be programmed over and over again with very little effort.
+It consists of an array of \ac{CLB} here called gates connected through an mesh.
+The \ac{HDL} tells the \ac{FPGA} network how to connect the gates to obtain the desired circuity behavior.
+\ac{CPLD} follow a similar principle as the \ac{FPGA} but with some differences as being smaller in terms of resources or less complex structure.
+\ac{FPGA} however suffer from different problems making it difficult to use them as secure \apuf implementation.
+When "programming" the chip with \ac{HDL} its code has to be compiled before transferring.
+In the compilation process the compiler determines which physical gates on the chip will be used for the circuity design due to the specific chip type and its interconnect structure.
+This defines the used circuit traces between the used gates and makes exact symmetric routing in most cases not realizable.
+Asymmetries in routing means that the trace to connect two gates is different in its physical length to its parallel opponent.
+It can lead to bias in the mean of the delay difference distribution making the responses predictable and introduces a lack of randomness \cite{Majzoobi2010FPGALines} \cite{Morozov2010AnFPGA}.
+The variation of the traces can even be higher as the manufacturing variations of the stage implementations so that the response is mainly decided by the routing delays instead of the different variation combination of the used stage paths \cite{Majzoobi2009TechniquesPUFs}.
+To counter these problems a concept of multiple combined \apuf called Double \apuf has been suggested \cite{Machida2015ImplementationFPGA} \cite{Machida2015AFPGA}.
+The examined \apufs of this paper can be implemented as \ac{ASIC} as there are all necessary electronic components can be places and connected freely.
+Hence \apuf implementations by \ac{ASIC} will be further outlined.
+
+The necessary components beside the conductor paths, whose layout have to be designed symmetric and of the same capacitive loads, are implementations of the stages and the arbiter \cite{Maes2012ExperimentalCMOS}.
+For the hardware realization of a single stage two 2-to-1 \ac{MUX} are used as Lee et al. \cite{Lee2004AApplications} or Rührmair et al. \cite{Ruhrmair2013PUFData} suggested.
+There are analog or digital \ac{MUX} available.
+Their design differences lead to a greater delay in passing the signal to its output for digital \ac{MUX} compared to analog ones \cite{2016MultiplexerWikipedia}.
+Additional differences like clipping parts of an continues signal when exceeding a specific voltage does not applies here as the \apuf
+only has sign signals \cite{Semiconductor2002BasicComparison}.
+Hence both types of \ac{MUX} can be used unless they get mixed.
+Fig. \ref{fig:multiplexer} shows a single analog \ac{MUX} and how they are add up to a complete stage component.
+The signals $\gls{s}_1$ and $\gls{s}_2$ are connected to the output $\gls{o}_1$ and $\gls{o}_2$ depending on the challenge bit $c_i$.
+Additional there are some buffers used in the \ac{ASIC} design which yet not needed for understanding.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.70\textwidth]{images/stage_circuit.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+%\cite{Semiconductor2002BasicComparison}
+%\cite{Lee2004AApplications}
+\caption{\ac{MUX} \ac{CMOS} realization and stage circuit}
+\label{fig:multiplexer}
+\end{figure}
+
+The arbiter's task is to determine which signal arrives first at the end of its stage chain.
+For this function a \ac{SR-latch} set-reset-latch is used that can be realized in different ways with NOR, NAND, or AND-OR logic gates \cite{2016Flip-flopWikipedia}.
+Using NAND logic gates is supposed to be the best option since it has a symmetric construction and because of that it is unbiased \cite{Lin2010Low-powerFunctions} \cite{Maes2013PhysicallyApplications.}.
+Fig. \ref{fig:nandarbiter} displays the switching circuit build with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{2016NANDWikipedia}.
+The internal states $r$ and $rb$ are initial high. 
+An rising edge of a signal occurring on $\gls{s}_1$ will pull down $r$ and the other way round.
+Ensured by the cross-coupling only one competing transition can win and the symmetric layout prevents from circuit design based biases.
+NOR logic gates could be used likewise as their \ac{SR-latch} implementation is symmetric.
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.80\textwidth]{images/arbiter_circuit.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+%\cite{Lin2010Low-powerFunctions}
+% https://en.wikipedia.org/wiki/NAND_gate
+\caption{Arbiter switching circuit realized with \ac{CMOS} NAND gates}
+\label{fig:nandarbiter}
+\end{figure}
+
+All presented \apuf \ac{ASIC} implementation properties are considered when creating the \apuf simulation in Sec. \ref{cap:simulationdesign}.
+This work does not study physical \apuf implementations further as they are not part of the attacks itself.
+
+%========================================
+
+\subsection{Theoretical}
+\label{sec:theoretical}
+
+Every \apuf can be exactly represented by a theoretical model when all delay difference values of all stages and the noise distribution attributes are known.
+For clearer notations and easier understanding that the challenge bit 1 flips the signal paths the challenge space will be converted from $\{0, 1\}^n$ to $\{-1, 1\}^n$ for the following equations.
+This can be done by $p(c_i) = (-1)^{c_i}$ which means 0 becomes 1 and 1 becomes -1.
+
+To evaluate the response of a challenge with a specific \puf representation the sum of all delay differences chosen according to this challenge $\Delta D_{\mathrm{Model}}(c)$ and the noise values $\Delta D_{\mathrm{Noise Stage}}$ and $\Delta D_{\mathrm{Noise Arbiter}}$ is made up.
+The final response $\gls{r}$ is then calculated by the signum function of the sum:
+
+\begin{align*}
+r &= \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}})
+\end{align*}
+
+The model $\Delta D_{\mathrm{Model}}(c)$ which is the noise free \apuf representation is the sum of all delay differences chosen according to the current challenge $\gls{c}$.
+As the signal propagates though every stage after another each delay difference of the sum depends on all following challenge bits including its own.
+This is easier to understand by imagine an \apuf with just two stages where the delay difference values of the second stage are 0. 
+The sign of the delay difference sum will be still definite by the challenge bit of the first and second stage as the second challenge bit can always flip its stages paths or not.
+A noise free \apuf model is thus be specified by
+
+\begin{align*}
+\Delta D_{\mathrm{Model}}(c) &= \sum_{i=1}^{n}\left(\delta_{c_{i}}^{(i)}\prod_{j=i}^{n}c_{j}\right),
+\end{align*}
+
+for delay differences $\delta_{c_{i}}^{(i)}$ chosen by the bit of the challenge $c = (c_1, c_2, \cdots, c_n) \in \{-1, 1\}^n$ in the $i$-th stage of $\gls{n}$ stages.
+
+As there are deviations in every component of the \puf when evaluating noise has to be added.
+Noise that occurs at the arbiter $\Delta D_{\mathrm{Noise Arbiter}}$ is a randomly drawn value of a normal distribution with zero mean and given variance $\sigma_{Arbiter Noise}^2$ depending only on the used electronic component.
+% While the variance of the normal distribution where the value for $\Delta D_{\mathrm{Noise Stage}}$ is chosen of depends on the number of stages of the \apuf.
+While the variance of the normal distribution where the value for the total stage noise $\Delta D_{\mathrm{Noise Stage}}$ is chosen of depends beside the used electronic component on the number of stages of the \apuf as their particular noise value distributions add up.
+For that reason its random value is 
+
+\begin{align*}
+\Delta D_{\mathrm{Noise Stage}} \sim \mathcal{N} (m,\ \sqrt[]{n}\ \sigma_{Stage Noise}^2),
+\end{align*}
+
+with mean $m = 0$ and variance $\sigma_{Stage Noise}^2$ per stage for $\gls{n}$ stages.
+The introduced noise leads to unstable challenges as explained in Sec. \ref{sec:arbiter}.
+To define these unstable challenges precisely the stability $\Stab(\gls{c})$ for challenge $\gls{c}$ is equal to
+
+\begin{align*}
+\Pr[\operatorname{sgn}(\operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}})) = \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c))].
+\end{align*}
+
+Within all these parts to completely model an \apuf the noise free model $\Delta D_{\mathrm{Model}}(c)$ is the part with the intrinsic key which want to be attacked.
+As widely common and used in attacks on \apuf the noise free model can be described as linear function of dimension $\gls{n} + 1$ \cite{Majzoobi2008TestingSecurity} \cite{Majzoobi2008LightweightPUFs} \cite{Ruhrmair2010ModelingFunctions} \cite{Becker2015ThePUFs}.
+An equally representation is used in this paper to attack different types of \apufs.
+The function is definite by
+
+\begin{align*}
+\Delta D_{\mathrm{Model}}(x) &= \sum_{i=0}^{n+1} w_i x_i = \langle w,x\rangle,
+\end{align*}
+
+whereas delay vector $w_i = (w_1, \cdots, w_{n+1})$ includes the delay differences $\delta_{c_i}^{(i)}$ of all stages and is calculated as follows:
+
+\begin{align*}
+w_1 &= \delta_{0}^{(1)} - \delta_{1}^{(1)}\\
+w_i &= \delta_{0}^{(i-1)} + \delta_{1}^{(i-1)} + \delta_{0}^{(i)} - \delta_{1}^{(i)}\ for\ 2 \le i \le n,\\
+w_{n+1} &= \delta_{0}^{(n)} + \delta_{1}^{(n)}
+\end{align*}
+ 
+The feature vector $\gls{x}$ is computed from the challenge $\gls{c}$ by
+
+\begin{align*}
+x_i &= \prod_{i=1}^n c_i\\
+x_{n+1} &= 1
+\end{align*}
+
+As in Sec. \ref{sec:xorarbiterpufs} explained \xpufs include $\gls{k}$ multiple \apufs whose single responses are combined by an exclusive or function to the final response.
+The exclusive or function is represented by an multiplication hence equation
+
+\begin{align*}
+r &= \prod_{i=1}^k \operatorname{sgn}(\Delta D_{\mathrm{Model}}^i(x)) = \prod_{i=1}^k \operatorname{sgn}(\langle w_i,x\rangle)
+\end{align*}
+
+calculates the final response $\gls{r}$ for the noise free \xpuf model.
+Since the challenge $\gls{c}$ is the same for all \apufs the feature vector $\gls{x}$ stays the same as well.
+The feature vector is applied to all \apufs and only the \apuf model $\gls{w}$ changes.
+Here introduced models are used in both to simulate attackable \apuf instances in Sec. \ref{sec:pufsimulation} and to attack them in Sec. \todo{ref}.
+
+%========================================
+
+\section{Attacks on \apufs}
+\label{sec:attacksonarbiter}
+
+Since \apufs were one of the most promising \puf implementation a lot of, often successful, attacks have been developed.
+One of the first attacks reveals the internal values of the \apuf by linear programming \cite{Ozturk2008TowardsDevices}.
+This approach solves a linear equation system after collecting enough \acp{CRP} because an \apuf can be represented as linear threshold function.
+For a good resolution the response of the \acp{CRP} have to be less noisy as possible.
+As the response of every \ac{CRP} includes some noise as explained in Sec. \ref{sec:physical} one strategy of the attacker is to reduce the noise by using majority vote meaning evaluating the same challenge multiple times and picking the most appeared response.
+Another option would be using an algorithm for solving noisy linear threshold function as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
+
+The linear programming attack is a non-invasive modeling attack where the attacker needs to collect \acp{CRP} to build a model of the \puf by for example a \ac{ML} algorithm.
+After that the model can predict responses for new challenges which have not be used to create the model itself.
+How precise these predictions are depends on the number of captured \acp{CRP} and how well the model has been build.
+Different \ac{ML} attacks perform differently.
+How the attacker gets to know the \acp{CRP} in a real use case depends on the way the \puf is used and the \acp{CRP} transmitted and therefore not part of this work.
+As \apufs are strong \pufs and their operation frequency is relatively high they provide the possibility to freely access a large amount of \acp{CRP} \cite{Ruhrmair2010ModelingFunctions}.
+On the contrary some \pufs post-process their response in the protected chip environment to make the \puf response itself inaccessible to protect the \puf \cite{Suh2007PhysicalGeneration} \cite{Gassend2004IdentificationCircuits}.
+In this paper I assume to have free access to the \puf.
+% difference machine learning to algebraic technique like linear programming \cite{Ruhrmair2014PUFOverview} Page 1
+
+It has been shown by Rührmair et al. that \apufs can be successfully attack even with a higher stability as their in-silicon implementation \cite{Ruhrmair2010ModelingFunctions}.
+For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performed best in terms of predicting randomly chosen challenges.
+Another technique to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning although \ac{ANN} need a relative large amount of \acp{CRP} to achieve a high prediction accuracy of new challenges \cite{Hospodar2012MachineUsability}.
+The \ac{PAC} learning algorithm requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
+A further attack is the reliability-based machine learning attack published by Becker \cite{Becker2015ThePUFs}.
+It is based on the reliability of the \puf responses rather than on their values. 
+This in combination with an \ac{ES-CMA} algorithm makes it possible to create \apuf model with high accuracy.
+
+Beside these non-invasive modeling attacks are side channel attack possible.
+As mentioned before, in real attack scenarios, the \puf response or a large set of \acp{CRP} is may be not available to the attacker so he has to obtain information differently.
+An example would be the photonic emission analysis attack where the attacker measures the evolved photons of the bottom side of the \apuf chip to reveal all its internal delay values \cite{Tajik2014PhysicalPUFs}.
+With these values the attacker can directly create a exact model of the \apuf as explained in Sec. \ref{sec:theoretical}.
+Different combinations of machine learning attacks and side channel attacks has been proposed as well \cite{Mahmoud2013CombinedPUFs} \cite{Xu2014Hybrid}.
+However in this work I focus only on non-invasive machine learning attacks as they do not require physical access to the \apuf chip.
+
+%========================================
+
+\section{Attacks on \acs{XOR} \apufs}
+\label{sec:attacksonxorarbiter}
+
+Many attacks on \apufs can also be applied to \xpufs.
+As main differences the attacks additionally have to cope with the added non-linearity by the \ac{XOR} function, the increasing number of \apufs, and the fact that the responses of all \apufs are not individual accessible.
+The increasing number of \apufs make the time consumed by the attack and its growth rate an important factor for building secure \xpufs that can not be successfully modeled in a reasonable time.
+On one side this time grows with the number of used \apufs for the most attacks exponentially and on the other side the size $\gls{k}$ of a \xpuf is limited by the growing total noise as explained in Sec. \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}.
+The reports about current effective attacks on \xpufs differ in the maximum size $\gls{k}$ by $4 - 6$ \cite{Ganji2015WhyPUFs} \cite{Xu2014Hybrid}.
+Under these conditions Ganji et al. developed a \ac{PAC} learning framework to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
+Using \ac{ANN} and \ac{SVM} proved to be rather unperformant when $\gls{k} > 2$ \cite{Hospodar2012MachineUsability}.
+Equally bad performed the \ac{ES} attack.
+Instead the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.
+All attacks mentioned so far grow exponentially in their execution time for linear increasing $k$.
+Only the \ac{ES-CMA} attack that is based on the reliability of the responses claims to have linear growing time consumption for rising $k$ \cite{Becker2015ThePUFs}.
+That means for example using double the amount of \apufs in a \xpufs leads only to twice the required time to run this attack.
+
+%========================================
+

@@ -1,0 +1,40 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Symbols
+
+% Listofsymbols package example
+%\opensymdef
+%\newsym[Energy]{symE}{E}
+%\newsym[Mass]{symm}{m}
+%\newsym[Speed of light]{symc}{c}
+%\closesymdef
+
+% Glossary package
+\newglossaryentry{U}% the label 
+{% 
+  name={universal set},% the term 
+  description={the set of all things},% a brief description 
+  symbol={\ensuremath{\mathcal{U}}}% the associate symbol 
+} 
+% maybe "\ensuremath{\mathit{k}}" for math variables in text
+
+% For math symbols
+% http://www.latex-community.org/know-how/263-glossaries-nomenclature-lists-of-symbols-and-acronyms
+% \newglossaryentry{delta}{name={foo},description={blue}, symbol={\ensuremath{\delta} }}
+% \glssymbol{delta}
+\newglossaryentry{n}
+{
+  name={n},
+  description={size of the \apuf},
+} 
+
+\newglossaryentry{k}{name={k},description={number of \apufs}} 
+\newglossaryentry{c}{name={c},description={challenge $c = (c_1, c_2, \cdots, c_n)$}} 
+\newglossaryentry{t}{name={t},description={stage path delay}} 
+\newglossaryentry{r}{name={r},description={\puf response}} 
+\newglossaryentry{x}{name={x},description={feature vector calculated by challenge \gls{c}}} 
+\newglossaryentry{w}{name={w},description={\apuf delay vector}} 
+\newglossaryentry{s}{name={s},description={\apuf path signal}} 
+\newglossaryentry{o}{name={o},description={\apuf stage output}} 
+
+\newglossaryentry{m}{name={m},description={number of \ac{MV}}} 
+

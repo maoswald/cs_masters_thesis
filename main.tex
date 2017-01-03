@@ -1,0 +1,106 @@
+\documentclass[
+	oneside,
+    BCOR10mm, % 1 cm Margin left
+    a4paper,
+    12pt,
+    parskip,
+    bibliography=totoc,
+	listof=totoc
+]{scrreprt}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Config
+\include{misc/packages}
+\include{misc/language}
+\include{misc/colors}
+\include{misc/style}
+\include{misc/commands}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Draft settings: Deactivate after finished
+%% Deactivate Links
+% \hypersetup{draft}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Symbols package and symbols (can not be included in overleaf)
+\usepackage[nopostdot]{glossaries} % nonumberlist: no numbers,
+\makeglossaries
+\include{misc/symbols}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Content
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document meta data
+\include{misc/documentdata}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List of todos
+\listoftodos
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Frontpage
+\include{chapters/a-frontpage}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Abstract
+\include{chapters/b-abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acknowledgments
+\include{chapters/c-acknowledgments}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of contents
+\pagenumbering{roman}
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Acronyms
+\include{misc/acronyms}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% List of symbols
+%\listofsymbols % other package
+\printglossary[title=List of Symbols]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of figures
+% \listoffigures
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Listings
+% \lstlistoflistings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of tables
+% \listoftables
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Content start
+\newpage
+\pagenumbering{arabic}
+\acresetall
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Chapter
+\include{chapters/1-introduction}
+\include{chapters/2-background}
+\include{chapters/3-mla}
+\include{chapters/4-arbiter}
+\include{chapters/5-marbiter}
+\include{chapters/6-simulationdesign}
+\include{chapters/7-stabilitysimulation}
+\include{chapters/8-attacksimulation}
+\include{chapters/9-conclusion}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Table of source
+\bibliography{resources_m}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Declaration of Authorship
+\include{chapters/d-declaration}
+
+\end{document}
