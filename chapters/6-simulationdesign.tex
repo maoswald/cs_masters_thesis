@@ -1,9 +1,16 @@
-\chapter{Simulation design}
+\chapter{Simulation Design}
 \label{cap:simulationdesign}
 
+
+
+
+\section{\ac{PUF} Design}
+\label{sec:pufsimulation}
 % Sigma Model to sigma noise relation + Arbiter noise + set Ref in Chap 7 beginning
 %========================================
 
+
+%========================================
 % OLD=============== check!
 
 \iffalse
@@ -26,12 +33,11 @@ The simulation also includes additional helper functions for example to generate
 Additional functions will be described in case they are needed.
 For consistence and better usage there are interfaces for concepts, learner and evaluators which every implementation have to inherit from.
 All function are covered by test cases.
-\fi
 
-\section{\ac{PUF} design}
+
+\section{\ac{PUF} Design}
 \label{sec:pufsimulation}
 
-\iffalse
 As this paper simulates types of \apufs the concept implementation inherits on each other as in class diagram \ref{class:pufsimulation} shown. The conceptual layout of the relations between the different types of \apufs, see Figure \ref{fig:pufconceptlayout}, clarifies the sense of this structure as well.
 
 \begin{figure}[ht]
@@ -97,7 +103,15 @@ With that there are the following \puf simulations possible.
 %where \symE is the energy \ldots
 \fi
 
-\section{Machine learning design}
+%========================================
+
+\section{Machine Learning Design}
+
+The reliability $\gls{h}$ of a challenge $\gls{c}$ is computed of its responses $r_1, r_2, ..., r_j$ by
+
+\begin{align}
+h &= |\frac{j}{2} - \sum_{i = 1}^{j}r_i|. \label{equ:reliability}
+\end{align}
 
 % Why ES-CMA
 %========================================
