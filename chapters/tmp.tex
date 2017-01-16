@@ -1,0 +1,88 @@
+% 6-simulationsdesign
+%========================================
+% OLD=============== check!
+
+% \iffalse
+To evaluate machine learning approaches \pufs will be simulated and attacked.
+The simulation will be therefore divided into the parts concepts, learner and evaluator.
+In generally speaking concepts are all kind of functions which can be combined and learned.
+The base concept is the \apuf which can be combined with different combiner concepts and the majority vote concept as described in chapter \ref{sec:pufsimulation}.
+Learner are the machine learning algorithms described in chapter \ref{cap:mla}.
+These three parts can be individually combined to an attack experiment which makes it flexible to try to learn different concepts with different learning algorithms.
+The attack sequence is different when using online learning in comparison to offline learning as shown in Figure \ref{fig:attackflow}.
+
+\begin{figure}[ht]
+%\includegraphics[width=1.00\textwidth]{images/4-arbiter_puf.png}
+\noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption{Online and offline learning}
+\label{fig:attackflow}
+\end{figure}
+
+The simulation also includes additional helper functions for example to generate challenges or to transform them as far as necessary.
+Additional functions will be described in case they are needed.
+For consistence and better usage there are interfaces for concepts, learner and evaluators which every implementation have to inherit from.
+All function are covered by test cases.
+
+
+\section{\ac{PUF} Design}
+\label{sec:pufsimulation}
+
+As this paper simulates types of \apufs the concept implementation inherits on each other as in class diagram \ref{class:pufsimulation} shown. The conceptual layout of the relations between the different types of \apufs, see Figure \ref{fig:pufconceptlayout}, clarifies the sense of this structure as well.
+
+\begin{figure}[ht]
+\includegraphics[width=1.00\textwidth]{images/6-class_pufsimulation.png}
+%\noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption{\apufs class diagram}
+\label{class:pufsimulation}
+\end{figure}
+
+\begin{figure}[ht]
+%\includegraphics[width=1.00\textwidth]{images/4-arbiter_puf.png}
+\noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption{\apufs concept layout}
+\label{fig:pufconceptlayout}
+\end{figure}
+
+The basic concept is the normal \apuf concept. 
+As explained in Sec. \ref{sec:arbiter} it includes n stages for n challenge input bits.
+Every path in every stage has its own variation which will be usually randomly created within the production process of the chip. 
+These variations can be reduced in the simulation to just two variations for both possible states each stage can accept, see Sec. \ref{sec:arbiter}.
+For a accurate simulation the variation for both possible delay differences in every stage is randomly chosen from an normal distribution because the more the delay difference differs from zero the more unlikely they occur.
+\todo{Bessere begruendung (-> accumulation zufällig gewählter werte gleicher verteilung ergeben normalverteilung! Central limit theorem???!!
+1. "Assuming a Gaussian distribution is the common approach (e.g. used in [\cite{Ruhrmair2010ModelingFunctions}]) and resembles a best-case scenario from a security perspective. To model the impact of noise a random variable is added to each computed delay difference delta-PUF with a Gaussian distribution of norm(0,noise)." (The Gap Between Promise and Reality: On the Insecurity of XOR) 2. "An additional time difference introduced ... be normally distributed with zero mean and and standard deviation" (Side channel modeling attacks on 65nm arbiter pufs exploiting CMOS device noise.) 3. Alternativ Nils Experiment}
+This variations stays the same for the lifetime of the \puf instance.
+
+Additional there is another deviation which differs every time the \puf will be executed.
+For a single stage the deviation is chosen of a normal distribution. 
+The following formula displays the distribution depending on the size n of the \puf as the deviation of every stage will be accumulated.
+
+% See mathematica file
+\begin{align*}
+%\sum_{i=1}^{n}\left[\frac{1}{\sigma \sqrt[]{2\pi}} \cdot e^{-\frac{(x-\mu)^2}{2\;\sigma^2}}\right]
+d &= \frac{1}{\sigma\;\sqrt[]{n}\;\sqrt[]{2\pi}} \cdot e^{-\frac{(x-n\,\mu)^2}{2\;n\;\sigma^2}}
+\end{align*}
+\todo{Sum is wrong $\sum_{}^{n}x=x+x...x=nx$}
+
+Beside the deviations and variation of the stages the arbiter at the end of the stage chain has a deviation as well which are also chosen of normal distribution. 
+Usually the mean $ \mu = 0 $ is used for all distributions but can be chosen as well as the variances.
+With the adjustment of all this values the simulation can simulate the production and execution deviation of stages and the arbiter.
+
+To simulate the majority voting the \apuf will be wrapped so that the same challenge can be applied m times.
+After that the most occurred response --- the majority --- will be the final response.
+This is called \mpuf.
+From this part on there are no more deviations in the simulation necessary since the following deviation of the hardware implementation doesn't influenced the output.
+
+The \ac{XOR} Arbiter concept and the Bent Arbiter concept provide the possibility to combine k concepts with the in Sec. \ref{sec:majorityxorarbiter} and \ref{sec:combinerfunctions} described functions.
+With that there are the following \puf simulations possible.
+
+\begin{itemize}
+\item \apuf
+\item \xpuf
+\item \bpuf
+\item \mpuf
+\item \mxpuf
+\item \mbpuf
+\end{itemize}
+
+% Arbiter stage distribution source \cite{Ozturk2008TowardsDevices}
+% Deviation from paper (my section)

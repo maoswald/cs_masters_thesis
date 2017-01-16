@@ -1,11 +1,13 @@
 \chapter{Attack Simulation}
 \label{cap:attacksimulations}
 
-% ES-CMA reliability based
+same configuration as for stability simulation, repeat and ref
 
-\section{Detection of Unstable Challenges}
+% CMA-ES reliability based
 
-For the reliability based \ac{ES-CMA} attack on \apufs it is crucial to find challenges which evaluate differently at multiple evaluations as explained in Sec. \ref{sec:cma-es}.
+\section{Detection of Unreliable Challenges}
+
+For the reliability based \ac{CMA-ES} attack on \apufs it is crucial to find challenges which evaluate differently at multiple evaluations as explained in Sec. \ref{sec:cma-es}.
 To find these challenges and their reliability $\gls{h}$ every challenge $\gls{c}$ of a set will be evaluated $\gls{j}$ times.
 After that the reliability $\gls{h}$ will be computed for every challenge by \ref{equ:reliability}.
 When using \ac{MV} to increase the stability of the \apuf finding challenges with lower reliability becomes more difficult.
@@ -20,27 +22,44 @@ Though with applying \ac{MV} this increase disappears with growing $\gls{m}$.
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption{Proportion of unreliable challenges for different values of $\gls{m}$ \ac{MV} votes. The different line graphs represent the $\gls{j}$ number of evaluations $200, 400, 800, 1600$. The small distance between the graphs in the beginning show the very little increase of found unreliable challenges and how this gap resolves with introducing of \ac{MV}.}
+\caption[Proportion of unreliable challenges]{Proportion of unreliable challenges for different values of $\gls{m}$ \ac{MV}. The different line graphs represent the $\gls{j}$ number of evaluations $200, 400, 800, 1600$. The small distance between the graphs in the beginning show the very little increase of found unreliable challenges and how this gap resolves with introducing of \ac{MV}.}
 \label{fig:cmamajorityvotemeasurementrelation}
 \end{figure}
 
-% mv vs. measurements
-% unstable challenges are required for the cma-es attack
-% Finding unstable challenges: graph!
 %========================================
 
 \section{\apufs vs. \mpufs}
 
-$\gls{n} = 32$
-$\gls{j} = 100$
+To measure the impact of \ac{MV} on the normal \ac{CMA-ES} attack explained in Sec. \ref{sec:machinelearningdesign} for \apufs this section describes the results of the simulation.
+The \apuf used for the simulation has $\gls{n} = 32$ stages.
+For the attack a training set of $10000$ \acp{CRP} and a number of evaluation times of $\gls{j} = 100$ were used.
+Since the \ac{CMA-ES} attack not always approximates to a model which performs well on challenges that are not included in the training set it has to be restarted.
+A model produced by the attack is defined to perform well if it evaluates $80 \%$ of the $10000$ \acp{CRP} of the test set correct.
+Both test set and training set are independent randomly chosen sets of challenges $\gls{c}$.
+The exit criteria sigma of the \ac{CMA-ES} attack as explained in Sec. \ref{sec:machinelearningdesign} is set to $0.2$ and stops the attack despite if the attack approximates to a model which performs well on the test set or not.
+For a growing number of \ac{MV} $\gls{m}$ there is an increase of needed executions of the attack to approximate to a model which performs well on the test set, as shown in Fig \ref{fig:cmasingleattackcorrelation}.
+The growing gradient of the graph shows the growing exponential increase of needed attack executions to gain well performing models.
+From $\gls{m} = 80$ \acp{MV} on the gradient of the graph is greater than $1$ 
+Hence the slope of the number of needed attack executions is greater than the polynomial degree $1$.
 
-training set $10000$
-test set $10000$
+\begin{figure}[ht]
+\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption[Needed \acs{CMA-ES} attack executions for \mpufs]{Number of needed attack executions per approximation to a well performing model. A well performing model evaluates $80 \%$ of the $10000$ test set \acp{CRP} correct. The rising gradient of the graph shows the exponential increase of needed attack executions.}
+\label{fig:cmasingleattackcorrelation}
+\end{figure}
 
-exit criteria sigma = 0.2
+Apart from increasing attack executions the performance of the computed models decreases with the growth of $\gls{m}$, as shown in Fig. \ref{fig:cmasingleattackcorrectness}.
+The graph displays how the proportion of correct evaluated challenges $\gls{c}$ of the test set lower linear with a linear rise of the number of \ac{MV} $\gls{m}$.
+This indirect correlation implies that with growing number of \ac{MV} $\gls{m}$ the proportion of the correct evaluated challenges $\gls{c}$ which are not included in the training set decrease for well performing models build by the \ac{CMA-ES} attack.
+The values of both Fig. \ref{fig:cmasingleattackcorrelation} and \ref{fig:cmasingleattackcorrectness} are average values of minimum $10$ well performing models or at least $2000$ attack executions.
 
-avg on all successful performed attacks where the test set min. 0.8 correct
-
+\begin{figure}[ht]
+\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption[Proportion of correct evaluated test set challenges of a model approximated by the \acs{CMA-ES} attack]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by an \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
+\label{fig:cmasingleattackcorrectness}
+\end{figure}
 
 %========================================
 

@@ -1,69 +1,262 @@
 \chapter{Machine Learning Attacks}
 \label{cap:mla}
 
+The \ac{ML} attack creates a \puf model of the attacked \puf which acts as binary classifier.
+A binary classifier classifies the samples, in the case of \pufs challenges, of a given set into two different classes $0$ or $1$ like the response of the \puf.
+To build this model a training set $D = \{(z, e)_1, ..., (z,e)_i\}$ with samples $d = (z, e)$ that are already classified by the attacked \puf is necessary.
+A sample $d$ is defined by its values $z$ and is classified into the class $e$.
+With that training set the model can be trained by the \ac{ML} algorithm.
+To evaluate the build model a test set is build the same way and used to compare the output of the \puf model and the attacked \puf.
+
+The most \pufs, know by the year 2014, which can be build by an electrical circuit, are related to internal values of the circuit \cite{Ruhrmair2014PUFOverview}.
+These values determine the response for a given challenge. 
+The goal of the \ac{ML} attacks is to find a representation of these values so that the build model classifies samples in the same way as the \puf. % values b
+How man samples the model classifies the same way as the \puf defines how precise the model has been trained.
+Hence the values learned by the \ac{ML} attack do not have to be similar to the ones of the attacked \puf to classify samples of a set the same way as the \puf.
+
+If a \ac{ML} attack can find a binary classifier for a given set depends on the attack and if the set of samples is linear separable. 
+Instead of a set of samples this also applies to binary functions $f: \mathbb{R}^n \to \{0,1\}$. % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
+One example for a not linear separable function is the \ac{XOR} function. % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
+Some \ac{ML} attacks, e.g. single-layer perceptron, can only learn linear separable sets and can therefor not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}.
+Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called linear separable if all their vectors $\vec{a} = (a_1, ..., a_n) \in A$, $\vec{b} = (b_1, ..., b_n) \in B$ can be separated by
+
+\begin{align}
+\sum_{i=1}^{n} w_i a_i \le w_{n + 1} < \sum_{j=1}^{n} w_j b_j, \label{equ:linearseparable}
+\end{align}
+
+whereas $w_1, ..., w_{n + 1}$ are $n + 1$ real numbers.
+The separating hyperplane is defined by the vector $\vec{x} = (x_1, ..., x_n) \subseteq \mathbb{R}^n$ that satisfies $\sum_{i = 1}^{n} w_i x_i = w_{n + 1}$.% https://en.wikipedia.org/wiki/Linear_separability
+In the case of building a classifier by the \ac{ML} attacks the two subset $A$ and $B$ are subsets of the given set used to train the model.
+The described \ac{ML} attacks in this chapter are common approaches to attack \pufs \cite{Ruhrmair2014PUFOverview}.
+As there are different modifications and configurations used only the \ac{ML} algorithms itself are explained.
+
+% over trained / over fitted model (end second paragraph)
+% ? randomly chosen values are most of the time normal distributed
+%========================================
+% values z of the samples are a real-valued vectors % https://en.wikipedia.org/wiki/Perceptron
+% classifications e are boolean
+% done
+% -All by the year 2014 know \cite{Ruhrmair2014PUFOverview} Page 4
+% - All described \ac{ML} are binary classifier 
+% -what is a binary classifier % https://en.wikipedia.org/wiki/Binary_classification
+% -to train the \ac{ML} attack
+% -training set: $D = \{(z, e), ..., (z,e)\}$ contains samples d with their values z and their correct classification e
+% -to test the \ac{ML} attack test set $T...$
+% -Definition of linear separability! % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
+% 
+% tmp-old:
+% Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called linear separable if all their vectors $\vec{a} = (a_1, ..., a_n) \in A$, $\vec{b} = (b_1, ..., b_n) \in B$ can be separated by $n + 1$ real numbers $w_1, ..., w_{n + 1}$ and therefore
+% 
+% \begin{align}
+% \sum_{i=1}^{n} w_i a_i \le w_{n + 1} < \sum_{j=1}^{n} w_j b_j \label{equ:linearseparable}
+% \end{align}
+% 
+% applies.
+
 \section{Evolution Strategies}
 \label{sec:evolutionstrategies}
 
-The computation time required by ES is determined by the following factors: \cite{Ruhrmair2013PUFData}
-Evolution Strategies (ES) [24, 25] belong \cite{Ruhrmair2010ModelingFunctions} + Page 4, right top
+The \acf{ES} is an optimization technique that is inspired by the evolution process of the nature.
+In this process every species can adapt to the environmental conditions by changing its genes and only the fittest survive.
+From these fittest individuals the next generation will be build and inherits the attributes of their fittest parents genes.
+This repeating process of classification by rating the fitness of every individual, inheriting the genes of the previous generation and modifying them leads to an approximation of the optimal solution for the specific environment.
+Every repetition of this evolutionary cycle counts as one generation.	% Wiki \cite{Becker2015ThePUFs}
+It is also possible to approximate the at least optimal solution by letting the at least fittest survive.
+The procedure of the \ac{ES} attack in the case of finding the optimal solution is displayed in the Alg. \ref{alg:es}.
 
-\cite{Hansen2006TheReview}
-\cite{Delvaux2013SideNoise}
+% \IncMargin{1em}
+\SetAlCapHSkip{0.2em}
+\begin{algorithm}[H] % t let them float - H argument forces the algorithm to stay in place
+\Indm
+\SetAlgoLined
+\caption{\acl{ES}}
+\label{alg:es}
+% \KwData{}
+\KwResult{sets of individuals of the last generation}
+\Indp
 
+initialization of the individuals of the first generation\\
+\While{termination criteria is not fulfilled}{
+modify all individuals\\
+rate fitness of all individuals\\
+sort all individuals by their fitness values\\
+select number of fittest individuals\\
+create new generation from selected individuals\\
+}
+\end{algorithm}
+% \DecMargin{1em}
+
+To initialize the individuals of the first generation in line $1$ often random chosen normally distributed values are used.
+In the step of the lines $6$ and $7$ of the attack it is determined how the number of individuals get changed.
+There are options to define how many of the fittest individuals are selected and how many new individuals are created per generation.
+Additionally in the step of creating the next generation it can be defined if individuals of the old generation should be kept and if new randomly created individuals should be added.
+Adding new random individuals makes it possible for the attack to approximate a more optimal solution even if all individuals are already approximated to another solution. % https://en.wikipedia.org/wiki/Evolution_strategy
+Keeping old individuals ensures not to lose a individual of the previous generation which outperforms the next generations individuals.
+How the individuals are modified in line $3$ of the Alg. \ref{alg:es} is not specified.
+One way of modification is to add a random chosen value to all values of the individual.
+The fitness function in line $4$ rates the fitness value of every individual and represents the above mentioned environmental conditions that the individuals get adapted to.
+The sort function of line $5$ sorts the results by their fitness values.
+The \ac{ES} attack approximates a optimal solution if the individuals are sorted descending and vice versa.
+The attack ends if the termination criteria is fulfilled, which could be e.g. a maximum number of generations.
+The \ac{ES} attack is a randomized algorithm and therefore does not always determines.
+However it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
+	
 %========================================
+% The computation time required by ES is determined by the following factors: \cite{Ruhrmair2013PUFData}
+% ES is a randomized method that neither requires an (approximately) linearly separable problem (like Support VectorMachines), nor a differentiable model (such as LR with gradient descent); a merely param- eterizable model suffic. \cite{Ruhrmair2010ModelingFunctions}
+% notation: with / without parents: page 25
+% \cite{Becker2015ThePUFs}
+% https://de.wikipedia.org/wiki/Evolution%C3%A4rer_Algorithmus
+% http://www.scholarpedia.org/article/Evolution_strategies
 
 \section{CMA-ES}
 \label{sec:cma-es}
-Different types: Covariance Matrix Adaptation, ...
 
-\cite{Hansen2006TheReview}
-\cite{Delvaux2013SideNoise}
+The \acf{CMA-ES}
+% https://en.wikipedia.org/wiki/CMA-ES
+
+% Different types: Covariance Matrix Adaptation, ...
+
+% \cite{Hansen2006TheReview}
+% \cite{Delvaux2013SideNoise}
+
+% https://homepages.fhv.at/hgb/downloads/cma-es.mat
+% https://www.lri.fr/~hansen/copenhagen-cma-es.pdf
+% ...
 
 % reliability based: becker!!!!
-As all known Arbiter PUF implementations suffer from a portion of challenges that do not provide stable responses [10], Why-Attacks-Lose
+% As all known Arbiter PUF implementations suffer from a portion of challenges that do not provide stable responses [10], Why-Attacks-Lose
 % -> move to Simulation Design!!!!
-Then the reliability hi is computed for challenge blub using the following formula: becker
-Definition: reliability $\gls{h}$ \cite{Becker2015ThePUFs}
-
-%========================================
-
-\section{PAC Learning}
-\label{PAC learning}
-
-PAC Learning of XOR PUFs \cite{Ganji2015WhyPUFs}
-
-%========================================
-
-\section{Perceptron}
-\label{sec:perceptron}
+% Then the reliability hi is computed for challenge blub using the following formula: becker
+% Definition: reliability $\gls{h}$ \cite{Becker2015ThePUFs}
 
 %========================================
 
 \section{Support Vector Machine}
 \label{sec:svm}
 
-Logistic regression has the asset that the examined problems need not be (approximately) linearly separable in feature space, as is required for suc- cessful application of SVMs, but merely differentiable \cite{Ruhrmair2010ModelingFunctions}
+% svm 
+% https://en.wikipedia.org/wiki/Support_vector_machine
+% https://de.wikipedia.org/wiki/Support_Vector_Machine
+
+% kernel method
+% https://en.wikipedia.org/wiki/Kernel_method
+% Die Idee hinter dem Kernel-Trick ist, den Vektorraum und damit auch die darin befindlichen Trainingsvektoren in einen höherdimensionalen Raum zu überführen. In einem Raum mit genügend hoher Dimensionsanzahl – im Zweifelsfall unendlich – wird auch die verschachteltste Vektormenge linear trennbar. In diesem höherdimensionalen Raum wird nun die trennende Hyperebene bestimmt. Bei der Rücktransformation in den niedrigerdimensionalen Raum wird die lineare Hyperebene zu einer nichtlinearen, unter Umständen sogar nicht zusammenhängenden Hyperfläche, die die Trainingsvektoren sauber in zwei Klassen trennt....
+
+% Logistic regression has the asset that the examined problems need not be (approximately) linearly separable in feature space, as is required for suc- cessful application of SVMs, but merely differentiable \cite{Ruhrmair2010ModelingFunctions} -> https://de.wikipedia.org/wiki/Support_Vector_Machine#Nicht-linear_separierbare_Daten
+
+% https://www.youtube.com/watch?v=1NxnPkZM9bc
 
 %========================================
 
 \section{Logistic Regression}
 \label{sec:lr}
-Logistic Regression (LR) is a well-investigated supervised machine learning framework, which has been described, for example, in [21] \cite{Ruhrmair2010ModelingFunctions}
+
+The \acf{LR} is a regression analysis technique which is used in statistic modeling to estimate relationships between variables. % https://en.wikipedia.org/wiki/Regression_analysis https://en.wikipedia.org/wiki/Logistic_regression
+It is an approach to solve binary classification problems and is based on the logistic function $\frac{1}{1 + e^{-z}}$.
+The logistic function is a "S" shape and its values ranges between $0$ and $1$.
+The input value $z$ is transformed onto this range since it is applied in the denominator.
+% In \ac{LR} a modified version of the logistic function is used to transform all values that are going to be classified by 
+In the \ac{LR}, additionally to the logistic function, all values $z_i$ of a sample that is going to be classified are combined with weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added.
+Hence this modified version of the logistic function, known as \ac{LR} model, is used to transform all values $z_i$ by 
+
+\begin{align*}
+\Pr[Y = 1 | Z = z_i] &= \frac{1}{1 + e^{-(\beta_0 + z^T_i \beta)}}
+\end{align*}
+
+onto the range between $0$ and $1$.
+% The value of the function is the likelihood $P$ that a given sample with its values $z_i$ is classified with $Y = 1$.
+The value of the function is the likelihood $\Pr[Y = 1 | Z = z_i]$ that a given sample classifies $1$ under the condition its values are $z_i$.
+To calculate the binary classification the likelihood is then divided into the classes $0$ for $\Pr[Y = 1 | Z = z_i] < 0.5$ and $1$ for $\Pr[Y = 1 | Z = z_i] \ge 0.5$.
+The \ac{LR} model is defined by the weights $\beta + \beta_0$. % whereas the bias $\beta_0$ is the value which determines the likelihood $\Pr[Y = 1 | Z = z_i]$ when all values $z_i$ are zero. % https://en.wikipedia.org/wiki/Logistic_regression
+These weights must be estimated from the training data that includes already classified samples.
+A usually approach is the maximum likelihood estimation whereas the goal is that the likelihood predicted by the \ac{LR} model is very close to $1$ if the sample belongs to this class and the way round.
+The maximum likelihood estimation does that by minimizing the error in the likelihood predicted by the model for the training data. % Probably cut out http://machinelearningmastery.com/logistic-regression-for-machine-learning/
+For more detailed information I refer the reader to \cite{2017MaximumEstimation}.
+As a last point is has to be mentioned that the classification problems solved by \ac{LR} do not need to be linearly separable but differentiable \cite{Ruhrmair2010ModelingFunctions}.
+% https://en.wikipedia.org/wiki/Logistic_regression
+
+%========================================
+% values z are called feature vektor 
+% Sources:
+% http://machinelearningmastery.com/logistic-regression-for-machine-learning/
+% addition source from ModelingFunctions: C.M. Bishop et al. Pattern recognition and machine learning. Springer New York:, 2006
+
+\section{Perceptron}
+\label{sec:perceptron}
+
+The perceptron is an supervised learning algorithm of binary classifiers and the simples form of an \ac{ANN} \cite{Rosenblatt1957TheAutomaton}. 
+In case of an single-layer perceptron every value $z_i$ of a sample $d$, which is going to be classified, is combined with one of the weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added similar to \ac{LR}, as shown in Sec. \ref{sec:lr}.
+However the output value $f(z)$ of the perceptron is calculated by
+
+\begin{align*}
+f(z) &= \begin{cases}
+1 & \text{if}\ \beta \cdot z + \beta_0 > 0\\
+0 & \text{otherwise}
+\end{cases}
+\end{align*}
+
+and classifies the sample $d$ in the classes $0$ or $1$.
+To obtain the weights and the bias, which define the perceptron model, the model is trained by the Alg. \ref{alg:perceptron} and a training set with the samples $d$ and their desired output $e$.
+The output value of the perceptron $f(z)$ is computed for a sample $d$ at the time $l$ in line $4$.
+Afterwards in line $5$ the weights $\beta$ and the bias $\beta_0$ are updated by
+
+\begin{align*}
+\beta_i(l+1) &= \beta_i(l) + \alpha \cdot (e - f(z)) \cdot z_i\\
+\beta_0(l+1) &= \beta_0(l) + \alpha \cdot (e - f(z))
+\end{align*}
+
+whereas $\beta_i(l)$ are the weights $\beta_i$ and $\beta_0(l)$ is the bias $\beta_0$ at the time $l$.
+A learning rate $\alpha$ is added that determines the value that is used to change the weights.
+With these incremental updates the perceptron algorithm is an online learning algorithm.
+The algorithm is guaranteed to converge, and there is a limit for the maximum number of weight adjustments while trained under the condition that the training set is linear separable \cite{2016Perceptron}.
+For a non-linear separable problem the perceptron algorithm does not terminate as it never reaches the optimal classification of all samples. % https://en.wikipedia.org/wiki/Perceptron
+A modification of the single-layer perceptron is the multilayer perceptron that is able to distinguish non-linear separable problems.
+For more detailed information about the multilayer perceptron I refer the reader to \cite{2017MultilayerPerceptron}.
+
+\SetAlCapHSkip{0.2em}
+\begin{algorithm}[H]
+\Indm
+\SetAlgoLined
+\caption{perceptron}
+\label{alg:perceptron}
+\KwData{training set}
+\KwResult{weights and bias} %weights $\beta$ and bias $\beta_0$
+\Indp
+
+initialize the weights\\ % $\beta$\\
+initialize the bias\\ % $\beta_0$\\
+\For{each sample of the training set}{ 
+calculate the output of the perceptron\\
+update the weights and the bias\\
+}
+
+\end{algorithm}
+
+%========================================
+% Sources:
+% can learn non-linear function if not single layered % https://en.wikipedia.org/wiki/Perceptrons_(book)
+% multilayer perceptrons % https://en.wikipedia.org/wiki/Multilayer_perceptron
+% -> backpropagation % https://en.wikipedia.org/wiki/Backpropagation
+% for non-linear: dalta rule % https://en.wikipedia.org/wiki/Delta_rule
+
+% \section{Artificial Neural Network}
+% \label{sec:neuralnetwork}
+
+% Artificial Neural Networks (ANN): ANNs are \cite{Hospodar2012MachineUsability}
+
+% a special form of ANN is perceptron learning
 
 %========================================
 
-\section{Artificial Neural Network}
-\label{sec:neuralnetwork}
-
-Artificial Neural Networks (ANN): ANNs are \cite{Hospodar2012MachineUsability}
+% \section{Low-Degree Algorithm}
+% \label{sec:lowdegreealg}
 
 %========================================
 
-\section{Low-Degree Algorithm}
-\label{sec:lowdegreealg}
+% \section{PAC Learning}
+% \label{PAC learning}
+
+% PAC Learning of XOR PUFs \cite{Ganji2015WhyPUFs}
 
 %========================================
-
-
-
-

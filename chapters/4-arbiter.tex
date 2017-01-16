@@ -84,8 +84,7 @@ Successful attacks on \apufs have been already developed and will be explained i
 
 The \xpuf is one attempt to improve the security of \apufs and has been proposed by Suh and Devadas in 2007 \cite{Suh2007PhysicalGeneration}.
 It combines multiple individual \apufs with a \acf{XOR} function to an \xpuf as shown in Figure \ref{fig:xorarbiter}.
-\todo{linear separable: notion not introduced (Lineare Separierbarkeit)}
-As the \ac{XOR} function is not a linear separable function it adds non-linearity to the \puf. 
+As the \ac{XOR} function is not a linear separable function, as defined in Chap. \ref{cap:mla}, it adds non-linearity to the \puf. 
 % https://en.wikipedia.org/wiki/Exclusive_or
 % https://www.quora.com/Why-cant-the-XOR-problem-be-solved-by-a-one-layer-perceptron
 This non-linearity increases the effort on the side of the attacker and makes machine learning attacks more difficult \cite{Greibach2010OnBifurcation, Lim2005ExtractingCircuits}.
@@ -96,7 +95,7 @@ Another approach to add non-linearity are Feed-forward \apufs proposed by Lim et
 \centering
 \includegraphics[width=1.00\textwidth]{images/xor_arbiter.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption{\xpuf}
+\caption[\acs{XOR} \apuf]{\xpuf}
 \label{fig:xorarbiter}
 \end{figure}
 
@@ -199,7 +198,7 @@ Additional there are some buffers used in the \ac{ASIC} design which yet not nee
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 %\cite{Semiconductor2002BasicComparison}
 %\cite{Lee2004AApplications}
-\caption{(a) Analog \ac{MUX} \ac{CMOS} realization with single output.
+\caption[Analog \acs{MUX} and stage circuit]{(a) Analog \ac{MUX} \ac{CMOS} realization with single output.
 (b) Two \acs{MUX} connected to complete stage circuit.}
 \label{fig:multiplexer}
 \end{figure}
@@ -222,7 +221,7 @@ NOR logic gates could be used likewise as their \ac{SR-latch} implementation is 
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 %\cite{Lin2010Low-powerFunctions}
 % https://en.wikipedia.org/wiki/NAND_gate
-\caption{Arbiter switching circuit realized with \ac{CMOS} NAND gates. The outputs $r$ and $rb$ start with the initial state high. If signal $\gls{s}_1$ appears first the output $r$ changes to low whereas $rb$ stays high. If signal $\gls{s}_2$ arrives first it behaves the other way round.}
+\caption[Arbiter circuit]{Arbiter switching circuit realized with \ac{CMOS} NAND gates. The outputs $r$ and $rb$ start with the initial state high. If signal $\gls{s}_1$ appears first the output $r$ changes to low whereas $rb$ stays high. If signal $\gls{s}_2$ arrives first it behaves the other way round.}
 \label{fig:nandarbiter}
 \end{figure}
 
@@ -245,9 +244,9 @@ To evaluate the response $\gls{r}$ of a challenge $\gls{c}$ of a specific \puf t
 % Whereas the \apuf model $\Delta D_{\mathrm{Model}}(c)$ is the sum of the delay differences that are chosen depending on the challenge $\gls{c}$.
 The final response $\gls{r}$ is then calculated by the signum function of the sum:
 
-\begin{align*}
-r &= \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}})
-\end{align*}
+\begin{align}
+r &= \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}}) \label{equ:pufresponse}
+\end{align}
 
 The model $\Delta D_{\mathrm{Model}}(c)$ which is the noise free \apuf representation is the sum of all delay differences chosen according to the current challenge $\gls{c}$.
 % As the signal propagates though every stage after another each delay difference of the sum depends on all following challenge bits including its own.
@@ -260,9 +259,9 @@ The sign of the delay difference sum will be still definite by the challenge bit
 The second stage according to its challenge bit can always flip its stages paths independently of its delay difference values.
 A noise free \apuf model is thus be specified by
 
-\begin{align*}
-\Delta D_{\mathrm{Model}}(c) &= \sum_{i=1}^{n}\left(\delta_{c_{i}}^{(i)}\prod_{j=i}^{n}c_{j}\right),
-\end{align*}
+\begin{align}
+\Delta D_{\mathrm{Model}}(c) &= \sum_{i=1}^{n}\left(\delta_{c_{i}}^{(i)}\prod_{j=i}^{n}c_{j}\right), \label{equ:pufmodelc}
+\end{align}
 
 for delay differences $\delta_{c_{i}}^{(i)}$ chosen by the bit of the challenge $c = (c_1, c_2, \cdots, c_n) \in \{-1, 1\}^n$ in the $i$-th stage of $\gls{n}$ stages.
 
@@ -273,9 +272,9 @@ Noise that occurs at every path in every stage of the \apuf can be jointly drawn
 This normal distribution has mean zero and variance scaling relative to the number of stages of the \apuf as the sum of normally distributed stage noise is normally distributed itself.
 For that reason its random value is 
 
-\begin{align*}
-\Delta D_{\mathrm{Noise Stage}} \sim \mathcal{N} (m,\ \sqrt[]{n}\ \sigmaSNoise),
-\end{align*}
+\begin{align}
+\Delta D_{\mathrm{Noise Stage}} \sim \mathcal{N} (m,\ \sqrt[]{n}\ \sigmaSNoise), \label{equ:stagenoisedistribution}
+\end{align}
 
 with mean $m = 0$ and variance $\sigma_{Stage Noise}^2$ per stage for $\gls{n}$ stages whereas the standard deviation per stage adds up to the standard deviation of all stages $\sigmaASNoise$ of the \puf as follows:
 
@@ -297,9 +296,9 @@ As widely common and used in attacks on \apuf the noise free model can be descri
 An equally representation is used in this paper to attack different types of \apufs.
 The function is definite by
 
-\begin{align*}
-\Delta D_{\mathrm{Model}}(x) &= \sum_{i=0}^{n+1} w_i x_i = \langle w,x\rangle,
-\end{align*}
+\begin{align}
+\Delta D_{\mathrm{Model}}(x) &= \sum_{i=0}^{n+1} w_i x_i = \langle w,x\rangle, \label{equ:pufmodelw}
+\end{align}
 
 whereas delay vector $w_i = (w_1, \cdots, w_{n+1})$ includes the delay differences $\delta_{c_i}^{(i)}$ of all stages and is calculated as follows:
 
@@ -355,12 +354,12 @@ For this reason I assume to have free access to the \puf and be able to measure 
 
 It has been shown by Rührmair et al. that \apufs can be successfully attacked resulting in a model with even higher stability as the \apuf in-silicon implementation has \cite{Ruhrmair2010ModelingFunctions}.
 For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performed best in terms of predicting randomly chosen challenges.
-Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning whereas \ac{PAC} is a analysis algorithm and not a \ac{ML}. 
+Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning whereas \ac{PAC} is an analysis algorithm and not a \ac{ML} technique. 
 \acp{ANN} need a relative large amount of \acp{CRP} to achieve a high prediction accuracy of new challenges \cite{Hospodar2012MachineUsability}.
 The approach for a \ac{PAC} learning algorithm by Ganji et al. requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
 A further attack is the reliability-based machine learning attack by Becker \cite{Becker2015ThePUFs}.
 It is based on the reliability of the \puf responses rather than on their values. 
-This in combination with an \ac{ES-CMA} algorithm makes it possible to create \apuf model with high accuracy.
+This in combination with an \ac{CMA-ES} algorithm makes it possible to create \apuf model with high accuracy.
 
 Beside these non-invasive modeling attacks are side channel attack possible.
 As mentioned before, in real attack scenarios, the \puf response or a large set of \acp{CRP} is may be not available to the attacker so he has to obtain information differently.
@@ -385,7 +384,7 @@ Equally bad performed the \ac{ES} attack.
 However the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.
 All attacks mentioned so far grow exponentially in their execution time for linear increasing $k$.
 \todo{Nils:a comparison table would be great}
-Only the \ac{ES-CMA} attack that is based on the reliability of the responses claims to have linear growing time consumption for rising $k$ \cite{Becker2015ThePUFs}.
+Only the \ac{CMA-ES} attack that is based on the reliability of the responses claims to have linear growing time consumption for rising $k$ \cite{Becker2015ThePUFs}.
 That means for example using double the amount of \apufs in a \xpufs leads only to twice the required time to run this attack.
 
 %========================================
