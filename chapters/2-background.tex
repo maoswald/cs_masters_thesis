@@ -1,114 +1,207 @@
 \chapter{Background}
 \label{cap:background}
 
+The idea of \acfp{PUF} was first proposed in 2001 and has gained since that enormous research attention. % \cite{Pappu2002PhysicalFunctions} % \cite{Becker2015ThePUFs}
+They use internal device differences that are unique for every physical instance due to variations in the manufacturing process.
+These internal device differences makes them unique identifiable and can be used in multiple ways as explained in Sec. \ref{sec:applicationsofpufs}.
+
+%========================================
+
 \section{Physical Unclonable Functions}
 \label{sec:pyhsicalunclonablefunctions}
 
+A \acfp{PUF} is a function that maps a set of challenges onto a set of responses.
+The combination of a challenge $c$ and its response $r$ is then called \ac{CRP}.
+A challenge can be described as sequence of $n$ bits.
+How many bits the challenge contains depends on the type of \puf and their implementation.
+Since there are different implementations of \pufs and no general definition there is no restriction how many bit the response can contain.
+However this thesis studies \pufs that response with a single bit.
+% However this thesis only considers \pufs with a single bit response.
+Hence the function of a \puf can be described by the binary function $f: \{0, 1\}^n \to \{0,1\}$, as long as environmental and random impacts, that are occurring in \puf implementations, are not concerned.
+So far there exists no general accepted complete formal definition of \pufs and their specifications. % \cite{Becker2015ThePUFs}
+Though some requirements must be met that the purpose \pufs, explained in Sec. \ref{sec:applicationsofpufs}, can be fulfilled.
+As the name encloses, one requirement for \pufs is being unclonable. % \cite{Tajik2014PhysicalPUFs}
+By unclonable it is meant that neither the producer of the \puf itself nor someone else can reproduce a \puf.
+Here reproducing means building a second instance with exact same binary mapping function.
+This is ensured by using the internal device differences, which occur in the manufacturing process and can not be controlled, to produce the \puf response.
+Another requirement to \pufs is repeatability.
+Only \pufs that are repeatable can reproduce the same response for the same challenge.
+The reproduction of the same response is important since it is the basis for all further processing when using \pufs, as shown in Sec. \ref{sec:applicationsofpufs}. % \cite{Armknecht2011AFunctions}
 
-
-Concept \cite{Suh2007PhysicalGeneration}
-Definitions: unclonable, ...
-% A Formal Foundation for the Security Features of Physical Functions
-What are CPS
-randomness, uniqueness and steadiness(robustness) \cite{CherifJouini2011PerformanceStatistics}
-
-Definition by Armknecht
-
-Physically Unclonable Functions (PUFs) offer a promising solution for future security problems [9].
-\cite{Tajik2014PhysicalPUFs}
-
-unclonability and unpredictability are the main PUF requirements [3, 22]
-\cite{Tajik2014PhysicalPUFs}
-
-"However, it was pointed out that most existing PUFs do not match the formal PUF models" (\cite{Becker2015ThePUFs}) -> \cite{Ruhrmair2013PUFsEvaluations}
-
-PUF: function n bit -> 1 bit
-binary function
-Distinction of puf which response multiple bits
-
-
-
-
+At last randomness is important for the unpredictability of the \puf response.
+If one state of the binary response of the \puf would not be likely to occur with a likelihood of approximately $50 \%$, the response of the \puf can be predicted.
+% This prediction would destroy the security feature given by the \puf. % \cite{CherifJouini2011PerformanceStatistics}
+However it is suggested that \pufs offer a solution for security problems of the future with good prospects \cite{Tajik2014PhysicalPUFs}.
 
 %========================================
+% Concept \cite{Suh2007PhysicalGeneration}
+% Definitions:
+% -unclonable,
+% -stability
+% -randomness
+% \cite{Armknecht2011AFunctions}
+% -randomness, uniqueness and steadiness(robustness) \cite{CherifJouini2011PerformanceStatistics}
+% -unclonability and unpredictability are the main PUF requirements [3, 22] \cite{Tajik2014PhysicalPUFs}
+% -Source "However, it was pointed out that most existing PUFs do not match the formal PUF models" (\cite{Becker2015ThePUFs}) -> \cite{Ruhrmair2013PUFsEvaluations}
+% -PUF: function n bit -> 1 bit
+% -binary function
+% -Distinction of puf which response multiple bits
+% -Physically Unclonable Functions (PUFs) offer a promising solution for future security problems [9]. \cite{Tajik2014PhysicalPUFs}
+
 
 \subsection{Classes of PUFs}
+\label{sec:classesofpufs}
 
-Optical, electric digital, electric analog
-optical: Only optical PUFs have resisted all modeling attacks so far. We refer the reader to existing works [67], [70] and a recent survey paper on modeling attacks [68]. \cite{Ruhrmair2014PUFsGlance}
-% Presentation PUF seminar ws1516
-% On the foundations of physical unclonable functions
-Strong, weak, ...  
-% Strong PUFs: Models, Constructions, and Security Proofs
-Strong: They assume that an adversary has collected a large number of all possible CRPs of a given Strong PUF (usually between several hundred to a few million CRPs, depending on the exact Strong PUF design). \cite{Ruhrmair2014PUFsGlance}
+As there are different types of \pufs they can be divided into different classes.
+The first classification divides them by their type of implementation.
+Hence the subclasses optical, electric digital, and electric analog are used.
+The majority of \puf implementations are electric implementations as they can be used directly in electronic devices.
+Though the first \puf implementation was an optical \puf.
+Another classification separates different types of \pufs into strong and weak \pufs.
+Strong \pufs are defined by the following requirements \cite{Ruhrmair2013PUFsEvaluations}:
 
-Delay based, memory based 
-% TV-PUF: A Fast Lightweight Aging-Resistant Threshold Voltage PUF
+\begin{itemize}
+\item The interface to evaluate challenges and to read out the corresponding response is freely accessible to everybody who holds the \puf.
+\item The number of unique challenges that can be evaluated by the strong \puf is very large.
+In order that it is impossible in combination with the finite evaluation time per challenge to read out all \acp{CRP} even in a long time.
+\item The challenge response mapping behavior of strong \pufs is so complicated that it is not possible to make any prediction on the response of a challenge. 
+This also applies even if a large number of \acp{CRP} is known and used source for the prediction.
+\end{itemize}
 
-settling-state-based PUFs and timing-based PUFs [15].
-Arbiter and Ring-oscillator PUFs are two examples of timing-based PUFs [15]
-\cite{Tajik2014PhysicalPUFs}
+In contrast weak \pufs only have a few challenges, at least one.
+Their responses are not meant to be given to the outside of the system and only used internal, e.g. as standard key \cite{Ruhrmair2012AnPUFs}.
+Weak \pufs provide an alternative to nonvolatile memory, which is a secret key storage device, with the advantage that weak \pufs may be harder to read out. % \cite{Lim2005ExtractingCircuits}
+Since weak \pufs do not have a large number of unique challenges it is easy to read out all their responses if free access is provided.
+This thesis studies \apufs, which are classified as strong \puf, and for this reason does not cover weak \pufs further \cite{Ruhrmair2010StrongProofs}.
+At last it has to be mentioned that there exist further subclassifications, e.g. electrical \pufs can be divided into delay based \pufs and memory based \pufs. % \cite{Saha2016TV-PUFPUF}
 
-\cite{Becker2015ThePUFs}
-
+% further category: settling-state-based PUFs and timing-based PUFs [15]. \cite{Tajik2014PhysicalPUFs}
+% Arbiter and Ring-oscillator PUFs are two examples of timing-based PUFs [15] \cite{Tajik2014PhysicalPUFs}
+% classification \cite{Becker2015ThePUFs}
 %========================================
+% -Optical, electric digital, electric analog
+% -% Presentation PUF seminar ws1516
+% % On the foundations of physical unclonable functions
+% -Strong, weak, ...  
+% % Strong PUFs: Models, Constructions, and Security Proofs
+% -Strong: They assume that an adversary has collected a large number of all possible CRPs of a given Strong PUF (usually between several hundred to a few million CRPs, depending on the exact Strong PUF design). \cite{Ruhrmair2014PUFsGlance}
+% -A Strong PUF is a PUF with the following features (for formal definitions see [29], [23], [1]) \cite{Ruhrmair2013PUFsEvaluations}
+% -Delay based, memory based % TV-PUF: A Fast Lightweight Aging-Resistant Threshold Voltage PUF
 
-\subsection{Current Types of PUFs}
+\subsection{Current Types of strong PUFs}
 \label{sec:typesofpufs}
 
-
-
-Butterfly, ...
-\cite{Becker2015ThePUFs}
-
-In the coating PUF [15], a silicon chip is covered with a randomized dielectric coating that affects the exact capacitance values of underlying metal sensors, leading again to unique and practically unclonable PUF responses. \cite{Armknecht2011AFunctions}
-
-Lightweight PUFs \cite{Delvaux2014SecureImpossible}
-
-Feed Forward Arbiter PUFs: Feed Forward Arbiter PUFs \cite{Ruhrmair2013PUFData}
-
-Loop PUF proposed by: "Zouha Cherif Jouini, Jean-Luc Danger, Sylvain Guilley, and Lilian
-Bossuet. An easy to design puf based on a single oscillator: the loop
-puf."
-
-Seminar presentation:
-Cellular Nonlinear Network!!!
-
-\apufs
-%Why are arbiter pufs strong pufs?
-%-> length of arbiter -> number of challenges
+The optical \puf suggest by Puppu et al. uses a laser beamed through a transparent unit to project a pattern of light and dark spots onto a photo sensor \cite{Pappu2002PhysicalFunctions}.
+The transparent unit contains reflecting particles, which interfere the laser beam.
+By changing the angle between the laser source and the transparent unit the created pattern changes as well.
+The pattern is transformed by the photo sensor to a bit sequence and represents the response of the \puf.
+The challenge is the angle that is used to apply the laser \cite{Pappu2002PhysicalFunctions}.
+This is the first strong \puf yet its application in the real world is difficult due to the laser and the photo sensor.
+After that several electric strong \puf have been suggested like the Power Grid \puf.
+The Power Grid \puf is based on the measurements of the variations of equivalent resistances of the \ac{IC}. % \cite{Helinski2009AVariations}
+Another important implementation is the \apuf, which is based on the runtime delay differences of two signal flowing through the \ac{IC}.
+These runtime delays differ because of variation in their circuit paths.
+\apufs have been used as base for several other strong \puf constructions such as the \xpuf and will be therefore studied in this thesis. % \cite{Becker2015ThePUFs}
+The \ac{CNN} \puf is a approach for an analog electric \puf where cells are interconnected to their neighbors in a two dimensional net.
+These interconnection have different strength that determines how signals are propagated through this net.
+After emitting a single it propagates through the net till the propagation stops and a response can be measured.
+In this way the response depends on a very large number of random electric components. % \cite{Csaba2010ApplicationCryptography}.
+At last the Crossbar \puf has to be mentioned.
+The Crossbar \puf has a very high independent information density and has a slow readout speed.
+This leads to a long readout time and is due to its physical construction, which makes it impossible to read out all responses. 
+Trying to readout responses to fast destroys the circuit of the \puf and therewith the \puf itself.
+However the slow readout speed can be a disadvantage depending on the application of the \puf. % \cite{Ruhrmair2010StrongProofs}
 
 %========================================
-
-
-
+% -Power Grid PUF  \cite{Ruhrmair2010StrongProofs}
+% -apuf  \cite{Ruhrmair2010StrongProofs}
+% -cnn puf  \cite{Ruhrmair2010StrongProofs}
+% -Crossbar PUFs  \cite{Ruhrmair2010StrongProofs}
+% -Their security merely depends on the access time of the adversary and on the ratio of the already readout bits vs. the number of overall bits stored in the structure. Whether the limited readout speed is a severe disadvantage depends on the intended application of this Strong PUF. Rührmair
+% Additional Source:
+% optical: Only optical PUFs have resisted all modeling attacks so far. We refer the reader to existing works [67], [70] and a recent survey paper on modeling attacks [68]. \cite{Ruhrmair2014PUFsGlance} -> ref
+% Not used:
+% Butterfly, ...\cite{Becker2015ThePUFs}
+% In the coating PUF [15], a silicon chip is covered with a randomized dielectric coating that affects the exact capacitance values of underlying metal sensors, leading again to unique and practically unclonable PUF responses. \cite{Armknecht2011AFunctions}
+% Lightweight PUFs \cite{Delvaux2014SecureImpossible}
+% Feed Forward Arbiter PUFs: Feed Forward Arbiter PUFs \cite{Ruhrmair2013PUFData}
+% Arbiter puf improvement: Loop PUF proposed by: "Zouha Cherif Jouini, Jean-Luc Danger, Sylvain Guilley, and Lilian Bossuet. An easy to design puf based on a single oscillator: the loop puf."
 
 \subsection{Application of PUFs}
+\label{sec:applicationsofpufs}
 
-Key derivative, ...
-\cite{Becker2015ThePUFs} NXP
-
-PUFs can be utilized as the basis for many security applications, such as encryption [13, 29] and hardware fingerprinting [26, 33]
-\cite{Tajik2014PhysicalPUFs}
-
-against: Recently, fake IC (Integrated Circuit) chips are dis- tributed to market.
-\cite{Machida2015ImplementationFPGA}
+\pufs can be used as basis for several security application.
+In the field of encryption it is crucial to protect the secret key as it is used for identification and authentication.
+Which has the secret key can authenticate itself as the instance the key belongs to.
+Currently nonvolatile memory is used to store the secret key.
+However it is possible with invasive and noninvasive physical tampering methods, e.g. micro-probing, to extract the stored secret key. % \cite{Lim2005ExtractingCircuits}
+Hence \pufs provide another possibility to include keys into an \ac{IC}.
+For that the secret key can be derived from the \puf responses.
+This key then can be used for different propose, such as encryption. % \cite{Tajik2014PhysicalPUFs}
+Also hardware fingerprinting can be done through the \puf responses as the \puf is directly coupled with the device itself.
+With an included \puf it can be determined if any device is the device it claims to be.
+Beside authentication this can be used to detect fake \acp{IC} that are distributed and block them out. % \cite{Machida2015ImplementationFPGA}
+Despite \puf are limited studied so far, \acl{NXP} and Microsemi, two semiconductor manufacturer, already use \puf based key storage in some of their products \cite{Becker2015ThePUFs}.
 
 %========================================
+% Done
+% alternative to key storage (nonvolatile memory)
+% -authentication, -> humans, phones, cars, chips
+% -against: Recently, fake IC (Integrated Circuit) chips are dis- tributed to market. \cite{Machida2015ImplementationFPGA}
+% -PUFs can be utilized as the basis for many security applications, such as encryption [13, 29] and hardware fingerprinting [26, 33] \cite{Tajik2014PhysicalPUFs}
 
 \section{Machine Learning Attacks}
 
+The idea of \acf{ML} is summarized by the ability of a system to produce knowledge from experience.
+For that the system uses an algorithm called \ac{ML} algorithm.
+Starting with no knowledge or random given knowledge the \ac{ML} algorithm modifies this knowledge.
+The modifications are based on given examples. 
+This process is called training or learning.
+The modified knowledge of the \ac{ML} algorithm is called model.
+This model, trained by the \ac{ML} algorithm, can then make predictions about data it was trained with, new data, or both.
+It can recognize pattern or correlations and can classify data into different groups.
+% ? right or wrong in general sense: The model learns a function that maps the input values and desired output values. 
 
-
-Abgrenzung andere Attacks: Side channel, etc + "attack" -> ML
-Idea of ML
-
-supervised vs. unsupervised
-offline vs. online
-
-
-\subsection{Types of Learning Approach}
-
+In the case of \pufs the term \ac{ML} attack is used equally to \ac{ML} algorithm.
+\ac{ML} attacks are used to learn the response behavior of \pufs.
+To train the model by a \ac{ML} attack \acp{CRP}, which are already know, are used.
+For challenges their responses are not know the model then can make predictions about whose responses.
 % https://en.wikipedia.org/wiki/Machine_learning
+
+% check if in type of learning approach: online vs batch learning % https://en.wikipedia.org/wiki/Online_machine_learning
 %========================================
+% ? "attack" -> ML
+% Done:
+% -Idea of ML
+% -attack?! what is meant by attack
+
+\subsection{Types of Learning Approaches}
+
+To categorize \ac{ML} techniques by their approach the following three different learning approach classes are used: % https://en.wikipedia.org/wiki/Machine_learning
+
+\begin{itemize}
+\item Supervised learning: The data includes input values and their desired output values for the \ac{ML} algorithm. 
+In the training process the \ac{ML} algorithm has to make predictions about the data and in this way trains its model.
+The goal is to learn the rules how the input values mapped onto the output values.
+\item Unsupervised learning: The data includes input values only.
+These data are used in the training process so that the \ac{ML} algorithm can find structures in the data.
+The goal can be to even find a structure in the data or to find the structure itself.
+\item Semi-supervised learning: The data includes input values with their desired output values and input values without their output values. % https://en.wikipedia.org/wiki/Semi-supervised_learning
+In the training process the \ac{ML} algorithm has to structure the data and make already prediction for the data without output values.
+\item Reinforcement learning: The \ac{ML} algorithm is trained by reward and punishment to maximize its performance in a dynamic environment.
+This learning approach is based on a common way humans learn.
+\end{itemize}
+
+Since there is a large variety of different \ac{ML} techniques other categorizations, e.g. considering the desired output of the \ac{ML} algorithm, exist though the categorization by learning approaches is sufficient for this thesis. % https://en.wikipedia.org/wiki/Machine_learning
+All \ac{ML} attacks considered in this thesis are from the supervised learning class.
+
+% check if in machine learning chap: online vs batch learning % https://en.wikipedia.org/wiki/Online_machine_learning
+%========================================
+% https://en.wikipedia.org/wiki/Machine_learning
+% http://machinelearningmastery.com/a-tour-of-machine-learning-algorithms/
+
+
+
+
+
 
