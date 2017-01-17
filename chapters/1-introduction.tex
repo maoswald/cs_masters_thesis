@@ -1,35 +1,61 @@
 \chapter{Introduction}
 
+The number of used electronic devices connected over the internet grew throughout the last two decades rapidly.
+Through the establishment of smartphones tremendous mass of people are using services based on an internet connection.
+Apart form connected end-user devices, control units of industrial facilities or plants that provide any kind of supply can be operated via an internet connection.
+These are just some examples for connections where authentication and identification is needed to restrict the access to the qualified entity.
+Without restriction every other entity has access and can perhaps enrich itself or cause damage.
+Since data, transferred by internet, passes multiple nodes and can be eavesdropped, encryption is needed to protect its containing information.
+Authentication, identification, and encryption are just some security features needed to meet the requirements of information security.
 
-more devices
+To meet the requirements of information security secret keys are used.
+Secret keys have to be accessible by the devices to verify themselves and have to be protected.
+Approaches like noninvasive memory or one-way hash functions have been used so far.
+Though due to the development of physical intrusion methods and the increasing performance of computer systems both techniques facing a number of challenges.
+For that reason \pufs, as a new possible basis for secret keys, has been introduced.
+\pufs were developed being a alternative to physical implementations of one-way functions used as authentication device such as smart cards. % \cite{Pappu2002PhysicalFunctions}
 
-smart phones
-cars
-smart -everything
+% old:
+% Hence they are mostly stored in data, which makes them vulnerable to being red out and reused by unqualified entities.
+% To protect keys one-way hash functions are.
+% These functions are easy to evaluate in the one direction but infeasible to calculated in the reverse direction.
+% The secret key is applied to the one-way hash function and only its result is stored.
+% Hence the secret key can not be calculated from the stored value but conversely.
+% However one-way function face 
 
-iot
-bot nets
+However \pufs are also not invulnerable to attacks, e.g. physical intrusion or \acl{ML} attacks.
+Since \pufs are not completely studied new types of \pufs and suitable attacks are proposed.
+This interplay between developing new \pufs that are claimed to be secure and developing of successful attacks leads to a huge variety of different \pufs.
+In this way the \apuf and multiple modified versions based on the \apuf have been suggested.
+One of these versions is the \mpuf.
+As there exist several successful attacks on \apufs, their impact on \mpuf is unknown. % ? probably
+Hence this thesis studies the changes due to the modification done to the \apuf and how existing attacks are affected.
 
--> authentication
-
--> encryption
-
-
-Motivation: secret key storage are attackable and the key can be read out with different techniques
--> PUFs provide a more save key storage against attacks
-Protocols are based on PUFs
-PUFs can be used for multiple purposes
-
-gegenspiel zw attack and puf dev
-
-% Done:
-This thesis is structured as follows: 
+The thesis is structured as follows: 
 Chap. \ref{cap:background} gives an introduction to \pufs and \ac{ML} attacks.
 A more detailed description of important \ac{ML} attacks for this thesis is provided by Chap. \ref{cap:mla}.
 \todo{put attack section ref in here}
-Chap. \ref{cap:arbiter} explains the \apuf specifications before Chap. shows already applied attacks occurring in the current literature.
-It is explained why only one of these attacks is relevant to the idea of \ac{MV} which then is introduced in Chap. \ref{cap:majorityarbiter} and counteracts this one attack.
+% old
+% Chap. \ref{cap:arbiter} explains the \apuf specifications before Chap. shows already applied attacks occurring in the current literature.
+% It is explained why only one of these attacks is relevant to the idea of \ac{MV} which is introduced in Chap. \ref{cap:majorityarbiter}. % and counteracts this one attack.
+Chap. \ref{cap:arbiter} explains the \apuf specifications before Chap. shows the modifications made to create the \mpuf.
+After an overview to already applied attacks occurring in the current literature it is explained why only one of these attacks is relevant to the idea of \ac{MV}.
 To prove this in an empirical manner a simulation of the \apuf and the attack is build and described in Chap. \ref{cap:simulationdesign}.
 The results of the simulations are laid out in Chap. \ref{cap:stabilitysimulation} and Chap. \ref{cap:attacksimulations}.
 Finally a conclusion for the thesis is given in Chap. \ref{cap:conclusion}.
 
+% iot
+% no security due to expenses (iot)
+% bot nets
+% ==============================
+% - smart phones, cars, smart -everything
+% - authentication
+% - identification
+% - encryption: for data, connections, signatures
+% - attacks to steal secret keys
+% - noninvasive memory
+% - hash functions 
+% - PUFs provide a alternative key storage developed to resist these attacks
+% - (upon pufs Protocols are based )
+% - gegenspiel zw attack and puf dev -> arbiter -> improvement by mv
+% - Machine learning attacks on majority vote arbiter physical unclonable functions.
