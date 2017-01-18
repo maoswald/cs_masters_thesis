@@ -38,8 +38,10 @@ For the attack simulation \ref{equ:pufmodelw} is used since the delay vector $\g
 \section{Machine Learning Design}
 \label{sec:machinelearningdesign}
 
-The number of evaluation $\gls{j}$ is the number of times a challenge is evaluated by the same \apuf and its responses $\gls{r}$ captured to calculate it reliability $\gls{h}$.
 
+
+The number of evaluation $\gls{j}$ is the number of times a challenge is evaluated by the same \apuf and its responses $\gls{r}$ captured to calculate it reliability $\gls{h}$.
+Against the definition of stability \ref{equ:stability}, in terms of the reliability based \ac{CMA-ES} attack, the reliability has a different definition.
 The reliability $\gls{h}$ of a challenge $\gls{c}$ is computed of its responses $r_1, r_2, ..., r_j$ by
 
 \begin{align}
@@ -65,6 +67,8 @@ minimum search
 normal CMA-ES
 
 two stage CMA-ES
+
+achieved? For the reliability based \ac{CMA-ES} attack on \apufs it is crucial to find challenges which evaluate differently at multiple evaluations as explained in Sec. \ref{sec:machinelearningdesign}.
 
 % Why ES-CMA
 %========================================
