@@ -1,15 +1,13 @@
 \chapter{Attacks}
+\label{cap:attacks}
 
-
-
-apuf specific
-extract the intrinsic secret -> the delay values
-or find another ... which act in the same way
-
-impersonate 
+The aim of attacks on \apuf is to predict responses for challenges their responses are unknown.
+% To accomplish this it is possible to either reveal the intrinsic secret, the inaccuracies of the \apuf circuit, or to adapt the challenge response behavior of the \puf to impersonate the attacked \puf.
+To accomplish this on the one hand it is possible to reveal the intrinsic secret represented by the inaccuracies of the \apuf circuit.
+On the other hand the challenge response behavior of the \puf can be adapted.
+Both methods can then be used to impersonate the attacked \puf.
 
 %========================================
-
 
 \section{Attacks on \apufs}
 \label{sec:attacksonarbiter}
@@ -59,14 +57,30 @@ As main differences the attacks additionally have to cope with the added non-lin
 The increasing number of \apufs make the time consumed by the attack and its growth rate an important factor for building secure \xpufs that can not be successfully modeled in reasonable time.
 On the one hand, this time grows with the number of used \apufs for the most attacks exponentially and on the other hand, the size $\gls{k}$ of a \xpuf is limited by the growing total noise as explained in Sec. \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}.
 The reports about current effective attacks on \xpufs differ in the maximum size $\gls{k}$ by $4$ to $6$ \cite{Ganji2015WhyPUFs, Xu2014Hybrid}.
-Under these conditions Ganji et al. developed a \ac{PAC} learning algorithm to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
+Under these conditions Ganji et al. developed a \ac{PAC} analysis algorithm to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
 Using \ac{ANN} and \ac{SVM} proved to be rather inefficient when $\gls{k} > 2$ \cite{Hospodar2012MachineUsability}.
 Equally bad performed the \ac{ES} attack.
 However the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.
 All attacks mentioned so far grow exponentially in their execution time for linear increasing $k$.
-\todo{Nils:a comparison table would be great}
+% \todo{Nils:a comparison table would be great}
 Only the \ac{CMA-ES} attack that is based on the reliability of the responses claims to have linear growing time consumption for rising $k$ \cite{Becker2015ThePUFs}.
 That means for example using double the amount of \apufs in a \xpufs leads only to twice the required time to run this attack.
 
 %========================================
 
+\section{Essential attacks}
+
+The time effort of all attacks applied to \xpufs grows exponentially with increasing number of \apuf except of the \ac{CMA-ES} attack, as described in Sec. \ref{sec:attacksonxorarbiter}.
+Hence a \xpuf with an arbitrary large number of \apufs would prevent all attack but the \ac{CMA-ES} attack.
+To overcome the problems large \xpufs encounter the concept of \ac{MV} has been developed, as shown in Chap. \ref{cap:majorityarbiter}.
+\ac{MV} claims to make it possible to build \xpufs with large number of \apufs, which will be studied in Chap. \ref{cap:simulationdesign}.
+% As a result the only attack that claims to be usable with large \xpufs at a feasible time consumption is the \ac{CMA-ES} attack.
+As a result the only attack that can be applied to large \xpufs with a feasible time consumption is the \ac{CMA-ES} attack.
+Hence the impact of using \ac{MV} in combination with \apufs on the success of the \ac{CMA-ES} attack will be studied in Chap. \ref{cap:attacksimulations}.
+
+%========================================
+% - exponential
+% - xor limited
+% - unlimited xor -> prevent all attacks except cma
+% - mv claims to make it possible to build abtriry large xpuf
+% - only cma could break mv puf -> this thesis
