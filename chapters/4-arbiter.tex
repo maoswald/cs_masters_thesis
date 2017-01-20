@@ -225,7 +225,7 @@ NOR logic gates could be used likewise as their \ac{SR-latch} implementation is 
 \label{fig:nandarbiter}
 \end{figure}
 
-All presented \apuf \ac{ASIC} implementation properties are considered when creating the \apuf simulation in Sec. \ref{cap:simulationdesign}.
+All presented \apuf \ac{ASIC} implementation properties are considered when creating the \apuf simulation in Sec. \ref{sec:pufsimulation}.
 This work does not study physical \apuf implementations further as they are not needed for understanding of \ac{ML} attacks.
 
 %========================================
@@ -292,7 +292,7 @@ To define these unstable challenges precisely we define the stability $\Stab(\gl
 % Within all these parts to completely model an \apuf the noise free model $\Delta D_{\mathrm{Model}}(c)$ is the part with the intrinsic key which want to be attacked.
 For a realistic model of an \apuf noise has to added as described. 
 However the noise free model $\Delta D_{\mathrm{Model}}(c)$ is the part with the hidden information which an attacker want to expose.
-As widely common and used in attacks on \apuf the noise free model can be described in a case-distinction-free form and as linear function of dimension $\gls{n} + 1$ \cite{Majzoobi2008TestingSecurity, Majzoobi2008LightweightPUFs, Ruhrmair2010ModelingFunctions, Becker2015ThePUFs}.
+As widely common and used in attacks on \apuf the noise free model can be described in a case-distinction-free form and as linear function of dimension $\gls{n} + 1$ also called linear threshold function \cite{Majzoobi2008TestingSecurity, Majzoobi2008LightweightPUFs, Ruhrmair2010ModelingFunctions, Becker2015ThePUFs, Gassend2004IdentificationCircuits, Ganji2016PACPUFs}.
 An equally representation is used in this paper to attack different types of \apufs.
 The function is definite by
 
@@ -310,10 +310,12 @@ w_{n+1} &= \delta_{0}^{(n)} + \delta_{1}^{(n)}
  
 The feature vector $\gls{x}$ is computed from the challenge $\gls{c}$ by
 
-\begin{align*}
-x_i &= \prod_{i=1}^n c_i\\
-x_{n+1} &= 1
-\end{align*}
+\begin{equation}
+\begin{aligned}
+x_i &= \prod_{i=1}^n c_i\\ 
+x_{n+1} &= 1 \label{equ:featurevector}
+\end{aligned}
+\end{equation}
 
 As in Sec. \ref{sec:xorarbiterpufs} explained \xpufs include $\gls{k}$ multiple \apufs whose single responses are combined by an \ac{XOR} function to the final response.
 % The \ac{XOR} function is represented by an multiplication hence equation
@@ -326,7 +328,7 @@ r &= \prod_{i=1}^k \operatorname{sgn}(\Delta D_{\mathrm{Model}}^i(x)) = \prod_{i
 for the noise free \xpuf model.
 Since the challenge $\gls{c}$ is the same for all \apufs the feature vector $\gls{x}$ stays the same as well.
 The feature vector is applied to all \apufs and only the \apuf model $\gls{w}$ changes.
-Here introduced models are used in both to simulate attackable \apuf instances in Sec. \ref{sec:pufsimulation} and to attack them in Sec. \todo{ref}.
+Here introduced models are used in both to simulate attackable \apuf instances in Sec. \ref{sec:pufsimulation} and in the attacks on them in Sec. \ref{sec:machinelearningdesign}.
 
 %========================================
 

@@ -3,9 +3,12 @@
 
 Most of the attacks described in Sec. \ref{sec:attacksonxorarbiter} increase exponentially in their complexity for a growing number of used \apufs in a \xpuf. 
 Hence it can be claimed that arbitrary large \xpufs would constitute a secure \puf in terms of all now known non-invasive modeling attacks except of the \ac{CMA-ES} attack.
-This is possible because only linear enlargement of \xpufs will lead to exponential growth in time consumptionm, even with the fastest known attack.
+This is possible because only linear enlargement of \xpufs will lead to exponential growth in time consumption, even with the fastest known attack.
 To overcome the stability problem of \xpufs mentioned in Sec. \ref{sec:xorarbiterpufs} which currently deter them from been enlarged unlimited we introduce the concept of \ac{MV}. %\cite{Majzoobi2010FPGALines}.
-In terms of completeness it has to be mentioned that \ac{MV} can also be used by the attacker as technique to obtain responses with high stability of a \puf if needed \cite{Ganji2016PACPUFs, Ozturk2008TowardsDevices}.
+The concept of \ac{MV} has been already mentioned by Ruhrmair et al. \cite{Ruhrmair2013PUFData}.
+However they did not further investigate its impact on the possibility to build large \xpufs.
+\ac{MV} can also be used by the attacker as technique to obtain responses with high stability of a \puf if needed \cite{Ganji2016PACPUFs, Ozturk2008TowardsDevices}.
+As the attacks of this thesis are not based on \ac{MV} this purpose of \ac{MV} is not part of this thesis.
 
 \section{Majority Based Arbiter PUFs}
 \label{sec:majorityarbiter}

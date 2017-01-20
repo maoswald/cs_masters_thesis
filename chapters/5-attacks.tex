@@ -14,36 +14,41 @@ Both methods can then be used to impersonate the attacked \puf.
 
 Since \apufs were one of the most promising \puf implementation multiple attacks have been developed.
 One of the first attacks reveals the internal values of the \apuf by linear programming \cite{Ozturk2008TowardsDevices}.
-This approach solves a linear equation system after collecting enough \acp{CRP} because an \apuf can be represented as linear threshold function, as shown in Sec. \ref{sec:theoretical}.
+This approach solves a linear equation system after collecting enough \acp{CRP} because an \apuf can be represented as linear threshold function, as shown in Sec. \ref{sec:theoretical}.\\
 For a good result the stability of the responses of the \acp{CRP} should be as high as possible.
 As the response of every \ac{CRP} includes some noise as explained in Sec. \ref{sec:physical} one strategy of the attacker is to reduce the noise by using majority vote, i.e. evaluating the same challenge multiple times and picking the most appeared response.
-Therefor the attacker has to be able to evaluate chosen challenges.
+Therefor the attacker has to be able to evaluate chosen challenges.\\
 Another option would be using an algorithm to learn noisy linear threshold function as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
 
 The linear programming attack is a non-invasive modeling attack where the attacker needs to collect \acp{CRP} to build a model of the \puf by for example a \ac{ML} algorithm.
-After that the model can predict responses for new challenges which have not be used to create the model itself.
-How precise these predictions are depends on the number of captured \acp{CRP} and which parameters have been used to build the model.
+After that the model can predict responses for new challenges, which have not be used to create the model itself.
+How precise these predictions are depends on the number of captured \acp{CRP} and used parameters to build the model.\\
 The result and the model building performance vary for different \ac{ML} techniques.
-How the attacker gets to know the \acp{CRP} in a real use case depends on the way the \puf is used and the \acp{CRP} transmitted and therefore not part of this work.
-As \apufs are strong \pufs and their operation frequency is relatively high they provide the option to freely access a large amount of \acp{CRP} \cite{Ruhrmair2010ModelingFunctions}.
+How the attacker gets to know the \acp{CRP} in a real use case depends on the way the \puf is used and the \acp{CRP} transmitted and therefore not part of this work.\\
+\apufs are strong \pufs and their operation frequency is relatively high.
+They provide the option to freely access a large amount of \acp{CRP} \cite{Ruhrmair2010ModelingFunctions}.\\
 On the contrary some \pufs post-process their response in the protected chip environment to make the \puf response itself inaccessible to protect the \puf \cite{Suh2007PhysicalGeneration, Gassend2004IdentificationCircuits}.
 All non-invasive attacks mentioned in this thesis investigate \pufs despite how they obtain \acp{CRP}.
-For this reason I assume to have free access to the \puf and be able to measure \acp{CRP} without restrictions.
+For this reason I assume to have free access to the \puf and to be able to measure \acp{CRP} without restrictions.
 % difference machine learning to algebraic technique like linear programming \cite{Ruhrmair2014PUFOverview} Page 1
 
 It has been shown by Rührmair et al. that \apufs can be successfully attacked resulting in a model with even higher stability as the \apuf in-silicon implementation has \cite{Ruhrmair2010ModelingFunctions}.
-For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performed best in terms of predicting randomly chosen challenges.
-Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning whereas \ac{PAC} is an analysis algorithm and not a \ac{ML} technique. 
+For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performed best in terms of predicting randomly chosen challenges.\\
+Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning whereas \ac{PAC} learning is an analysis framework and not a \ac{ML} technique.\\
 \acp{ANN} need a relative large amount of \acp{CRP} to achieve a high prediction accuracy of new challenges \cite{Hospodar2012MachineUsability}.
 The approach for a \ac{PAC} learning algorithm by Ganji et al. requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
-A further attack is the reliability-based machine learning attack by Becker \cite{Becker2015ThePUFs}.
-It is based on the reliability of the \puf responses rather than on their values. 
-This in combination with an \ac{CMA-ES} algorithm makes it possible to create \apuf model with high accuracy.
 
-Beside these non-invasive modeling attacks are side channel attack possible.
+All non-invasive attacks mentioned so far are based only on the values of the responses of the attacked \puf.
+A different attack is the reliability-based machine learning attack proposed by Becker et al. \cite{Becker2015ThePUFs}.
+It is based on the reliability of the \puf responses than on their values. 
+This in combination with a \ac{CMA-ES} algorithm makes it possible to create \apuf models with high accuracy.
+We count this attack as non-invasive attack as it relies only on the response of the \puf and does not need physical access to the \puf like side channel attacks.
+
+In addition to non-invasive modeling attacks, physical side channel attacks are possible.
 As mentioned before, in real attack scenarios, the \puf response or a large set of \acp{CRP} is may be not available to the attacker so he has to obtain information differently.
+Physical side channel attacks require physical access to the \puf.\\
 As an example the photonic emission analysis attack where the attacker measures the evolved photons of the bottom side of the \apuf chip to reveal all its internal delay values \cite{Tajik2014PhysicalPUFs}.
-With these values the attacker can create an exact model of the \apuf as explained in Sec. \ref{sec:theoretical}.
+With these values the attacker can create an exact model of the \apuf as explained in Sec. \ref{sec:theoretical}.\\
 Different combinations of machine learning attacks and side channel attacks have been proposed as well \cite{Mahmoud2013CombinedPUFs, Xu2014Hybrid}.
 However in this work I focus only on non-invasive machine learning attacks as they do not require physical access to the \apuf chip.
 
@@ -72,9 +77,10 @@ That means for example using double the amount of \apufs in a \xpufs leads only 
 \label{sec:essentialattacks}
 
 The time effort of all attacks applied to \xpufs grows exponentially with increasing number of \apuf except of the \ac{CMA-ES} attack, as described in Sec. \ref{sec:attacksonxorarbiter}.
-Hence a \xpuf with an arbitrary large number of \apufs would prevent all attack but the \ac{CMA-ES} attack.
+Becker et al. points out that their approach "results in only a linear increase in needed number of challenge and responses for increasing numbers of XORs" \cite{Becker2015ThePUFs}.
+A \xpuf with an arbitrary large number of \apufs would prevent all attack but the \ac{CMA-ES} attack.
 To overcome the problems large \xpufs encounter the concept of \ac{MV} has been developed, as shown in Chap. \ref{cap:majorityarbiter}.
-\ac{MV} claims to make it possible to build \xpufs with large number of \apufs, which will be studied in Chap. \ref{cap:simulationdesign}.
+\ac{MV} claims to make it possible to build \xpufs with large number of \apufs, which will be studied in Chap. \ref{cap:stabilitysimulation}.
 % As a result the only attack that claims to be usable with large \xpufs at a feasible time consumption is the \ac{CMA-ES} attack.
 As a result the only attack that can be applied to large \xpufs with a feasible time consumption is the \ac{CMA-ES} attack.
 Hence the impact of using \ac{MV} in combination with \apufs on the success of the \ac{CMA-ES} attack will be described in Chap. \ref{cap:attacksimulations}.
