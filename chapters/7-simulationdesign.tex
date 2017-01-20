@@ -20,19 +20,21 @@ After that the principles used by the different attacks on \mpufs and \mxpufs ar
 \section{\ac{PUF} Design}
 \label{sec:pufsimulation}
 
+The \apuf simulations are based on the \apuf representation explained in Sec. \ref{sec:theoretical}.
+
 The simulation of the \apuf uses randomly chosen normal distributed values with zero mean and given variance for delay difference values $\delta$ that represent the \apuf.
 % Old: This is a common approach for random values whose distribution is unknown.  %? https://en.wikipedia.org/wiki/Normal_distribution
-This is a common approach for natural randomly occurring deviations whose distribution is unknown.
+This is a common approach for natural randomly occurring deviations whose distribution is unknown.\\
 The different noise values added in $\ref{equ:pufresponse}$ are also normal distributed random values with zero mean and given variance.
 The distribution $\ref{equ:stagenoisedistribution}$ where the noise of the stages is chosen from scales by the size of the \apuf $\gls{n}$ as required by the equation.
 
-The distributions of the delay difference values and all noise values depend for a physical \apuf implementation on the used electronic components, as shown in Sec. \ref{sec:physical}.
+The distributions of the delay difference values and all noise values depend for a physical \apuf implementation on the used electronic components, as shown in Sec. \ref{sec:physical}.\\
 The ratio between $\sigmaSNoise$ and $\sigmaModel$ and the value of $\sigmaANoise$ determines the stability of the challenges of the \apuf.
-As this work studies the impact of adding \ac{MV} to \apufs the real value of the ration does not matter.
-Hence it crucial not to changed the ration during the simulation to grain results that are comparable.
+As this work studies the impact of adding \ac{MV} to \apufs in a comparison the real value of the ratio does not matter.
+Hence it crucial not to changed the ration during the simulation to receive results that are comparable.
 
 The response of the \apuf model is simulated by \ref{equ:pufmodelc} or \ref{equ:pufmodelw} before the noise values are added.
-All other implementations of \puf concepts used in this thesis, e. g. the \mpuf, are based on these \apuf equations.
+All other implementations of \puf concepts used in this thesis, e.g. the \mpuf, are based on these \apuf equations.
 For the attack simulation of the \ac{CMA-ES} attack \ref{equ:pufmodelw} is used since the delay vector $\gls{w}$ is approximated explained in Sec. \ref{sec:machinelearningdesign}.
 
 %========================================
@@ -69,15 +71,15 @@ In the end the principle to successfully apply the attack on \xpufs is described
 \label{sec:reliability}
 
 The \ac{ES} algorithm is based on the natural evolution process of survival of the fittest, explained in Sec. \ref{sec:evolutionstrategies}, and therefore needs a method to score the fitness of a trained model.
-This function is called fitness function and how it is used in the \ac{CMA-ES} algorithm is explained later in the Sec. \ref{sec:cma-esdesign}.
+This function is called fitness function and how it is used in the \ac{CMA-ES} algorithm is explained later in the Sec. \ref{sec:cma-esdesign}.\\
 The fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges of the training set, as Becker et al. describes \cite{Becker2015ThePUFs}.
 This is done to approximate the attacked \puf by adapting its reliability behavior of the responses of every challenge of the training set.\\
 % idea: Von der Stabilität kann auf den konkreten Wert des Signalunterschieds (delay difference) geschlossen werden
 Against the definition of stability \ref{equ:stability}, in terms of the reliability based \ac{CMA-ES} attack, the reliability of a challenge and the hypothetical reliability of a challenge have both different definitions than the stability, as described in the next paragraphs. 
-First and explanation for the reliability and the hypothetical reliability is given before its described how they are used to rate the models.
+First an explanation for the reliability and the hypothetical reliability is given before it is described how they are used to rate the models.
 
 To measure the reliability value $h_i$ of a challenge it has to be evaluated multiple times by the attacked \puf.
-This process of measuring the reliability values of the challenges of the attacked \puf has to be done only once as the same values are used during the complete attack.
+This process of measuring the reliability values of the challenges of the attacked \puf has to be done only once as the same values are used during the complete attack.\\
 We define the number of evaluation $\gls{j}$ to be the number of times a challenge is evaluated by the same \puf and its responses $\gls{r}$ captured to calculate it reliability $\gls{h}_i$.
 The reliability $\gls{h}_i$ of a challenge $\gls{c}$ is computed of its responses $r_1, r_2, ..., r_j$ as follows \cite{Becker2015ThePUFs}:
 
@@ -85,12 +87,12 @@ The reliability $\gls{h}_i$ of a challenge $\gls{c}$ is computed of its response
 h_i &= |\frac{j}{2} - \sum_{i = 1}^{j}r_i| \label{equ:reliability}
 \end{align}
 
-In \ref{equ:reliability} it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with the same response $r$, either $0$ or $1$, for all $j$ times of evaluations.
-A challenges that evaluates one or more times of $j$ times of evaluations to a different response as the other responses it has a lowered reliability and is called unreliable challenge.
+In \ref{equ:reliability} it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with the same response $r$, either $0$ or $1$, for all $j$ times of evaluations.\\
+A challenges that evaluates one or more times of $j$ evaluations to a different response as the other responses has a lowered reliability and is called unreliable challenge.
 Hence $h = (h_1, ..., h_n)$ is the reliability vector of $n$ challenges from the training set evaluated by the attacked \puf.
 
 After that the hypothetical reliability values $g_i$ of the models created by the algorithm has to be calculated.
-The models are defined by their delay vectors $w$, as used in the \apuf model representation \ref{equ:pufmodelw}, that are known by the algorithm.
+The models are defined by their delay vectors $w$, as used in the \apuf model representation \ref{equ:pufmodelw}, that are known by the algorithm.\\
 Additional a feature vector $x$ is computed from every challenge of the training set by \ref{equ:featurevector}.
 Hence the vectors $w$, the feature vectors $x$, and the \apuf model \ref{equ:pufmodelw} are used to calculate the hypothetical reliability $g_i$ for a challenge as follows:
 
@@ -104,15 +106,15 @@ g_i &=
 \end{aligned}
 \end{equation}
 
-The hypothetical reliability categorizes every challenge for the model defined by $w$ into hypothetical reliable and hypothetical unreliable.
+The hypothetical reliability categorizes every challenge for the model defined by $w$ into hypothetical reliable and hypothetical unreliable.\\
 The challenge is defined to be hypothetical reliable when its delay difference computed by $\langle w, x \rangle$ is grater than the error boundary $\epsilon$ and results in $g_i = 1$.
-The challenge is defined to be hypothetical unreliable when its delay difference is lower than the error boundary $\epsilon$ and results in $g_i = 0$.
+The challenge is defined to be hypothetical unreliable when its delay difference is lower than the error boundary $\epsilon$ and results in $g_i = 0$.\\
 The error boundary $\epsilon$ is a flexible limit, which determines the separation, and is approximated in the attack.
 Hence $g = (g_1, ..., g_n)$ is the hypothetical reliability vector of $n$ evaluated challenges from the training set by every created model of the attack.
 
 As last step the Pearson correlation coefficient of both vectors, reliability vector and hypothetical reliability vector, is computed.
 The correlation coefficient represents the linear dependency of the vectors to each other.
-For the attack it is assumed that a higher linear dependency between these vectors means a more well performing model.
+For the attack it is assumed that a higher linear dependency between these vectors means a more well performing model.\\
 The correlation coefficients are computed of the combinations between the one reliability vector and all hypothetical reliability vectors of all models that exist in the current generation of the algorithm.
 These correlation coefficients are used as the fitness values of the corresponding model.
 How many models in the current generation of the algorithm exist is explained in the next Sec. \ref{sec:cma-esdesign}.
@@ -124,7 +126,8 @@ How many models in the current generation of the algorithm exist is explained in
 
 Since we described in the previous section how to score the fitness values of the created models this sections explains how the models are trained by the algorithm.
 One way to describe the \ac{CMA-ES} algorithm is displayed in Alg. \ref{alg:cma-es}.
-We run through the algorithm step by step and explain the purpose of each step.\\
+
+In this section we run through the algorithm step by step and explain the purpose of each step.\\
 In the first lines 1 to 3 multiple values are initialized, which are described when used in the algorithm.
 Since the \ac{ES} algorithm is based on the natural evolution process survival of the fittest, as described in Sec. \ref{sec:evolutionstrategies}, the algorithm creates new models every generation. % https://en.wikipedia.org/wiki/Survival_of_the_fittest
 
@@ -156,28 +159,29 @@ update the values used in the \ac{CMA}:\\
 This process of repeating generations is realized by the loop starting in line 7 and ends with fulfilling one of the termination criteria that are described later.
 In every generation the following steps are executed.
 
-By the loop starting in line 5 new models are created and their fitness values are determined by the reliability based fitness function, explained in Sec. \ref{sec:reliability}.
+By the loop starting in line 5 new models are created and their fitness values are determined by the reliability based fitness function, explained in Sec. \ref{sec:reliability}.\\
 The number of new created models per generation is defined by the initially set number of new models per generations in line 2.
-After all models are created in every generation they are sorted descending by their fitness values in line 10.
+After all models are created and their fitness rated in every generation, they are sorted descending by their fitness values in line 10.
 
 Since the \ac{ES} algorithm requires a selection process of the fittest models in every generation this is done by the \ac{CMA}.
-The \ac{CMA} adapts the values used for creating new models in the next generation by the values of models of the current generation in line 11 and 12.
+The \ac{CMA} adapts the values used for creating new models in the next generation by the values of models of the current generation in line 11 and 12.\\
 The descending sorted models of the current generation are combined with weights to rank their importance for adapting these values.
 The impact of a model on the values, used to create the models of the next generation, depends on its fitness value through these weights.
-This makes sure that the algorithm approximated fitter models.
+This makes sure that the algorithm approximates fitter models.
 
 The values that are approximated by the \ac{CMA} are the means of the distributions of the values that define a model.
-These means and random values that are scaled by the covariance matrix and the sigma value are used to create the values for the models of every generation in line 6 and 7.
-The covariance matrix represents the correlation of the model values to each other, which is important as the response of the \apuf depends on every value it is defined by.
+These means and random values that are scaled by the covariance matrix and the sigma value are used to create the values for the models of every generation in line 6 and 7.\\
+The covariance matrix represents the correlation of the model values to each other, which is important as the response of the \apuf depends on every value it is defined by.\\
 The sigma value is a dynamic step-size value, that adjusts the space wherein the algorithm chooses values for new models from.
-The values of sigma is reduced when the algorithm correlates a well performing model to increase the likelihood of approximating a better performing model that values differs slightly.
+The values of sigma is reduced when the algorithm correlates a well performing model to increase the likelihood of approximating a better performing model that values differs slightly.\\
+Additional sigma is reduced when the algorithm can not approximate a model so that the algorithm terminates.
 
 The means, covariance matrix, and the sigma value are updated every generation in line 11 and 12.
-The mean is updated by the ranked and weighted models of the current generation.
+The mean is updated by the ranked and weighted models of the current generation.\\
 To update the covariance matrix and the sigma value evolution paths are used.
 These paths represent correlations between consecutive steps of the modifications of the means. They purpose is to reach a faster approximation and prevent from early adaption, as explained in Sec. \ref{sec:cma-es}.
 
-This generation loop from line 4 to 13 in the Alg. \ref{alg:cma-es} ends with meeting one of the termination criteria.
+The generation loop from line 4 to 13 in the Alg. \ref{alg:cma-es} stops with meeting one of the termination criteria.
 The algorithm uses the following three termination criteria:
 
 \begin{itemize}
@@ -187,7 +191,7 @@ The algorithm uses the following three termination criteria:
 \end{itemize}
 
 The first criteria exits the algorithm after a given number of generations.
-The attack ends also if the the step-size sigma becomes to low and the algorithms has approximated a solution or can not approximate a solution in this run.
+The attack ends also if the the step-size sigma becomes to low and the algorithms has approximated a solution or can not approximate a solution in this run.\\
 In contrast when a model exceeds a given maximum fitness value the attack terminates as the models have been trained till at least one is rated above a given fitness value.
 
 After the algorithm terminated the result are the approximated means and the rated models of the last generation.
@@ -212,7 +216,7 @@ Before the attacks start a training set from the \xpuf is created in line 1.
 \begin{algorithm}[H] % t let them float - H argument forces the algorithm to stay in place
 \Indm
 \SetAlgoLined
-\caption{two stage reliability based \acl{CMA-ES} attack}
+\caption{two stage attack on \xpufs}
 \label{alg:twostageapproach}
 % \KwData{}
 \KwResult{mean values and rates model of the last generation}
@@ -228,20 +232,21 @@ response based \ac{CMA-ES} attack
 
 \end{algorithm}
 
-In stage one the purpose of the reliability based \ac{CMA-ES} attack is to approximate underlying \apufs or \mpufs of the \xpuf or \mxpuf one by one.
-This can be done since the reliability of the challenges evaluated by the \xpuf depends "equally on each of the n employed Arbiter PUFs" as Becker et al. mentions \cite{Becker2015ThePUFs}
-Hence the unreliable response of one underlying \apuf results in an unreliable response of the complete \puf.\\
-One execution of the reliability based \ac{CMA-ES} attack then approximates one of the \apufs.
+In stage one the purpose of the reliability based \ac{CMA-ES} attack is to approximate underlying \apufs of the \xpuf one by one.
+This can be done since the reliability of the challenges evaluated by the \xpuf depends "equally on each of the n employed Arbiter PUFs" as Becker et al. mentions \cite{Becker2015ThePUFs}.\\
+Hence the unreliable response of one underlying \apuf results in an unreliable response of the complete \puf.
+Because of that the reliability values measured of the \xpuf can be used to attack the underlying \apufs with the reliability based \ac{CMA-ES} attack, as described in Sec. \ref{sec:cma-esdesign}.
+
+One execution of the reliability based \ac{CMA-ES} attack approximates one of the \apufs.
 Multiple executions of the attack lead to different models of underlying \apufs as Becker et al. explains further.\\
 As the attack is not deterministic it can approximate models that have a response behavior similar to already approximated models.
-These models are eliminated by the hamming distance of their response and the responses of already approximated models.
-This approach makes it possible to approximate models for different \apufs of a \xpuf.
+These models are eliminated by the hamming distance of their responses and the responses of already approximated models.\\
+This approach makes it possible to approximate models for different \apufs used for a \xpuf.
 Hence the reliability based attack is repeated by the loop in line 2 till a given number of trained models is reached.
 
 These models, approximated by the attack in stage one and defined by their mean values, are past on to the stage two.
-To be able to combine all approximated models of \apuf to a \xpuf model, the attack of the stage two approximates all the rest of the so far not approximated models.
-In contrast to the attack in stage one its fitness function scores the models based on their responses of the challenges from the training set.
-The models of every generation are modified by random values.
+To be able to combine all approximated models of \apuf to a \xpuf model, the attack of the stage two approximates all the rest of the so far not approximated models.\\
+In contrast to the attack in stage one its fitness function scores the models based on their responses of the challenges from the training set.\\
 This response based \ac{CMA-ES} attack is repeated by the loop of line 7 in Alg. \ref{alg:twostageapproach} till a model is approximated that evaluates a high proportion of the challenges of the training set correct.
 
 The result of the attack is again the means and the approximated models of the last generation.
