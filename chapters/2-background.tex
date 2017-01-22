@@ -1,9 +1,19 @@
 \chapter{Background}
 \label{cap:background}
 
-The idea of \acfp{PUF} was first proposed in 2001 and has gained since that enormous research attention \cite{Pappu2001PhysicalFunctions}. % \cite{Becker2015ThePUFs}
-They use internal device differences that are unique for every physical instance due to variations in the manufacturing process.
-These internal device differences makes them unique identifiable and can be used in multiple ways as explained in Sec. \ref{sec:applicationsofpufs}.
+The idea of making an entity identifiable by its random variations goes far back in history.
+As an example a technique to identify documents and to prevent forgery was proposed in the year 1978 \cite{1978MethodForgery}.\\
+%old: The idea of \acfp{PUF} was first proposed in 2001 and has gained since that enormous research attention \cite{Pappu2001PhysicalFunctions}. % \cite{Becker2015ThePUFs}
+In the year 2001 a system has been proposed now known as \acf{PUF}, though based on the same idea \cite{Pappu2001PhysicalFunctions}.
+Since that it has gained enormous research attention \cite{Becker2015ThePUFs}.
+It uses intrinsic device imperfections that are unique for every physical instance due to variations in the manufacturing process.
+These internal device differences makes them uniquely identifiable and can be used in multiple ways as explained in this section.
+
+This section explains \pufs and provides an overview about their classifications, applications, and different variations.
+Additionally, \ac{ML} attacks, as one possible attack type for \pufs, is introduced since their impact on different \pufs are studied in this thesis.\\
+First, we describe the specifications of \pufs before we distinguish them by different classes in Sec. \ref{sec:classesofpufs}.
+After that current different \pufs and their applications are depicted.
+Finally, the \ac{ML} attacks are explained and one of their classifications to delimit the attacks part of this thesis.
 
 %========================================
 
@@ -11,27 +21,39 @@ These internal device differences makes them unique identifiable and can be used
 \label{sec:pyhsicalunclonablefunctions}
 
 A \acfp{PUF} is a function that maps a set of challenges onto a set of responses.
-The combination of a challenge $c$ and its response $r$ is then called \ac{CRP}.
+The combination of a challenge $c$ and its response $r$ is then called \ac{CRP}.\\
 A challenge can be described as sequence of $n$ bits.
-How many bits the challenge contains depends on the type of \puf and their implementation.
-Since there are different implementations of \pufs and no general definition there is no restriction how many bit the response can contain.
+The number of bits the sequence contains is called challenge length.\\
+The challenge length depends on the type of \puf and their implementation.
+Since there are different implementations of \pufs and no general definition there is no restriction how many bit the response can contain.\\
 However this thesis studies \pufs that response with a single bit.
 % However this thesis only considers \pufs with a single bit response.
-Hence the function of a \puf can be described by the binary function $f: \{0, 1\}^n \to \{0,1\}$, as long as environmental and random impacts, that are occurring in \puf implementations, are not concerned.
-So far there exists no general accepted complete formal definition of \pufs and their specifications. % \cite{Becker2015ThePUFs}
-Though some requirements must be met that the purpose \pufs, explained in Sec. \ref{sec:applicationsofpufs}, can be fulfilled.
-As the name encloses, one requirement for \pufs is being unclonable. % \cite{Tajik2014PhysicalPUFs}
+Hence the function of a \puf can be described by the binary function $f: \{0, 1\}^n \to \{0,1\}$, as long as environmental and random impacts, that are occurring in \puf implementations and evaluation, are not concerned.\\
+So far there exists no general accepted complete formal definition of \pufs and their specifications \cite{Becker2015ThePUFs}.
+However multiple definitions are proposed but no general consensus has been reached so far \cite{Armknecht2011AFunctions,Ruhrmair2014PUFsGlance,Tehranipoor2012IntroductionTrust}.
+Though some requirements must be met in order \pufs can fulfill their purpose, explained in Sec. \ref{sec:applicationsofpufs}.
+\pufs can be defined by the following three requirements:
+
+% old:
+% As the name encloses, one requirement for \pufs is being unclonable \cite{Tajik2014PhysicalPUFs}.
+% By unclonable it is meant that neither the producer of the \puf itself nor someone else can reproduce a \puf.\\
+% Here reproducing means building a second instance with exact same binary mapping function.
+% This is ensured by using the internal device differences, which occur in the manufacturing process and can not be controlled, to produce the \puf response.\\
+% Another requirement to \pufs is repeatability.
+% Only \pufs that are repeatable can reproduce the same response for the same challenge.
+% The reproduction of the same response is important since it is the basis for all further processing when using \pufs, as shown in Sec. \ref{sec:applicationsofpufs} \cite{Armknecht2011AFunctions}.
+
+\begin{itemize}
+\item unclonability: As the name \puf encloses, one requirement for \pufs is being unclonable \cite{Tajik2014PhysicalPUFs}.
 By unclonable it is meant that neither the producer of the \puf itself nor someone else can reproduce a \puf.
 Here reproducing means building a second instance with exact same binary mapping function.
 This is ensured by using the internal device differences, which occur in the manufacturing process and can not be controlled, to produce the \puf response.
-Another requirement to \pufs is repeatability.
-Only \pufs that are repeatable can reproduce the same response for the same challenge.
-The reproduction of the same response is important since it is the basis for all further processing when using \pufs, as shown in Sec. \ref{sec:applicationsofpufs}. % \cite{Armknecht2011AFunctions}
-
-At last randomness is important for the unpredictability of the \puf response.
-If one state of the binary response of the \puf would not be likely to occur with a likelihood of approximately $50 \%$, the response of the \puf can be predicted.
+\item repeatability: Only \pufs that are repeatable can reproduce the same response for the same challenge.
+The reproduction of the same response is important since it is the basis for all further processing when using \pufs, as shown in Sec. \ref{sec:applicationsofpufs} \cite{Armknecht2011AFunctions}.
+\item randomness: Randomness is important for the unpredictability of the \puf response.
+If one state of the binary response of the \puf would not be likely to occur with a likelihood of approximately $50 \%$, the response of the \puf can be predicted \cite{CherifJouini2011PerformanceStatistics}.
 % This prediction would destroy the security feature given by the \puf. % \cite{CherifJouini2011PerformanceStatistics}
-However it is suggested that \pufs offer a solution for security problems of the future with good prospects \cite{Tajik2014PhysicalPUFs}.
+\end{itemize}
 
 %========================================
 % Concept \cite{Suh2007PhysicalGeneration}
@@ -52,11 +74,11 @@ However it is suggested that \pufs offer a solution for security problems of the
 \subsection{Classes of PUFs}
 \label{sec:classesofpufs}
 
-As there are different types of \pufs they can be divided into different classes.
+As there are different types of \pufs, they can be divided into different classes.
 The first classification divides them by their type of implementation.
-Hence the subclasses optical, electric digital, and electric analog are used.
-The majority of \puf implementations are electric implementations as they can be used directly in electronic devices.
-Though the first \puf implementation was an optical \puf.
+Hence, the sub-classes optical, electric digital, and electric analog are used.\\
+Electric implementations can be used directly in electronic devices and there has been an "extensive research in finding different electrical \pufs" \cite{Becker2015ThePUFs}.
+In contrast to that, the first \puf implementation was an optical \puf.\\
 Another classification separates different types of \pufs into strong and weak \pufs.
 Strong \pufs are defined by the following requirements \cite{Ruhrmair2013PUFsEvaluations}:
 
@@ -142,7 +164,8 @@ Also hardware fingerprinting can be done through the \puf responses as the \puf 
 With an included \puf it can be determined if any device is the device it claims to be.
 Beside authentication this can be used to detect fake \acp{IC} that are distributed and block them out. % \cite{Machida2015ImplementationFPGA}
 Despite \puf are limited studied so far, \acl{NXP} and Microsemi, two semiconductor manufacturer, already use \puf based key storage in some of their products \cite{Becker2015ThePUFs}.
-
+\todo{last sentence?}
+However it is suggested that \pufs offer a solution for security problems of the future with good prospects \cite{Tajik2014PhysicalPUFs}.
 %========================================
 % Done
 % alternative to key storage (nonvolatile memory)
@@ -151,6 +174,10 @@ Despite \puf are limited studied so far, \acl{NXP} and Microsemi, two semiconduc
 % -PUFs can be utilized as the basis for many security applications, such as encryption [13, 29] and hardware fingerprinting [26, 33] \cite{Tajik2014PhysicalPUFs}
 
 \section{Machine Learning Attacks}
+
+\todo{definition needed}
+Machine learning is the subfield of computer science that gives computers the ability to learn without being explicitly programmed (Arthur Samuel, 1959).[1] 
+
 
 The idea of \acf{ML} is summarized by the ability of a system to produce knowledge from experience.
 For that the system uses an algorithm called \ac{ML} algorithm.

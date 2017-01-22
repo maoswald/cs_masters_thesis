@@ -2,19 +2,31 @@
 
 The number of used electronic devices connected over the internet grew throughout the last two decades rapidly.
 % Through the establishment of smartphones tremendous masses of people are using personalized services based on an internet connection.
-Through the establishment of smartphones tremendous masses of people are using services and transfer personal data via the internet.
+Through the establishment of smartphones, a large number of people are using services and transfer personal data via the internet.
+\todo{source statistic smartphones}
 Apart form connected end-user devices, control units of industrial facilities or plants that provide all different kinds of supply can be operated via an internet connection.
 These are just some examples for connections where authentication and identification is needed to restrict the access to the qualified entity.
-Without restriction every other entity has access and can perhaps enrich itself or cause damage.
-Since data, transferred by internet, passes multiple nodes and can be eavesdropped, encryption is needed to protect its containing information.
+Without restriction, every other entity has access and may be able to steal or cause damage otherwise.
+Since data, transferred via the internet, passes multiple nodes and can be eavesdropped, encryption is needed to protect the information contained.
 Authentication, identification, and encryption are just some security features needed to meet the requirements of information security.
 
-To meet the requirements of information security secret keys are used.
-Secret keys have to be accessible by the devices to verify themselves and have to be protected.
-Approaches like noninvasive memory or one-way hash functions have been used so far.
+\todo{what are the requirements of information security}
+\cite{2017InformationSecurity}
+
+To meet the requirements of information security, secret keys are used.
+Secret keys have to be accessible by the devices to authenticate themselves and have to be protected.\\
+The attackers aim is to get the secret key to impersonate the entity the key belongs to.
+Different attacks to get to know the key are possible.
+Intrusion into a system that stores the key via a connection or to gain physical access to the key storage device to extract the key are two examples for possible attacks \cite{2016Attackcomputing,2017Side-channelAttack}.
+
+Approaches like noninvasive memory, a memory specially protected against physical attacks, or one-way hash functions have been used so far to prevent those attacks \cite{Pappu2001PhysicalFunctions}.\\
+Knowing the input of a one-way hash functions is easy to calculate its output hash that is stored if a key has to be verified.
+To verify a given key, its hash is calculated by the hash function and compared with the stored hash.
+If the hashes match, the key will be verified to be the correct one.
+When an attacker gets to know the hash, the key is still protected since the one-way hash function is hard to evaluated in the reverse direction, if only the hash is known.\\
 Though due to the development of physical intrusion methods and the increasing performance of computer systems both techniques facing a number of challenges.
-For that reason \pufs, as a new possible basis for secret keys, has been introduced.
-\pufs were developed being a alternative to physical implementations of one-way functions used as authentication device such as smart cards. % \cite{Pappu2002PhysicalFunctions}
+For that reason \pufs have been introduced as a replacement for secret key memory.
+\pufs were developed being an alternative to physical implementations of one-way functions used as authentication device such as smart cards \cite{Pappu2001PhysicalFunctions}.
 
 % old:
 % Hence they are mostly stored in data, which makes them vulnerable to being red out and reused by unqualified entities.
@@ -24,25 +36,33 @@ For that reason \pufs, as a new possible basis for secret keys, has been introdu
 % Hence the secret key can not be calculated from the stored value but conversely.
 % However one-way function face 
 
-However \pufs are also not invulnerable to attacks, e.g. physical intrusion or \acl{ML} attacks.
-Since \pufs are not completely studied new types of \pufs and suitable attacks are proposed.
-This interplay between developing new \pufs that are claimed to be secure and developing of successful attacks leads to a huge variety of different \pufs.
-In this way the \apuf and multiple modified versions based on the \apuf have been suggested.
-One of these versions is the \mpuf.
-As there exist several successful attacks on \apufs, their impact on \mpuf is unknown. % ? probably
-Hence this thesis studies the changes due to the modification done to the \apuf and how existing attacks are affected.
+However \pufs are also not immune to attacks, e.g. physical intrusion or \acl{ML} attacks \cite{Tajik2014PhysicalPUFs,Ruhrmair2010ModelingFunctions,Becker2015ThePUFs,Helfmeier2014PhysicalFunctions}.
+Since \pufs are not completely studied new types of \pufs and suitable attacks are proposed.\\
+This interplay between developing new \pufs that are claimed to be secure and developing of successful attacks leads to a huge variety of different \pufs \cite{Ruhrmair2014PUFOverview}.
+Hence, the \apuf and multiple modified versions based on the \apuf have been suggested.\\
+\todo{citation needed, actually, maybe you need to introduce it yourself, since the paper is not published yet, + claim to make large xor arbiter possible}
+One of these versions is based on the idea of \ac{MV} that has been suggested before but has not been researched in detail \cite{Ruhrmair2013PUFData}.
+This version of \apufs is not named yet so we call it the \mpuf.
+In combination with \xpufs it is then called \mxpufs.
 
+The concept of \ac{MV} applied to \apufs is introduced to overcome the problems \xpufs face when growing large.
+This thesis studies if \ac{MV} makes it possible to build large \xpufs.\\
+As there exist several successful attacks on \apufs, their impact on \mpuf is unknown.
+%old: This thesis studies the changes due to the modification done to the \apuf and how existing attacks are affected.
+Due to the modifications done to the \apuf this thesis studies how existing attack are affected by adding \ac{MV}.
+
+\todo{more details maybe for the subsections}
 The thesis is structured as follows: 
 Chap. \ref{cap:background} gives an introduction to \pufs and \ac{ML} attacks.
 A more detailed description of important \ac{ML} attacks for this thesis is provided by Chap. \ref{cap:mla}.
-Chap. \ref{cap:arbiter} explains the \apuf specifications before in Chap. \ref{cap:attacks} already applied attacks occurring in the current literature are shown.
+In Chap. \ref{cap:arbiter} the \apuf specifications are explained before in Chap. \ref{cap:attacks} applied attacks occurring in the current literature are shown.
 It is explained why only one of these attacks is relevant to the idea of \ac{MV} which is introduced in Chap. \ref{cap:majorityarbiter}. % and counteracts this one attack.
 % alternative if Attacks chapter after MV chapter
 % Chap. \ref{cap:arbiter} explains the \apuf specifications before Chap. shows the modifications made to create the \mpuf.
 % After an overview to already applied attacks occurring in the current literature it is explained why only one of these attacks is relevant to the idea of \ac{MV}.
 To prove this in an empirical manner a simulation of the \apuf and the attack is build and described in Chap. \ref{cap:simulationdesign}.
 The results of the simulations are laid out in Chap. \ref{cap:stabilitysimulation} and Chap. \ref{cap:attacksimulations}.
-Finally a conclusion for the thesis is given in Chap. \ref{cap:conclusion}.
+Finally, a conclusion for the thesis is given in Chap. \ref{cap:conclusion}.
 
 % iot
 % no security due to expenses (iot)

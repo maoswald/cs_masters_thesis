@@ -12,11 +12,11 @@ That is why I chose to study \apufs beside the introduced types of \pufs in Sec.
 \section{\apufs}
 \label{sec:arbiter}
 
-The concept of an \apufs is based on the difference of the delays of two signals which gets converted to a single bit response. 
-To implement this concept an \apuf has multiple connected stages and an arbiter at the end, as shown in Figure \ref{fig:arbiter}.
+The concept of an \apufs is based on the difference of the delays of two signals, which gets converted to a single bit response. 
+To implement this concept, an \apuf has multiple connected stages and an arbiter at the end, as shown in Figure \ref{fig:arbiter}.
 Both signals propagate on parallel paths with the same layout length through all stages until they reach the arbiter.
-The arbiter then outputs the response bit depending on which input of the arbiter was triggered first by one of the signals.
-\todo{check}
+The arbiter then outputs the response bit depending on which input of the arbiter is triggered first by one of the signals.
+\todo{maybe change "three inputs"}
 Every stage has three inputs, two for both signals and one for one bit of the challenge.
 This challenge bit determines if the signal paths will be crossed in this stage. 
 If the bit is 0, both signals will flow parallel through the stage.
