@@ -3,12 +3,14 @@
 
 % point out comparison better! check whole chapter
 
-The reliability based \ac{CMA-ES} is the only attack which is claimed to have a linear increasing time consumption for successful attacks on \xpufs that grow linear in their number of used \apufs, as explained in Sec. \ref{sec:essentialattacks}.
-Successfully attacked means to building a model that can predict $80 \%$ of the challenges from a test set that contains randomly chosen challenges correct.
-The implementation of the \ac{CMA-ES} attack, how it is based on reliability, and the \apuf simulation is explained in Chap. \ref{cap:simulationdesign}.
-As the attack is based on the unreliability of challenges first the dependency between the number of \acp{MV} and the number of collected unreliable challenges is studied.
-After that the success of the \ac{CMA-ES} attack on \mpufs is evaluated, since they are used to build the \mxpuf.
-Finally the \ac{CMA-ES} attack is applied to \mxpufs of different size to study whether \ac{MV} can prevent the attack through enabling large \mxpufs. 
+The reliability based \ac{CMA-ES} is the only attack, which is claimed to have a linear increasing complexity for successful attacks on \xpufs that grow linear in their number of used \apufs, as explained in Sec. \ref{sec:essentialattacks}.
+Successfully attacked means to building a model that can predict $80 \%$ of the challenges from a test set, which contains randomly chosen challenges, correct.
+The implementation of the \ac{CMA-ES} attack, how it is based on the reliability of challenges, and the \apuf simulation is explained in Chap. \ref{cap:simulationdesign}.
+
+This section presents the results of the simulations to verify the success of the \ac{CMA-ES} attack on large \xpufs.
+As the attack is based on the unreliability of challenges, first the dependency between the number of vote used for \ac{MV} and the number of collected unreliable challenges is studied.
+After that, the success of the normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to build the \mxpuf.
+Finally, the \ac{CMA-ES} attack is applied to \xpufs and \mxpufs of different size to study whether \ac{MV} can prevent the attack through enabling large \mxpufs. 
 
 % same configuration as for stability simulation, repeat and ref
 % ref to machine learning design
@@ -17,9 +19,9 @@ Finally the \ac{CMA-ES} attack is applied to \mxpufs of different size to study 
 \section{Detection of Unreliable Challenges}
 \label{sec:detectionofunreliablechallenges}
 
-For the reliability based \ac{CMA-ES} attack on \apufs it is crucial to find challenges which evaluate differently at multiple evaluations as explained in Sec. \ref{sec:reliability}.
+For the reliability based \ac{CMA-ES} attack on \apufs it is crucial to find challenges, which evaluate differently at multiple evaluations, as explained in Sec. \ref{sec:reliability}.
 To find these challenges and their reliability $\gls{h}$ every challenge $\gls{c}$ of a set will be evaluated $\gls{j}$ times.
-After that the reliability $\gls{h}$ will be computed for every challenge by \ref{equ:reliability}.
+After that, the reliability $\gls{h}$ will be computed for every challenge by \ref{equ:reliability}.
 Do not get confused with the notions stability and reliability as the definition of reliability differs for the \ac{CMA-ES} attack, as explained in Sec. \ref{sec:reliability}.
 
 When using \ac{MV} to increase the stability of the \apuf finding challenges with lower reliability becomes more difficult.
@@ -36,7 +38,7 @@ There are four line graphs for the different numbers of evaluations $\gls{j}$.
 
 % Old and wrong: The raising gradient of all four graphs could lead to the same assumption display the subsiding impact of \ac{MV} with rising $\gls{m}$ as explained in Sec. \ref{sec:stabilityimprovementbymajorityvote}.
 The raising gradient of all four graphs could lead to the same assumption of the subsiding impact of \ac{MV} with rising $\gls{m}$ as explained in Sec. \ref{sec:stabilityimprovementbymajorityvote}.
-However the linear course of the graph shown by the logarithmic Fig. \ref{fig:cmamajorityvotemeasurementrelationloglog} suggest that this is not the case and supports the result of Sec. \ref{sec:stabilityimprovementbymajorityvote}.
+However, the linear course of the graph, showed by the logarithmic Fig. \ref{fig:cmamajorityvotemeasurementrelationloglog}, suggest that this is not the case and supports the result of Sec. \ref{sec:stabilityimprovementbymajorityvote}.
 
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges_loglog.eps}
@@ -45,16 +47,19 @@ However the linear course of the graph shown by the logarithmic Fig. \ref{fig:cm
 \label{fig:cmamajorityvotemeasurementrelationloglog}
 \end{figure}
 
-The only slight difference between the graphs in both figures show that increasing the number of evaluation $\gls{j}$ does not necessarily provides more challenges with lowered reliability $\gls{h}$.
+The slight difference between the graphs in both figures shows that increasing the number of evaluation $\gls{j}$ does not necessarily provides more challenges with lowered reliability $\gls{h}$.
 Without \ac{MV} there is a little increase of found challenges with lowered reliability $\gls{h}$.
 Though with applying \ac{MV} this increase disappears with growing $\gls{m}$.
+It has been verified that the number of unreliable challenges decreases with an increase of used \ac{MV} votes.
+
 
 %========================================
 
 \section{\apufs vs. \mpufs}
 \label{sec:arbitervsmajorityarbiter}
 
-This section describes the results of the simulation used to study the success of the \ac{CMA-ES} attack, explained in Sec. \ref{sec:cma-esdesign}, on \mpufs.
+This section describes the results of the simulation used to study the success of the \ac{CMA-ES} attack, explained in Sec. \ref{sec:cma-esdesign}, on \mpufs in comparison to \apufs.
+
 Through the comparison with the success of the attack on \apuf the impact of \ac{MV} can be evaluated.
 The \apuf used for the simulation has $\gls{n} = 32$ stages.
 For the attack a training set of $10000$ \acp{CRP} and a number of evaluation times of $\gls{j} = 100$ were used.
