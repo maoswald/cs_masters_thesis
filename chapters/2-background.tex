@@ -4,13 +4,14 @@
 The idea of making an entity identifiable by its random variations goes far back in history.
 As an example a technique to identify documents and to prevent forgery was proposed in the year 1978 \cite{1978MethodForgery}.\\
 %old: The idea of \acfp{PUF} was first proposed in 2001 and has gained since that enormous research attention \cite{Pappu2001PhysicalFunctions}. % \cite{Becker2015ThePUFs}
-In the year 2001 a system has been proposed now known as \acf{PUF}, though based on the same idea \cite{Pappu2001PhysicalFunctions}.
-Since that it has gained enormous research attention \cite{Becker2015ThePUFs}.
-It uses intrinsic device imperfections that are unique for every physical instance due to variations in the manufacturing process.
+In the year 2001 a system has been proposed under the name \acf{PUF}, based on a same idea \cite{Pappu2001PhysicalFunctions}.
+Since that it has gained enormous research attention \cite{Becker2015ThePUFs}.\\
+The idea is to use intrinsic device imperfections that are unique for every physical instance due to variations in the manufacturing process.
 These internal device differences makes them uniquely identifiable and can be used in multiple ways as explained in this section.
 
-This section explains \pufs and provides an overview about their classifications, applications, and different variations.
-Additionally, \ac{ML} attacks, as one possible attack type for \pufs, is introduced since their impact on different \pufs are studied in this thesis.\\
+This section explains the concept of \pufs and provides an overview about their classifications, applications, and different variations.
+Additionally, \ac{ML} attacks, as one possible attack type for \pufs, are introduced.
+Both \pufs and \ac{ML} attacks are needed to study the impacts of attacks on different \pufs in this thesis.\\
 First, we describe the specifications of \pufs before we distinguish them by different classes in Sec. \ref{sec:classesofpufs}.
 After that current different \pufs and their applications are depicted.
 Finally, the \ac{ML} attacks are explained and one of their classifications to delimit the attacks part of this thesis.
@@ -20,7 +21,7 @@ Finally, the \ac{ML} attacks are explained and one of their classifications to d
 \section{Physical Unclonable Functions}
 \label{sec:pyhsicalunclonablefunctions}
 
-A \acfp{PUF} is a function that maps a set of challenges onto a set of responses.
+A \acfp{PUF} maps a set of challenges onto a set of responses.
 The combination of a challenge $c$ and its response $r$ is then called \ac{CRP}.\\
 A challenge can be described as sequence of $n$ bits.
 The number of bits the sequence contains is called challenge length.\\
@@ -74,9 +75,10 @@ If one state of the binary response of the \puf would not be likely to occur wit
 \subsection{Classes of PUFs}
 \label{sec:classesofpufs}
 
-As there are different types of \pufs, they can be divided into different classes.
+This section gives a overview of the classifications of \pufs and how \apufs can be classified.
+As there are different types of \pufs, they can be divided by different classifications.\\
 The first classification divides them by their type of implementation.
-Hence, the sub-classes optical, electric digital, and electric analog are used.\\
+Hence, the sub-classes optical, electric digital, and electric analog are used.
 Electric implementations can be used directly in electronic devices and there has been an "extensive research in finding different electrical \pufs" \cite{Becker2015ThePUFs}.
 In contrast to that, the first \puf implementation was an optical \puf.\\
 Another classification separates different types of \pufs into strong and weak \pufs.
@@ -85,17 +87,35 @@ Strong \pufs are defined by the following requirements \cite{Ruhrmair2013PUFsEva
 \begin{itemize}
 \item The interface to evaluate challenges and to read out the corresponding response is freely accessible to everybody who holds the \puf.
 \item The number of unique challenges that can be evaluated by the strong \puf is very large.
-In order that it is impossible in combination with the finite evaluation time per challenge to read out all \acp{CRP} even in a long time.
-\item The challenge response mapping behavior of strong \pufs is so complicated that it is not possible to make any prediction on the response of a challenge. 
-This also applies even if a large number of \acp{CRP} is known and used source for the prediction.
+% old :In order that it is impossible in combination with the finite evaluation time per challenge to read out all \acp{CRP} even in a long time.
+To evaluate challenges a finite evaluation time per challenge is needed.
+Hence, it is impossible to read out all \acp{CRP}, even in a long time.
+\item The challenge response mapping behavior of strong \pufs is so complex that it is not possible to make any prediction on the response of a challenge. 
+This also applies even if a large number of \acp{CRP} is known and used as source for prediction.
 \end{itemize}
 
-In contrast weak \pufs only have a few challenges, at least one.
-Their responses are not meant to be given to the outside of the system and only used internal, e.g. as standard key \cite{Ruhrmair2012AnPUFs}.
-Weak \pufs provide an alternative to nonvolatile memory, which is a secret key storage device, with the advantage that weak \pufs may be harder to read out. % \cite{Lim2005ExtractingCircuits}
+This definition of strong \pufs excludes \pufs that are classified as strong \puf, e.g. \xpufs \cite{Becker2015ThePUFs}.
+% Furthermore it has be questioned if there exist any \pufs that fulfill these requirements.
+As no current available \puf fulfills these requirements, it has to be questioned if any \puf can meet these requirements.
+This pictures how premature \puf definitions are and will not be further studied as it not part of this thesis.
+
+In contrast to strong \pufs weak \pufs only have a few challenges, at least one \cite{Ruhrmair2014PUFsGlance}.
+Their responses are not meant to be given to the outside of the system and only used internally, e.g. as standard key \cite{Ruhrmair2012AnPUFs}.\\
+A standard key does not change and can be used, as explained in Chap. \ref{cap:introduction}, for different purposes, e.g. for encryption in pay TV \cite{2016PirateDecryption}.\\
+Weak \pufs provide an alternative to nonvolatile memory, which is a secret key storage device, with the advantage that weak \pufs may be harder to read out \cite{Lim2005ExtractingCircuits}.
 Since weak \pufs do not have a large number of unique challenges it is easy to read out all their responses if free access is provided.
-This thesis studies \apufs, which are classified as strong \puf, and for this reason does not cover weak \pufs further \cite{Ruhrmair2010StrongProofs}.
-At last it has to be mentioned that there exist further subclassifications, e.g. electrical \pufs can be divided into delay based \pufs and memory based \pufs. % \cite{Saha2016TV-PUFPUF}
+As in this thesis \pufs, which provide a large amount of \acp{CRP}, are studied, weak \pufs will not be covered further.
+
+Additional to strong \puf and weak \puf, controlled \pufs is the third classification.
+Controlled \pufs are based on a strong \pufs and a surrounding control logic that limits the access to the underlying \puf.
+This limiting logic is added to protect \pufs from attacks and can not be separated from the \puf \cite{Ruhrmair2013PUFData,Gassend2007ControlledFunctions}.\\
+In contrast to the definition of strong \pufs, which is mentioned above, \apufs are classified as strong \puf \cite{Ruhrmair2010StrongProofs}.
+This thesis studies \apufs and \xpufs, which are both classified as strong \puf.  
+Controlled \pufs will not be studied further, as strong \pufs provide free access to the \ac{CRP} interface, compared with controlled \pufs.\\
+% apufs are weak pufs:
+% This thesis studies \apufs, which are classified as weak \pufs, as well as \xpufs that are strong \pufs.
+% It has to be mentioned that there are some discrepancies regarding the classification of \apufs. \cite{Ruhrmair2010StrongProofs}.\\
+We point out that there are further subclassifications, e.g. electrical \pufs can be divided into delay based \pufs and memory based \pufs \cite{Saha2016TV-PUFPUF}.
 
 % further category: settling-state-based PUFs and timing-based PUFs [15]. \cite{Tajik2014PhysicalPUFs}
 % Arbiter and Ring-oscillator PUFs are two examples of timing-based PUFs [15] \cite{Tajik2014PhysicalPUFs}
@@ -110,29 +130,37 @@ At last it has to be mentioned that there exist further subclassifications, e.g.
 % -A Strong PUF is a PUF with the following features (for formal definitions see [29], [23], [1]) \cite{Ruhrmair2013PUFsEvaluations}
 % -Delay based, memory based % TV-PUF: A Fast Lightweight Aging-Resistant Threshold Voltage PUF
 
-\subsection{Current Types of strong PUFs}
+\subsection{Current Types Of Strong PUFs}
 \label{sec:typesofpufs}
 
+Different types of strong \pufs have been proposed.
+This sections gives an overview about them and displays alternatives to the studied \apuf and \xpuf. 
+
 The optical \puf suggest by Puppu et al. uses a laser beamed through a transparent unit to project a pattern of light and dark spots onto a photo sensor \cite{Pappu2001PhysicalFunctions}.
-The transparent unit contains reflecting particles, which interfere the laser beam.
+The transparent unit contains reflecting particles, which interfere with the laser beam.
 By changing the angle between the laser source and the transparent unit the created pattern changes as well.
-The pattern is transformed by the photo sensor to a bit sequence and represents the response of the \puf.
-The challenge is the angle that is used to apply the laser \cite{Pappu2001PhysicalFunctions}.
-This is the first strong \puf yet its application in the real world is difficult due to the laser and the photo sensor.
-After that several electric strong \puf have been suggested like the Power Grid \puf.
-The Power Grid \puf is based on the measurements of the variations of equivalent resistances of the \ac{IC}. % \cite{Helinski2009AVariations}
-Another important implementation is the \apuf, which is based on the runtime delay differences of two signal flowing through the \ac{IC}.
+The pattern is transformed by the photo sensor to a bit sequence and used to build the response.
+The \puf response is a representation of the pattern and challenge is the angle that is used to apply the laser.
+
+This is the first strong \puf, yet its application in the real world is difficult due to the laser and the photo sensor.
+After that several electric strong \puf have been suggested.\\
+One of them is the Power Grid \puf.
+The Power Grid \puf is based on the measurements of the variations of equivalent resistances of the \ac{IC} \cite{Helinski2009AVariations}.
+
+Another important implementation is the \apuf, which is based on the runtime delay differences of two signals flowing through the \ac{IC}  \cite{Ruhrmair2010StrongProofs}.
 These runtime delays differ because of variation in their circuit paths.
-\apufs have been used as base for several other strong \puf constructions such as the \xpuf and will be therefore studied in this thesis. % \cite{Becker2015ThePUFs}
-The \ac{CNN} \puf is a approach for an analog electric \puf where cells are interconnected to their neighbors in a two dimensional net.
-These interconnection have different strength that determines how signals are propagated through this net.
-After emitting a single it propagates through the net till the propagation stops and a response can be measured.
-In this way the response depends on a very large number of random electric components. % \cite{Csaba2010ApplicationCryptography}.
-At last the Crossbar \puf has to be mentioned.
+\apufs have been used as base for several other strong \puf constructions such as the \xpuf and will be studied in this thesis \cite{Becker2015ThePUFs}.
+
+The \ac{CNN} \puf is a approach for an analog electric \puf where cells are interconnected to their neighbors in a two-dimensional net \cite{Csaba2010ApplicationCryptography}.
+These interconnections have different strength that determines how signals are propagated through this net.
+After emitting a signal it propagates through the net till the propagation stops and a response can be measured.
+In this way the response depends on a very large number of random electric components.
+
+At last, the Crossbar \puf has to be mentioned.
 The Crossbar \puf has a very high independent information density and has a slow readout speed.
 This leads to a long readout time and is due to its physical construction, which makes it impossible to read out all responses. 
-Trying to readout responses to fast destroys the circuit of the \puf and therewith the \puf itself.
-However the slow readout speed can be a disadvantage depending on the application of the \puf. % \cite{Ruhrmair2010StrongProofs}
+Trying to readout responses too fast destroys the circuit of the \puf and therewith the \puf itself.
+However, the slow readout speed can be a disadvantage depending on the application of the \puf \cite{Ruhrmair2010StrongProofs}.
 
 %========================================
 % -Power Grid PUF  \cite{Ruhrmair2010StrongProofs}
@@ -152,20 +180,24 @@ However the slow readout speed can be a disadvantage depending on the applicatio
 \subsection{Application of PUFs}
 \label{sec:applicationsofpufs}
 
-\pufs can be used as basis for several security application.
-In the field of encryption it is crucial to protect the secret key as it is used for identification and authentication.
-Which has the secret key can authenticate itself as the instance the key belongs to.
-Currently nonvolatile memory is used to store the secret key.
-However it is possible with invasive and noninvasive physical tampering methods, e.g. micro-probing, to extract the stored secret key. % \cite{Lim2005ExtractingCircuits}
+\pufs can be used as basis for several security applications.
+In the field of encryption it is crucial to protect the secret key, as it is used for identification and authentication, as explained in Chap \ref{cap:introduction}.
+% Which has the secret key can authenticate itself as the instance the key belongs to.
+Everyone, who obtains the secret key, can impersonate the instance the key belongs to for example in cases where  authentication is required.
+
+Currently one method to store the secret key is using nonvolatile memory.
+However it is possible with invasive and noninvasive physical tampering methods, e.g. micro-probing, to extract the stored secret key \cite{Lim2005ExtractingCircuits}.\\
 Hence \pufs provide another possibility to include keys into an \ac{IC}.
-For that the secret key can be derived from the \puf responses.
-This key then can be used for different propose, such as encryption. % \cite{Tajik2014PhysicalPUFs}
+% For that the secret key can be derived from the \puf responses.
+One way is to keep the \puf responses private and derived secret key from it.
+This key then can be used for different propose, such as encryption \cite{Tajik2014PhysicalPUFs}.
+
 Also hardware fingerprinting can be done through the \puf responses as the \puf is directly coupled with the device itself.
-With an included \puf it can be determined if any device is the device it claims to be.
-Beside authentication this can be used to detect fake \acp{IC} that are distributed and block them out. % \cite{Machida2015ImplementationFPGA}
-Despite \puf are limited studied so far, \acl{NXP} and Microsemi, two semiconductor manufacturer, already use \puf based key storage in some of their products \cite{Becker2015ThePUFs}.
-\todo{last sentence?}
-However it is suggested that \pufs offer a solution for security problems of the future with good prospects \cite{Tajik2014PhysicalPUFs}.
+With an included \puf it can be determined if any device is the device it claims to be.\\
+Beside authentication this can be used to detect fake \acp{IC}, which are distributed by forger, and block them out \cite{Machida2015ImplementationFPGA}.
+Despite the limited study of \pufs to date, \acl{NXP} and Microsemi, two semiconductor manufacturer, already use \puf based key storage in some of their products \cite{Becker2015ThePUFs}.
+
+
 %========================================
 % Done
 % alternative to key storage (nonvolatile memory)
@@ -175,22 +207,43 @@ However it is suggested that \pufs offer a solution for security problems of the
 
 \section{Machine Learning Attacks}
 
-\todo{definition needed}
-Machine learning is the subfield of computer science that gives computers the ability to learn without being explicitly programmed (Arthur Samuel, 1959).[1] 
+As this thesis studies \acf{ML} attacks, this section provides some definitions for \ac{ML} algorithms and gives a introduction for the interaction with \pufs.
+After that, different learning approaches are explained to clarify the type of attacks, which are used in this thesis to attack \pufs.\\
+The field of \ac{ML} has several different approached and therefore multiple definitions \cite{2017MachineLearning}.
+An early definition was made by Arthur Samuel in 1959, which says:
 
+"[Machine Learning is the field of study] that gives computers the ability to learn without being explicitly programmed." \cite{Samuel1959SomeCheckers}
 
-The idea of \acf{ML} is summarized by the ability of a system to produce knowledge from experience.
-For that the system uses an algorithm called \ac{ML} algorithm.
-Starting with no knowledge or random given knowledge the \ac{ML} algorithm modifies this knowledge.
-The modifications are based on given examples. 
-This process is called training or learning.
+This definition has only a few restriction compared to the more formal definition of Tom Mitchell that was proposed in 1997 and says:
+
+"A computer program is said to learn from experience E with respect to some class of tasks T and performance measure P, if its performance at tasks in T, as measured by P, improves with experience E." \cite{Mitchell1997MachineLearning}
+
+Mitchell defines that the \ac{ML} algorithm, what he calls a computer program, learns from experience E and as a consequence improves its performance P on task E.\\
+However, both definitions claim that the \ac{ML} algorithm learns, which is main purpose of the \ac{ML} algorithm.
+Samuel defines that the computer, which is represented by an algorithm here, "learns without being explicitly programmed".
+Mitchell in contrast does not define the experience E and how its provided to the algorithm.\\
+Further, neither Samuel nor Mitchell define how the learned knowledge is stored.
+The idea of \acf{ML} can also be defined by the ability of a system to produce knowledge from experience.
+
+To realize this behavior the system uses an algorithm called \ac{ML} algorithm.
+A \ac{ML} algorithm starts with no knowledge or random given knowledge and modifies this knowledge.
+The modifications are based on given examples that provide the experience E. 
+This process is called training or learning.\\
 The modified knowledge of the \ac{ML} algorithm is called model.
 This model, trained by the \ac{ML} algorithm, can then make predictions about data it was trained with, new data, or both.
 It can recognize pattern or correlations and can classify data into different groups.
-% ? right or wrong in general sense: The model learns a function that maps the input values and desired output values. 
 
-In the case of \pufs the term \ac{ML} attack is used equally to \ac{ML} algorithm.
-\ac{ML} attacks are used to learn the response behavior of \pufs.
+% old
+% To realize this behavior the system uses an algorithm called \ac{ML} algorithm.\\
+% A \ac{ML} algorithm starts with no knowledge or random given knowledge and modifies this knowledge.
+% The modifications are based on given examples. 
+% This process is called training or learning.\\
+% The modified knowledge of the \ac{ML} algorithm is called model.
+% This model, trained by the \ac{ML} algorithm, can then make predictions about data it was trained with, new data, or both.
+% It can recognize pattern or correlations and can classify data into different groups.
+
+In the case of \pufs the term \ac{ML} attack is used equivalently to \ac{ML} algorithm.
+\ac{ML} attacks are used to learn the response behavior of \pufs.\\
 To train the model by a \ac{ML} attack \acp{CRP}, which are already know, are used.
 For challenges their responses are not know the model then can make predictions about whose responses.
 % https://en.wikipedia.org/wiki/Machine_learning
@@ -204,22 +257,28 @@ For challenges their responses are not know the model then can make predictions 
 
 \subsection{Types of Learning Approaches}
 
-To categorize \ac{ML} techniques by their approach the following three different learning approach classes are used: % https://en.wikipedia.org/wiki/Machine_learning
+To categorize \ac{ML} techniques by their approach the following three different learning approach classes are used \cite{2017MachineLearning}:
 
 \begin{itemize}
 \item Supervised learning: The data includes input values and their desired output values for the \ac{ML} algorithm. 
-In the training process the \ac{ML} algorithm has to make predictions about the data and in this way trains its model.
+In the training process the \ac{ML} algorithm has to make predictions about the data and in this way trains its model.\\
 The goal is to learn the rules how the input values mapped onto the output values.
 \item Unsupervised learning: The data includes input values only.
-These data are used in the training process so that the \ac{ML} algorithm can find structures in the data.
-The goal can be to even find a structure in the data or to find the structure itself.
+These data are used in the training process so that the \ac{ML} algorithm can find structures in the data.\\
+The goal can be to reveal that there is a structure in the data or to learn the structure.
+If the algorithm learned the structure, it will be able to repeat to a certain level.
 \item Semi-supervised learning: The data includes input values with their desired output values and input values without their output values. % https://en.wikipedia.org/wiki/Semi-supervised_learning
 In the training process the \ac{ML} algorithm has to structure the data and make already prediction for the data without output values.
 \item Reinforcement learning: The \ac{ML} algorithm is trained by reward and punishment to maximize its performance in a dynamic environment.
-This learning approach is based on a common way humans learn.
+This learning approach is based on a common way humans learn.\\
+The algorithm can choose an action to change the state of the environment over to another state.
+Depending on this transition the algorithm gets rewarded.
+The goal of the algorithm is to collect as much reward as possible \cite{2017ReinforcementLearning}.
 \end{itemize}
 
-Since there is a large variety of different \ac{ML} techniques other categorizations, e.g. considering the desired output of the \ac{ML} algorithm, exist though the categorization by learning approaches is sufficient for this thesis. % https://en.wikipedia.org/wiki/Machine_learning
+There is a large variety of different \ac{ML} techniques.
+Hence, other categorizations, e.g. considering the desired output of the \ac{ML} algorithm, exist.
+Though the categorization by learning approaches is sufficient for this thesis.
 All \ac{ML} attacks considered in this thesis are from the supervised learning class.
 
 % check if in machine learning chap: online vs batch learning % https://en.wikipedia.org/wiki/Online_machine_learning
