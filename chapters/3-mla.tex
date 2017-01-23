@@ -1,23 +1,28 @@
 \chapter{Machine Learning Attacks}
 \label{cap:mla}
 
-The \ac{ML} attack creates a \puf model of the attacked \puf which acts as binary classifier.
-A binary classifier classifies the samples, in the case of \pufs challenges, of a given set into two different classes $0$ or $1$ like the response of the \puf.
-To build this model a training set $D = \{(z, e)_1, ..., (z,e)_i\}$ with samples $d = (z, e)$ that are already classified by the attacked \puf is necessary.
-A sample $d$ is defined by its values $z$ and is classified into the class $e$.
+Different \ac{ML} attacks are used to attack \pufs.
+This section gives an overview of the techniques used in these attacks including the attack that is studied in this thesis.\\
+First, required the inputs for the \ac{ML} attacks and the problem they are solving are explained.
+After that, each \ac{ML} technique is described by its own.
+
+The \ac{ML} attack creates a \puf model of the attacked \puf, which acts as binary classifier.
+A binary classifier classifies the samples, in the case of \pufs these are challenges, of a given set into two different classes $0$ or $1$ like the response of the \puf.\\
+To build this model a training set $D = \{(z, e)_1, ..., (z,e)_i\}$ with samples $d = (z, e)_i$ that are already classified by the attacked \puf are required.
+A sample $d$ is defined by its values $z$ and is classified into the class $e$.\\
 With that training set the model can be trained by the \ac{ML} algorithm.
-To evaluate the build model a test set is build the same way and used to compare the output of the \puf model and the attacked \puf.
+To evaluate the build model, a test set is build the same way and used to compare the output of the \puf model and the attacked \puf.
 
 The most \pufs, know by the year 2014, which can be build by an electrical circuit, are related to internal values of the circuit \cite{Ruhrmair2014PUFOverview}.
-These values determine the response for a given challenge. 
-The goal of the \ac{ML} attacks is to find a representation of these values so that the build model classifies samples in the same way as the \puf. % values b
-How man samples the model classifies the same way as the \puf defines how precise the model has been trained.
-Hence the values learned by the \ac{ML} attack do not have to be similar to the ones of the attacked \puf to classify samples of a set the same way as the \puf.
+These values determine the response for a given challenge.\\
+The goal of the \ac{ML} attacks is to find a representation of these values, so that the build model classifies samples in the same way as the attacked \puf. % values b
+How man samples of the test set the model classifies the same way as the \puf defines how precise the model has been trained.\\
+Hence, the values learned by the \ac{ML} attack do not have to be exact the same values that defined the attacked \puf to classify samples of a set the same way as the \puf.
 
-If a \ac{ML} attack can find a binary classifier for a given set depends on the attack and if the set of samples is linear separable. 
-Instead of a set of samples this also applies to binary functions $f: \mathbb{R}^n \to \{0,1\}$. % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
+Whether a \ac{ML} attack can find a binary classifier for a given set depends on the attack and if the set of samples is linear separable. 
+Instead of a set of samples this also applies to binary functions $f: \mathbb{R}^n \to \{0,1\}$.\\ % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
 One example for a not linear separable function is the \ac{XOR} function. % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
-Some \ac{ML} attacks, e.g. single-layer perceptron, can only learn linear separable sets and can therefor not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}.
+Some \ac{ML} attacks, e.g. single-layer perceptron, can only learn linear separable sets and can therefor not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}.\\
 Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called linear separable if all their vectors $\vec{a} = (a_1, ..., a_n) \in A$, $\vec{b} = (b_1, ..., b_n) \in B$ can be separated by
 
 \begin{align}
@@ -26,7 +31,7 @@ Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called li
 
 whereas $w_1, ..., w_{n + 1}$ are $n + 1$ real numbers.
 The separating hyperplane is defined by the vector $\vec{x} = (x_1, ..., x_n) \subseteq \mathbb{R}^n$ that satisfies $\sum_{i = 1}^{n} w_i x_i = w_{n + 1}$.% https://en.wikipedia.org/wiki/Linear_separability
-In the case of building a classifier by the \ac{ML} attacks the two subset $A$ and $B$ are subsets of the given set used to train the model.
+In the case of building a classifier by the \ac{ML} attacks the two subset $A$ and $B$ are subsets of the given set used to train the model.\\
 The described \ac{ML} attacks in this chapter are common approaches to attack \pufs \cite{Ruhrmair2014PUFOverview}.
 As there are different modifications and configurations used only the \ac{ML} algorithms itself are explained.
 
@@ -58,12 +63,13 @@ As there are different modifications and configurations used only the \ac{ML} al
 
 The \acf{ES} is an optimization technique that is inspired by the evolution process of the nature.
 In this process every species can adapt to the environmental conditions by changing its genes and only the fittest survive.
-From these fittest individuals the next generation will be build and inherits the attributes of their fittest parents genes.
+From these fittest individuals the next generation will be build and inherits the attributes of their fittest parents genes.\\
 This repeating process of classification by rating the fitness of every individual, inheriting the genes of the previous generation and modifying them leads to an approximation of the optimal solution for the specific environment.
-Every repetition of this evolutionary cycle counts as one generation and every individual represents a model with its own fitness value.	% Wiki \cite{Becker2015ThePUFs}
+Every repetition of this evolutionary cycle counts as one generation and every individual represents a model with its own fitness value	\cite{Becker2015ThePUFs}. % wiki
+
 The fittest model after the last generation is the result of the algorithm and the best learned model by this time.
-It is also possible to approximate the at least optimal solution by letting the at least fittest survive.
-The procedure of the \ac{ES} attack in the case of finding the optimal solution is displayed in the Alg. \ref{alg:es}.
+It is also possible to approximate the at least optimal solution by letting the at least fittest survive.\\
+The procedure of the \ac{ES} attack, in the case of finding the optimal solution, is displayed in the Alg. \ref{alg:es}.
 
 % \IncMargin{1em}
 \SetAlCapHSkip{0.2em}
@@ -87,18 +93,20 @@ create new generation from selected models\\
 \end{algorithm}
 % \DecMargin{1em}
 
-To initialize the models of the first generation in line $1$ often random chosen normally distributed values are used.
-In the step of the lines $6$ and $7$ of the attack it is determined how the number of models changes in the evolution process.
+To initialize the models of the first generation in line $1$, often random chosen normally distributed values are used.
+In the step of the lines $6$ and $7$ of the attack, it is determined how the number of models changes in the evolution process.\\
 There are options to define how many of the fittest models are selected and how many new models are created per generation.
-Additionally in the step of creating the next generation it can be defined if models of the old generation should be kept and if new randomly created models should be added.
-Adding new random models makes it possible for the attack to approximate a more optimal solution even if all models are already approximated to another solution. % https://en.wikipedia.org/wiki/Evolution_strategy
+Additionally in the step of creating the next generation it can be defined if models of the old generation should be kept and if new randomly created models should be added.\\
+Adding new random models makes it possible for the attack to approximate a more optimal solution even if all models are already approximated to another solution \cite{2016EvolutionStrategy}.
 Keeping old models ensures not to lose a individual of the previous generation which outperforms the next generations models.
-How the models are modified in line $3$ of the Alg. \ref{alg:es} is not specified.
-One way of modification is to add a random chosen value to all values of the individual.
-The fitness function in line $4$ rates the fitness value of every individual and represents the above mentioned environmental conditions that the models get adapted to.
+
+How the models are modified in the beginning of every generation in line $3$ of the Alg. \ref{alg:es} is not specified.
+One way of modification is to add a random chosen value to all values of the individual.\\
+The fitness function in line $4$ rates the fitness value of every individual and represents the above mentioned environmental conditions that the models get adapted to.\\
 The sort function of line $5$ sorts the results by their fitness values.
-The \ac{ES} attack approximates a optimal solution if the models are sorted descending and vice versa.
-The attack ends if the termination criteria is fulfilled, which could be e.g. a maximum number of generations.
+The \ac{ES} attack approximates a optimal solution if the models are sorted descending and vice versa.\\
+The attack ends when the termination criteria is fulfilled, which could be e.g. a maximum number of generations.
+
 The \ac{ES} attack is a randomized algorithm and therefore does not always determines.
 However it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
 	
@@ -114,26 +122,29 @@ However it can approximate not linear separable problems and does not need a dif
 \label{sec:cma-es}
 
 The \acf{CMA-ES} is based on the principles of the \ac{ES}, which is explained in Sec. \ref{sec:evolutionstrategies}.
-Additional the \ac{CMA-ES} algorithm uses a covariance matrix to learn a second order model of the underlying function.
-For this reason every value that defines the model and is learned by the algorithm has its own distribution, which will be optimized.
-Hence the covariance matrix is used to represent pairwise dependencies between variables used in these distributions.
-% Throughout the evolution process the mean values and the covariance matrix used in combination with normal distributed random distributed values to generate the next generation of models and are adaped iterative in every generation.
-Throughout the evolution process the mean values of the distributions, the covariance matrix and a step size value are adapted per generation.
-The mean values and the covariance matrix in combination with normal distributed randomly chosen values are used to create the model for the next generation in every evolution cycle \cite{2017CMA-ES}.
+Additional, the \ac{CMA-ES} algorithm uses a covariance matrix to learn a second order model of the underlying function.
 
+For this reason every value that defines the model and is learned by the algorithm has its own distribution, which will be optimized.
+Hence, the covariance matrix is used to represent pairwise dependencies between variables used in these distributions.\\
+% Throughout the evolution process the mean values and the covariance matrix used in combination with normal distributed random distributed values to generate the next generation of models and are adaped iterative in every generation.
+Throughout the evolution process the mean values of the distributions, the covariance matrix and a step size value are adapted per generation.\\
+The mean values, the covariance matrix, and the step size in combination with normal distributed randomly chosen values are used to create the model for the next generation in every evolution cycle \cite{2017CMA-ES}.
 To update the values used in the \ac{CMA-ES} algorithm two principles are applied.
-The first is the maximum-likelihood method.
+
+The first principle is the maximum-likelihood method.
 It is used to maximize the likelihood of previous models with the highest fitness values when updating the mean values.
 When updating the covariance matrix the likelihood of previous search steps that lead to fitter models is increased.
 % principal components analysis
+
 The second principle captures two paths of the time progress of the distribution mean values.
 These two paths are called evolution paths.
 They are used to gain information on correlations between consecutive steps of the mean values modification.
-The evolution paths becomes longer when consecutive step are taken in the same direction.
-The \ac{CMA} process uses the first path to promote longer paths, which represent preferred directions of the distribution mean values modification, by the possibility of a faster distribution variance increase.
+The evolution paths becomes longer when consecutive step are taken in the same direction.\\
+The \ac{CMA} process uses the first path to promote longer paths, which represent preferred directions of the distribution mean values modification, by the possibility of a faster distribution variance increase.\\
 The second evolution path is used to control the step size value.
 The step size is adjusted by \ac{CSA} that reduces the importance of a step with the increasing number of taken steps \cite{Chotard2012CumulativeFunctions}.
 This allows the algorithm to approximate the optimal solution fast and prevents the \ac{CMA-ES} algorithm from to early adaptations. 
+
 The \ac{CMA} is build to solve non-separable and ill-conditioned problems \cite{Hansen2011TheTutorial}.
 Problems are ill-conditioned when making little changes to their input lead to significant changes in their output \cite{2016ConditionNumber}.
 
@@ -150,24 +161,25 @@ Problems are ill-conditioned when making little changes to their input lead to s
 
 A \acf{SVM} is the model created by the \ac{SVM} training algorithm.
 It classifies samples into two categories with dividing their multidimensional space by a hyperplane. % hyperplane has dimension z - 1
+
 The number of dimensions of the space is defined by the number of values $z$ of the samples.
-The model is trained the way that it divides the two categories by the largest possible gap.
-Hence the training algorithm maximizes the distance from the hyperplane to the nearest samples of each category.
-If there exists such a hyperplane, known as maximum-margin hyperplane, it has the larges margin to the closest samples of both categories.
+The model is trained the way that it divides the two categories by the largest possible gap.\\
+Hence, the training algorithm maximizes the distance from the hyperplane to the nearest samples of each category.
+If there exists such a hyperplane, known as maximum-margin hyperplane, it has the larges margin to the closest samples of both categories.\\
 Not all samples have to be considered when training the model.
-Samples that are located behind other samples of the same classification and more far away of the hyperplane do not affect the location of the hyperplane since they never become the closest samples.
+Samples that are located behind other samples of the same classification and are more far away of the hyperplane do not affect the location of the hyperplane since they never become the closest samples.\\
 New samples are then predicted to belong to the same category as the samples that are on the side of the hyperplane where the new sample is located.
 
 A complete separation into two categories by a linear hyperplane is only possible if the training data is linear separable.
-To make it possible to classify non-linear problems \acp{SVM} use the kernel method.
+To make it possible to classify non-linear problems \acp{SVM} use the kernel method.\\
 In doing so all training data and the $z$ dimensional space is transformed to a space with a higher number of dimensions.
 Every data transformed into a space with enough higher number of dimensions is linear separable.
-That can be even an infinite number of dimensions.
-The hyperplane is then determined in this higher dimensional space and transformed back to the original dimensional space where it represents a non-linear hyperplane.
-As these transformations are high in computational cost the kernel method provides the possibility to define the hyperplane in a higher dimensional space and use it in the lower dimensional space without the transformation \cite{2016SupportMachine}.
+That can be even an infinite number of dimensions.\\
+The hyperplane is then determined in this higher dimensional space and transformed back to the original dimensional space where it represents a non-linear hyperplane.\\
+As these transformations are high in computational cost, the kernel method provides the possibility to define the hyperplane in a higher dimensional space and use it in the lower dimensional space without the transformations \cite{2016SupportMachine}.
 
 Another method used by \ac{SVM} to be able to solve non-linear problems are slack variables.
-Slack variable allow the algorithm by undergoing punishment to classify samples in the training process wrong.
+Slack variable allow the algorithm by undergoing punishment to classify samples in the training process wrong.\\
 This leads to a more flexible training process, reduces the number of needed samples and can build models of non-separable data.
 
 % Soft Margin Classifier
@@ -187,11 +199,12 @@ This leads to a more flexible training process, reduces the number of needed sam
 
 The \acf{LR} is a regression analysis technique which is used in statistic modeling to estimate relationships between variables. % https://en.wikipedia.org/wiki/Regression_analysis https://en.wikipedia.org/wiki/Logistic_regression
 It is an approach to solve binary classification problems and is based on the logistic function $\frac{1}{1 + e^{-z}}$.
+
 The logistic function is a "S" shape and its values ranges between $0$ and $1$.
-The input value $z$ is transformed onto this range since it is applied in the denominator.
+The input value $z$ is transformed onto this range since it is applied in the denominator of the function.\\
 % In \ac{LR} a modified version of the logistic function is used to transform all values that are going to be classified by 
-In the \ac{LR}, additionally to the logistic function, all values $z_i$ of a sample that is going to be classified are combined with weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added.
-Hence this modified version of the logistic function, known as \ac{LR} model, is used to transform all values $z_i$ by 
+In the \ac{LR}, additionally to the logistic function, all values $z_i$ of a sample that is going to be classified are combined with weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added.\\
+Hence, this modified version of the logistic function, known as \ac{LR} model, is used to transform all values $z_i$ by 
 
 \begin{align*}
 \Pr[Y = 1 | Z = z_i] &= \frac{1}{1 + e^{-(\beta_0 + z^T_i \beta)}}
@@ -200,12 +213,14 @@ Hence this modified version of the logistic function, known as \ac{LR} model, is
 onto the range between $0$ and $1$.
 % The value of the function is the likelihood $P$ that a given sample with its values $z_i$ is classified with $Y = 1$.
 The value of the function is the likelihood $\Pr[Y = 1 | Z = z_i]$ that a given sample classifies $1$ under the condition its values are $z_i$.
-To calculate the binary classification the likelihood is then divided into the classes $0$ for $\Pr[Y = 1 | Z = z_i] < 0.5$ and $1$ for $\Pr[Y = 1 | Z = z_i] \ge 0.5$.
+To calculate the binary classification, the likelihood is then divided into the classes $0$ for $\Pr[Y = 1 | Z = z_i] < 0.5$ and $1$ for $\Pr[Y = 1 | Z = z_i] \ge 0.5$.\\
 The \ac{LR} model is defined by the weights $\beta + \beta_0$. % whereas the bias $\beta_0$ is the value which determines the likelihood $\Pr[Y = 1 | Z = z_i]$ when all values $z_i$ are zero. % https://en.wikipedia.org/wiki/Logistic_regression
+
 These weights must be estimated from the training data that includes already classified samples.
-A usually approach is the maximum likelihood estimation whereas the goal is that the likelihood predicted by the \ac{LR} model is very close to $1$ if the sample belongs to this class and the way round.
+A usually approach is the maximum likelihood estimation whereas the goal is that the likelihood, predicted by the \ac{LR} model, is very close to $1$ if the sample belongs to this class and the way round.\\
 The maximum likelihood estimation does that by minimizing the error in the likelihood predicted by the model for the training data. % Probably cut out http://machinelearningmastery.com/logistic-regression-for-machine-learning/
 For more detailed information I refer the reader to \cite{2017MaximumEstimation}.
+
 As a last point is has to be mentioned that the classification problems solved by \ac{LR} do not need to be linearly separable but differentiable \cite{Ruhrmair2010ModelingFunctions}.
 % https://en.wikipedia.org/wiki/Logistic_regression
 
@@ -218,8 +233,9 @@ As a last point is has to be mentioned that the classification problems solved b
 \section{Perceptron}
 \label{sec:perceptron}
 
-The perceptron is an supervised learning algorithm of binary classifiers and the simples form of an \ac{ANN} \cite{Rosenblatt1957TheAutomaton}. 
-In case of an single-layer perceptron the values $z_i$ of a sample $d$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added similar to \ac{LR}, as shown in Sec. \ref{sec:lr}.
+The perceptron is a supervised learning algorithm of binary classifiers and the simplest form of an \ac{ANN} \cite{Rosenblatt1957TheAutomaton}. 
+
+In case of an single-layer perceptron the values $z_i$ of a sample $d$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec. \ref{sec:lr}.
 However the output value $f(z)$ of the perceptron is calculated by
 
 \begin{align*}
@@ -261,8 +277,9 @@ Afterwards in line $5$ the weights $\beta$ and the bias $\beta_0$ are updated by
 
 whereas $\beta_i(l)$ are the weights $\beta_i$ and $\beta_0(l)$ is the bias $\beta_0$ at the time $l$.
 A learning rate $\alpha$ is added that determines the value that is used to change the weights.
+
 With these incremental updates the perceptron algorithm is an online learning algorithm.
-The algorithm is guaranteed to converge, and there is a limit for the maximum number of weight adjustments while trained under the condition that the training set is linear separable \cite{2016Perceptron}.
+The algorithm is guaranteed to converge, and there is a limit for the maximum number of weight adjustments while trained under the condition that the training set is linear separable \cite{2016Perceptron}.\\
 For a non-linear separable problem the perceptron algorithm does not terminate as it never reaches the optimal classification of all samples. % https://en.wikipedia.org/wiki/Perceptron
 A modification of the single-layer perceptron is the multilayer perceptron that is able to distinguish non-linear separable problems.
 For more detailed information about the multilayer perceptron I refer the reader to \cite{2017MultilayerPerceptron}.

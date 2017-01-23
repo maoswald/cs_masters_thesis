@@ -7,39 +7,44 @@ To accomplish this on the one hand it is possible to reveal the intrinsic secret
 On the other hand the challenge response behavior of the \puf can be adapted.
 Both methods can then be used to impersonate the attacked \puf.
 
+This section first names attacks on \apufs occurring in the current literature.
+It separates them into different classes of attacks to distinguish the attacks studied in this work from other attacks.
+Then attacks on \xpufs and their success are mentioned.
+Finally the relevant attacks for this thesis are named in addition to the reasons for their choice.
+
 %========================================
 
 \section{Attacks on \apufs}
 \label{sec:attacksonarbiter}
 
-Since \apufs were one of the most promising \puf implementation multiple attacks have been developed.
+Since \apufs were one of the most promising \puf implementation, multiple attacks have been developed.
 One of the first attacks reveals the internal values of the \apuf by linear programming \cite{Ozturk2008TowardsDevices}.
-This approach solves a linear equation system after collecting enough \acp{CRP} because an \apuf can be represented as linear threshold function, as shown in Sec. \ref{sec:theoretical}.\\
+This approach solves a linear equation system after collecting enough \acp{CRP}, because an \apuf can be represented as linear threshold function, as shown in Sec. \ref{sec:theoretical}.\\
 For a good result the stability of the responses of the \acp{CRP} should be as high as possible.
-As the response of every \ac{CRP} includes some noise as explained in Sec. \ref{sec:physical} one strategy of the attacker is to reduce the noise by using majority vote, i.e. evaluating the same challenge multiple times and picking the most appeared response.
+As the response of every \ac{CRP} includes some noise, explained in Sec. \ref{sec:physical}, one strategy of the attacker is to reduce the noise by using majority vote, i.e. evaluating the same challenge multiple times and picking the most appeared response.
 Therefor the attacker has to be able to evaluate chosen challenges.\\
-Another option would be using an algorithm to learn noisy linear threshold function as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
+Another option is using an algorithm to learn noisy linear threshold function, as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
 
-The linear programming attack is a non-invasive modeling attack where the attacker needs to collect \acp{CRP} to build a model of the \puf by for example a \ac{ML} algorithm.
+The linear programming attack is a non-invasive modeling attack where the attacker needs to collect \acp{CRP} to build a model of the \puf for example by a \ac{ML} algorithm.
 After that the model can predict responses for new challenges, which have not be used to create the model itself.
 How precise these predictions are depends on the number of captured \acp{CRP} and used parameters to build the model.\\
 The result and the model building performance vary for different \ac{ML} techniques.
-How the attacker gets to know the \acp{CRP} in a real use case depends on the way the \puf is used and the \acp{CRP} transmitted and therefore not part of this work.\\
+How the attacker gets to know the \acp{CRP} in a real use case depends on the way the \puf is used and the \acp{CRP} transmitted and is therefore not part of this work.\\
 \apufs are strong \pufs and their operation frequency is relatively high.
 They provide the option to freely access a large amount of \acp{CRP} \cite{Ruhrmair2010ModelingFunctions}.\\
-On the contrary some \pufs post-process their response in the protected chip environment to make the \puf response itself inaccessible to protect the \puf \cite{Suh2007PhysicalGeneration, Gassend2004IdentificationCircuits}.
+On the contrary, some \pufs post-process their response in a protected chip environment to make the \puf response itself inaccessible to protect the \puf \cite{Suh2007PhysicalGeneration, Gassend2004IdentificationCircuits}.
 All non-invasive attacks mentioned in this thesis investigate \pufs despite how they obtain \acp{CRP}.
 For this reason I assume to have free access to the \puf and to be able to measure \acp{CRP} without restrictions.
 % difference machine learning to algebraic technique like linear programming \cite{Ruhrmair2014PUFOverview} Page 1
 
 It has been shown by Rührmair et al. that \apufs can be successfully attacked resulting in a model with even higher stability as the \apuf in-silicon implementation has \cite{Ruhrmair2010ModelingFunctions}.
 For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performed best in terms of predicting randomly chosen challenges.\\
-Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning whereas \ac{PAC} learning is an analysis framework and not a \ac{ML} technique.\\
+Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning, whereas \ac{PAC} learning is an analysis framework and not a \ac{ML} technique.\\
 \acp{ANN} need a relative large amount of \acp{CRP} to achieve a high prediction accuracy of new challenges \cite{Hospodar2012MachineUsability}.
 The approach for a \ac{PAC} learning algorithm by Ganji et al. requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
 
 All non-invasive attacks mentioned so far are based only on the values of the responses of the attacked \puf.
-A different attack is the reliability-based machine learning attack proposed by Becker et al. \cite{Becker2015ThePUFs}.
+A different attack is the reliability-based machine learning attack proposed by Becker et al. \cite{Becker2015ThePUFs}.\\
 It is based on the reliability of the \puf responses than on their values. 
 This in combination with a \ac{CMA-ES} algorithm makes it possible to create \apuf models with high accuracy.
 We count this attack as non-invasive attack as it relies only on the response of the \puf and does not need physical access to the \puf like side channel attacks.
@@ -47,10 +52,10 @@ We count this attack as non-invasive attack as it relies only on the response of
 In addition to non-invasive modeling attacks, physical side channel attacks are possible.
 As mentioned before, in real attack scenarios, the \puf response or a large set of \acp{CRP} is may be not available to the attacker so he has to obtain information differently.
 Physical side channel attacks require physical access to the \puf.\\
-As an example the photonic emission analysis attack where the attacker measures the evolved photons of the bottom side of the \apuf chip to reveal all its internal delay values \cite{Tajik2014PhysicalPUFs}.
-With these values the attacker can create an exact model of the \apuf as explained in Sec. \ref{sec:theoretical}.\\
+As an example the photonic emission analysis attack, where the attacker measures the evolved photons of the bottom side of the \apuf chip to reveal all its internal delay values, has been proposed by Tajik et al. \cite{Tajik2014PhysicalPUFs}.
+With these values, the attacker can create an exact model of the \apuf as explained in Sec. \ref{sec:theoretical}.\\
 Different combinations of machine learning attacks and side channel attacks have been proposed as well \cite{Mahmoud2013CombinedPUFs, Xu2014Hybrid}.
-However in this work I focus only on non-invasive machine learning attacks as they do not require physical access to the \apuf chip.
+However, in this work I focus only on non-invasive machine learning attacks, as they do not require physical access to the \apuf chip.
 
 %========================================
 
@@ -58,32 +63,43 @@ However in this work I focus only on non-invasive machine learning attacks as th
 \label{sec:attacksonxorarbiter}
 
 Many attacks on \apufs can also be applied to \xpufs.
-As main differences the attacks additionally have to cope with the added non-linearity by the \ac{XOR} function, the increasing number of \apufs, and the fact that the responses of all \apufs are not individually accessible.
-The increasing number of \apufs make the time consumed by the attack and its growth rate an important factor for building secure \xpufs that can not be successfully modeled in reasonable time.
-On the one hand, this time grows with the number of used \apufs for the most attacks exponentially and on the other hand, the size $\gls{k}$ of a \xpuf is limited by the growing total noise as explained in Sec. \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}.
+As main differences, the attacks additionally have to cope with the added non-linearity by the \ac{XOR} function, the increasing number of \apufs, and the fact that the responses of all \apufs are not individually accessible.
+
+%old: The increasing number of \apufs make the time consumed by the attack or the needed \acp{CRP} and their growth rates an important factor for building secure \xpufs that can not be successfully modeled.
+The increasing number of \apufs increases the complexity of an attack.
+This complexity grows in form of raising time consumption of the attack or a greater number of required \acp{CRP}
+Additional, their growth rates are important factors for building secure \xpufs that can not be successfully modeled.
+An exponential growing complexity to attack an \xpuf that can be build with linear growing effort can lead to a secure \puf.
+
+However, on one hand this complexity grows exponentially with the number of used \apufs for the most attacks and on the other hand the size $\gls{k}$ of a \xpuf is limited by the growing total noise, as explained in Sec. \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}.\\
 The reports about current effective attacks on \xpufs differ in the maximum size $\gls{k}$ by $4$ to $6$ \cite{Ganji2015WhyPUFs, Xu2014Hybrid}.
+
 Under these conditions Ganji et al. developed a \ac{PAC} analysis algorithm to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
 Using \ac{ANN} and \ac{SVM} proved to be rather inefficient when $\gls{k} > 2$ \cite{Hospodar2012MachineUsability}.
 Equally bad performed the \ac{ES} attack.
-However the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.
-All attacks mentioned so far grow exponentially in their execution time for linear increasing $k$.
+However, the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.
+
+% All attacks mentioned so far grow exponentially in their execution time for linear increasing $k$.
+All attacks mentioned so far grow exponentially in their complexity for linear increasing $k$.
 % \todo{Nils:a comparison table would be great}
 Only the \ac{CMA-ES} attack that is based on the reliability of the responses claims to have linear growing time consumption for rising $k$ \cite{Becker2015ThePUFs}.
-That means for example using double the amount of \apufs in a \xpufs leads only to twice the required time to run this attack.
+That means for example using double the amount of \apufs in a \xpufs leads only to twice the required \acp{CRP} to run a successful attack.
 
 %========================================
 
-\section{Essential attacks}
+\section{Relevant attacks}
 \label{sec:essentialattacks}
 
-The time effort of all attacks applied to \xpufs grows exponentially with increasing number of \apuf except of the \ac{CMA-ES} attack, as described in Sec. \ref{sec:attacksonxorarbiter}.
-Becker et al. points out that their approach "results in only a linear increase in needed number of challenge and responses for increasing numbers of XORs" \cite{Becker2015ThePUFs}.
+The complexity of all attacks applied to \xpufs grows exponentially with increasing number of \apuf, except of the reliability based \ac{CMA-ES} attack, as described in Sec. \ref{sec:attacksonxorarbiter}.
+Becker et al. points out that their approach to combine the reliability based \ac{CMA-ES} attack with a normal \ac{CMA-ES} attack "results in only a linear increase in needed number of challenge and responses for increasing numbers of XORs" \cite{Becker2015ThePUFs}.
+
 A \xpuf with an arbitrary large number of \apufs would prevent all attack but the \ac{CMA-ES} attack.
-To overcome the problems large \xpufs encounter the concept of \ac{MV} has been developed, as shown in Chap. \ref{cap:majorityarbiter}.
+To overcome the problems, large \xpufs encounter, the concept of \ac{MV} has been developed, as shown in Chap. \ref{cap:majorityarbiter}.
 \ac{MV} claims to make it possible to build \xpufs with large number of \apufs, which will be studied in Chap. \ref{cap:stabilitysimulation}.
 % As a result the only attack that claims to be usable with large \xpufs at a feasible time consumption is the \ac{CMA-ES} attack.
-As a result the only attack that can be applied to large \xpufs with a feasible time consumption is the \ac{CMA-ES} attack.
-Hence the impact of using \ac{MV} in combination with \apufs on the success of the \ac{CMA-ES} attack will be described in Chap. \ref{cap:attacksimulations}.
+
+As a result, the only attack that can be applied to large \xpufs with a feasible required \acp{CRP} is the \ac{CMA-ES} attack.
+Hence, the impact of using \ac{MV} in combination with \apufs on the success of the \ac{CMA-ES} attack will be described in Chap. \ref{cap:attacksimulations}.
 
 %========================================
 % - exponential
