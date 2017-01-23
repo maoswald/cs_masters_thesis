@@ -24,7 +24,8 @@ The \apuf simulations are based on the \apuf representation explained in Sec. \r
 
 The simulation of the \apuf uses randomly chosen normal distributed values with zero mean and given variance for delay difference values $\delta$ that represent the \apuf.
 % Old: This is a common approach for random values whose distribution is unknown.  %? https://en.wikipedia.org/wiki/Normal_distribution
-This is a common approach for natural randomly occurring deviations whose distribution is unknown.\\
+This is a common approach for natural randomly occurring deviations whose distribution is unknown.%+
+
 The different noise values added in $\ref{equ:pufresponse}$ are also normal distributed random values with zero mean and given variance.
 The distribution $\ref{equ:stagenoisedistribution}$ where the noise of the stages is chosen from scales by the size of the \apuf $\gls{n}$ as required by the equation.
 
@@ -54,13 +55,13 @@ For the attack simulation of the \ac{CMA-ES} attack \ref{equ:pufmodelw} is used 
 
 To attack \mpufs and \mxpufs, described in Chap. \ref{cap:majorityarbiter}, the reliability based \ac{CMA-ES} attack explained by Becker et al. in his paper with the title "The Gap Between Promise and Reality: On the Insecurity of XOR Arbiter PUFs" and further sources are used \cite{Becker2015ThePUFs,2017CMA-ES,Hansen2011TheTutorial,Hansen2006TheReview}.\\
 It is the only relevant attack that can successfully create well performing models of large \xpufs, as described in Sec. \ref{sec:essentialattacks}.
-As large \xpufs suffers face some stability challenges the concept of \ac{MV} is used to overcome them, as described in Sec. \ref{sec:majorityxorarbiter}.
-Hence the attack is applied to \apufs and \xpufs with and without the concept of \ac{MV} to study its impact on the attack.\\
+As large \xpufs face some stability challenges, the concept of \ac{MV} is used to overcome them, as described in Sec. \ref{sec:majorityxorarbiter}.
+Hence, the attack is applied to \apufs and \xpufs with and without the concept of \ac{MV} to study its impact on the attack.\\
 The attack implementations follow the description of the paper of Becker et al. to be able to reproduce their results of well performing models of large \xpufs \cite{Becker2015ThePUFs}.
 A model performs well when it predicts a high proportion of the challenges from a test set correct.
 
 The reliability based \ac{CMA-ES} algorithm relies on the \ac{CMA-ES} algorithm, which is described in Sec. \ref{sec:cma-es}.
-To provide a better understanding of how the attack works this section explains the applied principles and the attack implementations.
+To provide a better understanding of how the attack works this section explains the applied principles and the attack implementations.\\
 First the reliability approach to rate the models created by the algorithm is explained.
 After that, it is shown how the \ac{CMA-ES} algorithm use this to approximates well performing models of the attacked \apuf.
 In the end the principle to successfully apply the attack on \xpufs is described.
@@ -71,7 +72,8 @@ In the end the principle to successfully apply the attack on \xpufs is described
 \label{sec:reliability}
 
 The \ac{ES} algorithm is based on the natural evolution process of survival of the fittest, explained in Sec. \ref{sec:evolutionstrategies}, and therefore needs a method to score the fitness of a trained model.
-This function is called fitness function and how it is used in the \ac{CMA-ES} algorithm is explained later in the Sec. \ref{sec:cma-esdesign}.\\
+This function is called fitness function and how it is used in the \ac{CMA-ES} algorithm is explained later in the Sec. \ref{sec:cma-esdesign}.
+
 The fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges of the training set, as Becker et al. describes \cite{Becker2015ThePUFs}.
 This is done to approximate the attacked \puf by adapting its reliability behavior of the responses of every challenge of the training set.\\
 % idea: Von der Stabilität kann auf den konkreten Wert des Signalunterschieds (delay difference) geschlossen werden
