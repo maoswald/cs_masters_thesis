@@ -4,12 +4,14 @@
 % point out comparison better! check whole chapter
 
 The reliability based \ac{CMA-ES} is the only attack, which is claimed to have a linear increasing complexity for successful attacks on \xpufs that grow linear in their number of used \apufs, as explained in Sec. \ref{sec:essentialattacks}.
-Successfully attacked means to building a model that can predict $80 \%$ of the challenges from a test set, which contains randomly chosen challenges, correct.
-The implementation of the \ac{CMA-ES} attack, how it is based on the reliability of challenges, and the \apuf simulation is explained in Chap. \ref{cap:simulationdesign}.
+Successfully attacked means to build a model that can predict $80 \%$ of the challenges from a test set, which contains randomly chosen challenges, correct.
+The implementation details of the \ac{CMA-ES} attack and the \apuf, which is basis for the simulations of the \mpuf, is explained in Chap. \ref{cap:simulationdesign}.
 
 This section presents the results of the simulations to verify the success of the \ac{CMA-ES} attack on large \xpufs.
-As the attack is based on the unreliability of challenges, first the dependency between the number of vote used for \ac{MV} and the number of collected unreliable challenges is studied.
-After that, the success of the normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to build the \mxpuf.
+First the dependency between the number of vote used for \ac{MV} and the number of collected unreliable challenges is studied, as the attack is based on the unreliability of challenges.
+% old: After that, the success of the normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to build the \mxpuf.
+The normal reliability based \ac{CMA-ES} attack is part of the combined attack on \mxpufs and attacks the underlying \mpufs.
+Hence, in the next simulation the success of this normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to build the \mxpuf.
 Finally, the \ac{CMA-ES} attack is applied to \xpufs and \mxpufs of different size to study whether \ac{MV} can prevent the attack through enabling large \mxpufs. 
 
 % same configuration as for stability simulation, repeat and ref
@@ -49,9 +51,10 @@ However, the linear course of the graph, showed by the logarithmic Fig. \ref{fig
 
 The slight difference between the graphs in both figures shows that increasing the number of evaluation $\gls{j}$ does not necessarily provides more challenges with lowered reliability $\gls{h}$.
 Without \ac{MV} there is a little increase of found challenges with lowered reliability $\gls{h}$.
-Though with applying \ac{MV} this increase disappears with growing $\gls{m}$.
-It has been verified that the number of unreliable challenges decreases with an increase of used \ac{MV} votes.
+Though, with applying \ac{MV} this increase disappears with growing $\gls{m}$.
 
+The results presented in this section verify that the number of unreliable challenges decreases with an increase of used \ac{MV} votes.
+Despite the use of \ac{MV}, unreliable challenges are occurring.
 
 %========================================
 
@@ -59,15 +62,19 @@ It has been verified that the number of unreliable challenges decreases with an 
 \label{sec:arbitervsmajorityarbiter}
 
 This section describes the results of the simulation used to study the success of the \ac{CMA-ES} attack, explained in Sec. \ref{sec:cma-esdesign}, on \mpufs in comparison to \apufs.
-
 Through the comparison with the success of the attack on \apuf the impact of \ac{MV} can be evaluated.
+
 The \apuf used for the simulation has $\gls{n} = 32$ stages.
 For the attack a training set of $10000$ \acp{CRP} and a number of evaluation times of $\gls{j} = 100$ were used.
-Since the \ac{CMA-ES} attack not always approximates to a model, which performs well on challenges of the test set, it has to be restarted.
+Since the \ac{CMA-ES} attack not always approximates to a model, which performs well on the challenges of the test set, it has to be restarted.
 The number of needed starts of the attack till a desired model has been approximated is called number of attack executions.
+
 A model produced by the attack is defined to perform well if it evaluates $80 \%$ of the $10000$ \acp{CRP} of the test set correct.
 Both test set and training set are independent randomly chosen sets of challenges $\gls{c}$.
-The exit criteria sigma of the \ac{CMA-ES} attack as explained in Sec. \ref{sec:cma-esdesign} is set to $0.2$ and stops the attack despite if the attack approximates to a model which performs well on the test set or not.
+% The exit criteria sigma of the \ac{CMA-ES} attack as explained in Sec. \ref{sec:cma-esdesign} is set to $0.2$ and stops the attack despite if the attack approximates to a model, which performs well on the test set or not.
+The minimum step-size sigma, used in the attack as termination criteria explained in Sec. \ref{sec:cma-esdesign}, is set to the value $0.2$.
+Reaching this limit stops the attack regardless if a well performing model is approximated or not.
+
 For a growing number of \ac{MV} $\gls{m}$ there is an increase of needed executions of the attack to approximate to a model which performs well on the test set, as shown in Fig \ref{fig:cmasingleattackcorrelation}.
 The growing gradient of the graph shows the growing exponential increase of needed attack executions to gain well performing models.
 From $\gls{m} = 80$ \acp{MV} on the gradient of the graph is greater than $1$.
@@ -83,6 +90,7 @@ Hence the slope of the number of attack executions is greater than the polynomia
 Apart from the increasing number of attack executions the performance of the computed models decreases with the growth of $\gls{m}$, as shown in Fig. \ref{fig:cmasingleattackcorrectness}.
 The graph displays how the proportion of correct evaluated challenges $\gls{c}$ of the test set lowers linear with a linear rise of the number of \ac{MV} $\gls{m}$.
 This indirect correlation implies that with growing number of \ac{MV} $\gls{m}$ the proportion of the correct evaluated challenges $\gls{c}$ of the test set decreases for well performing models build by the \ac{CMA-ES} attack.
+
 The values of both Fig. \ref{fig:cmasingleattackcorrelation} and \ref{fig:cmasingleattackcorrectness} are average values of minimum $10$ well performing models except for the last value of $m = 320$ that required $2000$ attack executions to gain $5$ well performing models.
 \todo{maybe measure m=320 with additional 2000 executions}
 
@@ -92,6 +100,11 @@ The values of both Fig. \ref{fig:cmasingleattackcorrelation} and \ref{fig:cmasin
 \caption[Proportion of correct evaluated test set challenges of a model approximated by the \acs{CMA-ES} attack]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by an \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
 \label{fig:cmasingleattackcorrectness}
 \end{figure}
+
+% The results of this section show that with a growing number of votes $\gls{m}$ the required number of \ac{CMA-ES} attack executions increases greatly as well.
+The results of this section show that the required number of \ac{CMA-ES} attack executions increases faster than the growing number of votes $\gls{m}$ from a certain point on.
+Applying a large number of votes can be used to minimize the likelihood of a successful attack.
+\ac{MV} improves the ability of \apufs to resist reliability based \ac{CMA-ES} attacks.
 
 %========================================
 
