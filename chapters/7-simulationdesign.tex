@@ -85,34 +85,56 @@ Finally, we describe how to successfully apply the algorithm to attack \xpufs.
 \label{sec:reliability}
 \todo{maybe rename to "Fitness function"}
 
-The \ac{ES} algorithm is inspired by the natural evolution process of survival of the fittest, explained in Sec. \ref{sec:evolutionstrategies}, and therefore needs a method to score the fitness of a trained model.
-This function is called fitness function and how it is used in the \ac{CMA-ES} algorithm is explained later in the Sec. \ref{sec:cma-esdesign}.
+The \ac{ES} algorithm is inspired by the natural evolution process of survival of the fittest (see Sec. \ref{sec:evolutionstrategies}) and thus needs a method to score the fitness of a trained model.
+This function is called fitness function.
+In Sec. \ref{sec:cma-esdesign}, we will outline how the fitness function is used in the \ac{CMA-ES} algorithm.
 
-The fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges of the training set, as Becker et al. describes \cite{Becker2015ThePUFs}.
-This is done to approximate the attacked \puf by adapting its reliability behavior of the responses of every challenge of the training set. %+
+% Becker's fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges of the training set.
+% unused below:
+% Becker's fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges of the training set.
+% This is done to approximate the attacked \puf by adapting its reliability behavior of the responses of every challenge of the training set. %+
 % idea: Von der Stabilität kann auf den konkreten Wert des Signalunterschieds (delay difference) geschlossen werden
 
-Against the definition of stability \ref{equ:stability}, in terms of the reliability based \ac{CMA-ES} attack, the reliability of a challenge and the hypothetical reliability of a challenge have both different definitions than the stability, as described in the next paragraphs. 
-First an explanation for the reliability and the hypothetical reliability is given before it is described how they are used to rate the models.
+Becker's fitness function uses reliability values of challenges that are evaluated by the attacked \puf.
+To measure the reliability value $h_i$, which is defined in the next paragraph, of a challenge, the challenge has to be evaluated multiple times by the attacked \puf.
+Hence, the attack requires the possibility to freely evaluate challenges similar to a chosen-plaintext attack \cite{2016Chosen-plaintextAttack}.
+This process of measuring multiple challenge evaluations has to be done only once, since the same values are used during the complete attack. %+ % the reliability values of the challenges of the attacked \puf
+The set of multiple evaluated challenges is in the case of the reliability based \ac{CMA-ES} attack the training set with $v$ number of challenges.
+The test set is created by single evaluations of different challenges, as specified in Cap. \ref{cap:mla}.
 
-To measure the reliability value $h_i$ of a challenge it has to be evaluated multiple times by the attacked \puf.
-This process of measuring the reliability values of the challenges of the attacked \puf has to be done only once as the same values are used during the complete attack. %+
-We define the number of evaluation $\gls{j}$ to be the number of times a challenge is evaluated by the same \puf and its responses $\gls{r}$ captured to calculate it reliability $\gls{h}_i$.
+
+% Against the definition of stability \ref{equ:stability}, in terms of the reliability based \ac{CMA-ES} attack, the reliability of a challenge and the hypothetical reliability of a challenge have both different definitions than the stability, as described in the next paragraphs. 
+% First an explanation for the reliability and the hypothetical reliability is given before it is described how they are used to rate the models.
+
+% To measure the reliability value $h_i$ of a challenge it has to be evaluated multiple times by the attacked \puf.
+% This process of measuring the reliability values of the challenges of the attacked \puf has to be done only once as the same values are used during the complete attack. %+
+
+% old: Against the definition of stability in Eq. (\ref{equ:stability}), in terms of the reliability based \ac{CMA-ES} attack, the reliability of a challenge has a different definition than the stability.
+How the definition of reliability differs from the definition of stability that is given in Eq. (\ref{equ:stability}), in terms of the reliability based \ac{CMA-ES} attack, is highlighted now.
+% old: We define the number of evaluation $\gls{j}$ to be the number of times a challenge is evaluated by the same \puf and its responses $\gls{r}$ captured to calculate it reliability $\gls{h}_i$.
+Let $\gls{j}$ be the number of times a challenge is evaluated by the same \puf and let $\gls{r}_i$, $1 \le i \le j$ be the responses captured to calculate the reliability $\gls{h}_i$.
 The reliability $\gls{h}_i$ of a challenge $\gls{c}$ is computed of its responses $r_1, r_2, ..., r_j$ as follows \cite{Becker2015ThePUFs}:
 
 \begin{align}
-h_i &= |\frac{j}{2} - \sum_{i = 1}^{j}r_i| \label{equ:reliability}
+h_i &= |\frac{j}{2} - \sum_{l = 1}^{j}r_l| \label{equ:reliability}
 \end{align}
+% Nils: In CS language: this i shadows the i that is already declared in the outside scope. In math, shadowing is considered an error, not just an inconvinience.
 
-In \ref{equ:reliability} it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with the same response $r$, either $0$ or $1$, for all $j$ times of evaluations. %+
+
+%old: In Eq. (\ref{equ:reliability}) it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with the same response $r$, either $0$ or $1$, for all $j$ times of evaluations. %+
+In Eq. (\ref{equ:reliability}) it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with all $\gls{r}_i$, $i \le j$, are simultaneously $0$ or $1$, for all $j$ times of evaluations. %+
 A challenges that evaluates one or more times of $j$ evaluations to a different response as the other responses has a lowered reliability and is called unreliable challenge.
-Hence $h = (h_1, ..., h_n)$ is the reliability vector of $n$ challenges from the training set evaluated by the attacked \puf.
+Hence $h = (h_1, ..., h_v)$ is the reliability vector of $v$ challenges from the training set evaluated by the attacked \puf.
 
-After that the hypothetical reliability values $g_i$ of the models created by the algorithm has to be calculated.
-The models are defined by their delay vectors $w$, as used in the \apuf model representation \ref{equ:pufmodelw}, that are known by the algorithm. %+
-Additional a feature vector $x$ is computed from every challenge of the training set by \ref{equ:featurevector}.
-Hence the vectors $w$, the feature vectors $x$, and the \apuf model \ref{equ:pufmodelw} are used to calculate the hypothetical reliability $g_i$ for a challenge as follows:
+Becker's fitness function uses also the hypothetical reliability values of challenges evaluated by the modeled \pufs.
+The hypothetical reliability of a challenge has also a different definition than the reliability and the stability, in terms of the reliability based \ac{CMA-ES} attack.
+% After that, the hypothetical reliability values $g_i$ of the models created by the algorithm have to be calculated.
+To rate all models, hypothetical reliability values have to be calculated for every model created by the algorithm.
+The models are defined by their delay vectors $\gls{w}$ of real-valued numbers and of size $\gls{n} + 1$, as used in the \apuf model representation Eq. (\ref{equ:pufmodelw}), and are known by the algorithm. %+
+Additionally, the feature vector $\gls{x}_{n+1}$ of real-valued numbers, which is defined in Sec. \ref{sec:theoretical}, is computed from every challenge of the training set by Eq. (\ref{equ:featurevector}).
+Hence the vectors $w$, the feature vectors $\gls{x}$, and the \apuf model \ref{equ:pufmodelw} are used to calculate the hypothetical reliability $g_i$ for a challenge as follows:
 
+% Nils: when introducing new variables, like x here, or w in the sentence before, always give the type. For instance, x is a vector of real-valued numbers of size n+1 (?). You can do that either in math: x\in\mathbb{R}^{n+1} or in English (see above). Here you are using the dot product of two vectors that you did not properly declare. This is why it is important for the reader to know the vector types and sizes, otherwise the dot product cannot be understood by the reader.
 \begin{equation}
 \begin{aligned}
 g_i &=
@@ -124,15 +146,24 @@ g_i &=
 \end{equation}
 
 The hypothetical reliability categorizes every challenge for the model defined by $w$ into hypothetical reliable and hypothetical unreliable. %+
-The challenge is defined to be hypothetical reliable when its delay difference computed by $\langle w, x \rangle$ is grater than the error boundary $\epsilon$ and results in $g_i = 1$.
+The challenge is defined to be hypothetical reliable when its delay difference computed by $\langle w, \gls{x} \rangle$ is greater than the error boundary $\epsilon$ and results in $g_i = 1$.
 The challenge is defined to be hypothetical unreliable when its delay difference is lower than the error boundary $\epsilon$ and results in $g_i = 0$. %+
+This relies on the facilitation of a low delay difference value being changed by noise, which results in a different sign of the value and thus a different response, as outlined in Sec. \ref{sec:arbiter}. 
 
 The error boundary $\epsilon$ is a flexible limit, which determines the separation, and is approximated in the attack.
-Hence $g = (g_1, ..., g_n)$ is the hypothetical reliability vector of $n$ evaluated challenges from the training set by every created model of the attack.
+Its value is approximated through the covariance matrix adaptation similar to the way the model values are approximated, as presented in the next Sec. \ref{sec:cma-esdesign}.
+Hence $g = (g_1, ..., g_v)$ is the hypothetical reliability vector of $v$ evaluated challenges from the training set by every created model of the attack.
 
-As last step the Pearson correlation coefficient of both vectors, reliability vector and hypothetical reliability vector, is computed.
+% old:
+% As last step the Pearson correlation coefficient of both vectors, reliability vector and hypothetical reliability vector, is computed.
+% The correlation coefficient represents the linear dependency of the vectors to each other.
+% For the attack it is assumed that a higher linear dependency between these vectors means a more well performing model. %+
+% The correlation coefficients are computed of the combinations between the one reliability vector and all hypothetical reliability vectors of all models that exist in the current generation of the algorithm.
+As last step Becker's fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges evaluated by the attacked \puf.
+The number of evaluated challenges by the attacked \puf is the size of the training set, which is outlined in Chap. \ref{cap:mla}.
 The correlation coefficient represents the linear dependency of the vectors to each other.
 For the attack it is assumed that a higher linear dependency between these vectors means a more well performing model. %+
+The attacked \puf is approximated by adapting its reliability behavior of the responses of every evaluated challenge.
 The correlation coefficients are computed of the combinations between the one reliability vector and all hypothetical reliability vectors of all models that exist in the current generation of the algorithm.
 
 These correlation coefficients are used as the fitness values of the corresponding model.
@@ -143,13 +174,13 @@ How many models in the current generation of the algorithm exist is explained in
 \subsection{CMA-ES}
 \label{sec:cma-esdesign}
 
-Since we described in the previous section how to score the fitness values of the created models this sections explains how the models are trained by the algorithm.
-One way to describe the \ac{CMA-ES} algorithm is displayed in Alg. \ref{alg:cma-es}.
-
-In this section we run through the algorithm step by step and explain the purpose of each step. %+
-In the first lines 1 to 3 multiple values are initialized, which are described when used in the algorithm.
+After we described in the previous section how to assess the fitness values of the created models this sections states how the models are trained by the algorithm.
+A pseudocode representation of the \ac{CMA-ES} algorithm is displayed in Alg. \ref{alg:cma-es}.
+In this section we analyze the algorithm step by step and point out the purpose of each step. %+
+In lines 1 to 3 multiple values are initialized, which are described when used in the algorithm.
 Since the \ac{ES} algorithm is based on the natural evolution process survival of the fittest, as described in Sec. \ref{sec:evolutionstrategies}, the algorithm creates new models every generation. % https://en.wikipedia.org/wiki/Survival_of_the_fittest
 
+% Nils: Maybe it is better to remove the initialization from the pseudocode altogether
 \SetAlCapHSkip{0.2em}
 \begin{algorithm}[H] % t let them float - H argument forces the algorithm to stay in place
 \Indm
@@ -231,7 +262,7 @@ To apply the attack to large \xpufs and \mxpuf it has to be applied multiple tim
 
 One way to display the combined attacks is Alg. \ref{alg:twostageapproach}.
 For a better understanding we divide the attack in two stages, whereas line 3 to 5 contains stage one and line 7 to 9 stage two.
-Before the attacks start a training set from the \xpuf is created in line 1.
+Before the attacks start a training set and its reliability values, as clarified in Sec. \ref{sec:reliability}, are created by the \xpuf in line 1.
 
 \SetAlCapHSkip{0.2em}
 \begin{algorithm}[H] % t let them float - H argument forces the algorithm to stay in place
@@ -243,7 +274,7 @@ Before the attacks start a training set from the \xpuf is created in line 1.
 \KwResult{mean values and rates model of the last generation}
 \Indp
 
-create training set by attacked \xpuf\\
+create training set and reliability values by attacked \xpuf\\
 \While{not reached number of trained models by stage one}{
 reliability based \ac{CMA-ES} attack
 }
