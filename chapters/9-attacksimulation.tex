@@ -111,11 +111,95 @@ Applying a large number of votes can be used to minimize the likelihood of a suc
 \section{\acs{XOR} \apufs vs. Majority \acs{XOR} \apufs}
 \label{sec:xorarbitervsmajorityxorarbiter}
 
+% \xpuf to unstable with growing k
 
-\xpuf to unstable with growing k
+This section presents the results of the simulation to verify the success of the combined \ac{CMA-ES} attacks, as explained in Sec. \ref{sec:attackcombination}, on \mxpufs in comparison to \xpufs.
+Through the comparison with the success of the attack on \xpuf the impact of \ac{MV} can be evaluated.
+First, the results of the attack on \xpufs are compared with the results of the attack on \mpufs.
+\todo{adjust}
+Subsequently, problems that occur when attacking \mpufs are outlined.
+Finally, the modifications of the preconditions for the attack and the according results are shown.
 
+To gain comparable results the simulation uses the same preconditions for the attacks on \xpufs and \mxpufs.
+All \pufs in this simulation have $n = 32$ stages.
+The number of challenges in the training set increases linear with the growth of the number of $k$ \apufs or $k$ \mpufs.
+The simulations starts with $5000$ training set challenges for $k = 2$ and doubles the number of training set challenges for the double number of $k$.
+All training set challenges are individually randomly chosen for all attacks.
 
+A test set is used to evaluate the performance of the learned model.
+The attack is successful when the learned model evaluates $80 \%$ of the test set challenges correct and thus is defined to perform well.
+The test set contains $2000$ individually randomly chosen challenges for all measurements, since only the complexity of the attack grows for a similar result.
+The number of $5000$ training set challenges in combination with $2000$ test set challenges were chosen for the reason that attacks on \xpufs with $k = 2$ and $k = 4$ with accordingly $10000$ training set challenges were able to build well performing models.
 
+\todo{simu xpuf k=3}
+\begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.eps}
+\noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption[blub]{Blub}
+\label{fig:cmamultiattackmodelperformance}
+\end{figure}
 
+Fig. \ref{fig:cmamultiattackmodelperformance} shows the proportion of correct evaluated test set challenges by well performing models produced by the attacks for $2 \le \gls{k} \le 12$.
+Every value is the average of $10$ successfully learned models.
+Since the attack is not deterministic, only attack executions that approximate well performing models are counted.
+There are no significant differences in the needed number of attack executions for different numbers of $\gls{k}$ neither for \xpufs nor for \mxpufs.
+
+The numbers of \ac{MV} votes $\gls{m}$ used for the \mxpufs in Fig. \ref{fig:cmamultiattackmodelperformance} are determined by the results of the simulations in Sec. \ref{sec:majorityvotegrowth}.
+This simulations approximated the required numbers of votes to gain a stable \mxpuf, which means it reaches $\Pr[\protect\Stab(\gls{c}) \ge 95 \%] \ge 95 \%$, for different $\gls{k}$.
+In Tab. \ref{tab:cmamultinumbervotes} the used values $\gls{m}$ for different values of $\gls{k}$ and the number of training set challenges that are similar to \xpufs and \mxpufs are displayed.
+
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline
+number of $\gls{k}$ & 2 & 3 & 4 & 6 & 8 & 10 & 12\\
+\hline
+number of training set challenges ($\cdot 10^3$) & 5 & 7.5 & 10 & 15 & 20 & 25 & 30\\
+% number of training set challenges & $5*10^3$ & $7.5 \cdot 10^3$ & $10 \cdot 10^3$ & $15 \cdot 10^3$ & $20 \cdot 10^3$ & $25 \cdot 10^3$ & $30 \cdot 10^3$\\
+\hline
+number of votes $\gls{m}$ & 5 & 9 & 17 & 29 & 64 & 100 & 150\\
+\hline
+\end{tabular}
+\caption[blub]{Number of used training set challenges for the attack on \xpufs and \mxpufs. Number of \ac{MV} votes used for the according \mxpufs determined by the simulation in Sec. \ref{sec:majorityvotegrowth}.}
+\label{tab:cmamultinumbervotes}
+\end{table}
+
+The Fig. \ref{fig:cmamultiattackmodelperformance} states the decrease of the performance of models approximated of \xpufs.
+If there is no impact of \ac{MV} on the attack success, the model approximated by the attack from \mxpufs would reach the same performance.
+For the case that the attack benefits of \ac{MV}, the performance values would be exceeded.
+However, the line graph for well performing models of the attack on \mxpufs stops after $k = 3$.
+The attack is not able to learn well performing models of \mxpufs that have a $\gls{k}$ larger than $3$ and uses $\gls{m}$ votes a the number of challenges as defined in Tab. \ref{tab:cmamultinumbervotes}.
+% how many attack executions to prove this
+
+To study the success of the attack on \mxpufs we approximate the required \acp{CRP} for a successful attack by binary search.
+In Fig. \ref{fig:cmamultiattackrequiredcrp} a comparison between the required training set challenges of the attack on \xpufs and \mxpufs shown.
+The raising graph states the exponential increase in demanded \acp{CRP} for a successful attack on \mxpufs that use the according number of votes $\gls{m}$, as display in Tab. \ref{tab:cmamultinumbervotes}.
+
+\begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.eps}
+\noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption[blub]{Blub}
+\label{fig:cmamultiattackrequiredcrp}
+\end{figure}
+
+To study the approximated required number of \acp{CRP}, $10$ successful attacks are performed for every $k$ and the average proportion of correct evaluated test set challenges by well performing models are compared with the results of the attacks on \xpufs in Fig. \ref{fig:cmamultiattackmvmodelperformance}.
+The similarity of the graphs on the attack on \xpufs and \mxpufs with the approximated required number of training challenges verifies that the attack results in the similar well performing model by a exponential increase of training challenges.
+
+\begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.eps}
+\noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption[blub]{Blub}
+\label{fig:cmamultiattackmvmodelperformance}
+\end{figure}
+
+The exponential raise of the required number of training set challenges for the same attack results confirms the impact of \ac{MV} on the combined \ac{CMA-ES} attack.
+The complexity of the attack grows exponentially, since the number of needed challenges to train the model increases exponentially for \mxpufs.
+However, the claim, which states that the complexity of the combined \ac{CMA-ES} attack grows linear for \xpufs with linear growth in $\gls{k}$, is not refuted.
+Nevertheless, Chap. \ref{cap:stabilitysimulation} outlined that it is possible to build large \xpufs with the principle of \ac{MV} called \mxpufs.
+In Sec. \ref{sec:essentialattacks} we state that only the combined \ac{CMA-ES} attack is relevant to large \xpufs and thus \mxpufs.
+As a result, large \mxpufs can not be successfully modeled by the combined \ac{CMA-ES} attack or any other currently known attack.
+
+% maybe: why low number of crps -> impact not measurable with high number as boundary will be not reached
+% abgrenzung von normal CMA-ES (könnte einfach alle werte auf einmal lernen), jedoch nur relevant fuer kleine k
 %========================================
 
