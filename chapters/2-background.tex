@@ -2,7 +2,7 @@
 \label{cap:background}
 
 The idea of making an entity identifiable by its random variations goes far back in history.
-As an example a technique to identify documents and to prevent forgery was proposed in the year 1978 \cite{1978MethodForgery}. %+
+As an example a technique to identify documents and to prevent forgery was proposed in the year 1978 \cite{brosow1980method}. %+
 
 %old: The idea of \acfp{PUF} was first proposed in 2001 and has gained since that enormous research attention \cite{Pappu2001PhysicalFunctions}. % \cite{Becker2015ThePUFs}
 In the year 2001 a system has been proposed under the name \acf{PUF}, based on a same idea \cite{Pappu2001PhysicalFunctions}.
@@ -108,7 +108,7 @@ This pictures how premature \puf definitions are and will not be further studied
 
 In contrast to strong \pufs weak \pufs only have a few challenges, at least one \cite{Ruhrmair2014PUFsGlance}.
 Their responses are not meant to be given to the outside of the system and only used internally, e.g. as standard key \cite{Ruhrmair2012AnPUFs}. %+
-A standard key does not change and can be used, as explained in Chap. \ref{cap:introduction}, for different purposes, e.g. for encryption in pay TV \cite{2016PirateDecryption}. %+
+A standard key does not change and can be used, as explained in Chap. \ref{cap:introduction}, for different purposes, e.g. for encryption in pay TV \cite{Wikipedia2016PirateDecryption}. %+
 
 Weak \pufs provide an alternative to nonvolatile memory, which is a secret key storage device, with the advantage that weak \pufs may be harder to read out \cite{Lim2005ExtractingCircuits}.
 Since weak \pufs do not have a large number of unique challenges it is easy to read out all their responses if free access is provided.
@@ -220,7 +220,7 @@ Despite the limited study of \pufs to date, \acl{NXP} and Microsemi, two semicon
 As this thesis studies \acf{ML} attacks, this section provides some definitions for \ac{ML} algorithms and gives a introduction for the interaction with \pufs.
 Afterwards different learning approaches are explained to clarify the type of attacks, which are used in this thesis to attack \pufs. %+
 
-The field of \ac{ML} has several different approached and therefore multiple definitions \cite{2017MachineLearning}.
+The field of \ac{ML} has several different approached and therefore multiple definitions \cite{Wikipedia2017MachineLearning}.
 An early definition was made by Arthur Samuel in 1959, which says:
 
 "[Machine Learning is the field of study] that gives computers the ability to learn without being explicitly programmed." \cite{Samuel1959SomeCheckers}
@@ -268,7 +268,7 @@ For challenges their responses are not know the model then can make predictions 
 
 \subsection{Types of Learning Approaches}
 
-To categorize \ac{ML} techniques by their approach the following three different learning approach classes are used \cite{2017MachineLearning}:
+To categorize \ac{ML} techniques by their approach the following three different learning approach classes are used \cite{Wikipedia2017MachineLearning}:
 
 \begin{itemize}
 \item supervised learning: The data includes input values and their desired output values for the \ac{ML} algorithm. 
@@ -284,7 +284,7 @@ In the training process the \ac{ML} algorithm has to structure the data and make
 This learning approach is based on a common way humans learn. %+
 The algorithm can choose an action to change the state of the environment over to another state.
 Depending on this transition the algorithm gets rewarded.
-The goal of the algorithm is to collect as much reward as possible \cite{2017ReinforcementLearning}.
+The goal of the algorithm is to collect as much reward as possible \cite{Wikipedia2017ReinforcementLearning}.
 \end{itemize}
 
 There is a large variety of different \ac{ML} techniques.

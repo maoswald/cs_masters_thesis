@@ -214,7 +214,7 @@ To implement the stages and the arbiter different electric components are requir
 For the hardware realization of a single stage two 2-to-1 \ac{MUX} are used, as suggested by Rührmair et al. \cite{Ruhrmair2013PUFData, Lee2004AApplications}.%+
 
 There are analog or digital \ac{MUX} available. %+
-Their design differences lead to a greater delay in passing the signal to its output for digital \ac{MUX} compared to analog ones \cite{2016MultiplexerWikipedia}.
+Their design differences lead to a greater delay in passing the signal to its output for digital \ac{MUX} compared to analog ones \cite{Wikipedia2016Multiplexer}.
 Additional differences, e.g. clipping parts of an continuous signal when exceeding a specific voltage, do not apply here as the \apuf has only sign signals \cite{Semiconductor2002BasicComparison}. %+
 
 The sign signal of an \apuf is the signal, which propagates through the stages of the \apuf explained in Sec. \ref{sec:arbiter}.
@@ -242,10 +242,10 @@ Additional, there are some buffers used in the \ac{ASIC} design, which yet are n
 % The inputs of the arbiter are the same as the ends of the stage chains.
 The arbiter's task is to determine, which signal arrives first at the end of the stage chain.
 The ends of the stage chains are the same as the inputs of the arbiter. %+
-To provide this function a \ac{SR-latch} is used that can be realized in different ways with NOR, NAND, or AND-OR logic gates \cite{2016Flip-flopWikipedia}.
+To provide this function a \ac{SR-latch} is used that can be realized in different ways with NOR, NAND, or AND-OR logic gates \cite{Wikipedia2016Flip-flopelectronics}.
 Using NAND logic gates is the method of choice since it has a symmetric construction and because of that it is unbiased \cite{Lin2010Low-powerFunctions,Maes2013PhysicallyApplications}.
 
-Fig. \ref{fig:nandarbiter} displays the switching circuit build with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{2016NANDWikipedia}.
+Fig. \ref{fig:nandarbiter} displays the switching circuit build with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{Wikipedia2016NANDGate}.
 The internal states of the outputs $r$ and $rb$ are initial high. 
 A rising edge of a signal occurring on $\gls{s}_1$ will pull down $r$ and the other way round.
 The output states low or high are equal to the response values of the \puf $0$ or $1$. %+

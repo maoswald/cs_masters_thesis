@@ -29,7 +29,7 @@ The \apuf simulations are based on the \apuf representation explained in Sec. \r
 % They use randomly chosen normally distributed values with zero mean and given variance for delay difference values $\delta_i$ that represent the \apuf.
 % % https://en.wikipedia.org/wiki/Normal_distribution
 % This is a common approach for natural randomly occurring deviations whose distribution is unknown, since the sum of independent random variable, regardless of their distribution, tend to toward a normal distribution known as the central limit theorem \cite{2017CentralTheorem}. %+
-The sum of independent random variable, regardless of their distribution, tend to toward a normal distribution, known as the central limit theorem \cite{2017CentralTheorem}.
+The sum of independent random variable, regardless of their distribution, tend to toward a normal distribution, known as the central limit theorem \cite{Wikipedia2017CentralTheorem}.
 Hence, it is a common approach for natural randomly occurring deviations, whose distribution is unknown, to be chosen of a normal distribution.
 For that reason, the delay difference values $\delta_i$, which represent the variation of the \apuf due to the manufacturing process, are randomly chosen normally distributed values with zero mean and given variance. %+
 
@@ -64,7 +64,7 @@ For the attack simulation of the \ac{CMA-ES} attack Eq. (\ref{equ:pufmodelw}) is
 
 % To attack \mpufs and \mxpufs, as described in Chap. \ref{cap:majorityarbiter}, the reliability based \ac{CMA-ES} attack introduced by Becker in his paper with the title "The Gap Between Promise and Reality: On the Insecurity of XOR Arbiter PUFs" and further sources are used \cite{Becker2015ThePUFs,2017CMA-ES,Hansen2011TheTutorial,Hansen2006TheReview}. %+
 To attack \mpufs and \mxpufs, as described in Chap. \ref{cap:majorityarbiter}, the reliability based \ac{CMA-ES} attack introduced by Becker is interesting to study \cite{Becker2015ThePUFs}.
-Further sources have been used \cite{Becker2015ThePUFs,2017CMA-ES, Hansen2011TheTutorial, Hansen2006TheReview}. %+
+Further sources have been used \cite{Becker2015ThePUFs,Wikipedia2017CMA-ES, Hansen2011TheTutorial, Hansen2006TheReview}. %+
 It is the only relevant attack that can successfully create well performing models of large \xpufs, as described in Sec. \ref{sec:essentialattacks}.
 
 As large \xpufs face some stability challenges, the concept of \ac{MV} is used to overcome them, as described in Sec. \ref{sec:majorityxorarbiter}.
@@ -99,7 +99,7 @@ In Sec. \ref{sec:cma-esdesign}, we will outline how the fitness function is used
 
 Becker's fitness function uses reliability values of challenges that are evaluated by the attacked \puf.
 To measure the reliability value $h_i$, which is defined in the next paragraph, of a challenge, the challenge has to be evaluated multiple times by the attacked \puf.
-Hence, the attack requires the possibility to freely evaluate challenges similar to a chosen-plaintext attack \cite{2016Chosen-plaintextAttack}.
+Hence, the attack requires the possibility to freely evaluate challenges similar to a chosen-plaintext attack \cite{Wikipedia2016Chosen-plaintextAttack}.
 This process of measuring multiple challenge evaluations has to be done only once, since the same values are used during the complete attack. %+ % the reliability values of the challenges of the attacked \puf
 The set of multiple evaluated challenges is in the case of the reliability based \ac{CMA-ES} attack the training set with $v$ number of challenges.
 The test set is created by single evaluations of different challenges, as specified in Cap. \ref{cap:mla}.
@@ -256,7 +256,7 @@ Hence, at least one of the trained models has to be rated above this given fitne
 After the algorithm terminated, the result are the approximated means and the rated models of the last generation.
 From this point on, the means or the models itself can be used to evaluate challenges of the test set to measure the performance of the trained models. 
 If a high proportion of the challenges of the test set is evaluated correct, the reliability based \ac{CMA-ES} attack will have successfully attacked an \apuf. %+
-Both the means and the models of the last generation can be used, whereas the means are expected to be better trained then the best trained model of the last generation \cite{2017CMA-ES}.
+Both the means and the models of the last generation can be used, whereas the means are expected to be better trained then the best trained model of the last generation \cite{Wikipedia2017CMA-ES}.
 
 How high this proportion has to be depends on how many correct evaluated responses are necessary to impersonate the \puf.
 However, this depends on the protocol that is based on the \puf and is therefor not part of this thesis.
@@ -311,7 +311,7 @@ In contrast to the attack in stage one its fitness function scores the models ba
 This response based \ac{CMA-ES} attack is repeated by the loop of line 7 in Alg. \ref{alg:twostageapproach} till a model is approximated that evaluates a high proportion of the challenges of the training set correct.
 
 The results of the attack, similar to the normal \ac{CMA-ES} attack, are the means and the approximated models of the last generation.
-Both the means or the models can be used to evaluate the challenges of the test set, whereas the means are expected to be better trained \cite{2017CMA-ES}.
+Both the means or the models can be used to evaluate the challenges of the test set, whereas the means are expected to be better trained \cite{Wikipedia2017CMA-ES}.
 If they evaluate a high proportion of the test set challenges correct, the attack will be successful and a well performing model has been approximated. %+
 
 As described in the end of Sec. \ref{sec:cma-esdesign}, the value of this proportion is not part of this thesis.
