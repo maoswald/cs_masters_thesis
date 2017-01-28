@@ -1,11 +1,56 @@
 \chapter{Conclusion}
 \label{cap:conclusion}
 
+\section{Future Work}
 
-% Perspective(?)
-% Loop pufs?
+% The aim of this work was to verify the impact of modifications on \apufs on their stability and related attacks.
+The aim of this work was to verify the stability improvement of \mpufs, a modified version on \apufs, and the impact on related attacks.
+All parts to achieve this have been outlined but some have not been studied in greater detail.
+Depending on the aim, different parts can be considered more extensively.
+
+Despite the clear principles of \apufs, a way to build them as circuit has only been summarized.
+For real physical implementations the required electronic components and their interplay has to be examined.
+Possibilities to overcome the problems that \ac{FPGA} implementations of \apufs face can be an issue of research.
+% Apart from more modified versions of \apufs, e.g. loop \pufs, other types of \pufs can  be interesting alternatives to study the field of physical implementations \cite{Jouini2013EvaluationFPGA}.
+Apart from modified versions of \apufs, other types of \pufs, e.g. controlled \pufs, can be interesting alternatives to study in the field of physical implementations.
+
+This work focus on a specific class of attacks on \pufs.
+The field of \ac{ML} attacks received more attention in the last three year \cite{2017MachineTrends}.
+For this reason and in combination with a continuous raising available processing power, more \ac{ML} attack possibilities that are worth examining can occur in the future.
+Another field of study are invasive attacks that can be applied to real \puf implementations.
+How successful these attacks are and how \pufs can be protected are still crucial issues for using \pufs in the real world.
+
+The security of all \pufs is based on their intrinsic information, which they contain.
+However, the entropy of this information does not serve as comparable attribute to rate their security quality \cite{Ruhrmair2010ModelingFunctions}.
+In addition, \pufs are not clear defined and due to this a question of research can be to develop a method to analyze the security characteristics of \pufs that yields to a comparable result \cite{Becker2015ThePUFs}.
+
 % max entropy: find lower boundary for attack effort by give entropy, see also: Entropy Analysis vs. Modeling Attacks. \cite{Ruhrmair2010ModelingFunctions}
-% additional hw restriction like number of possible queries \cite{Edition2010SmartHandbook}
 % Attack perspective?
+%========================================
+% Loop pufs?
+% additional hw restriction like number of possible queries \cite{Edition2010SmartHandbook} as controlled puf
+
+\section{Final Comments}
+
+To conclude this thesis, we would like to point out the main insights that have been disclosed.
+Started with the principle of \ac{MV} applied to \apufs and \xpufs to improve their stability and resistance against successful attacks.
+The idea behind \ac{MV} is to evaluate a \puf multiple times, whereas the most occurring response the final response is.
+
+By simulation it was verified, that with the concept of \ac{MV} it becomes possible to build large stable \mxpufs.
+All non-invasive attacks, known by the year 2017, on \xpufs can thus be prevented by increasing their complexity exponentially through a linear growth of the number of used \mpufs.
+As a consequence, large \mxpufs are machine learning resistant \pufs.
+
+This gives the opportunity to use them as physical implementation of one-way hash functions or secret key memory to keep a key secret.
+Many goals of the information security base on the secrecy of the key.
+Hence, preventing machine learning attacks builds a foundation to met these goals and to keep connections, data, and other things that are worth protecting secure.
+
+However, certain is that there exist no absolute secure system.
+In addition, capabilities of attackers raise as well and allegedly secure systems become vulnerable.
+As an example, the design of the studied \apuf includes no additional protection against invasive attacks.
+With that said there is still a lot to improve till most of the vulnerabilities can be controlled.
+\pufs are one way to help us reach a greater level of security.
 
 %========================================
+% Taktik:
+% http://www.time4writing.com/writing-resources/writing-a-good-conclusion-paragraph/
+% https://www2.warwick.ac.uk/fac/soc/al/globalpad/openhouse/academicenglishskills/writing/conclusions/

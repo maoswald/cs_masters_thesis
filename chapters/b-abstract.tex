@@ -3,13 +3,44 @@
 
 \begin{abstract}
 
-This work shows possible attacks on current \apufs as well as further improvements of \apufs to resist these attacks.
-\apufs have been successfully attacked with different machine learning approaches which makes them unsafe and leads to the question how to make them robust to these attacks.
-Machine learning attacks in combination with a certain amount of \acp{CRP} made it so far possible to create models which can be used to calculate responses to new challenges.
-Beside an overview of the different current attacks this work simulates attacks to compare their success on \apufs and the improved \mpufs.
-\mpufs follow a new approach to make \apufs more robust and scaleable.
+% the old abstract before the thesis started:
+% This work shows possible attacks on current \apufs as well as further improvements of \apufs to resist these attacks.
+% \apufs have been successfully attacked with different machine learning approaches which makes them unsafe and leads to the question how to make them robust to these attacks.
+% Machine learning attacks in combination with a certain amount of \acp{CRP} made it so far possible to create models which can be used to calculate responses to new challenges.
+% Beside an overview of the different current attacks this work simulates attacks to compare their success on \apufs and the improved \mpufs.
+% \mpufs follow a new approach to make \apufs more robust and scaleable.
 
-The simulation shows that the robustness of \apufs ascends magnificent with the new majority based approach....
+% The simulation shows that the robustness of \apufs ascends magnificent with the new majority based approach....
+
+Since secret keys are used as basis for several security features, as e.g. encryption or authentication, there is a need to protect them from unauthorised access.
+%\pufs use intrinsic imperfections that can not be red out easily and provide the possibility to derive secret keys for the purpose of e.g. identification of them.
+Physical unclonable functions fulfill this need with the possibility to derive secret keys of their intrinsic imperfections that can be used but not be read out easily.
+These imperfections are unique to ever instance and linked inseparable with the device.
+As a result they can be used to securely identify devices.
+
+However, Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF} can be successfully attacked by machine learning attacks.
+Machine learning attacks in combination with a certain amount of \aclp{CRP} make it possible to create models, which can be used to predict responses for new challenges.
+To counteract these attacks, the principle of \acl{MV} is applied to Arbiter \acsp{PUF}.
+% Its impacts on the stability of \pufs and relevant attacks are verified by simulations.
+Its impacts on the stability of Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF} are verified by simulations.
+Furthermore, relevant attacks are applied to Majority Arbiter \acsp{PUF} and Majority \acs{XOR} Arbiter \acsp{PUF} to study their success.
+This work shows that \acl{MV} combined with Arbiter \acsp{PUF} enable large Majority \acs{XOR} Arbiter \acsp{PUF} that resist all by this time known non-invasive attacks.
+Thus, large Majority \acs{XOR} Arbiter \acsp{PUF} can constitute as foundation to meet the goals of many security features.
+
+% old with acronyms
+% Since secret keys are used as basis for several security features, as e.g. encryption or authentication, there is a need to protect them.
+% %\pufs use intrinsic imperfections that can not be red out easily and provide the possibility to derive secret keys for the purpose of e.g. identification of them.
+% \pufs fulfill this need with the possibility to derive secret keys of their intrinsic imperfections that can be used but not be read out easily.
+% These imperfections are unique to ever instance and linked inseparable with the device, which can be used to securely identify devices.
+
+% However, \apufs and \acs{XOR} \apufs can be successfully attacked by machine learning attacks.
+% Machine learning attacks in combination with a certain amount of \acf{CRP} make it possible to create models, which can be used to predict responses for new challenges.
+% To counteract these attacks, the principle of \acl{MV} is applied to \apufs.
+% % Its impacts on the stability of \pufs and relevant attacks are verified by simulations.
+% Its impacts on the stability of \apufs and thus \xpufs are verified by simulations.
+% Furthermore, relevant attacks are applied to \mpufs and \mxpufs to study their success.
+% This work shows that \acl{MV} combined with \apufs enable large Majority \acs{XOR} \apufs that resist all by this time known non-invasive attacks.
+% Thus, large Majority \acs{XOR} \apufs can constitute as foundation to meet the goals of many security features.
 
 \end{abstract}
 
