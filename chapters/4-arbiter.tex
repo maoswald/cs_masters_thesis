@@ -27,7 +27,6 @@ To implement this concept, an \apuf has multiple connected stages and an arbiter
 
 Both signals propagate on parallel paths with the same layout length through all stages until they reach the arbiter.
 The arbiter then outputs the response bit depending on which input of the arbiter is triggered first by one of the signals. %+
-\todo{maybe change "three inputs"}
 Every stage has three inputs, two for both signals and one for one bit of the challenge.
 This challenge bit determines if the signal paths will be crossed in this stage. %+
 If the bit is 0, both signals will flow parallel through the stage.
@@ -292,7 +291,7 @@ The model $\Delta D_{\mathrm{Model}}(c)$, which is the noise free \apuf represen
 The sign of delay difference of every stage in the sum depends on the challenge bit of the current stage and all following stages. %+
 The current stage and every following stage could swap the signals and change the final response.
 
-\todo{check} % proofbyexample?
+% Nils: proof by example?
 This is easier to understand by imagine an \apuf with just two stages where the delay difference values of the second stage are 0. %+ 
 % old:
 % The sign of the delay difference sum is still definite by the challenge bit of the first and second stage, as the second challenge bit can always flip its stages paths or not.

@@ -8,8 +8,16 @@
 \linespread{1.025}
 \usepackage[scaled=0.85]{beramono} 
 \usepackage{caption}
-\captionsetup{justification=centering,font=sf}
+% adjusts the captions package for text below figures
+% justification=justified or centering for block format
+% format=plain or hang
+\captionsetup{justification=justified,format=hang,indention=-0.7cm,font=sf}
 \renewcommand{\captionsize}{\small}
+
+
+%% Moves Text to the beginning of the line after new paragraph
+%%%%%%%%%%%%%%%%%%%%%%%%%
+% \usepackage[format=plain,justification=justified]{caption}
 
 %% Typography
 %%%%%%%%%%%%%%%%%%%%%%%%%
@@ -51,3 +59,5 @@
 %% Moves Text to the beginning of the line after new paragraph
 %%%%%%%%%%%%%%%%%%%%%%%%%
 \setlength{\parindent}{0em} 
+
+

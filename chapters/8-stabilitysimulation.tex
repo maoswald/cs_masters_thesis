@@ -12,6 +12,18 @@ To study the impact of \ac{MV} on the stability of \pufs a simulation approximat
 All simulations use a $\sigmaSNoise/\sigmaModel$ ratio of $1/30$ and additional $\sigmaANoise = 0.5$.
 Though, since this is a comparison, the ratio does not matter as explained in Sec. \ref{sec:pufsimulation}.
 
+% Nils: maybe code appendix
+% Stability distribution of a n = 32 single Arbiter evaluated 100 times! ( 2^16 challenges)
+\begin{figure}[!ht]
+\includegraphics[width=1.00\textwidth]{images/arbiter-stability-distribution-simulation.eps}
+% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+\caption[Challenge stability distribution of an \apuf]{Challenge stability distribution of challenges evaluated by an \apuf using $32$ stages. 
+The graph displays buckets of challenges that are clustered by their stability values.
+Every challenge has been measured $100$ times. The y-axis of the graph shows the number of challenges in relation to all challenges and is scaled logarithmic to figure the wide range of the values.}  % $log_2$
+\label{fig:arbiterstabilitydistribution}
+\end{figure}
+\pagebreak
+
 To be able to compare the results of simulations that including \ac{MV}, reference values of \apufs simulations without \ac{MV} are needed.
 Hence, Fig. \ref{fig:arbiterstabilitydistribution} shows the stability distribution of an \apuf with $\gls{n} = 32$.
 Every challenge has been evaluated $100$ times to approximate its stability.
@@ -21,20 +33,9 @@ The very high peak for $\Stab(\gls{c}) = 1$ states that the majority of the chal
 While the number of the other challenges increases for an increase of the stability, i. e. the lower the stability the less challenges exist.
 All challenges with a stability values below a given value are the unstable challenges, as described at the end of Sec. \ref{sec:arbiter}.
 
-\todo{maybe code appendix}
-% Stability distribution of a n = 32 single Arbiter evaluated 100 times! ( 2^16 challenges)
-\begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/arbiter-stability-distribution-simulation.eps}
-% \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Challenge stability distribution of an \apuf]{Challenge stability distribution of challenges evaluated by an \apuf using $32$ stages. 
-The graph displays buckets of challenges that are clustered by their stability values.
-Every challenge has been measured $100$ times. The y-axis of the graph shows the number of challenges in relation to all challenges and is scaled logarithmic to figure the wide range of the values.}  % $log_2$
-\label{fig:arbiterstabilitydistribution}
-\end{figure}
-
-Since \apufs can have a different number of stages it could be claimed that this has impact on the stability of the \puf.
-\todo{maybe ref to paper lemma 8} % Nils: why is that? -> Paper (lemma 8)
-Except for very low numbers of $\gls{n}$ Fig. \ref{fig:arbiterstabilities} displays that there is no relation and therefor no stability improvement due to the number of used stages. % paper lemma 8
+Since \apufs can have a different number of stages, it could be claimed that this has impact on the stability of the \puf.
+% Nils: why is that? -> Paper (lemma 8) (paper not out yet)
+Except for very low numbers of $\gls{n}$, Fig. \ref{fig:arbiterstabilities} displays that there is no relation and therefor no stability improvement due to the number of used stages. % paper lemma 8
 In this simulation for every value of $\gls{n}$ the average of the results of $10$ independent \apufs has been approximated.
 A challenge is here considered to be unstable if $\Stab(\gls{c}) < 95 \%$.
 
@@ -96,7 +97,7 @@ This stability increase of \mpufs can be used to build large \mxpufs, which are 
 % \label{fig:majorityarbiterstabilitydistribution}
 % \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \includegraphics[width=1.00\textwidth]{images/comparison-arbiter-stability-distribution-majority-arbiter-stability-distribution.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Challenge stability distribution of an \mpuf]{Challenge stability distribution of challenges evaluated by an \mpuf using $32$ stages and $\gls{m} = 10$ in comparison to the distribution of an \apuf, as shown in Fig. \ref{fig:arbiterstabilitydistribution}. Challenges that have been measured $100$ times each are clustered by their stability. The y-axis displays the number of challenges relative to all challenges and is scaled logarithmic to figure the wide range of the values.} 
@@ -122,9 +123,6 @@ These \mxpufs consists of different numbers of $k$ parallel \mpufs.
 % The simulation measures the stability values of every challenge evaluated by the \mxpuf through multiple evaluations
 % It then approximates the number of $m$ \acp{MV} to reach $\Pr[\protect\Stab(\gls{c}) \ge 95 \%] \ge 95 \%$ for different numbers of $k$ by binary search.
 
-The simulation approximates the number of $m$ \acp{MV} to reach $\Pr[\protect\Stab(\gls{c}) \ge 95 \%] \ge 95 \%$ for different numbers of $k$ by binary search.
-Therefor it measures the stability values of every challenge evaluated by the underlying \mpufs through multiple evaluations, calculates the stability values for the \mxpuf, and changes the number of $m$ votes till the stability is reached.
-
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/votes-stab-simulation.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
@@ -134,6 +132,10 @@ The linear graph shown in a log-log-graph confirms the polynomial growing number
 The results are the average values over $10$ individual \puf instances with independent challenge sets.} 
 \label{fig:majorityvotegrowth}
 \end{figure}
+\pagebreak
+
+The simulation approximates the number of $m$ \acp{MV} to reach $\Pr[\protect\Stab(\gls{c}) \ge 95 \%] \ge 95 \%$ for different numbers of $k$ by binary search.
+Therefor it measures the stability values of every challenge evaluated by the underlying \mpufs through multiple evaluations, calculates the stability values for the \mxpuf, and changes the number of $m$ votes till the stability is reached.
 
 Fig. \ref{fig:majorityvotegrowth} shows how many votes are needed to reach a likelihood of $95 \%$ that a uniformly and randomly chosen challenge $\gls{c}$ has stability of at least $95 \%$, for different values of $\gls{k}$.
 These are upper bounds as the \ac{XOR} operation increases the stability of a \xpuf marginal, as any even number of incorrect \apuf responses will still yield the desired output of the \xpuf. 
@@ -158,6 +160,7 @@ The example uses $32$ \mpufs with $32$ stages each.
 The number of \acp{MV} needed to reach a stability of $95 \%$ with a likelihood of $95 \%$ is chosen from the results of Sec. \ref{sec:majorityvotegrowth}.
 
 The challenge stability distribution of a \mxpuf shown in Fig. \ref{fig:comparisonarbiterstabilitydistributionmajorityxorstabilitydistribution} was achieved by using $\gls{m} = 600$ votes and is roughly equivalent to the distribution of an \apuf displayed in the Fig. \ref{fig:arbiterstabilitydistribution} and here for comparison.
+\pagebreak
 
 This shows that even large \mxpufs can become stable through a feasible number of votes and even exceed stability of a basic \apuf with a larger number of \ac{MV}.
 
@@ -168,8 +171,25 @@ This shows that even large \mxpufs can become stable through a feasible number o
 % \label{fig:stabilitydistributionmajorityvote}
 % \end{figure}
 
+% Backup:  
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/comparison-arbiter-stability-distribution-majority-xor-stability-distribution.eps}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Challenge stability distribution of a Majority \acs{XOR} \apuf]{The histogram shows the relative frequency of the challenge stability values clustered into buckets of a \mxpuf with size $\gls{k} = 32$ and $32$ stages each in comparison to the challenge stability distribution of an \apuf, as shown in Fig. \ref{fig:arbiterstabilitydistribution}. \ac{MV} uses $\gls{m} = 600$ to reach a stability of $95 \%$ with likelihood $95 \%$ for randomly chosen challenges. The distribution and the amount of unstable challenges of the \mxpuf resembles the distribution of a \apuf.} 
+% \label{fig:comparisonarbiterstabilitydistributionmajorityxorstabilitydistribution}
+% \end{figure}
+
 \begin{figure}[ht]
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+\centering
 \includegraphics[width=1.00\textwidth]{images/comparison-arbiter-stability-distribution-majority-xor-stability-distribution.eps}
+	\else
+\includegraphics[width=1.00\textwidth]{images/comparison-arbiter-stability-distribution-majority-xor-stability-distribution-mono.eps}  
+    \fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Challenge stability distribution of a Majority \acs{XOR} \apuf]{The histogram shows the relative frequency of the challenge stability values clustered into buckets of a \mxpuf with size $\gls{k} = 32$ and $32$ stages each in comparison to the challenge stability distribution of an \apuf, as shown in Fig. \ref{fig:arbiterstabilitydistribution}. \ac{MV} uses $\gls{m} = 600$ to reach a stability of $95 \%$ with likelihood $95 \%$ for randomly chosen challenges. The distribution and the amount of unstable challenges of the \mxpuf resembles the distribution of a \apuf.} 
 \label{fig:comparisonarbiterstabilitydistributionmajorityxorstabilitydistribution}
