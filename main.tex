@@ -16,6 +16,14 @@
 \include{misc/style}
 \include{misc/commands}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Added bib source
+\bibliography{resources_m_clean.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Biblatex ieee hack to not replace same authors with dashes
+\renewbibmacro*{bbx:savehash}{}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Draft settings: Deactivate after finished
 %% Deactivate Links
@@ -111,7 +119,10 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table of source
-\bibliography{resources_m}
+% add bib source and print bibliography for natbib
+% \bibliography{resources_m_clean}
+% print bibliography for biblatex
+\printbibliography
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Declaration of Authorship

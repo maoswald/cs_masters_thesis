@@ -1,6 +1,9 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%
 %% Packages
 
+%% Encoding
+\usepackage[utf8]{inputenc}
+
 %% external package improvement
 \usepackage{scrhack}
 
@@ -17,25 +20,16 @@
 %\usepackage{listofsymbols}
 
 %% bibliography
-\usepackage[square,numbers]{natbib}
-\bibliographystyle{plainnat}
-%\bibliographystyle{abbrvnat}
+% natbib:
+% \usepackage[square,numbers]{natbib}
+% \bibliographystyle{plainnat}
+% \bibliographystyle{abbrvnat}
 
-% \usepackage[
-%     backend=biber,
-% %     style=authoryear-icomp,
-% %     sortlocale=de_DE,
-% %     natbib=true,
-% %     url=true, 
-% %     doi=false,
-% %     eprint=false
-% ]{biblatex}
-% \usepackage[
-% 	style=alphabetic,
-%     citestyle=alphabetic,
-%     backend=biber,
-%     backref=true
-%     ]{biblatex}
+% biblatex:
+\usepackage{csquotes}
+% \usepackage[backend=bibtex,bibencoding=ascii,style=ieee,citestyle=numeric-comp,sorting=none]{biblatex}
+\usepackage[natbib=true,style=ieee,doi=false,isbn=false,sorting=nty,url=false]{biblatex}
+% other:
 % \usepackage{cite}
 % \bibliographystyle{alphadin-patched}
 
