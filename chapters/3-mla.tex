@@ -2,9 +2,9 @@
 \label{cap:mla}
 
 Different \ac{ML} attacks are used to attack \pufs.
-This section gives an overview of the techniques used in these attacks including the attack that is studied in this thesis. %+
+This section gives an overview of the techniques used in these attacks including the attack that is examined in this thesis. %+
 First, required the inputs for the \ac{ML} attacks and the problem they are solving are explained.
-After that, each \ac{ML} technique is described by its own.
+After that, each \ac{ML} technique is outlined by its own.
 
 The \ac{ML} attack creates a \puf model of the attacked \puf, which acts as binary classifier.
 A binary classifier divides the samples, in the case of \pufs these are challenges, of a given set into two different classes $0$ or $1$ similar to the responses of a \puf. %+
@@ -22,12 +22,12 @@ The most \pufs, know by the year 2014, which can be build by an electrical circu
 These values determine the response for a given challenge. %+
 The goal of the \ac{ML} attacks is to find a representation of these values, so that the build model classifies samples in the same way as the attacked \puf. % values b
 How man samples of the test set the model classifies the same way as the \puf defines how precise the model has been trained. %+
-Hence, the values learned by the \ac{ML} attack do not have to be exact the same values that defined the attacked \puf to classify samples of a set the same way as the \puf.
+Accordingly, the values learned by the \ac{ML} attack do not have to be exact the same values that defined the attacked \puf to classify samples of a set the same way as the \puf.
 
 Whether a \ac{ML} attack can find a binary classifier for a given set depends on the attack and if the set of samples is linear separable. 
 Instead of a set of samples this also applies to binary functions $f: \mathbb{R}^n \to \{0,1\}$. %+ % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
 One example for a not linear separable function is the \ac{XOR} function. % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
-Some \ac{ML} attacks, e.g. single-layer perceptron, can only learn linear separable sets and can therefor not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}. %+
+Some \ac{ML} attacks, e.g. single-layer perceptron, can only learn linear separable sets and can therefore not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}. %+
 Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called linear separable if all their vectors $\vec{a} = (a_1, ..., a_n) \in A$, $\vec{b} = (b_1, ..., b_n) \in B$ can be separated by
 
 \begin{align}
@@ -37,8 +37,8 @@ Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called li
 whereas $w_1, ..., w_{n + 1}$ are $n + 1$ real numbers.
 The separating hyperplane is defined by the vector $\vec{x} = (x_1, ..., x_n) \subseteq \mathbb{R}^n$ that satisfies $\sum_{i = 1}^{n} w_i x_i = w_{n + 1}$.% https://en.wikipedia.org/wiki/Linear_separability
 In the case of building a classifier by the \ac{ML} attacks the two subset $A$ and $B$ are subsets of the given set used to train the model. %+
-The described \ac{ML} attacks in this chapter are common approaches to attack \pufs \cite{Ruhrmair2014PUFOverview}.
-As there are different modifications and configurations used only the \ac{ML} algorithms itself are explained.
+The \ac{ML} attacks named in this chapter are common approaches to attack \pufs \cite{Ruhrmair2014PUFOverview}.
+As there are different modifications and configurations used, only the \ac{ML} algorithms itself are stated.
 
 % over trained / over fitted model (end second paragraph)
 % ? randomly chosen values are most of the time normal distributed
@@ -116,7 +116,7 @@ The \ac{ES} attack approximates a optimal solution if the models are sorted desc
 The attack ends when the termination criteria is fulfilled, which could be e.g. a maximum number of generations.
 
 The \ac{ES} attack is a randomized algorithm and therefore does not always determines.
-However it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
+Nevertheless, it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
 	
 %========================================
 % The computation time required by ES is determined by the following factors: \cite{Ruhrmair2013PUFData}
@@ -129,7 +129,7 @@ However it can approximate not linear separable problems and does not need a dif
 \section{CMA-ES}
 \label{sec:cma-es}
 
-The \acf{CMA-ES} is based on the principles of the \ac{ES}, which is explained in Sec. \ref{sec:evolutionstrategies}.
+The \acf{CMA-ES} is based on the principles of the \ac{ES}, which is shown in Sec. \ref{sec:evolutionstrategies}.
 Additional, the \ac{CMA-ES} algorithm uses a covariance matrix to learn a second order model of the underlying function.
 
 For this reason every value that defines the model and is learned by the algorithm has its own distribution, which will be optimized.
@@ -174,7 +174,7 @@ It classifies samples into two categories with dividing their multidimensional s
 
 The number of dimensions of the space is defined by the number of values $z$ of the samples.
 The model is trained the way that it divides the two categories by the largest possible gap. %+
-Hence, the training algorithm maximizes the distance from the hyperplane to the nearest samples of each category.
+To achieve this, the training algorithm maximizes the distance from the hyperplane to the nearest samples of each category.
 If there exists such a hyperplane, known as maximum-margin hyperplane, it has the larges margin to the closest samples of both categories. %+
 
 Not all samples have to be considered when training the model.
@@ -183,7 +183,7 @@ New samples are then predicted to belong to the same category as the samples tha
 
 A complete separation into two categories by a linear hyperplane is only possible if the training data is linear separable.
 To make it possible to classify non-linear problems \acp{SVM} use the kernel method. %+
-In doing so all training data and the $z$ dimensional space is transformed to a space with a higher number of dimensions.
+In doing so, all training data and the $z$ dimensional space is transformed to a space with a higher number of dimensions.
 Every data transformed into a space with enough higher number of dimensions is linear separable.
 That can be even an infinite number of dimensions. %+
 The hyperplane is then determined in this higher dimensional space and transformed back to the original dimensional space where it represents a non-linear hyperplane. %+
@@ -212,7 +212,7 @@ The \acf{LR} is a regression analysis technique, which is used in statistic mode
 It is an approach to solve binary classification problems and is based on the logistic function $\frac{1}{1 + e^{-z_{i,l}}}$.
 
 The logistic function is a "S" shape and its values ranges between $0$ and $1$.
-The input value $z_{i,l}$ is transformed onto this range since it is applied in the denominator of the function. %+
+The input value $z_{i,l}$ is transformed onto this range, since it is applied in the denominator of the function. %+
 % In \ac{LR} a modified version of the logistic function is used to transform all values that are going to be classified by 
 
 In the \ac{LR}, additionally to the logistic function, all values $z_i = (z_{i,1}, ...,z_{i,l})$ of a sample that is going to be classified are combined with weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added. %+

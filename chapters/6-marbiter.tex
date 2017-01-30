@@ -1,32 +1,34 @@
 \chapter{Majority Arbiter PUFs}
 \label{cap:majorityarbiter}
 
-Most of the attacks described in Sec. \ref{sec:attacksonxorarbiter} increase exponentially in their complexity for a growing number of used \apufs in a \xpuf.  %+
-Hence, it can be claimed that arbitrary large \xpufs would constitute a secure \puf in terms of all now known non-invasive modeling attacks except of the \ac{CMA-ES} attack.
+Most of the attacks, named in Sec. \ref{sec:attacksonxorarbiter}, increase exponentially in their complexity for a growing number of used \apufs in a \xpuf.  %+
+Consequently, it can be claimed that arbitrary large \xpufs would constitute a secure \puf in terms of all now known non-invasive modeling attacks except of the \ac{CMA-ES} attack.
 This is possible because only linear enlargement of \xpufs will lead to exponential growth in attack effort, even with the fastest known attack.
 
 To overcome the stability problem of \xpufs, mentioned in Sec. \ref{sec:xorarbiterpufs}, which currently deter them from been enlarged we introduce the concept of \ac{MV} \cite{Majzoobi2010FPGALines}. %+
 The concept of \ac{MV} has been already mentioned by Ruhrmair et al. \cite{Ruhrmair2013PUFData}.
-However they did not further investigate its impact on the possibility to build large \xpufs. %+
+Though, they did not further investigate its impact on the possibility to build large \xpufs. %+
 \ac{MV} can also be used by the attacker as a technique to obtain responses with high stability of a \puf when required \cite{Ganji2016PACPUFs, Ozturk2008TowardsDevices}.
 As the attacks of this thesis are not based on \ac{MV}, this purpose of \ac{MV} is not part of this thesis.
 
 This section introduces the concept of \ac{MV} in combinations with \apufs.
-Afterwards it is described how this combination is used to build large \xpufs.
+Afterwards, it is outlined how this combination is used to build large \xpufs.
 Finally, alternative ways to combine multiple \apufs are mentioned.
+
+%========================================
 
 \section{Majority Based Arbiter PUFs}
 \label{sec:majorityarbiter}
 
 To apply \ac{MV} to an \apuf a challenge is evaluated $\gls{m}$ times.
-After that, the most occurring response is the final response for that challenge.
+Afterwards, the most occurring response is the final response for that challenge.
 We define the combination of \ac{MV} and \apuf to be a \mpuf.
 
 In this way the total number of unstable challenges, as explained in Sec. \ref{sec:arbiter}, gets reduced and the stability of the \apuf increases. %+
 Every challenge has a different stability as defined in \ref{equ:stability}.% which is the likelihood to not flip its response.
 These values vary between $50\ \%$ and $100\ \%$.
 The closer the value is to $50\ \%$, the more votes are necessary to get a more stable response for this challenge. %+
-Hence, how many votes are needed depends on the stability of the \apuf that is required. 
+Accordingly, how many votes are needed depends on the stability of the \apuf that is required. 
 For a more detailed view on the relations between stability and the number of required votes, different combinations will be simulated and evaluated in Chap. \ref{cap:stabilitysimulation}.
 
 %========================================
@@ -66,7 +68,9 @@ In addition to being a Boolean function it is important that the function obfusc
 %This prevents predictions about the input based on an analysis of the output of the function.
 
 Bent functions are one example for Boolean functions, which can be used instead of the \ac{XOR} function \cite{Wikipedia2016BentFunction}.
-They are highly non-linear, which is desired in this case since \apufs can be represented by a linear threshold function that can be attacked successfully, as described in Sec. \ref{sec:attacksonarbiter}.
+%old: They are highly non-linear, which is desired in this case since \apufs can be represented by a linear threshold function that can be attacked successfully, as described in Sec. \ref{sec:attacksonarbiter}.
+They are highly non-linear, which is desired in the case of \apufs, since they can be represented by a linear threshold functions.
+Attacks mentioned in Sec. \ref{sec:attacksonarbiter} are able to successfully attack these linear threshold functions.
 The non-linearity increases the complexity of attacks, as described in Sec. \ref{sec:xorarbiterpufs}. %+
 Beyond that Bent functions fulfill the strict avalanche criterion \cite{Wikipedia2016AvalancheEffect}.
 The strict avalanche criterion means if any number of input bits is flipped the output bit flips with a likelihood of $50\ \%$.

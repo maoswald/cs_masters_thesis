@@ -1,16 +1,17 @@
 \chapter{Stability Simulation}
 \label{cap:stabilitysimulation}
 
-This section presents the results of the simulations that have been done to study the impact of \ac{MV} on the ability to build large \mxpufs.
+This section presents the results of the simulations that have been done to scrutinize the impact of \ac{MV} on the ability to build large \mxpufs.
 The first simulation verifies if the introduced principle of \ac{MV} improves the stability of \apuf.
 An improvement of the stability of the \apufs is the requirement to build large \xpufs.
 In the second simulation the needed number of votes for the \ac{MV} in combination with \xpufs to reach a given stability is studied.
 Finally, the stability distribution of \mxpufs is simulated to compare its result with the stability distribution of an \apuf that is used as reference.
 
-% To study the impact of \ac{MV} on the stability of \apufs a simulation approximates the stability of \mpufs and \mxpufs.
-To study the impact of \ac{MV} on the stability of \pufs a simulation approximates their stability values.
+%older: To study the impact of \ac{MV} on the stability of \apufs a simulation approximates the stability of \mpufs and \mxpufs.
+% old: To study the impact of \ac{MV} on the stability of \pufs a simulation approximates their stability values.
+Simulations approximate the stability values of \pufs to assess the impact of \ac{MV} on them.
 All simulations use a $\sigmaSNoise/\sigmaModel$ ratio of $1/30$ and additional $\sigmaANoise = 0.5$.
-Though, since this is a comparison, the ratio does not matter as explained in Sec. \ref{sec:pufsimulation}.
+Though, since this is a comparison, the ratio does not matter, as explained in Sec. \ref{sec:pufsimulation}.
 
 % Nils: maybe code appendix
 % Stability distribution of a n = 32 single Arbiter evaluated 100 times! ( 2^16 challenges)
@@ -25,7 +26,7 @@ Every challenge has been measured $100$ times. The y-axis of the graph shows the
 \pagebreak
 
 To be able to compare the results of simulations that including \ac{MV}, reference values of \apufs simulations without \ac{MV} are needed.
-Hence, Fig. \ref{fig:arbiterstabilitydistribution} shows the stability distribution of an \apuf with $\gls{n} = 32$.
+Consequently, Fig. \ref{fig:arbiterstabilitydistribution} shows the stability distribution of an \apuf with $\gls{n} = 32$.
 Every challenge has been evaluated $100$ times to approximate its stability.
 
 The very high peak for $\Stab(\gls{c}) = 1$ states that the majority of the challenges already have a very high stability, i. e. showed the same result in all $100$ evaluations.
@@ -35,7 +36,7 @@ All challenges with a stability values below a given value are the unstable chal
 
 Since \apufs can have a different number of stages, it could be claimed that this has impact on the stability of the \puf.
 % Nils: why is that? -> Paper (lemma 8) (paper not out yet)
-Except for very low numbers of $\gls{n}$, Fig. \ref{fig:arbiterstabilities} displays that there is no relation and therefor no stability improvement due to the number of used stages. % paper lemma 8
+Except for very low numbers of $\gls{n}$, Fig. \ref{fig:arbiterstabilities} displays that there is no relation and therefore no stability improvement due to the number of used stages. % paper lemma 8
 In this simulation for every value of $\gls{n}$ the average of the results of $10$ independent \apufs has been approximated.
 A challenge is here considered to be unstable if $\Stab(\gls{c}) < 95\ \%$.
 
@@ -75,7 +76,7 @@ This could lead to the assumption that the improving impact of \ac{MV} subsides 
 To clarify this the logarithmic Fig. \ref{fig:majorityvotestabilityimprovementloglog} has been created with the same values.
 It displays a nearly linear graph that suggest that there is no mitigation of the stability improving impact of \ac{MV} with increasing $\gls{m}$.
 % Old: Hence the relative stability improvement is highest with the first increase of $\gls{m}$ as the beginning of the graph shows.
-However, the relative stability improvement is highest with the first increase of $\gls{m}$, as the beginning of the graph in Fig.  \ref{fig:majorityvotestabilityimprovement} shows.
+Nevertheless, the relative stability improvement is highest with the first increase of $\gls{m}$, as the beginning of the graph in Fig.  \ref{fig:majorityvotestabilityimprovement} shows.
 
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/single-votes-stab-simulation_loglog.eps}
@@ -87,7 +88,7 @@ However, the relative stability improvement is highest with the first increase o
 The Fig. \ref{fig:majorityvotestabilityimprovement} and Fig. \ref{fig:majorityvotestabilityimprovementloglog} show that \ac{MV} improves the stability of an \apuf remarkable. 
 For more details on the challenge stability distribution Fig. \ref{fig:comparisonarbiterstabilitydistributionmajorityarbiterstabilitydistribution} shows the challenges stability distribution of a \mpuf with $\gls{m} = 10$ \acp{MV} in comparison to the challenge stability distribution of an \apuf, as shown in the beginning of this chapter.
 In comparison of the figures the reduced number of challenges with lowered stability can be seen.
-This stability increase of \mpufs can be used to build large \mxpufs, which are studied in Sec. \ref{sec:majorityvotegrowth}.
+This stability increase of \mpufs can be used to build large \mxpufs, which are examined in Sec. \ref{sec:majorityvotegrowth}.
 
 % Old: only the stability values, no comparison
 % \begin{figure}[ht]
@@ -112,7 +113,7 @@ This stability increase of \mpufs can be used to build large \mxpufs, which are 
 % Number of needed votes for k large xor arbiter to achieve a certain stability
 
 As only \xpufs that are large in $\gls{k}$ can not be modeled successfully by known attacks, it is the purpose to be able to build large \xpufs, which have to be stable to produce a reliable output. % arbitrary
-To achieve this with \ac{MV} the number of $\gls{m}$ votes has to be increased with a growth in $\gls{k}$, as explained in Sec. \ref{sec:majorityxorarbiter}.
+To achieve this through \ac{MV}, the number of $\gls{m}$ votes has to be increased with a growth in $\gls{k}$, as shown in Sec. \ref{sec:majorityxorarbiter}.
 
 Though, the growth rate of $\gls{m}$ must not be too high otherwise the time to evaluate a challenge would grow to large with large \xpufs as well. %, like exponential, 
 % Old: To show that this high stability can be reached using a polynomial number of $\gls{m}$ \acp{MV} $\gls{k}$ parallel \mpufs for different values of $\gls{k}$ are simulated.
@@ -135,11 +136,11 @@ The results are the average values over $10$ individual \puf instances with inde
 \pagebreak
 
 The simulation approximates the number of $m$ \acp{MV} to reach $\Pr[\protect\Stab(\gls{c}) \ge 95\ \%] \ge 95\ \%$ for different numbers of $k$ by binary search.
-Therefor it measures the stability values of every challenge evaluated by the underlying \mpufs through multiple evaluations, calculates the stability values for the \mxpuf, and changes the number of $m$ votes till the stability is reached.
+Therefore, it measures the stability values of every challenge evaluated by the underlying \mpufs through multiple evaluations, calculates the stability values for the \mxpuf, and changes the number of $m$ votes till the stability is reached.
 
 Fig. \ref{fig:majorityvotegrowth} shows how many votes are needed to reach a likelihood of $95\ \%$ that a uniformly and randomly chosen challenge $\gls{c}$ has stability of at least $95\ \%$, for different values of $\gls{k}$.
 These are upper bounds as the \ac{XOR} operation increases the stability of a \xpuf marginal, as any even number of incorrect \apuf responses will still yield the desired output of the \xpuf. 
-This behavior is not included in the simulation since the stability values of the challenges are approximated for all \apufs independently.
+This behavior is not included in the simulation, since the stability values of the challenges are approximated for all \apufs independently.
 
 The polynomial increasing number of votes needed to fulfill the stability requirements for a useful PUF implementation displayed in the Fig. \ref{fig:majorityvotegrowth} proves that \xpufs can be build arbitrary large using \ac{MV}.
 
@@ -154,7 +155,7 @@ To get a more precise exposition of the stability distribution of \mxpufs with l
 The results are then compared with the stability distribution of the \apuf.
 
 Only a subset of challenges is used due to the needed simulation computation time.
-However, this random chosen subset represents the distribution of all challenges. 
+Nevertheless, this random chosen subset represents the distribution of all challenges. 
 All challenge of the subset are evaluated $100$ times to compute their stability values.
 The example uses $32$ \mpufs with $32$ stages each.
 The number of \acp{MV} needed to reach a stability of $95\ \%$ with a likelihood of $95\ \%$ is chosen from the results of Sec. \ref{sec:majorityvotegrowth}.
