@@ -29,9 +29,9 @@ To be able to compare the results of simulations that including \ac{MV}, referen
 Consequently, Fig. \ref{fig:arbiterstabilitydistribution} shows the stability distribution of an \apuf with $\gls{n} = 32$.
 Every challenge has been evaluated $100$ times to approximate its stability.
 
-The very high peak for $\Stab(\gls{c}) = 1$ states that the majority of the challenges already have a very high stability, i. e. showed the same result in all $100$ evaluations.
+The very high peak for $\Stab(\gls{c}) = 1$ states that the majority of the challenges already have a very high stability, i.e.\ showed the same result in all $100$ evaluations.
 % WRONG: While the other challenges are nearly uniformly distributed with a slightly increase towards the peak i. e. that even the majority of these challenges still has a high stability.
-While the number of the other challenges increases for an increase of the stability, i. e. the lower the stability the less challenges exist.
+While the number of the other challenges increases for an increase of the stability, i.e.\ the lower the stability the less challenges exist.
 All challenges with a stability values below a given value are the unstable challenges, as described at the end of Sec. \ref{sec:arbiter}.
 
 Since \apufs can have a different number of stages, it could be claimed that this has impact on the stability of the \puf.
@@ -128,7 +128,7 @@ These \mxpufs consists of different numbers of $k$ parallel \mpufs.
 \includegraphics[width=1.00\textwidth]{images/votes-stab-simulation.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Number of votes needed for large Majority \acs{XOR} \apufs]{Minimum number of votes needed to reach $\Pr[\protect\Stab(\gls{c}) \ge 95\ \%] \ge 95\ \%$ for a uniformly random chosen challenge $\gls{c}$ for different numbers of $\gls{k}$ \apufs. 
-The simulations uses $\gls{n} = 16$, but the results are independent of $\gls{n}$ as shown in Fig. \ref{fig:arbiterstabilities}. 
+The simulations uses $\gls{n} = 16$, but the results are independent of $\gls{n}$, as shown in Fig. \ref{fig:arbiterstabilities}. 
 The linear graph shown in a log-log-graph confirms the polynomial growing number $\gls{m}$ of \acp{MV} of the degree $1$.
 The results are the average values over $10$ individual \puf instances with independent challenge sets.} 
 \label{fig:majorityvotegrowth}
@@ -139,7 +139,7 @@ The simulation approximates the number of $m$ \acp{MV} to reach $\Pr[\protect\St
 Therefore, it measures the stability values of every challenge evaluated by the underlying \mpufs through multiple evaluations, calculates the stability values for the \mxpuf, and changes the number of $m$ votes till the stability is reached.
 
 Fig. \ref{fig:majorityvotegrowth} shows how many votes are needed to reach a likelihood of $95\ \%$ that a uniformly and randomly chosen challenge $\gls{c}$ has stability of at least $95\ \%$, for different values of $\gls{k}$.
-These are upper bounds as the \ac{XOR} operation increases the stability of a \xpuf marginal, as any even number of incorrect \apuf responses will still yield the desired output of the \xpuf. 
+These are upper bounds, as the \ac{XOR} operation increases the stability of a \xpuf marginal, because any even number of incorrect \apuf responses will still yield the desired output of the \xpuf. 
 This behavior is not included in the simulation, since the stability values of the challenges are approximated for all \apufs independently.
 
 The polynomial increasing number of votes needed to fulfill the stability requirements for a useful PUF implementation displayed in the Fig. \ref{fig:majorityvotegrowth} proves that \xpufs can be build arbitrary large using \ac{MV}.

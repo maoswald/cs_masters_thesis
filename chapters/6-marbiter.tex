@@ -25,7 +25,7 @@ Afterwards, the most occurring response is the final response for that challenge
 We define the combination of \ac{MV} and \apuf to be a \mpuf.
 
 In this way the total number of unstable challenges, as explained in Sec. \ref{sec:arbiter}, gets reduced and the stability of the \apuf increases. %+
-Every challenge has a different stability as defined in \ref{equ:stability}.% which is the likelihood to not flip its response.
+Every challenge has a different stability, as defined in Eq. (\ref{equ:stability}).% which is the likelihood to not flip its response.
 These values vary between $50\ \%$ and $100\ \%$.
 The closer the value is to $50\ \%$, the more votes are necessary to get a more stable response for this challenge. %+
 Accordingly, how many votes are needed depends on the stability of the \apuf that is required. 
@@ -41,7 +41,7 @@ To boost the stability of \xpufs, \ac{MV} is used for every single \apuf instead
 A \xpuf containing \mpufs instead of \apufs is named \mxpuf.
 
 The stability of the \xpuf increases with the increase of the stability of every \mpuf.
-As the stability decreases with higher $\gls{k}$, this has to be counteracted with an larger amount $\gls{m}$ of \acp{MV}.
+As the stability decreases with higher $\gls{k}$, this has to be counteracted with a larger amount $\gls{m}$ of \acp{MV}.
 The principle of \ac{MV} makes it possible to build large \mxpufs. %+
 How these competing values are relate and how the stability values of the challenges for large \mxpufs are distributed will be examined in Chap. \ref{cap:stabilitysimulation}.
 
@@ -76,7 +76,7 @@ Beyond that Bent functions fulfill the strict avalanche criterion \cite{Wikipedi
 The strict avalanche criterion means if any number of input bits is flipped the output bit flips with a likelihood of $50\ \%$.
 
 How these attributes of Bent functions can help to prevent successful attacks and analysis of the underlying \apufs has to be examined.
-This thesis is focused only on the \ac{XOR} function used as combiner function and will not further consider other possible combiner functions.
+This thesis is focused only on the \ac{XOR} function used as combiner function and will not consider other possible combiner functions further.
 
 %========================================
 % source?!

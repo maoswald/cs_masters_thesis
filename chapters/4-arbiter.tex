@@ -2,15 +2,15 @@
 \label{cap:arbiter}
 
 \apufs were introduced already in 2002 as new delay-based \puf \cite{Gassend2002SiliconFunctions}.
-Over the year 2016 they got more attention as their implementation is resource-efficient and low cost \cite{Becker2014ActiveDesigns,Suh2007PhysicalGeneration}.
-However, there are still challenges due to the security concerns of classic \apufs as described in Sec. \ref{sec:attacksonarbiter} \cite{Ganji2016PACPUFs, Ruhrmair2014PUFOverview}.
+Over the year 2016 they got more attention, since their implementation is resource-efficient and low cost \cite{Becker2014ActiveDesigns,Suh2007PhysicalGeneration}.
+However, there are still challenges due to the security concerns of classic \apufs, as described in Sec. \ref{sec:attacksonarbiter} \cite{Ganji2016PACPUFs, Ruhrmair2014PUFOverview}.
 
-The relatively simple design, compared to e.g. cellular nonlinear network \pufs, of \apufs makes it appealing to people to seek new improved possible varieties including the popular \xpuf, which will be presented in this section. %+
+The relatively simple design, compared to e.g.\ cellular nonlinear network \pufs, of \apufs makes it appealing to people to seek new improved possible varieties including the popular \xpuf, which will be presented in this section. %+
 % Due to new problems which occur with the design improvement of \xpufs it is impossible to realize them securely.
 Due to challenges, which occur when combining a large amount of \apufs to a \xpufs, it is so far impossible to realize large \xpufs \cite{Rostami2014RobustMatching}.
 
 % old: Further, the success of attacks on \xpufs depends on their size, it is also not possible to build \xpufs that are secure and usable \cite{Ganji2015WhyPUFs}. %+
-Further, the success of attacks on \xpufs depends on their size and as there is a limit it is also not possible to build \xpufs that are secure and usable \cite{Ganji2015WhyPUFs}. %+
+Furthermore, the success of attacks on \xpufs depends on their size and as there is a limit it is also not possible to build \xpufs that are secure and usable \cite{Ganji2015WhyPUFs}. %+
 For these reasons there is still further improvement needed to call \apufs to be practically secure, even for enhanced versions like for example \xpufs.
 That is why I chose to study \apufs and \xpufs instead of other types of \pufs introduced in Sec. \ref{sec:typesofpufs} in this thesis.
 
@@ -45,7 +45,7 @@ The challenge bit length must match the number of stages in the \apuf so every s
 This is called the size $\gls{n}$ of the \apuf in this work. %+
 The circuits of both paths are laid out to have logical equal length.
 % "Although the circuit is laid out to have equal length on all paths, any physical realization will have different signal delays that are due to chip imperfections."
-But due to the inaccuracies in the manufacturing process of the electronic devices used for the stages, which can not be influenced by the producer, transit times will differ from device to device.
+But, due to the inaccuracies in the manufacturing process of the electronic devices used for the stages, which can not be influenced by the producer, transit times will differ from device to device.
 These differences can be seen as the intrinsic unique key of an instance of every \apuf. %+
 One stage for itself has 4 different signal paths: 
 
@@ -74,8 +74,8 @@ Due to the internal noise, the PUF may return different responses when given the
 That is because challenges in combination with the different path delay values can result in a very small difference between the appearing signals on the arbiter. %+
 This small difference can be changed by the introduced noise or the arbiter can decide wrong due to its own noise every time the \apuf is queried and so the final response can be changed. %+
 
-Hence, every challenge has its own stability value, which is defined in \ref{equ:stability}, and challenges with a lower stability value are called unstable.
-If a challenge is called unstable depends on its stability value and the limit within a challenge is defined as stable.
+Hence, every challenge has its own stability value, which is defined in Eq. (\ref{equ:stability}), and challenges with a lower stability value are called unstable.
+Whether a challenge is called unstable, depends on its stability value and the limit within a challenge is defined as stable.
 This limit is not generally defined and can be set as needed.
 Is the stability value below this limit the challenge is called unstable.
 
@@ -83,7 +83,7 @@ These are all parts to evaluate and to specify an \apuf.
 The \xpuf, which is build on \apufs, will be outlined in Sec. \ref{sec:xorarbiterpufs}.
 One way how a \apuf can be built and its possible internal structure will be presented in Sec. \ref{sec:physical}.
 %A more detailed description how it is build and what the physical features are will be presented in Sec. \ref{sec:physical}.
-The theoretical characterizations as requirement for attacks are part of Sec. \ref{sec:theoretical}.
+The theoretical characterizations, a prerequisite for attacks, are part of Sec. \ref{sec:theoretical}.
 Successful attacks on \apufs have been already developed and will be mentioned in Sec. \ref{sec:attacksonarbiter}.
 
 %========================================
@@ -93,7 +93,7 @@ Successful attacks on \apufs have been already developed and will be mentioned i
 \label{sec:xorarbiterpufs}
 
 The \xpuf is one attempt to improve the security of \apufs and has been proposed by Suh and Devadas in 2007 \cite{Suh2007PhysicalGeneration}.
-It combines multiple individual \apufs with a \acf{XOR} function to an \xpuf as shown in Figure \ref{fig:xorarbiter}.
+It combines multiple individual \apufs with a \acf{XOR} function to a \xpuf, as shown in Figure \ref{fig:xorarbiter}.
 
 As the \ac{XOR} function is not a linear separable function, as defined in Chap. \ref{cap:mla}, it adds non-linearity to the \puf. 
 % https://en.wikipedia.org/wiki/Exclusive_or
@@ -113,21 +113,21 @@ Another approach to add non-linearity are Feed-forward \apufs proposed by Lim et
 Every \apuf operates in the manner of the characterization in Sec. \ref{sec:arbiter}. 
 To improve the security the \ac{XOR} function adds up all responses to hide the response of every single \apuf instance.
 If the attacker does not know the response of a single \apuf, he will not be able to separately attack every single \apuf of the \xpuf \cite{Becker2015ThePUFs}. %+
-% This protects the underling \apufs against direct attacks and if there are no more information revealed, e.g. though side channel attacks as described in Sec. \ref{sec:attacksonarbiter}, the attacker has to model the whole \xpuf to be successful.
-This protects the underling \apufs against direct attacks and under the condition that there are no more information revealed, through e.g. side channel attacks, as mentioned in Sec. \ref{sec:attacksonarbiter}, the attacker has to model the complete \xpuf at once to be successful.
+% This protects the underling \apufs against direct attacks and if there are no more information revealed, e.g.\ though side channel attacks as described in Sec. \ref{sec:attacksonarbiter}, the attacker has to model the whole \xpuf to be successful.
+This protects the underling \apufs against direct attacks and under the condition that there are no more information revealed, through e.g.\ side channel attacks, as mentioned in Sec. \ref{sec:attacksonarbiter}, the attacker has to model the complete \xpuf at once to be successful.
 
 
 The number of combined \apufs $\gls{k}$ has the following two impacts on the \puf.
-Using more \apufs increases the resistance against modeling attacks but also decreases the stability which makes the \puf less reliable \cite{Becker2015ThePUFs, Ganji2015WhyPUFs}. %+
+Using more \apufs increases the resistance against modeling attacks, but also decreases the stability which makes the \puf less reliable \cite{Becker2015ThePUFs, Ganji2015WhyPUFs}. %+
 Stability here means the likelihood that the \apuf responses equally to an \apuf with the same internal values but without noise when processing the same challenge under the same environmental conditions. %+
 % This opposed relation between stability and number of \apufs is due the fact that the errors are amplified by the \ac{XOR} function which leads to a maximum in the number of used \apufs for real applications \cite{Rostami2014RobustMatching}.
 
 The decrease of the stability of the entire \xpuf caused by using more \apufs is due the fact that the less stable challenges of every \apuf are accumulated by the \ac{XOR} function \cite{Rostami2014RobustMatching}.
-That leads to a maximum in the number of used \apufs for real applications as they have to meet a certain stability for a reliable repeatability \cite{Rostami2014RobustMatching}.
+That leads to a maximum in the number of used \apufs for real applications, since they have to meet a certain stability for a reliable repeatability \cite{Rostami2014RobustMatching}.
 
 The stability of an \apuf designed on a 65 nm technology is supposed to be $96\ \%$ \cite{Rostami2014RobustMatching}.
-This relation between the production technology and the stability as Rostami et al. mentioned is not part of this work and will therefore not be further studied \cite{Rostami2014RobustMatching}. %+
-Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50\ \%$, as the noise of $4\ \%$ of every \apuf gets added up and is not usable since the response is not stable reproducible as Ganji et al. implied \cite{Ganji2015WhyPUFs}. %+
+This relation between the production technology and the stability, as Rostami et al. mentioned, is not part of this work and will therefore not be further studied \cite{Rostami2014RobustMatching}. %+
+Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50\ \%$, as the noise of $4\ \%$ of every \apuf gets added up and is not usable, since the response is not stable reproducible, as Ganji et al. implied \cite{Ganji2015WhyPUFs}. %+
 
 Though, Yu et al. suggested that the accumulation of the \apuf noise values to obtain the \xpuf noise value, done by Ganji et al., is not precise enough.
 Accordingly, the stability of a \xpuf with $\gls{k} = 12$ is $67\ \%$ for an even lower stability of $95.7\ \%$ for the included \apufs \cite{Yu2016AAuthentication}. %+
@@ -143,9 +143,9 @@ For the reason to make machine learning attacks more difficult, it is suggested 
 However, applying a more large challenge of size $\gls{n} \cdot \gls{k}$ to the \xpuf and then distributing individual challenges of size $\gls{n}$ to every \apuf reopens possibilities to directly attack individual \apufs by changing only their challenge fraction \cite{Becker2015ThePUFs}.
 
 Another way is to shift the challenge depending on the size of the \puf and the number of \apufs every time before it will be applied to the next \apuf.
-Thus in the best case every challenge bit takes every place in the challenge once when getting applied to different \apufs. %+
+Thus, in the best case every challenge bit takes every place in the challenge once when getting applied to different \apufs. %+
 It is so far unproved that each input bit of an \apuf has a different high likelihood to affect the response.
-But by transforming the challenge in this way, the likelihood of every bit to affect the response becomes more balanced which makes the \puf less predictable and more difficult to attack.
+But, by transforming the challenge in this way, the likelihood of every bit to affect the response becomes more balanced which makes the \puf less predictable and more difficult to attack.
 
 As this challenge transformation is part of Lightweight \pufs, it will not be part of this work.
 For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoobi2008LightweightPUFs} .
@@ -189,11 +189,11 @@ Every time the layout changes a new wafer as core of an \ac{ASIC} has to be prod
 This manufacturing process is very costly and mainly used for the final product.
 Consequently, \ac{ASIC} are used when high quantities of chips is needed.
 
-A cheaper way is to use an \ac{FPGA} or \ac{CPLD}. 
-An \ac{FPGA} is an programmable \ac{IC} which can be programmed over and over again with very little effort.
+A cheaper way is to use a \ac{FPGA} or \ac{CPLD}. 
+An \ac{FPGA} is a programmable \ac{IC} which can be programmed over and over again with very little effort.
 It consists of an array of \acp{CLB}, here called gates, connected through a mesh. %+
 The \ac{HDL} tells the \ac{FPGA} network how to connect the gates to obtain the desired circuit behavior. %+
-\ac{CPLD} follow a similar principle as the \ac{FPGA} but are smaller in terms of resources and have a less complex structure.
+\ac{CPLD} follow a similar principle as the \ac{FPGA}, but are smaller in terms of resources and have a less complex structure.
 
 Nevertheless, \ac{FPGA} suffer from different problems making it difficult to use them as secure \apuf implementation.
 When describing the circuit layout of the chip with \ac{HDL}, its code has to be compiled before transferring. %+
@@ -216,7 +216,7 @@ For the hardware realization of a single stage two 2-to-1 \ac{MUX} are used, as 
 
 There are analog or digital \ac{MUX} available. %+
 Their design differences lead to a greater delay in passing the signal to its output for digital \ac{MUX} compared to analog ones \cite{Wikipedia2016Multiplexer}.
-Additional differences, e.g. clipping parts of an continuous signal when exceeding a specific voltage, do not apply here as the \apuf has only sign signals \cite{Semiconductor2002BasicComparison}. %+
+Additional differences, e.g.\ clipping parts of a continuous signal when exceeding a specific voltage, do not apply here, since the \apuf has only sign signals \cite{Semiconductor2002BasicComparison}. %+
 
 The sign signal of an \apuf is the signal, which propagates through the stages of the \apuf, shown in Sec. \ref{sec:arbiter}.
 It has two definite states, high and low, whereby high triggers the arbiter.
@@ -244,14 +244,14 @@ Additional, there are some buffers used in the \ac{ASIC} design, which yet are n
 The arbiter's task is to determine, which signal arrives first at the end of the stage chain.
 The ends of the stage chains are the same as the inputs of the arbiter. %+
 To provide this function a \ac{SR-latch} is used that can be realized in different ways with NOR, NAND, or AND-OR logic gates \cite{Wikipedia2016Flip-flopelectronics}.
-Using NAND logic gates is the method of choice since it has a symmetric construction and because of that it is unbiased \cite{Lin2010Low-powerFunctions,Maes2013PhysicallyApplications}.
+Using NAND logic gates is the method of choice, since it has a symmetric construction and because of that it is unbiased \cite{Lin2010Low-powerFunctions,Maes2013PhysicallyApplications}.
 
 Fig. \ref{fig:nandarbiter} displays the switching circuit build with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{Wikipedia2016NANDGate}.
 The internal states of the outputs $r$ and $rb$ are initial high. 
 A rising edge of a signal occurring on $\gls{s}_1$ will pull down $r$ and the other way round.
 The output states low or high are equal to the response values of the \puf $0$ or $1$. %+
 Ensured by the cross-coupling, only one competing transition can win and the symmetric layout prevents circuit design based bias.
-NOR logic gates could be used likewise as their \ac{SR-latch} implementation is also symmetric.
+NOR logic gates could be used likewise, as their \ac{SR-latch} implementation is also symmetric.
 
 \begin{figure}[ht]
 \centering
@@ -259,7 +259,7 @@ NOR logic gates could be used likewise as their \ac{SR-latch} implementation is 
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 %\cite{Lin2010Low-powerFunctions}
 % https://en.wikipedia.org/wiki/NAND_gate
-\caption[Arbiter circuit]{Arbiter switching circuit realized with \ac{CMOS} NAND gates. The outputs $r$ and $rb$ start with the initial state high. If signal $\gls{s}_1$ appears first the output $r$ changes to low, whereas $rb$ stays high. If signal $\gls{s}_2$ arrives first, it will behave the other way round.}
+\caption[Arbiter circuit]{Arbiter switching circuit realized with \ac{CMOS} NAND gates. The outputs $r$ and $rb$ start with the initial state high. If signal $\gls{s}_1$ appears first, the output $r$ will change to low, whereas $rb$ stays high. If signal $\gls{s}_2$ arrives first, it will behave the other way round.}
 \label{fig:nandarbiter}
 \end{figure}
 
@@ -362,9 +362,10 @@ x_{n+1} &= 1. \label{equ:featurevector}
 \end{aligned}
 \end{equation}
 
-As in Sec. \ref{sec:xorarbiterpufs} introduced, \xpufs include $\gls{k}$ multiple \apufs whose single responses are combined by an \ac{XOR} function to the final response.
+As in Sec. \ref{sec:xorarbiterpufs} introduced, \xpufs include $\gls{k}$ multiple \apufs whose single responses are combined by a \ac{XOR} function to the final response.
 % The \ac{XOR} function is represented by an multiplication hence equation
-The \ac{XOR} function is represented by multiplication in the $\{-1,1\}^n$ challenge space, hence we can model the response $\gls{r}$ of a \xpuf by
+The \ac{XOR} function is represented by multiplication in the $\{-1,1\}^n$ challenge space
+Hence, we can model the response $\gls{r}$ of a \xpuf by
 
 \begin{align*}
 r &= \prod_{i=1}^k \operatorname{sgn}(\Delta D_{\mathrm{Model}}^i(x)) = \prod_{i=1}^k \operatorname{sgn}(\langle w_i,x\rangle)

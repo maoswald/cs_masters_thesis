@@ -22,7 +22,7 @@ One of the first attacks reveals the internal values of the \apuf by linear prog
 This approach solves a linear equation system after collecting enough \acp{CRP}, because an \apuf can be represented as linear threshold function, as shown in Sec. \ref{sec:theoretical}. %+
 For a good result the stability of the responses of the \acp{CRP} should be as high as possible.
 
-As the response of every \ac{CRP} includes some noise, explained in Sec. \ref{sec:physical}, one strategy of the attacker is to reduce the noise by using majority vote, i.e. evaluating the same challenge multiple times and picking the most appeared response.
+As the response of every \ac{CRP} includes some noise, explained in Sec. \ref{sec:physical}, one strategy of the attacker is to reduce the noise by using majority vote, i.e.\ evaluating the same challenge multiple times and picking the most appeared response.
 Therefore, the attacker has to be able to evaluate chosen challenges. %+
 Another option is using an algorithm to learn noisy linear threshold function, as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
 
@@ -44,13 +44,13 @@ For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performe
 
 Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning, whereas \ac{PAC} learning is an analysis framework and not a \ac{ML} technique. %+
 \acp{ANN} need a relative large amount of \acp{CRP} to achieve a high prediction accuracy of new challenges \cite{Hospodar2012MachineUsability}.
-The approach for a \ac{PAC} learning algorithm by Ganji et al. requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
+The approach for a \ac{PAC} learning algorithm by Ganji et al. requires a \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
 
 All non-invasive attacks mentioned so far are based only on the values of the responses of the attacked \puf.
-A different attack is the reliability-based machine learning attack proposed by Becker et al. \cite{Becker2015ThePUFs}. %+
+A different attack is the reliability-based machine learning attack proposed by Becker \cite{Becker2015ThePUFs}. %+
 It is based on the reliability of the \puf responses than on their values. 
 This in combination with a \ac{CMA-ES} algorithm makes it possible to create \apuf models with high accuracy.
-We count this attack as non-invasive attack as it relies only on the response of the \puf and does not need physical access to the \puf like side channel attacks.
+We count this attack as non-invasive attack, as it relies only on the response of the \puf and does not need physical access to the \puf like side channel attacks.
 
 In addition to non-invasive modeling attacks, physical side channel attacks are possible.
 As mentioned before, in real attack scenarios, the \puf response or a large set of \acp{CRP} is may be not available to the attacker, so he has to obtain information differently.
@@ -74,7 +74,7 @@ As main differences, the attacks additionally have to cope with the added non-li
 The increasing number of \apufs increases the complexity of an attack.
 This complexity grows in form of raising time consumption of the attack or a greater number of required \acp{CRP}
 Additional, their growth rates are important factors for building secure \xpufs that can not be successfully modeled.
-An exponential growing complexity to attack an \xpuf that can be build with linear growing effort can lead to a secure \puf.
+An exponential growing complexity to attack a \xpuf that can be build with linear growing effort can lead to a secure \puf.
 
 Nevertheless, on one hand this complexity grows exponentially with the number of used \apufs for the most attacks and on the other hand the size $\gls{k}$ of a \xpuf is limited by the growing total noise, as presented in Sec. \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}. %+
 The reports about current effective attacks on \xpufs differ in the maximum size $\gls{k}$ by $4$ to $6$ \cite{Ganji2015WhyPUFs, Xu2014Hybrid}.
@@ -96,7 +96,7 @@ That means for example using double the amount of \apufs in a \xpufs leads only 
 \label{sec:essentialattacks}
 
 The complexity of all attacks applied to \xpufs grows exponentially with increasing number of \apuf, except of the reliability based \ac{CMA-ES} attack, as outlined in Sec. \ref{sec:attacksonxorarbiter}.
-Becker et al. points out that their approach to combine the reliability based \ac{CMA-ES} attack with a normal \ac{CMA-ES} attack "results in only a linear increase in needed number of challenge and responses for increasing numbers of XORs" \cite{Becker2015ThePUFs}.
+Becker points out that his approach to combine the reliability based \ac{CMA-ES} attack with a normal \ac{CMA-ES} attack ``results in only a linear increase in needed number of challenge and responses for increasing numbers of XORs'' \cite{Becker2015ThePUFs}.
 
 A \xpuf with an arbitrary large number of \apufs would prevent all attacks but the \ac{CMA-ES} attacks.
 To overcome the problems, large \xpufs encounter, the concept of \ac{MV} has been developed, as shown in Chap. \ref{cap:majorityarbiter}.

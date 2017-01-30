@@ -27,11 +27,11 @@ Different attacks to get to know the key are possible.
 Intrusion into a system that stores the key via a connection or with physical access to the key storage device extracting the key are two examples for possible attacks \cite{Wikipedia2016Attackcomputing,Wikipedia2017Side-channelAttack}.
 
 Approaches like noninvasive memory, a memory specially protected against physical attacks, or one-way hash functions have been used so far to prevent those attacks \cite{Pappu2001PhysicalFunctions}. %+
-A key, stored as hash of a one-way hash function, makes it harder for attackers to get to know the key. 
-Knowing the secret key, used as input of a one-way hash function, makes it is easy to calculate its hash that is stored to represent the key.
+A key, stored as hash of an one-way hash function, makes it harder for attackers to get to know the key. 
+Knowing the secret key, used as input of an one-way hash function, makes it is easy to calculate its hash that is stored to represent the key.
 To verify a given key, its hash is calculated by the hash function and compared with the stored hash.
 If the hashes match, the key will be verified to be correct.
-When an attacker gets to know the hash, the key is still protected since the one-way hash functions are hard to evaluate in the reverse direction with only the hash. %+
+When an attacker gets to know the hash, the key is still protected, since the one-way hash functions are hard to evaluate in the reverse direction with only the hash. %+
 
 Though, due to the development of physical intrusion methods and the increasing performance of computer systems both techniques facing a number of challenges.
 For that reason \pufs have been introduced as a replacement for secret key memory.
@@ -46,12 +46,12 @@ It is suggested that \pufs offer a solution for security problems of the future 
 % Hence the secret key can not be calculated from the stored value but conversely.
 % However one-way function face 
 
-However, \pufs are also not immune to attacks, e.g. physical intrusion or \acl{ML} attacks \cite{Tajik2014PhysicalPUFs,Ruhrmair2010ModelingFunctions,Becker2015ThePUFs,Helfmeier2014PhysicalFunctions}.
+However, \pufs are also not immune to attacks, e.g.\ physical intrusion or \acl{ML} attacks \cite{Tajik2014PhysicalPUFs,Ruhrmair2010ModelingFunctions,Becker2015ThePUFs,Helfmeier2014PhysicalFunctions}.
 Since \pufs are not completely studied, new types of \pufs and suitable attacks are proposed. %+
 This interplay between developing new \pufs that are claimed to be secure and developing of successful attacks leads to a huge variety of different \pufs \cite{Ruhrmair2014PUFOverview}.
 
 Consequently, the \apuf and multiple modified versions based on the \apuf have been suggested. %+
-One of these versions is based on the idea of \ac{MV} that has been suggested before but has not been researched in detail \cite{Ruhrmair2013PUFData}.
+One of these versions is based on the idea of \ac{MV} that has been suggested before, but has not been researched in detail \cite{Ruhrmair2013PUFData}.
 This version of \apufs is not named yet, so we call it the \mpuf.
 In combination with \xpufs it is then called \mxpufs.
 

@@ -27,7 +27,7 @@ Accordingly, the values learned by the \ac{ML} attack do not have to be exact th
 Whether a \ac{ML} attack can find a binary classifier for a given set depends on the attack and if the set of samples is linear separable. 
 Instead of a set of samples this also applies to binary functions $f: \mathbb{R}^n \to \{0,1\}$. %+ % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
 One example for a not linear separable function is the \ac{XOR} function. % https://de.wikipedia.org/wiki/Lineare_Separierbarkeit
-Some \ac{ML} attacks, e.g. single-layer perceptron, can only learn linear separable sets and can therefore not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}. %+
+Some \ac{ML} attacks, e.g.\ single-layer perceptron, can only learn linear separable sets and can therefore not learn \ac{XOR} functions \cite{Minsky1969Perceptrons:Geometry}. %+
 Two subsets $A \subseteq \mathbb{R}^n$, $B \subseteq \mathbb{R}^n$ are called linear separable if all their vectors $\vec{a} = (a_1, ..., a_n) \in A$, $\vec{b} = (b_1, ..., b_n) \in B$ can be separated by
 
 \begin{align}
@@ -73,7 +73,7 @@ From these fittest individuals the next generation will be build and inherits th
 This repeating process of classification by rating the fitness of every individual, inheriting the genes of the previous generation and modifying them leads to an approximation of the optimal solution for the specific environment.
 Every repetition of this evolutionary cycle counts as one generation and every individual represents a model with its own fitness value	\cite{Becker2015ThePUFs}. % wiki
 
-The fittest model after the last generation is the result of the algorithm and the best learned model by this time.
+The model that is rated to be the fittest model after the last generation is the result of the algorithm and the best learned model by this time.
 It is also possible to approximate the at least optimal solution by letting the at least fittest survive. %+
 The procedure of the \ac{ES} attack, in the case of finding the optimal solution, is displayed in the Alg. \ref{alg:es}.
 
@@ -112,8 +112,8 @@ One way of modification is to add a random chosen value to all values of the ind
 The fitness function in line $4$ rates the fitness value of every individual and represents the above mentioned environmental conditions that the models get adapted to. %+
 
 The sort function of line $5$ sorts the results by their fitness values.
-The \ac{ES} attack approximates a optimal solution if the models are sorted descending and vice versa. %+
-The attack ends when the termination criteria is fulfilled, which could be e.g. a maximum number of generations.
+The \ac{ES} attack approximates an optimal solution if the models are sorted descending and vice versa. %+
+The attack ends when the termination criteria is fulfilled, which could be e.g.\ a maximum number of generations.
 
 The \ac{ES} attack is a randomized algorithm and therefore does not always determines.
 Nevertheless, it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
@@ -175,10 +175,10 @@ It classifies samples into two categories with dividing their multidimensional s
 The number of dimensions of the space is defined by the number of values $z$ of the samples.
 The model is trained the way that it divides the two categories by the largest possible gap. %+
 To achieve this, the training algorithm maximizes the distance from the hyperplane to the nearest samples of each category.
-If there exists such a hyperplane, known as maximum-margin hyperplane, it has the larges margin to the closest samples of both categories. %+
+If there exists such a hyperplane, known as maximum-margin hyperplane, it will has the larges margin to the closest samples of both categories. %+
 
 Not all samples have to be considered when training the model.
-Samples that are located behind other samples of the same classification and are more far away of the hyperplane do not affect the location of the hyperplane since they never become the closest samples. %+
+Samples that are located behind other samples of the same classification and are more far away of the hyperplane do not affect the location of the hyperplane, since they never become the closest samples. %+
 New samples are then predicted to belong to the same category as the samples that are on the side of the hyperplane where the new sample is located.
 
 A complete separation into two categories by a linear hyperplane is only possible if the training data is linear separable.
@@ -211,7 +211,7 @@ This leads to a more flexible training process, reduces the number of needed sam
 The \acf{LR} is a regression analysis technique, which is used in statistic modeling to estimate relationships between variables. % https://en.wikipedia.org/wiki/Regression_analysis https://en.wikipedia.org/wiki/Logistic_regression
 It is an approach to solve binary classification problems and is based on the logistic function $\frac{1}{1 + e^{-z_{i,l}}}$.
 
-The logistic function is a "S" shape and its values ranges between $0$ and $1$.
+The logistic function is a ``S'' shape and its values ranges between $0$ and $1$.
 The input value $z_{i,l}$ is transformed onto this range, since it is applied in the denominator of the function. %+
 % In \ac{LR} a modified version of the logistic function is used to transform all values that are going to be classified by 
 
@@ -248,7 +248,7 @@ As a last point is has to be mentioned that the classification problems solved b
 
 The perceptron is a supervised learning algorithm of binary classifiers and the simplest form of an \ac{ANN} \cite{Rosenblatt1957TheAutomaton}. 
 
-In case of an single-layer perceptron the values $z_i$ of a sample $d_i$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec. \ref{sec:lr}.
+In case of a single-layer perceptron the values $z_i$ of a sample $d_i$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec. \ref{sec:lr}.
 However, the output value $f(z_i)$ of the perceptron is calculated by
 
 \begin{align*}

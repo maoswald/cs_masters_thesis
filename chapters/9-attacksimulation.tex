@@ -24,7 +24,7 @@ Finally, the \ac{CMA-ES} attack is applied to \xpufs and \mxpufs of different si
 
 For the reliability based \ac{CMA-ES} attack on \apufs it is crucial to find challenges, which evaluate differently at multiple evaluations, as termed in Sec. \ref{sec:reliability}.
 To find these challenges and their reliability $\gls{h}$ every challenge $\gls{c}$ of a set will be evaluated $\gls{j}$ times.
-Consequently, the reliability $\gls{h}$ will be computed for every challenge by Eq.(\ref{equ:reliability}).
+Consequently, the reliability $\gls{h}$ will be computed for every challenge by Eq. (\ref{equ:reliability}).
 % old: Do not get confused with the notions stability and reliability as the definition of reliability differs for the \ac{CMA-ES} attack, as explained in Sec. \ref{sec:reliability}.
 Note that the notions of stability and reliability are slightly different for the \ac{CMA-ES} attack, as defined in Sec. \ref{sec:reliability}.
 
@@ -93,12 +93,12 @@ Hence, the slope of the number of attack executions is greater than the polynomi
 Apart from the increasing number of attack executions the performance of the computed models decreases with the growth of $\gls{m}$, as shown in Fig. \ref{fig:cmasingleattackcorrectness}.
 The graph displays how the proportion of correct evaluated challenges $\gls{c}$ of the test set lowers linear with a linear rise of the number of \ac{MV} $\gls{m}$.
 This indirect correlation implies that with growing number of \ac{MV} $\gls{m}$ the proportion of the correct evaluated challenges $\gls{c}$ of the test set decreases for well performing models build by the \ac{CMA-ES} attack.
-The values of both Fig. \ref{fig:cmasingleattackcorrelation} and \ref{fig:cmasingleattackcorrectness} are average values of minimum $10$ well performing models.
+The values of both Fig. \ref{fig:cmasingleattackcorrelation} and Fig. \ref{fig:cmasingleattackcorrectness} are average values of minimum $10$ well performing models.
 
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Proportion of correct evaluated test set challenges for Arbiter \puf models and Majority Arbiter \puf models]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by an \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
+\caption[Proportion of correct evaluated test set challenges for Arbiter \puf models and Majority Arbiter \puf models]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by a \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
 \label{fig:cmasingleattackcorrectness}
 \end{figure}
 
@@ -171,10 +171,10 @@ number of votes $\gls{m}$ & 5 & 9 & 17 & 29 & 64 & 100 & 150\\
 The Fig. \ref{fig:cmamultiattackmodelperformance} states the decrease of the performance of models, which are approximated of \xpufs.
 With this decrease in performance a continuous trend would already lead to not well performing models learned by an attack on large \xpufs.
 The attack would not be successful for large \xpufs, if it was possible to build them stable.
-If there is no impact of \ac{MV} on the attack success, the models approximated by the attack from \mxpufs would reach the same performance.
-For the case that the attack benefits of \ac{MV}, the performance values would be exceeded.
+If there was no impact of \ac{MV} on the attack success, the models, approximated by the attack on \mxpufs, would reach the same performance.
+For the case that the attack benefits of \ac{MV}, the performance values of the attack on \xpufs would be exceeded.
 However, the line graph for well performing models of the attack on \mxpufs stops after $k = 6$.
-The attack was not able to learn well performing models of \mxpufs that have a $\gls{k} \ge 8$ and uses $\gls{m}$ votes and the number of challenges as defined in Tab. \ref{tab:cmamultinumbervotes}.
+The attack was not able to learn well performing models of \mxpufs that have a $\gls{k} \ge 8$ and uses $\gls{m}$ votes and the number of challenges, as defined in Tab. \ref{tab:cmamultinumbervotes}.
 % how many attack executions to prove this
 
 Nevertheless, the attack could be successful and train models, which fulfill a certain performance, with a polynomial increase in the number of used training set challenges.
