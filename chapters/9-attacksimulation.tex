@@ -5,7 +5,7 @@
 
 % old: The combined reliability based \ac{CMA-ES} is the only attack, which is claimed to have a linear increasing complexity for successful attacks on \xpufs that grow linear in their number of used \apufs, as explained in Sec. \ref{sec:essentialattacks} \cite{Becker2015ThePUFs}.
 The combined reliability based \ac{CMA-ES} is the only attack, which is claimed to have a linear increasing complexity for successful attacks on \xpufs of arbitrary size, as explained in Sec. \ref{sec:essentialattacks} \cite{Becker2015ThePUFs}.
-Successfully attacked here means to build a model that can predict $80 \%$ of the challenges from a test set, which contains randomly chosen challenges, correct.
+Successfully attacked here means to build a model that can predict $80\ \%$ of the challenges from a test set, which contains randomly chosen challenges, correct.
 The implementation details of the \ac{CMA-ES} attack and the \apuf, which is basis for the simulations of the \mpuf, is explained in Chap. \ref{cap:simulationdesign}.
 
 This section presents the results of the simulations to verify the success of the \ac{CMA-ES} attack on large \xpufs.
@@ -71,7 +71,7 @@ For the attack a training set of $10000$ \acp{CRP} and a number of evaluation ti
 Since the \ac{CMA-ES} attack not always approximates to a model, which performs well on the challenges of the test set, it has to be restarted.
 The number of needed starts of the attack till a desired model has been approximated is called number of attack executions.
 
-A model produced by the attack is defined to perform well if it evaluates $80 \%$ of the $10000$ \acp{CRP} of the test set correct.
+A model produced by the attack is defined to perform well if it evaluates $80\ \%$ of the $10000$ \acp{CRP} of the test set correct.
 Both test set and training set are independent randomly chosen sets of challenges $\gls{c}$.
 % The exit criteria sigma of the \ac{CMA-ES} attack as explained in Sec. \ref{sec:cma-esdesign} is set to $0.2$ and stops the attack despite if the attack approximates to a model, which performs well on the test set or not.
 The minimum step-size sigma, used in the attack as termination criteria explained in Sec. \ref{sec:cma-esdesign}, is set to the value $0.2$.
@@ -85,7 +85,7 @@ Hence the slope of the number of attack executions is greater than the polynomia
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Needed \acs{CMA-ES} attack executions for \mpufs]{Number of attack executions per approximation to a well performing model. A well performing model evaluates $80 \%$ of the $10000$ test set \acp{CRP} correct. The rising gradient of the graph shows the growing exponential increase of the number of attack executions.}
+\caption[Needed \acs{CMA-ES} attack executions for \mpufs]{Number of attack executions per approximation to a well performing model. A well performing model evaluates $80\ \%$ of the $10000$ test set \acp{CRP} correct. The rising gradient of the graph shows the growing exponential increase of the number of attack executions.}
 \label{fig:cmasingleattackcorrelation}
 \end{figure}
 
@@ -97,7 +97,7 @@ The values of both Fig. \ref{fig:cmasingleattackcorrelation} and \ref{fig:cmasin
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Proportion of correct evaluated test set challenges of a model approximated by the \acs{CMA-ES} attack]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by an \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
+\caption[Proportion of correct evaluated test set challenges for Arbiter \puf models and Majority Arbiter \puf models]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by an \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
 \label{fig:cmasingleattackcorrectness}
 \end{figure}
 
@@ -126,7 +126,7 @@ The simulations starts with $5000$ training set challenges for $k = 2$ and doubl
 All training set challenges are individually randomly chosen for all attacks.
 
 A test set is used to evaluate the performance of the learned model.
-The attack is successful when the learned model evaluates $80 \%$ of the test set challenges correct and thus is defined to perform well.
+The attack is successful when the learned model evaluates $80\ \%$ of the test set challenges correct and thus is defined to perform well.
 The test set contains $2000$ individually randomly chosen challenges for all measurements, since only the complexity of the attack grows for a similar results.
 The number of $5000$ training set challenges in combination with $2000$ test set challenges were chosen for the reason that attacks on \xpufs with $k = 2$ and $k = 4$ with accordingly $10000$ training set challenges were able to build well performing models.
 
@@ -134,7 +134,7 @@ The number of $5000$ training set challenges in combination with $2000$ test set
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-performance.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Proportion of correct evaluated test set challenges for \acs{XOR} Arbiter \pufs and Majority \acs{XOR} Arbiter \pufs]{Proportion of correct evaluated test set challenges of the \xpuf models and the \mxpuf models. All values are average values of 10 independent attacks. The number of used training set challenges and votes $\gls{m}$ is chosen according to the Tab. \ref{tab:cmamultinumbervotes}. The test set contains for all attack $2000$ challenges.}
+\caption[Proportion of correct evaluated test set challenges for \acs{XOR} Arbiter \puf models and Majority \acs{XOR} Arbiter \puf models]{Proportion of correct evaluated test set challenges of \xpuf models and \mxpuf models. All values are average values of 10 independent attacks. The number of used training set challenges and votes $\gls{m}$ is chosen according to the Tab. \ref{tab:cmamultinumbervotes}. The test set contains for all attack $2000$ challenges.}
 \label{fig:cmamultiattackmodelperformance}
 \end{figure}
 
@@ -147,7 +147,7 @@ The number of required attack executions for a successful attack are similar for
 In the case of \mxpufs the number of attack executions needed to obtain a well performing model rose significant for $k = 4$ and $k = 6$.
 
 The numbers of \ac{MV} votes $\gls{m}$ used for the \mxpufs in Fig. \ref{fig:cmamultiattackmodelperformance} are determined by the results of the simulations in Sec. \ref{sec:majorityvotegrowth}.
-This simulations approximated the required numbers of votes to gain stable large \mxpufs, which means to reach $\Pr[\protect\Stab(\gls{c}) \ge 95 \%] \ge 95 \%$, for different $\gls{k}$.
+This simulations approximated the required numbers of votes to gain stable large \mxpufs, which means to reach $\Pr[\protect\Stab(\gls{c}) \ge 95\ \%] \ge 95\ \%$, for different $\gls{k}$.
 In Tab. \ref{tab:cmamultinumbervotes} the used values $\gls{m}$ for different values of $\gls{k}$ and the number of training set challenges that are similar to \xpufs and \mxpufs are displayed.
 
 \todo{update values + values in text!}
@@ -198,7 +198,7 @@ This is important since otherwise with a growing number $\gls{k}$ the performanc
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-approx.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Proportion of correct evaluated test set challenges for Majority \acs{XOR} \pufs with approximated required number of training set challenges]{Proportion of correct evaluated test set challenges of well performing models trained with an approximated number of training set challenges. To measure the performance of the model a test set with $2000$ \acp{CRP} is used and the results are compared with the results of the attack simulations of Fig. \ref{fig:cmamultiattackmodelperformance}. The number of used training set challenges is displayed by Fig. \ref{fig:cmamultiattackrequiredcrp}.}
+\caption[Proportion of correct evaluated test set challenges for Majority \acs{XOR} \puf models with approximated required number of training set challenges]{Proportion of correct evaluated test set challenges of well performing models trained with an approximated number of training set challenges. To measure the performance of the model a test set with $2000$ \acp{CRP} is used and the results are compared with the results of the attack simulations of Fig. \ref{fig:cmamultiattackmodelperformance}. The number of used training set challenges is displayed by Fig. \ref{fig:cmamultiattackrequiredcrp}.}
 \label{fig:cmamultiattackmvmodelperformance}
 \end{figure}
 

@@ -123,12 +123,12 @@ Stability here means the likelihood that the \apuf responses equally to an \apuf
 The decrease of the stability of the entire \xpuf caused by using more \apufs is due the fact that the less stable challenges of every \apuf are accumulated by the \ac{XOR} function \cite{Rostami2014RobustMatching}.
 That leads to a maximum in the number of used \apufs for real applications as they have to meet a certain stability for a reliable repeatability \cite{Rostami2014RobustMatching}.
 
-The stability of an \apuf designed on a 65 nm technology is supposed to be $96 \%$ \cite{Rostami2014RobustMatching}.
+The stability of an \apuf designed on a 65 nm technology is supposed to be $96\ \%$ \cite{Rostami2014RobustMatching}.
 This relation between the production technology and the stability as Rostami et al. mentioned is not part of this work and will therefore not be further studied \cite{Rostami2014RobustMatching}. %+
-Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50 \%$, as the noise of $4 \%$ of every \apuf gets added up and is not usable since the response is not stable reproducible as Ganji et al. implied \cite{Ganji2015WhyPUFs}. %+
+Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50\ \%$, as the noise of $4\ \%$ of every \apuf gets added up and is not usable since the response is not stable reproducible as Ganji et al. implied \cite{Ganji2015WhyPUFs}. %+
 
 However, Yu et al. suggested that the accumulation of the \apuf noise values to obtain the \xpuf noise value, done by Ganji et al., is not precise enough.
-Hence, the stability of a \xpuf with $\gls{k} = 12$ is $67 \%$ for an even lower stability of $95.7 \%$ for the included \apufs \cite{Yu2016AAuthentication}. %+
+Hence, the stability of a \xpuf with $\gls{k} = 12$ is $67\ \%$ for an even lower stability of $95.7\ \%$ for the included \apufs \cite{Yu2016AAuthentication}. %+
 % Considering that, if there exists a limit for size $\gls{k}$ of a \xpuf, it will depend on the required stability and the stability of the used \apufs.
 Considering that, the limit for size $\gls{k}$ of a \xpuf depends on the required stability and the stability of the used \apufs.
 
@@ -138,7 +138,7 @@ The challenge must be distributed to all internal \apufs. %+
 The approach for \xpufs is to apply the same challenge to every \apuf.
 For the reason to make machine learning attacks more difficult, it is suggested to apply different challenges to every \apuf. %+
 
-However, applying a more large challenge of size $\gls{n} * \gls{k}$ to the \xpuf and then distributing individual challenges of size $\gls{n}$ to every \apuf reopens possibilities to directly attack individual \apufs by changing only their challenge fraction \cite{Becker2015ThePUFs}.
+However, applying a more large challenge of size $\gls{n} \cdot \gls{k}$ to the \xpuf and then distributing individual challenges of size $\gls{n}$ to every \apuf reopens possibilities to directly attack individual \apufs by changing only their challenge fraction \cite{Becker2015ThePUFs}.
 
 Another way is to shift the challenge depending on the size of the \puf and the number of \apufs every time before it will be applied to the next \apuf.
 Thus in the best case every challenge bit takes every place in the challenge once when getting applied to different \apufs. %+
@@ -222,7 +222,7 @@ Other values then high and low are not definite values of the signal and not use
 % https://en.wikipedia.org/wiki/Square_wave
 
 Hence, both types of \ac{MUX} can be used unless they get mixed.
-Fig. \ref{fig:multiplexer} shows a single analog \ac{MUX} and how two of them used to build a complete stage component. %+
+Fig. \ref{fig:multiplexer} shows a single analog \ac{CMOS} \ac{MUX} and how two of them used to build a complete stage component. %+
 The signals $\gls{s}_1$ and $\gls{s}_2$ are connected to the output $\gls{o}_1$ and $\gls{o}_2$ depending on the challenge bit $c_i$.
 Additional, there are some buffers used in the \ac{ASIC} design, which yet are not needed for understanding.
 
@@ -232,7 +232,7 @@ Additional, there are some buffers used in the \ac{ASIC} design, which yet are n
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 %\cite{Semiconductor2002BasicComparison}
 %\cite{Lee2004AApplications}
-\caption[Analog \acs{MUX} and stage circuit]{(a) Analog \ac{MUX} \ac{CMOS} realization with single output.
+\caption[Analog \acs{MUX} and stage circuit]{(a) Analog \ac{CMOS} \ac{MUX} realization with single output.
 (b) Two \acs{MUX} connected to complete stage circuit.}
 \label{fig:multiplexer}
 \end{figure}
@@ -283,7 +283,7 @@ To evaluate the response $\gls{r}$ of a challenge $\gls{c}$ of a specific \puf t
 The final response $\gls{r}$ is then calculated by the signum function of the sum:
 
 \begin{align}
-r &= \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}}) \label{equ:pufresponse}
+r &= \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}}). \label{equ:pufresponse}
 \end{align}
 
 The model $\Delta D_{\mathrm{Model}}(c)$, which is the noise free \apuf representation, is the sum of all delay differences chosen according to the current challenge $\gls{c}$.
@@ -321,7 +321,7 @@ with mean $m = 0$ and variance $\sigma_{Stage Noise}^2$ per stage for $\gls{n}$ 
 Its standard deviation per stage adds up to the standard deviation of all stages $\sigmaASNoise$ of the \puf as follows:
 
 \begin{align*}
-\sigmaASNoise = \sqrt[]{\sigmaASNoise^2} = \sqrt[]{n \cdot \sigmaSNoise^2} = \sqrt[]{n} \cdot \sqrt[]{\sigmaSNoise^2} = \sqrt[]{n} \cdot \sigmaSNoise
+\sigmaASNoise = \sqrt[]{\sigmaASNoise^2} = \sqrt[]{n \cdot \sigmaSNoise^2} = \sqrt[]{n} \cdot \sqrt[]{\sigmaSNoise^2} = \sqrt[]{n} \cdot \sigmaSNoise.
 % http://www.matheboard.de/archive/502880/thread.html
 \end{align*}
 
@@ -346,17 +346,17 @@ The function is definite by
 whereas delay vector $w_i = (w_1, \cdots, w_{n+1})$ includes the delay differences $\delta_{c_i}^{(i)}$ of all stages and is calculated as follows:
 
 \begin{align*}
-w_1 &= \delta_{0}^{(1)} - \delta_{1}^{(1)}\\
+w_1 &= \delta_{0}^{(1)} - \delta_{1}^{(1)},\\
 w_i &= \delta_{0}^{(i-1)} + \delta_{1}^{(i-1)} + \delta_{0}^{(i)} - \delta_{1}^{(i)}\ \text{for}\ 2 \le i \le n,\\
-w_{n+1} &= \delta_{0}^{(n)} + \delta_{1}^{(n)}
+w_{n+1} &= \delta_{0}^{(n)} + \delta_{1}^{(n)}.
 \end{align*}
  
 The feature vector $\gls{x}$ is computed from the challenge $\gls{c}$ by
 
 \begin{equation}
 \begin{aligned}
-x_i &= \prod_{i=1}^n c_i\\ 
-x_{n+1} &= 1 \label{equ:featurevector}
+x_i &= \prod_{i=1}^n c_i,\\ 
+x_{n+1} &= 1. \label{equ:featurevector}
 \end{aligned}
 \end{equation}
 

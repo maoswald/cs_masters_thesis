@@ -7,9 +7,14 @@ First, required the inputs for the \ac{ML} attacks and the problem they are solv
 After that, each \ac{ML} technique is described by its own.
 
 The \ac{ML} attack creates a \puf model of the attacked \puf, which acts as binary classifier.
-A binary classifier classifies the samples, in the case of \pufs these are challenges, of a given set into two different classes $0$ or $1$ like the response of the \puf. %+
-To build this model a training set $D = \{(z, e)_1, ..., (z,e)_i\}$ with samples $d = (z, e)_i$ that are already classified by the attacked \puf are required.
-A sample $d$ is defined by its values $z$ and is classified into the class $e$. %+
+A binary classifier divides the samples, in the case of \pufs these are challenges, of a given set into two different classes $0$ or $1$ similar to the responses of a \puf. %+
+% old:
+% To build this model a training set $D = \{(z, e)_1, ..., (z,e)_i\}$ with samples $d = (z, e)_i$ that are already classified by the attacked \puf are required.
+% A sample $d$ is defined by its values $z$ and is classified into the class $e$. %+
+To build this model a training set $D = \{(z_1, e_1), ..., (z_i,e_i)\}$ is necessary, whereas the integer $i$ is the number of training set samples $d_i = (z_i, e_i)$ that are already classified by the attacked \puf.
+Let $l$ be the number of input values of a sample $d_i$ then is this sample defined by its values $z_i = (z_{i,1}, ...,z_{i,l})$ and is classified into the class $e_i$. 
+%+
+
 With that training set the model can be trained by the \ac{ML} algorithm.
 To evaluate the build model, a test set is build the same way and used to compare the output of the \puf model and the attacked \puf.
 
@@ -203,18 +208,18 @@ This leads to a more flexible training process, reduces the number of needed sam
 \section{Logistic Regression}
 \label{sec:lr}
 
-The \acf{LR} is a regression analysis technique which is used in statistic modeling to estimate relationships between variables. % https://en.wikipedia.org/wiki/Regression_analysis https://en.wikipedia.org/wiki/Logistic_regression
-It is an approach to solve binary classification problems and is based on the logistic function $\frac{1}{1 + e^{-z}}$.
+The \acf{LR} is a regression analysis technique, which is used in statistic modeling to estimate relationships between variables. % https://en.wikipedia.org/wiki/Regression_analysis https://en.wikipedia.org/wiki/Logistic_regression
+It is an approach to solve binary classification problems and is based on the logistic function $\frac{1}{1 + e^{-z_{i,l}}}$.
 
 The logistic function is a "S" shape and its values ranges between $0$ and $1$.
-The input value $z$ is transformed onto this range since it is applied in the denominator of the function. %+
+The input value $z_{i,l}$ is transformed onto this range since it is applied in the denominator of the function. %+
 % In \ac{LR} a modified version of the logistic function is used to transform all values that are going to be classified by 
 
-In the \ac{LR}, additionally to the logistic function, all values $z_i$ of a sample that is going to be classified are combined with weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added. %+
+In the \ac{LR}, additionally to the logistic function, all values $z_i = (z_{i,1}, ...,z_{i,l})$ of a sample that is going to be classified are combined with weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added. %+
 Hence, this modified version of the logistic function, known as \ac{LR} model, is used to transform all values $z_i$ by 
 
 \begin{align*}
-\Pr[Y = 1 | Z = z_i] &= \frac{1}{1 + e^{-(\beta_0 + z^T_i \beta)}}
+\Pr[Y = 1 | Z = z_i] &= \frac{1}{1 + e^{-(\beta_0 + z^T_i \beta)}},
 \end{align*}
 
 onto the range between $0$ and $1$.
@@ -243,18 +248,18 @@ As a last point is has to be mentioned that the classification problems solved b
 
 The perceptron is a supervised learning algorithm of binary classifiers and the simplest form of an \ac{ANN} \cite{Rosenblatt1957TheAutomaton}. 
 
-In case of an single-layer perceptron the values $z_i$ of a sample $d$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_i)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec. \ref{sec:lr}.
-However the output value $f(z)$ of the perceptron is calculated by
+In case of an single-layer perceptron the values $z_i$ of a sample $d_i$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec. \ref{sec:lr}.
+However, the output value $f(z_i)$ of the perceptron is calculated by
 
 \begin{align*}
-f(z) &= \begin{cases}
-1 & \text{if}\ \beta \cdot z + \beta_0 > 0\\
+f(z_i) &= \begin{cases}
+1 & \text{if}\ \beta \cdot z_i + \beta_0 > 0\\
 0 & \text{otherwise}
 \end{cases}
 \end{align*}
 
-and classifies the sample $d$ in the classes $0$ or $1$.
-To obtain the weights and the bias, which define the perceptron model, the model is trained by the Alg. \ref{alg:perceptron} and a training set with the samples $d$ and their desired output $e$.
+and classifies the sample $d_i$ in the classes $0$ or $1$.
+To obtain the weights and the bias, which define the perceptron model, the model is trained by the Alg. \ref{alg:perceptron} and a training set with the samples $d_i$ and their desired output $e_i$.
 
 \SetAlCapHSkip{0.2em}
 \begin{algorithm}[H]
@@ -275,15 +280,15 @@ update the weights and the bias\\
 
 \end{algorithm}
 
-The output value of the perceptron $f(z)$ is computed for a sample $d$ at the time $l$ in line $4$.
-Afterwards in line $5$ the weights $\beta$ and the bias $\beta_0$ are updated by
+The output value of the perceptron $f(z_i)$ is computed for a sample $d_i$ with $\beta(p)$ and $\beta_0(p)$ at the time $p$ in line $4$.
+Afterwards, in line $5$ the weights $\beta$ and the bias $\beta_0$ are updated by
 
 \begin{align*}
-\beta_i(l+1) &= \beta_i(l) + \alpha \cdot (e - f(z)) \cdot z_i\\
-\beta_0(l+1) &= \beta_0(l) + \alpha \cdot (e - f(z))
+\beta_i(p+1) &= \beta_i(p) + \alpha \cdot (e_i - f(z_i)) \cdot z_i,\\
+\beta_0(p+1) &= \beta_0(p) + \alpha \cdot (e_i - f(z_i)),
 \end{align*}
 
-whereas $\beta_i(l)$ are the weights $\beta_i$ and $\beta_0(l)$ is the bias $\beta_0$ at the time $l$.
+whereas $\beta_i(p)$ are the weights $\beta_i$ and $\beta_0(p)$ is the bias $\beta_0$ at the time $p$.
 A learning rate $\alpha$ is added that determines the value that is used to change the weights.
 
 With these incremental updates the perceptron algorithm is an online learning algorithm.

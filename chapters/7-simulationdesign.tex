@@ -118,7 +118,7 @@ Let $\gls{j}$ be the number of times a challenge is evaluated by the same \puf a
 The reliability $\gls{h}_i$ of a challenge $\gls{c}$ is computed of its responses $r_1, r_2, ..., r_j$ as follows \cite{Becker2015ThePUFs}:
 
 \begin{align}
-h_i &= |\frac{j}{2} - \sum_{l = 1}^{j}r_l| \label{equ:reliability}
+h_i &= |\frac{j}{2} - \sum_{l = 1}^{j}r_l|. \label{equ:reliability}
 \end{align}
 % Nils: In CS language: this i shadows the i that is already declared in the outside scope. In math, shadowing is considered an error, not just an inconvinience.
 
@@ -141,8 +141,8 @@ Hence the vectors $w$, the feature vectors $\gls{x}$, and the \apuf model Eq. (\
 \begin{aligned}
 g_i &=
 \begin{cases}
-1,\ \ \text{if}\ |\langle w, x \rangle| > \epsilon\\
-0,\ \ \text{if}\ |\langle w, x \rangle| < \epsilon \label{equ:hypotheticalreliability}
+1,\ \ \text{if}\ |\langle w, x \rangle| > \epsilon,\\
+0,\ \ \text{if}\ |\langle w, x \rangle| < \epsilon. \label{equ:hypotheticalreliability}
 \end{cases}
 \end{aligned}
 \end{equation}

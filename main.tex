@@ -37,7 +37,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Symbols package and symbols (can not be included in overleaf)
 \usepackage[nopostdot]{glossaries} % nonumberlist: no numbers,
-\makeglossaries
+% creates glossary
+% \makeglossaries
+% disable all glossary hyperref since no list is included
+\glsdisablehyper
 \include{misc/symbols}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -80,7 +83,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % List of symbols
 %\listofsymbols % other package
-\printglossary[title=List of Symbols]
+% \printglossary[title=List of Symbols]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Table of figures
