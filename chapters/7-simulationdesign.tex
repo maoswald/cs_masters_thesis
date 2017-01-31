@@ -233,7 +233,7 @@ The covariance matrix represents the correlation of the model values to each oth
 The model values determine the response of the \apuf model, as outlined in Sec. \ref{sec:theoretical}, and thus are the values the algorithm learns.
 In addition, the error boundary $\epsilon$ that is stated in Sec. \ref{sec:reliability} is approximated by a value of the covariance matrix.
 
-The sigma value is a dynamic step-size value, that adjusts the added random values to create new models.
+The sigma value is a dynamic step-size value that adjusts the added random values to create new models.
 The value of sigma is reduced when the learning success lowers.
 This means it is subsides when the algorithm has correlated a well performing model to increase the likelihood of approximating a better performing model that values differ only slightly to the learned one. %+
 Supplementary, sigma sinks when the algorithm can not approximate a model, so that the algorithm terminates.

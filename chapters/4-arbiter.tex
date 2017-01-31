@@ -118,7 +118,7 @@ This protects the underling \apufs against direct attacks and under the conditio
 
 
 The number of combined \apufs $\gls{k}$ has the following two impacts on the \puf.
-Using more \apufs increases the resistance against modeling attacks, but also decreases the stability which makes the \puf less reliable \cite{Becker2015ThePUFs, Ganji2015WhyPUFs}. %+
+Using more \apufs increases the resistance against modeling attacks, but also decreases the stability, which makes the \puf less reliable \cite{Becker2015ThePUFs, Ganji2015WhyPUFs}. %+
 Stability here means the likelihood that the \apuf responses equally to an \apuf with the same internal values but without noise when processing the same challenge under the same environmental conditions. %+
 % This opposed relation between stability and number of \apufs is due the fact that the errors are amplified by the \ac{XOR} function which leads to a maximum in the number of used \apufs for real applications \cite{Rostami2014RobustMatching}.
 
@@ -145,7 +145,7 @@ However, applying a more large challenge of size $\gls{n} \cdot \gls{k}$ to the 
 Another way is to shift the challenge depending on the size of the \puf and the number of \apufs every time before it will be applied to the next \apuf.
 Thus, in the best case every challenge bit takes every place in the challenge once when getting applied to different \apufs. %+
 It is so far unproved that each input bit of an \apuf has a different high likelihood to affect the response.
-But, by transforming the challenge in this way, the likelihood of every bit to affect the response becomes more balanced which makes the \puf less predictable and more difficult to attack.
+But, by transforming the challenge in this way, the likelihood of every bit to affect the response becomes more balanced, which makes the \puf less predictable and more difficult to attack.
 
 As this challenge transformation is part of Lightweight \pufs, it will not be part of this work.
 For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoobi2008LightweightPUFs} .
@@ -190,7 +190,7 @@ This manufacturing process is very costly and mainly used for the final product.
 Consequently, \ac{ASIC} are used when high quantities of chips is needed.
 
 A cheaper way is to use a \ac{FPGA} or \ac{CPLD}. 
-An \ac{FPGA} is a programmable \ac{IC} which can be programmed over and over again with very little effort.
+A \ac{FPGA} is a programmable \ac{IC}, which can be programmed over and over again with very little effort.
 It consists of an array of \acp{CLB}, here called gates, connected through a mesh. %+
 The \ac{HDL} tells the \ac{FPGA} network how to connect the gates to obtain the desired circuit behavior. %+
 \ac{CPLD} follow a similar principle as the \ac{FPGA}, but are smaller in terms of resources and have a less complex structure.

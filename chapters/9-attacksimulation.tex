@@ -78,7 +78,7 @@ Both test set and training set are independent randomly chosen sets of challenge
 The minimum step-size sigma, used in the attack as termination criteria, explained in Sec. \ref{sec:cma-esdesign}, is set to the value $0.2$.
 Reaching this limit stops the attack regardless if a well performing model is approximated or not.
 
-For a growing number of \ac{MV} $\gls{m}$ there is an increase of needed executions of the attack to approximate to a model which performs well on the test set, as shown in Fig \ref{fig:cmasingleattackcorrelation}.
+For a growing number of \ac{MV} $\gls{m}$ there is an increase of needed executions of the attack to approximate to a model, which performs well on the test set, as shown in Fig \ref{fig:cmasingleattackcorrelation}.
 The growing gradient of the graph shows the growing exponential increase of needed attack executions to gain well performing models.
 From $\gls{m} = 80$ \acp{MV} on the gradient of the graph is greater than $1$.
 Hence, the slope of the number of attack executions is greater than the polynomial degree $1$.
