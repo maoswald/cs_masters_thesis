@@ -104,7 +104,7 @@ In the step of the lines $6$ and $7$ of the attack, it is determined how the num
 There are options to define how many of the fittest models are selected and how many new models are created per generation.
 
 Additionally, in the step of creating the next generation it can be defined if models of the old generation should be kept and if new randomly created models should be added. %+
-Adding new random models makes it possible for the attack to approximate a more optimal solution even if all models are already approximated to another solution \cite{Wikipedia2016EvolutionStrategy}.
+Adding new random models makes it possible for the attack to approximate a more optimal solution even if all models are already approximated to another solution \cite{Rechenberg1994EvolutionsstrategiePrinzipien}.
 Keeping old models ensures not to lose a individual of the previous generation, which outperforms the next generations models.
 
 How the models are modified in the beginning of every generation in line $3$ of the Alg. \ref{alg:es} is not specified.
@@ -137,7 +137,7 @@ Hence, the covariance matrix is used to represent pairwise dependencies between 
 % Throughout the evolution process the mean values and the covariance matrix used in combination with normal distributed random distributed values to generate the next generation of models and are adaped iterative in every generation.
 Throughout the evolution process the mean values of the distributions, the covariance matrix and a step size value are adapted per generation. %+
 
-The mean values, the covariance matrix, and the step size in combination with normal distributed randomly chosen values are used to create the model for the next generation in every evolution cycle \cite{Wikipedia2017CMA-ES}.
+The mean values, the covariance matrix, and the step size in combination with normal distributed randomly chosen values are used to create the model for the next generation in every evolution cycle \cite{Hansen2011TheTutorial}.
 To update the values used in the \ac{CMA-ES} algorithm two principles are applied.
 
 The first principle is the maximum-likelihood method.
@@ -156,7 +156,7 @@ The step size is adjusted by \ac{CSA} that reduces the importance of a step with
 This allows the algorithm to approximate the optimal solution fast and prevents the \ac{CMA-ES} algorithm from to early adaptations. 
 
 The \ac{CMA} is build to solve non-separable and ill-conditioned problems \cite{Hansen2011TheTutorial}.
-Problems are ill-conditioned when making little changes to their input lead to significant changes in their output \cite{Wikipedia2016ConditionNumber}.
+Problems are ill-conditioned when making little changes to their input lead to significant changes in their output \cite{Belsley1980RegressionCollinearity}.
 
 % principal components analysis
 % An n-dimensional separable problem can be solved by solving n 1-dimensional problems separately, which is a far easier task.
@@ -187,7 +187,7 @@ In doing so, all training data and the $z$ dimensional space is transformed to a
 Every data transformed into a space with enough higher number of dimensions is linear separable.
 That can be even an infinite number of dimensions. %+
 The hyperplane is then determined in this higher dimensional space and transformed back to the original dimensional space where it represents a non-linear hyperplane. %+
-As these transformations are high in computational cost, the kernel method provides the possibility to define the hyperplane in a higher dimensional space and use it in the lower dimensional space without the transformations \cite{Wikipedia2016SupportMachine}.
+As these transformations are high in computational cost, the kernel method provides the possibility to define the hyperplane in a higher dimensional space and use it in the lower dimensional space without the transformations \cite{Cristianini2000AnMethods}.
 
 Another method used by \ac{SVM} to be able to solve non-linear problems are slack variables.
 Slack variable allow the algorithm by undergoing punishment to classify samples in the training process wrong. %+
@@ -232,7 +232,7 @@ These weights must be estimated from the training data that includes already cla
 A usually approach is the maximum likelihood estimation whereas the goal is that the likelihood, predicted by the \ac{LR} model, is very close to $1$ if the sample belongs to this class and the way round. %+
 
 The maximum likelihood estimation does that by minimizing the error in the likelihood predicted by the model for the training data. % Probably cut out http://machinelearningmastery.com/logistic-regression-for-machine-learning/
-For more detailed information I refer the reader to \cite{Wikipedia2017MaximumEstimation}.
+For more detailed information I refer the reader to \cite{Aldrich1997RA1922}.
 
 As a last point is has to be mentioned that the classification problems solved by \ac{LR} do not need to be linearly separable but differentiable \cite{Ruhrmair2010ModelingFunctions}.
 % https://en.wikipedia.org/wiki/Logistic_regression
@@ -292,11 +292,11 @@ whereas $\beta_i(p)$ are the weights $\beta_i$ and $\beta_0(p)$ is the bias $\be
 A learning rate $\alpha$ is added that determines the value that is used to change the weights.
 
 With these incremental updates the perceptron algorithm is an online learning algorithm.
-The algorithm is guaranteed to converge, and there is a limit for the maximum number of weight adjustments while trained under the condition that the training set is linear separable \cite{Wikipedia2016Perceptron}. %+
+The algorithm is guaranteed to converge, and there is a limit for the maximum number of weight adjustments while trained under the condition that the training set is linear separable \cite{Rosenblatt1957TheAutomaton}. %+
 
 For a non-linear separable problem the perceptron algorithm does not terminate as it never reaches the optimal classification of all samples. % https://en.wikipedia.org/wiki/Perceptron
 A modification of the single-layer perceptron is the multilayer perceptron that is able to distinguish non-linear separable problems.
-For more detailed information about the multilayer perceptron I refer the reader to \cite{Wikipedia2017MultilayerPerceptron}.
+For more detailed information about the multilayer perceptron I refer the reader to \cite{Rosenblatt1961Principlesmechanisms}.
 
 
 %========================================

@@ -67,12 +67,12 @@ In addition to being a Boolean function it is important that the function obfusc
 % They are highly non-linear which is desired in this case as the \apuf itself is linear and can therefore badly resist machine learning attacks.
 %This prevents predictions about the input based on an analysis of the output of the function.
 
-Bent functions are one example for Boolean functions, which can be used instead of the \ac{XOR} function \cite{Wikipedia2016BentFunction}.
+Bent functions are one example for Boolean functions, which can be used instead of the \ac{XOR} function \cite{Adams1990Thedesign,Forre1990Thedefinition,Seberry1993Highlycriterion}.
 %old: They are highly non-linear, which is desired in this case since \apufs can be represented by a linear threshold function that can be attacked successfully, as described in Sec. \ref{sec:attacksonarbiter}.
 They are highly non-linear, which is desired in the case of \apufs, since they can be represented by a linear threshold functions.
 Attacks mentioned in Sec. \ref{sec:attacksonarbiter} are able to successfully attack these linear threshold functions.
 The non-linearity increases the complexity of attacks, as described in Sec. \ref{sec:xorarbiterpufs}. %+
-Beyond that Bent functions fulfill the strict avalanche criterion \cite{Wikipedia2016AvalancheEffect}.
+Beyond that Bent functions fulfill the strict avalanche criterion \cite{Feistel1973Cryptographyprivacy}.
 The strict avalanche criterion means if any number of input bits is flipped the output bit flips with a likelihood of $50\ \%$.
 
 How these attributes of Bent functions can help to prevent successful attacks and analysis of the underlying \apufs has to be examined.
