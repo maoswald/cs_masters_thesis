@@ -131,7 +131,6 @@ The attack is successful when the learned model evaluates $80\ \%$ of the test s
 The test set contains $2000$ individually randomly chosen challenges for all measurements, since only the complexity of the attack grows for a similar results.
 The number of $5000$ training set challenges in combination with $2000$ test set challenges were chosen for the reason that attacks on \xpufs with $k = 2$ and $k = 4$ with accordingly $10000$ training set challenges were able to build well performing models.
 
-\todo{update values}
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-performance.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
@@ -139,29 +138,29 @@ The number of $5000$ training set challenges in combination with $2000$ test set
 \label{fig:cmamultiattackmodelperformance}
 \end{figure}
 
-Fig. \ref{fig:cmamultiattackmodelperformance} shows the proportion of correct evaluated test set challenges by well performing models produced by the attacks for $2 \le \gls{k} \le 12$.
+Fig. \ref{fig:cmamultiattackmodelperformance} shows the proportion of correct evaluated test set challenges by well performing models produced by the attacks for $2 \le \gls{k} \le 14$.
 Every value is the average of $10$ successfully learned models.
 Since the attack is not deterministic, only attack executions that approximate well performing models are counted.
 % wrong: There are no significant differences in the needed number of attack executions for different numbers of $\gls{k}$ neither for \xpufs nor for \mxpufs.
 The number of required attack executions for a successful attack are similar for all attacks on \xpufs.
-\todo{rose significant: be more specific!}
-In the case of \mxpufs the number of attack executions needed to obtain a well performing model rose significant for $k = 4$ and $k = 6$.
+% In the case of \mxpufs the number of attack executions needed to obtain a well performing model rose significant for $k = 4$ and $k = 6$.
+In the case of \mxpufs the number of attack executions needed to obtain a well performing model rose between $k = 3$ and $k = 4$ by the factor $5$.
+Though, for $k = 4$ and $k = 6$ similar numbers of attack executions per well performing model are necessary.
 
 The numbers of \ac{MV} votes $\gls{m}$ used for the \mxpufs in Fig. \ref{fig:cmamultiattackmodelperformance} are determined by the results of the simulations in Sec. \ref{sec:majorityvotegrowth}.
 This simulations approximated the required numbers of votes to gain stable large \mxpufs, which means to reach $\Pr[\protect\Stab(\gls{c}) \ge 95\ \%] \ge 95\ \%$, for different $\gls{k}$.
 In Tab. \ref{tab:cmamultinumbervotes} the used values $\gls{m}$ for different values of $\gls{k}$ and the number of training set challenges that are similar to \xpufs and \mxpufs are displayed.
 
-\todo{update values + values in text!}
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|c|c|c|c|}
 \hline
-number of $\gls{k}$ & 2 & 3 & 4 & 6 & 8 & 10 & 12\\
+number of $\gls{k}$ & 2 & 3 & 4 & 6 & 8 & 10 & 12 & 14\\
 \hline
-number of training set challenges ($\cdot 10^3$) & 5 & 7.5 & 10 & 15 & 20 & 25 & 30\\
+number of training set challenges ($\cdot 10^3$) & 5 & 7.5 & 10 & 15 & 20 & 25 & 30 & 35\\
 % number of training set challenges & $5*10^3$ & $7.5 \cdot 10^3$ & $10 \cdot 10^3$ & $15 \cdot 10^3$ & $20 \cdot 10^3$ & $25 \cdot 10^3$ & $30 \cdot 10^3$\\
 \hline
-number of votes $\gls{m}$ & 5 & 9 & 17 & 29 & 64 & 100 & 150\\
+number of votes $\gls{m}$ & 5 & 9 & 17 & 29 & 64 & 100 & 150 & 200\\
 \hline
 \end{tabular}
 \caption[Number of votes and challenges used for \acs{CMA-ES} attack]{Number of used training set challenges for the attack on \xpufs and \mxpufs. Number of \ac{MV} votes used for the according \mxpufs determined by the simulation in Sec. \ref{sec:majorityvotegrowth}.}
@@ -178,11 +177,10 @@ The attack was not able to learn well performing models of \mxpufs that have a $
 % how many attack executions to prove this
 
 Nevertheless, the attack could be successful and train models, which fulfill a certain performance, with a polynomial increase in the number of used training set challenges.
-To study the success of the attack on \mxpufs, we approximate the required training set \acp{CRP} for successful attacks that lead to models with a given performance by binary search.
+To study the success of the attack on \mxpufs, we approximate the required training set \acp{CRP} for successful attacks that lead to models with a given continuous performance by binary search.
 In Fig. \ref{fig:cmamultiattackrequiredcrp} a comparison between the required training set challenges of the attack on \xpufs and \mxpufs is shown.
 The raising gradient of the graph states the exponential increase in demanded \acp{CRP} for a successful attack on \mxpufs that use the according number of votes $\gls{m}$, as display in Tab. \ref{tab:cmamultinumbervotes}.
 
-\todo{update values}
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-crps.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
@@ -190,12 +188,13 @@ The raising gradient of the graph states the exponential increase in demanded \a
 \label{fig:cmamultiattackrequiredcrp}
 \end{figure}
 
-To scrutinize the approximated required number of \acp{CRP}, $10$ successful attacks are performed for every $k$ and the average proportion of correct evaluated test set challenges by well performing models are compared with the results of the attacks on \xpufs in Fig. \ref{fig:cmamultiattackmvmodelperformance}.
+% To scrutinize the approximated required number of training set \acp{CRP}, $10$ successful attacks are performed for every $k$ and the average proportion of correct evaluated test set challenges by well performing models are compared with the results of the attacks on \xpufs in Fig. \ref{fig:cmamultiattackmvmodelperformance}.
+To scrutinize the approximated required number of training set \acp{CRP}, $10$ successful attacks for every $k$ are performed.
+Then the average proportion of correct evaluated test set challenges by the well performing models are compared with the results of the attacks on \xpufs in Fig. \ref{fig:cmamultiattackmvmodelperformance}.
 %wrong: The similarity of the graphs on the attack on \xpufs and \mxpufs with the approximated required number of training challenges verifies that the attack results in the similar well performing model by a exponential increase of training challenges.
 The continuous high performance of the models, which are learned with the approximated number of training set challenges, shows that the large increase of required challenge in Fig. \ref{fig:cmamultiattackrequiredcrp} are needed to obtain well performing models of the attacks.
 This is important, since otherwise with a growing number $\gls{k}$ the performance of the models would subside and the attack would not be successful.
 
-\todo{update values}
 \begin{figure}[ht]
 \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-approx.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
