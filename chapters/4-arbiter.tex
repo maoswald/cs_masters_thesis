@@ -310,6 +310,7 @@ for delay differences $\delta_{c_{i}}^{(i)}$ chosen by the bit of the challenge 
 As there are deviations in every component of the \puf when evaluating, noise needs to be modeled as well.
 Noise that occurs at the arbiter $\Delta D_{\mathrm{Noise Arbiter}}$ can be modeled as a randomly drawn value of a normal distribution with zero mean and given variance $\sigmaANoise^2$ depending only on the used electronic component. %+
 % While the variance of the normal distribution where the value for the total stage noise $\Delta D_{\mathrm{Noise Stage}}$ is chosen of depends beside the used electronic component on the number of stages of the \apuf as their particular noise value distributions add up.
+It is a common approach to use normally distributed random values for the path delay values and all noise values \cite{Delvaux2013SideNoise,Ganji2015WhyPUFs,Ruhrmair2010ModelingFunctions}.
 
 Noise that occurs at every path in every stage of the \apuf can be jointly drawn from a single normal distribution.
 This normal distribution has mean zero and variance scaling relative to the number of stages of the \apuf, as the sum of normally distributed stage noise is normally distributed itself.

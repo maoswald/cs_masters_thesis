@@ -3,23 +3,27 @@
 
 \begin{abstract}
 
-Geheime Schlüssel sind die elementare Basis für Schutzziele der Informationssicherheit, wie z.B. Verschlüsselung oder Authentifizierung, und müssen aus diesem Grund vor Fremdzugriffen geschützt werden.
-Physical Unclonable Functions bieten diesen Schutz durch ihre intrinsischen Abweichungen, die zur Ableitung von geheimen Schlüsseln genutzt werden können.
-Diese Abweichungen sind eindeutig für eine Instanz und an jedes Gerät fest gekoppelt, wodurch außerdem eine Identifizierung von einzelnen Geräten möglich ist.
+Geheime Schlüssel sind die elementare Basis für Schutzziele der Informationssicherheit, wie z. B. Verschlüsselung oder Authentifizierung, und müssen aus diesem Grund vor Fremdzugriffen geschützt werden.
+Physical Unclonable Functions (\acsp{PUF}) sollen diesen Schutz durch intrinsische Abweichungen ihrer Hardware, welche zur Ableitung von geheimen Schlüsseln genutzt werden können, bieten.
+Sind diese Abweichungen eindeutig für eine Instanz und an jedes Gerät fest gekoppelt, wie es das Konzept von PUFs vorsieht, ist außerdem eine Identifizierung von einzelnen Geräten möglich.
 
-Arbiter PUFs und XOR Arbiter PUFs können jedoch mittels Machine Learning Angriffen erfolgreich angegriffen werden.
+% Arbiter PUFs und XOR Arbiter PUFs können jedoch mittels Machine Learning Angriffen erfolgreich angegriffen werden.
+% Machine Learning Angriffe nutzen Ein- und Ausgabepaare der zu angreifenden PUF, um ein Model dieser zu bilden.
+% Das Model kann im Anschluss für das Vorhersagen von Ausgaben zu neuen Eingaben, der angegriffenen PUF, genutzt werden.
+% Um diese Angriffe zu verhindern, wird das Prinzip Majority Vote in Kombination mit Arbiter PUFs angewandt.
+% Sein Einfluss auf die Stabilität von Arbiter PUFs und XOR Arbiter PUFs wird mit Hilfe von Simulationen verifiziert.
+% Zusätzlich wird der Erfolg von relevanten Angriffen auf Majority Arbiter PUFs und Majority XOR Arbiter PUFs untersucht.
+Jedoch können bestimmte PUFs mittels Machine Learning Angriffen erfolgreich angegriffen werden.
 Machine Learning Angriffe nutzen Ein- und Ausgabepaare der zu angreifenden PUF, um ein Model dieser zu bilden.
-%old: Das Model kann anschließend genutzt werden kann, um für neue Eingaben Ausgaben der angegriffenen PUF vorherzusagen.
-Das Model kann im Anschluss für das Vorhersagen von Ausgaben zu neuen Eingaben,  der angegriffenen PUF, genutzt werden.
-Um diese Angriffe zu verhindern, wird das Prinzip Majority Vote in Kombination mit Arbiter PUFs angewandt.
-Sein Einfluss auf die Stabilität von Arbiter PUFs und XOR Arbiter PUFs wird mit Hilfe von Simulationen verifiziert.
-Zusätzlich wird der Erfolg von relevanten Angriffen auf Majority Arbiter PUFs und Majority XOR Arbiter PUFs untersucht.
-%old: Es wird gezeigt, dass es möglich ist durch die Kombination von majority vote und Arbiter PUFs große Majority XOR Arbiter PUFs zu realisieren, die resistent gegenüber allen zu dieser Zeit bekannten nichtinvasiven Angriffen ist.
+Das Model kann im Anschluss für das Vorhersagen von Ausgaben zu neuen Eingaben, der angegriffenen PUF, genutzt werden.
+Arbiter PUFs und kleine XOR Arbiter PUFs können somit erfolgreich angegriffen werden wohingegen große XOR Arbiter PUFs resistent wären, aber durch Instabilität unbrauchbar sind.
+
+Um diese Angriffe zu verhindern, wird das Prinzip Majority Vote in Kombination mit Arbiter PUFs, die für XOR Arbiter PUFs genutzt werden, angewandt.
+Sein Einfluss auf die Stabilität von Arbiter PUFs, XOR Arbiter PUFs und relevante Angriffe wird mit Hilfe von Simulationen verifiziert.
 Es wird gezeigt, dass Realisierungen von großen Majority XOR Arbiter PUFs durch die Kombination von Majority Vote und Arbiter PUFs möglich ist.
-Diese sind resistent gegenüber allen zu dieser Zeit bekannten nichtinvasiven Angriffen.
-Aus diesem Grund können große Majority XOR Arbiter PUFs das Fundament zum Erreichen vieler Sicherheitsziele bilden.
-
-
-
+Darüber hinaus wird nachgewiesen, dass für große Majority XOR Arbiter PUFs die Komplexität der Angriffe exponentiell steigt bei einem linearen Wachstum ihrer Größe.
+Aus diesem Grund können große Majority XOR Arbiter PUFs als Fundament für Machine Learning resistente PUFs dienen.
+% Aus diesem Grund können große Majority XOR Arbiter PUFs das Fundament zum Erreichen vieler Sicherheitsziele bilden.
+Da sie dennoch anfällig für invasive Angriffe sind, ist es ihnen nicht möglich einen allumfassenden Schutz für geheime Schlüssel zu bieten.
 
 \end{abstract}

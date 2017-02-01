@@ -12,20 +12,37 @@
 
 % The simulation shows that the robustness of \apufs ascends magnificent with the new majority based approach....
 
-Since secret keys are used as basis for several security features, as e.g.\ encryption or authentication, there is a need to protect them from unauthorised access.
+Since secret keys are used as basis for several security features, e.g.\ encryption or authentication, there is a need to protect them from unauthorized access.
 %\pufs use intrinsic imperfections that can not be red out easily and provide the possibility to derive secret keys for the purpose of e.g. identification of them.
-Physical unclonable functions fulfill this need with the possibility to derive secret keys of their intrinsic imperfections that can be used but not be read out easily.
-These imperfections are unique to ever instance and linked inseparable with the device.
-As a result they can be used to securely identify devices.
+Physical unclonable functions (\acsp{PUF}) ought to fulfill this need with the possibility to derive secret keys of their intrinsic hardware imperfections that can be used but not be read out easily.
+These imperfections are supposed to be unique to every instance and linked inseparable with the device.
+If that is true, they can be used to securely identify devices.
 
-Nevertheless, Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF} can be successfully attacked by machine learning attacks.
-Machine learning attacks in combination with a certain amount of \aclp{CRP} make it possible to create models, which can be used to predict responses for new challenges.
-To counteract these attacks, the principle of \acl{MV} is applied to Arbiter \acsp{PUF}.
+% Nevertheless, Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF} can be successfully attacked by machine learning attacks.
+% Non-invasive machine learning attacks in combination with a certain amount of \aclp{CRP} make it possible to create models of certain \acsp{PUF}, which can be used to predict responses for new challenges.
+
+
+% Nevertheless, non-invasive machine learning attacks in combination with a certain amount of \aclp{CRP} make it possible to create models of certain \acsp{PUF}, which can be used to predict responses for new challenges.
+% To prevent these attack 
+
+Nevertheless, certain \acsp{PUF} can be successfully attacked by machine learning attacks.
+Machine learning attacks in combination with a feasible amount of \aclp{CRP} make it possible to create models of  Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF}, which can be used to predict responses for new challenges.
+Large \acs{XOR} Arbiter \acsp{PUF} would prevent these attacks, but suffer instability.
+
+% For that reason, the principle of \acl{MV} is applied to Arbiter \acsp{PUF} to enhance their stability with make large \xpufs, that suffer instability when growing large, to prevent the attack.
+
+
+
+To counteract these instabilities, the principle of \acl{MV} is applied to Arbiter \acsp{PUF} that are used in \acs{XOR} Arbiter \acsp{PUF}.
 % Its impacts on the stability of \pufs and relevant attacks are verified by simulations.
-Its impacts on the stability of Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF} are verified by simulations.
-Furthermore, relevant attacks are applied to Majority Arbiter \acsp{PUF} and Majority \acs{XOR} Arbiter \acsp{PUF} to study their success.
-This work shows that \acl{MV} combined with Arbiter \acsp{PUF} enable large Majority \acs{XOR} Arbiter \acsp{PUF} that resist all by this time known non-invasive attacks.
-Thus, large Majority \acs{XOR} Arbiter \acsp{PUF} can constitute as foundation to meet the goals of many security features.
+% Its impacts on the stability of Arbiter \acsp{PUF} and \acs{XOR} Arbiter \acsp{PUF} are verified by simulations.
+% Furthermore, relevant attacks are applied to Majority Arbiter \acsp{PUF} and Majority \acs{XOR} Arbiter \acsp{PUF} to study their success.
+Its impacts on the stability of Arbiter \acsp{PUF}, \acs{XOR} Arbiter \acsp{PUF}, and relevant attacks are verified by simulations.
+It is shown that \acl{MV} enables large Majority \acs{XOR} Arbiter \acsp{PUF}.
+Furthermore, this work verifies that large Majority \acs{XOR} Arbiter \acsp{PUF} increase the complexity of an attack exponentially by linear growth.
+% This work shows that \acl{MV} combined with Arbiter \acsp{PUF} enable large Majority \acs{XOR} Arbiter \acsp{PUF} that increase the complexity of an attack exponentially by linear growth.
+Thus, large Majority \acs{XOR} Arbiter \acsp{PUF} can constitute as foundation for machine learning attack resistant \acsp{PUF}.
+Since they are vulnerable by invasive attacks, they are not able to completely protect secret keys.
 
 % old with acronyms
 % Since secret keys are used as basis for several security features, as e.g. encryption or authentication, there is a need to protect them.

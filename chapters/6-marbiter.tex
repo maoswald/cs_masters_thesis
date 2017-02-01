@@ -9,7 +9,7 @@ To overcome the stability problem of \xpufs, mentioned in Sec. \ref{sec:xorarbit
 The concept of \ac{MV} has been already mentioned by Ruhrmair et al. \cite{Ruhrmair2013PUFData}.
 Though, they did not further investigate its impact on the possibility to build large \xpufs. %+
 \ac{MV} can also be used by the attacker as a technique to obtain responses with high stability of a \puf when required \cite{Ganji2016PACPUFs, Ozturk2008TowardsDevices}.
-As the attacks of this thesis are not based on \ac{MV}, this purpose of \ac{MV} is not part of this thesis.
+As the attacks of this work are not based on \ac{MV}, this purpose of \ac{MV} is not part of this thesis.
 
 This section introduces the concept of \ac{MV} in combinations with \apufs.
 Afterwards, it is outlined how this combination is used to build large \xpufs.
@@ -41,9 +41,13 @@ To boost the stability of \xpufs, \ac{MV} is used for every single \apuf instead
 A \xpuf containing \mpufs instead of \apufs is named \mxpuf.
 
 The stability of the \xpuf increases with the increase of the stability of every \mpuf.
-As the stability decreases with higher $\gls{k}$, this has to be counteracted with a larger amount $\gls{m}$ of \acp{MV}.
-The principle of \ac{MV} makes it possible to build large \mxpufs. %+
-How these competing values are relate and how the stability values of the challenges for large \mxpufs are distributed will be examined in Chap. \ref{cap:stabilitysimulation}.
+As the stability decreases with higher $\gls{k}$, this has to be counteracted with a larger amount of $\gls{m}$ \acp{MV}.
+A theoretical proof by Wisiol et al. has showed that a polynomial increase of the number of \ac{MV} leads to an exponential growth of the stability of the \mxpuf \cite{Wisiol2017WhyPUFs}.
+% The principle of \ac{MV} makes it possible to build large \mxpufs. %+
+In this work we verify by simulation how this principle can be used to build large \mxpufs and how attacks are affected by that.
+% How these competing values are relate and how the stability values of the challenges for large \mxpufs are distributed will be examined in Chap. \ref{cap:stabilitysimulation}.
+A more detailed report on the relations between the stability values of the challenges for large \mxpufs will be examined in Chap. \ref{cap:stabilitysimulation}.
+
 
 \begin{figure}[ht]
 \centering
