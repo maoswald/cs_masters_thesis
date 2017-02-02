@@ -26,7 +26,8 @@ The attackers aim is to get the secret key to impersonate the entity the key bel
 Different attacks to get to know the key are possible.
 Intrusion into a system that stores the key via a connection or with physical access to the key storage device extracting the key are two examples for possible attacks \cite{IETF2000InternetGlossary,Skorobogatov2012PhysicalResistance}.
 
-Approaches like noninvasive memory, a memory specially protected against physical attacks, or one-way hash functions have been used so far to prevent those attacks \cite{Pappu2001PhysicalFunctions}. %+
+% Approaches like noninvasive memory, a memory specially protected against physical attacks, or one-way hash functions have been used so far to prevent those attacks \cite{Pappu2001PhysicalFunctions}. %+
+Approaches like secret key storage devices, a memory specially protected against physical attacks, or one-way hash functions have been used so far to prevent those attacks \cite{Pappu2001PhysicalFunctions}. %+
 A key, stored as hash of a one-way hash function, makes it harder for attackers to get to know the key. 
 Knowing the secret key, used as input of a one-way hash function, makes it is easy to calculate its hash that is stored to represent the key.
 To verify a given key, its hash is calculated by the hash function and compared with the stored hash.
@@ -71,7 +72,7 @@ It is explained why only one of the attacks is relevant to the combination of \x
 % Chap. \ref{cap:arbiter} explains the \apuf specifications before Chap. shows the modifications made to create the \mpuf.
 % After an overview to already applied attacks occurring in the current literature it is explained why only one of these attacks is relevant to the idea of \ac{MV}.
 
-To prove the possibility of large \mxpufs and to research the impacts of \ac{MV} on the attacks empirical, simulations of the \pufs and the attacks are build and described in Chap. \ref{cap:simulationdesign}. %+
+To prove the possibility of large \mxpufs and to research the impacts of \ac{MV} on the attacks empirical, simulations of the \pufs and the attacks are built and described in Chap. \ref{cap:simulationdesign}. %+
 The results of the simulations are laid out in Chap. \ref{cap:stabilitysimulation} and Chap. \ref{cap:attacksimulations}.
 Finally, a conclusion of the thesis summaries the results in Chap. \ref{cap:conclusion}.
 

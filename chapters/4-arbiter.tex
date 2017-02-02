@@ -3,7 +3,7 @@
 
 \apufs were introduced already in 2002 as new delay-based \puf \cite{Gassend2002SiliconFunctions}.
 Over the year 2016 they got more attention, since their implementation is resource-efficient and low cost \cite{Becker2014ActiveDesigns,Suh2007PhysicalGeneration}.
-However, there are still challenges due to the security concerns of classic \apufs, as described in Sec. \ref{sec:attacksonarbiter} \cite{Ganji2016PACPUFs, Ruhrmair2014PUFOverview}.
+However, there are still challenges due to the security concerns of classic \apufs, as described in Sec.\ \ref{sec:attacksonarbiter} \cite{Ganji2016PACPUFs, Ruhrmair2014PUFOverview}.
 
 The relatively simple design, compared to e.g.\ cellular nonlinear network \pufs, of \apufs makes it appealing to people to seek new improved possible varieties including the popular \xpuf, which will be presented in this section. %+
 % Due to new problems which occur with the design improvement of \xpufs it is impossible to realize them securely.
@@ -12,18 +12,18 @@ Due to challenges, which occur when combining a large amount of \apufs to a \xpu
 % old: Further, the success of attacks on \xpufs depends on their size, it is also not possible to build \xpufs that are secure and usable \cite{Ganji2015WhyPUFs}. %+
 Furthermore, the success of attacks on \xpufs depends on their size and as there is a limit it is also not possible to build \xpufs that are secure and usable \cite{Ganji2015WhyPUFs}. %+
 For these reasons there is still further improvement needed to call \apufs to be practically secure, even for enhanced versions like for example \xpufs.
-That is why I chose to study \apufs and \xpufs instead of other types of \pufs introduced in Sec. \ref{sec:typesofpufs} in this thesis.
+That is why I chose to study \apufs and \xpufs instead of other types of \pufs introduced in Sec.\ \ref{sec:typesofpufs} in this thesis.
 
 This sections starts with a description of how \apufs work and the differences of \xpufs.
 Subsequently, two models are explained. %+
-The first one gives an introduction on how \apufs can be physically build.
+The first one gives an introduction on how \apufs can be physically built.
 The second one defines the theoretical models of \apufs used to attack them later in this thesis.
 
 \section{\apufs}
 \label{sec:arbiter}
 
 The concept of an \apufs is based on the difference of the delays of two signals, which gets converted to a single bit response. 
-To implement this concept, an \apuf has multiple connected stages and an arbiter at the end, as shown in Figure \ref{fig:arbiter}.
+To implement this concept, an \apuf has multiple connected stages and an arbiter at the end, as shown in Fig.\ \ref{fig:arbiter}.
 
 Both signals propagate on parallel paths with the same layout length through all stages until they reach the arbiter.
 The arbiter then outputs the response bit depending on which input of the arbiter is triggered first by one of the signals. %+
@@ -74,17 +74,17 @@ Due to the internal noise, the PUF may return different responses when given the
 That is because challenges in combination with the different path delay values can result in a very small difference between the appearing signals on the arbiter. %+
 This small difference can be changed by the introduced noise or the arbiter can decide wrong due to its own noise every time the \apuf is queried and so the final response can be changed. %+
 
-Hence, every challenge has its own stability value, which is defined in Eq. (\ref{equ:stability}), and challenges with a lower stability value are called unstable.
+Hence, every challenge has its own stability value, which is defined in Eq.\ (\ref{equ:stability}), and challenges with a lower stability value are called unstable.
 Whether a challenge is called unstable, depends on its stability value and the limit within a challenge is defined as stable.
 This limit is not generally defined and can be set as needed.
 Is the stability value below this limit the challenge is called unstable.
 
 These are all parts to evaluate and to specify an \apuf.
-The \xpuf, which is build on \apufs, will be outlined in Sec. \ref{sec:xorarbiterpufs}.
-One way how an \apuf can be built and its possible internal structure will be presented in Sec. \ref{sec:physical}.
-%A more detailed description how it is build and what the physical features are will be presented in Sec. \ref{sec:physical}.
-The theoretical characterizations, a prerequisite for attacks, are part of Sec. \ref{sec:theoretical}.
-Successful attacks on \apufs have been already developed and will be mentioned in Sec. \ref{sec:attacksonarbiter}.
+The \xpuf, which is based on \apufs, will be outlined in Sec.\ \ref{sec:xorarbiterpufs}.
+One way how an \apuf can be built and its possible internal structure will be presented in Sec.\ \ref{sec:physical}.
+%A more detailed description how it is build and what the physical features are will be presented in Sec.\ \ref{sec:physical}.
+The theoretical characterizations, a prerequisite for attacks, are part of Sec.\ \ref{sec:theoretical}.
+Successful attacks on \apufs have been already developed and will be mentioned in Sec.\ \ref{sec:attacksonarbiter}.
 
 %========================================
 % n restriction by the size of the chip or costs \cite{Ganji2015WhyPUFs}
@@ -93,14 +93,14 @@ Successful attacks on \apufs have been already developed and will be mentioned i
 \label{sec:xorarbiterpufs}
 
 The \xpuf is one attempt to improve the security of \apufs and has been proposed by Suh and Devadas in 2007 \cite{Suh2007PhysicalGeneration}.
-It combines multiple individual \apufs with an \acf{XOR} function to a \xpuf, as shown in Figure \ref{fig:xorarbiter}.
+It combines multiple individual \apufs with an \acf{XOR} function to a \xpuf, as shown in Fig.\ \ref{fig:xorarbiter}.
 
-As the \ac{XOR} function is not a linear separable function, as defined in Chap. \ref{cap:mla}, it adds non-linearity to the \puf. 
+As the \ac{XOR} function is not a linear separable function, as defined in Chap.\ \ref{cap:mla}, it adds non-linearity to the \puf. 
 % https://en.wikipedia.org/wiki/Exclusive_or
 % https://www.quora.com/Why-cant-the-XOR-problem-be-solved-by-a-one-layer-perceptron
 This non-linearity increases the effort on the side of the attacker and makes machine learning attacks more difficult \cite{Becker2010OnBifurcation, Lim2005ExtractingCircuits}.
 % This non-linearity increases the complexity to make machine learning attacks more difficult since we can not prevent them \cite{Greibach2010OnBifurcation, Lim2005ExtractingCircuits}.
-Another approach to add non-linearity are Feed-forward \apufs proposed by Lim et al. \cite{Lim2005ExtractingCircuits}.
+Another approach to add non-linearity are Feed-forward \apufs proposed by Lim et al.\ \cite{Lim2005ExtractingCircuits}.
 
 \begin{figure}[ht]
 \centering
@@ -110,11 +110,11 @@ Another approach to add non-linearity are Feed-forward \apufs proposed by Lim et
 \label{fig:xorarbiter}
 \end{figure}
 
-Every \apuf operates in the manner of the characterization in Sec. \ref{sec:arbiter}. 
+Every \apuf operates in the manner of the characterization in Sec.\ \ref{sec:arbiter}. 
 To improve the security the \ac{XOR} function adds up all responses to hide the response of every single \apuf instance.
 If the attacker does not know the response of a single \apuf, he will not be able to separately attack every single \apuf of the \xpuf \cite{Becker2015ThePUFs}. %+
-% This protects the underling \apufs against direct attacks and if there are no more information revealed, e.g.\ though side channel attacks as described in Sec. \ref{sec:attacksonarbiter}, the attacker has to model the whole \xpuf to be successful.
-This protects the underling \apufs against direct attacks and under the condition that there are no more information revealed, through e.g.\ side channel attacks, as mentioned in Sec. \ref{sec:attacksonarbiter}, the attacker has to model the complete \xpuf at once to be successful.
+% This protects the underling \apufs against direct attacks and if there are no more information revealed, e.g.\ though side channel attacks as described in Sec.\ \ref{sec:attacksonarbiter}, the attacker has to model the whole \xpuf to be successful.
+This protects the underling \apufs against direct attacks and under the condition that there are no more information revealed, through e.g.\ side channel attacks, as mentioned in Sec.\ \ref{sec:attacksonarbiter}, the attacker has to model the complete \xpuf at once to be successful.
 
 
 The number of combined \apufs $\gls{k}$ has the following two impacts on the \puf.
@@ -126,10 +126,10 @@ The decrease of the stability of the entire \xpuf caused by using more \apufs is
 That leads to a maximum in the number of used \apufs for real applications, since they have to meet a certain stability for a reliable repeatability \cite{Rostami2014RobustMatching}.
 
 The stability of an \apuf designed on a 65 nm technology is supposed to be $96\ \%$ \cite{Rostami2014RobustMatching}.
-This relation between the production technology and the stability, as Rostami et al. mentioned, is not part of this work and will therefore not be further studied \cite{Rostami2014RobustMatching}. %+
-Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50\ \%$, as the noise of $4\ \%$ of every \apuf gets added up and is not usable, since the response is not stable reproducible, as Ganji et al. implied \cite{Ganji2015WhyPUFs}. %+
+This relation between the production technology and the stability, as Rostami et al.\ mentioned, is not part of this work and will therefore not be further studied \cite{Rostami2014RobustMatching}. %+
+Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50\ \%$, as the noise of $4\ \%$ of every \apuf gets added up and is not usable, since the response is not stable reproducible, as Ganji et al.\ implied \cite{Ganji2015WhyPUFs}. %+
 
-Yet Yu et al. suggested that the accumulation of the \apuf noise values to obtain the \xpuf noise value, done by Ganji et al., is not precise enough.
+Yet Yu et al.\ suggested that the accumulation of the \apuf noise values to obtain the \xpuf noise value, done by Ganji et al.\, is not precise enough.
 Accordingly, the stability of a \xpuf with $\gls{k} = 12$ is $67\ \%$ for an even lower stability of $95.7\ \%$ for the included \apufs \cite{Yu2016AAuthentication}. %+
 % Considering that, if there exists a limit for size $\gls{k}$ of a \xpuf, it will depend on the required stability and the stability of the used \apufs.
 Considering that, the limit for size $\gls{k}$ of a \xpuf depends on the required stability and the stability of the used \apufs.
@@ -148,7 +148,7 @@ It is so far unproved that each input bit of an \apuf has a different high likel
 But, by transforming the challenge in this way, the likelihood of every bit to affect the response becomes more balanced, which makes the \puf less predictable and more difficult to attack.
 
 As this challenge transformation is part of Lightweight \pufs, it will not be part of this work.
-For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoobi2008LightweightPUFs}.
+For more detailed information I refer the reader to Majzoobi et al.\ \cite{Majzoobi2008LightweightPUFs}.
 
 %========================================
 % Further points
@@ -167,19 +167,19 @@ An \apuf and so its intrinsic secret can be manifested in different ways.
 The following section explains a physical implementation of \apufs to provide an insight of \apuf implementations for real purpose. %+
 
 Furthermore, the theoretical models of \apufs are defined, since they are used by the simulation of \apufs.
-They serve also as representation for the results of attacks stated in Sec. \ref{cap:mla}.
-This representation is not unclonable as the values of the theoretical model are exposed and can be duplicated.
+They serve also as representation for the results of attacks stated in Sec.\ \ref{cap:mla}.
+This representation is not unclonable, as the values of the theoretical model are exposed and can be duplicated.
 
 % old:
 % The physical model is the description how \apufs can be built to use them for real purpose.
 % The theoretical model represents an \apuf and is used for simulations.
-% It serves thus as representation used as result of attacks explained in Sec. \ref{cap:mla}.
+% It serves thus as representation used as result of attacks explained in Sec.\ \ref{cap:mla}.
 % This representation is not unclonable as the values of the theoretical model are exposed and can be duplicated.
 
 \subsection{Physical}
 \label{sec:physical}
 
-For real world use cases \apufs have to be build as circuits to include them into devices.
+For real world use cases \apufs have to be built as circuits to include them into devices.
 There are different possible engineering techniques to realize them.
 An \ac{ASIC}, \ac{FPGA} or \ac{CPLD} are the most common ones \cite{Maes2012ExperimentalCMOS, Majzoobi2010FPGALines, Soybali2011ImplementationFPGA, Tajik2014PhysicalPUFs}.
 
@@ -201,30 +201,30 @@ In the compilation process the compiler determines, which physical gates on the 
 This defines the used circuit traces between the used gates and lead to asymmetric routes. %+ % makes exact symmetric routing in most cases not realizable.
 
 Asymmetries in routing means that the trace to connect two gates is different in its physical length to its parallel opponent.
-This can lead to bias in the mean of the distribution of the delay differences of an \apuf, explained in Sec. \ref{sec:arbiter}, making the responses predictable and introduces a lack of randomness \cite{Majzoobi2010FPGALines, Morozov2010AnFPGA}. %+
+This can lead to bias in the mean of the distribution of the delay differences of an \apuf, explained in Sec.\ \ref{sec:arbiter}, making the responses predictable and introduces a lack of randomness \cite{Majzoobi2010FPGALines, Morozov2010AnFPGA}. %+
 The variation of the traces can be even higher than the manufacturing variations of the stage implementations, so that the response is mainly decided by the routing delays instead of the different variation combination of the used stage paths \cite{Majzoobi2009TechniquesPUFs}.
 
 To counter these problems a concept of multiple combined \apuf called Double \apuf has been suggested \cite{Machida2015ImplementationFPGA, Machida2015AFPGA}.
 The \apufs, considered in this thesis, are implemented by \ac{ASIC}, as there are all necessary electronic components placed and connected freely.
-Accordingly, \apuf implementations in a \ac{ASIC} will be further studied.
+Accordingly, \apuf implementations in an \ac{ASIC} will be further studied.
 
 % old: 
 % The necessary components other than the conductor paths, whose layout have to be designed symmetric and of the same capacitive loads, are implementations of the stages and the arbiter \cite{Maes2012ExperimentalCMOS}.
-For \apuf implementations in a \ac{ASIC} all conductor paths have to have a symmetric layout with the same capacitive loads to prevent the named bias of the delay differences.
+For \apuf implementations in an \ac{ASIC} all conductor paths have to have a symmetric layout with the same capacitive loads to prevent the named bias of the delay differences.
 To implement the stages and the arbiter different electric components are required \cite{Maes2012ExperimentalCMOS}. %+
-For the hardware realization of a single stage two 2-to-1 \ac{MUX} are used, as suggested by Rührmair et al. \cite{Ruhrmair2013PUFData, Lee2004AApplications}.%+
+For the hardware realization of a single stage two 2-to-1 \ac{MUX} are used, as suggested by Rührmair et al.\ \cite{Ruhrmair2013PUFData, Lee2004AApplications}.%+
 
 There are analog or digital \ac{MUX} available. %+
 Their design differences lead to a greater delay in passing the signal to its output for digital \ac{MUX} compared to analog ones \cite{Mano2008Logicfundamentals}.
 Additional differences, e.g.\ clipping parts of a continuous signal when exceeding a specific voltage, do not apply here, since the \apuf has only sign signals \cite{Semiconductor2002BasicComparison}. %+
 
-The sign signal of an \apuf is the signal, which propagates through the stages of the \apuf, shown in Sec. \ref{sec:arbiter}.
+The sign signal of an \apuf is the signal, which propagates through the stages of the \apuf, shown in Sec.\ \ref{sec:arbiter}.
 It has two definite states, high and low, whereby high triggers the arbiter.
 Other values then high and low are not definite values of the signal and not used.
 % https://en.wikipedia.org/wiki/Square_wave
 
 Hence, both types of \ac{MUX} can be used unless they get mixed.
-Fig. \ref{fig:multiplexer} shows a single analog \ac{CMOS} \ac{MUX} and how two of them used to build a complete stage component. %+
+Fig.\ \ref{fig:multiplexer} shows a single analog \ac{CMOS} \ac{MUX} and how two of them used to build a complete stage component. %+
 The signals $\gls{s}_1$ and $\gls{s}_2$ are connected to the output $\gls{o}_1$ and $\gls{o}_2$ depending on the challenge bit $c_i$.
 Additional, there are some buffers used in the \ac{ASIC} design, which yet are not needed for understanding.
 
@@ -246,7 +246,7 @@ The ends of the stage chains are the same as the inputs of the arbiter. %+
 To provide this function a \ac{SR-latch} is used that can be realized in different ways with NOR, NAND, or AND-OR logic gates \cite{Mano2008Logicfundamentals}.
 Using NAND logic gates is the method of choice, since it has a symmetric construction and because of that it is unbiased \cite{Lin2010Low-powerFunctions,Maes2013PhysicallyApplications}.
 
-Fig. \ref{fig:nandarbiter} displays the switching circuit build with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{Mano2008Logicfundamentals}.
+Fig.\ \ref{fig:nandarbiter} displays the switching circuit built with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{Mano2008Logicfundamentals}.
 The internal states of the outputs $r$ and $rb$ are initial high. 
 A rising edge of a signal occurring on $\gls{s}_1$ will pull down $r$ and the other way round.
 The output states low or high are equal to the response values of the \puf $0$ or $1$. %+
@@ -263,7 +263,7 @@ NOR logic gates could be used likewise, as their \ac{SR-latch} implementation is
 \label{fig:nandarbiter}
 \end{figure}
 
-All presented \apuf \ac{ASIC} implementation properties are considered when creating the \apuf simulation in Sec. \ref{sec:pufsimulation}.
+All presented \apuf \ac{ASIC} implementation properties are considered when creating the \apuf simulation in Sec.\ \ref{sec:pufsimulation}.
 This work does not examine physical \apuf implementations further, since they are not needed for understanding of \ac{ML} attacks.
 
 %========================================
@@ -323,12 +323,19 @@ For that reason its random value is
 with mean $m = 0$ and variance $\sigma_{Stage Noise}^2$ per stage for $\gls{n}$ stages.
 Its standard deviation per stage adds up to the standard deviation of all stages $\sigmaASNoise$ of the \puf as follows:
 
+% Backup:
+% \begin{align*}
+% \sigmaASNoise = \sqrt[]{\sigmaASNoise^2} = \sqrt[]{n \cdot \sigmaSNoise^2} = \sqrt[]{n} \cdot \sqrt[]{\sigmaSNoise^2} = \sqrt[]{n} \cdot \sigmaSNoise.
+% % http://www.matheboard.de/archive/502880/thread.html
+% \end{align*}
 \begin{align*}
-\sigmaASNoise = \sqrt[]{\sigmaASNoise^2} = \sqrt[]{n \cdot \sigmaSNoise^2} = \sqrt[]{n} \cdot \sqrt[]{\sigmaSNoise^2} = \sqrt[]{n} \cdot \sigmaSNoise.
+\sigmaASNoise &= \sqrt[]{\sigmaASNoise^2}\\ 
+&= \sqrt[]{n \cdot \sigmaSNoise^2}\\
+&= \sqrt[]{n} \cdot \sqrt[]{\sigmaSNoise^2} = \sqrt[]{n} \cdot \sigmaSNoise.
 % http://www.matheboard.de/archive/502880/thread.html
 \end{align*}
 
-The introduced noise leads to unstable challenges, as explained in Sec. \ref{sec:arbiter}.
+The introduced noise leads to unstable challenges, as explained in Sec.\ \ref{sec:arbiter}.
 To define these unstable challenges precisely, we define the stability $\Stab(\gls{c})$ for challenge $\gls{c}$ to be
 
 \begin{align}
@@ -363,9 +370,9 @@ x_{n+1} &= 1. \label{equ:featurevector}
 \end{aligned}
 \end{equation}
 
-As in Sec. \ref{sec:xorarbiterpufs} introduced, \xpufs include $\gls{k}$ multiple \apufs whose single responses are combined by a \ac{XOR} function to the final response.
+As in Sec.\ \ref{sec:xorarbiterpufs} introduced, \xpufs include $\gls{k}$ multiple \apufs whose single responses are combined by a \ac{XOR} function to the final response.
 % The \ac{XOR} function is represented by an multiplication hence equation
-The \ac{XOR} function is represented by multiplication in the $\{-1,1\}^n$ challenge space
+The \ac{XOR} function is represented by multiplication in the $\{-1,1\}^n$ challenge space.
 Hence, we can model the response $\gls{r}$ of a \xpuf by
 
 \begin{align*}
@@ -373,9 +380,9 @@ r &= \prod_{i=1}^k \operatorname{sgn}(\Delta D_{\mathrm{Model}}^i(x)) = \prod_{i
 \end{align*}
 
 for the noise free \xpuf model.
-Since the challenge $\gls{c}$ is the same for all \apufs the feature vector $\gls{x}$ stays the same as well.
+Since the challenge $\gls{c}$ is the same for all \apufs, the feature vector $\gls{x}$ stays the same as well.
 The feature vector is applied to all \apufs and only the \apuf model $\gls{w}$ changes. %+
-Here introduced models are used in both to simulate attackable \apuf instances in Sec. \ref{sec:pufsimulation} and in the attacks on them in Sec. \ref{sec:machinelearningdesign}.
+Here introduced models are used in both to simulate attackable \apuf instances in Sec.\ \ref{sec:pufsimulation} and in the attacks on them in Sec.\ \ref{sec:machinelearningdesign}.
 
 %========================================
 
@@ -390,11 +397,11 @@ Here introduced models are used in both to simulate attackable \apuf instances i
 
 % Since \apufs were one of the most promising \puf implementation multiple attacks have been developed.
 % One of the first attacks reveals the internal values of the \apuf by linear programming \cite{Ozturk2008TowardsDevices}.
-% This approach solves a linear equation system after collecting enough \acp{CRP} because an \apuf can be represented as linear threshold function, as shown in Sec. \ref{sec:theoretical}.
+% This approach solves a linear equation system after collecting enough \acp{CRP} because an \apuf can be represented as linear threshold function, as shown in Sec.\ \ref{sec:theoretical}.
 % For a good result the stability of the responses of the \acp{CRP} should be as high as possible.
-% As the response of every \ac{CRP} includes some noise as explained in Sec. \ref{sec:physical} one strategy of the attacker is to reduce the noise by using majority vote, i.e. evaluating the same challenge multiple times and picking the most appeared response.
+% As the response of every \ac{CRP} includes some noise as explained in Sec.\ \ref{sec:physical} one strategy of the attacker is to reduce the noise by using majority vote, i.e. evaluating the same challenge multiple times and picking the most appeared response.
 % Therefor the attacker has to be able to evaluate chosen challenges.
-% Another option would be using an algorithm to learn noisy linear threshold function as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
+% Another option would be using an algorithm to learn noisy linear threshold function as Blum et al.\ showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
 
 % The linear programming attack is a non-invasive modeling attack where the attacker needs to collect \acp{CRP} to build a model of the \puf by for example a \ac{ML} algorithm.
 % After that the model can predict responses for new challenges which have not be used to create the model itself.
@@ -407,11 +414,11 @@ Here introduced models are used in both to simulate attackable \apuf instances i
 % For this reason I assume to have free access to the \puf and be able to measure \acp{CRP} without restrictions.
 % % difference machine learning to algebraic technique like linear programming \cite{Ruhrmair2014PUFOverview} Page 1
 
-% It has been shown by Rührmair et al. that \apufs can be successfully attacked resulting in a model with even higher stability as the \apuf in-silicon implementation has \cite{Ruhrmair2010ModelingFunctions}.
+% It has been shown by Rührmair et al.\ that \apufs can be successfully attacked resulting in a model with even higher stability as the \apuf in-silicon implementation has \cite{Ruhrmair2010ModelingFunctions}.
 % For these attacks he used \acp{SVM}, \ac{LR}, and \ac{ES} where \ac{LR} performed best in terms of predicting randomly chosen challenges.
 % Other techniques to create accurate \apuf models are \ac{ANN} and \ac{PAC} learning whereas \ac{PAC} is an analysis algorithm and not a \ac{ML} technique. 
 % \acp{ANN} need a relative large amount of \acp{CRP} to achieve a high prediction accuracy of new challenges \cite{Hospodar2012MachineUsability}.
-% The approach for a \ac{PAC} learning algorithm by Ganji et al. requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
+% The approach for a \ac{PAC} learning algorithm by Ganji et al.\ requires an \ac{DFA} based representation of \apufs to attack them successfully \cite{Ganji2016PACPUFs}.
 % A further attack is the reliability-based machine learning attack by Becker \cite{Becker2015ThePUFs}.
 % It is based on the reliability of the \puf responses rather than on their values. 
 % This in combination with an \ac{CMA-ES} algorithm makes it possible to create \apuf model with high accuracy.
@@ -419,7 +426,7 @@ Here introduced models are used in both to simulate attackable \apuf instances i
 % Beside these non-invasive modeling attacks are side channel attack possible.
 % As mentioned before, in real attack scenarios, the \puf response or a large set of \acp{CRP} is may be not available to the attacker so he has to obtain information differently.
 % As an example the photonic emission analysis attack where the attacker measures the evolved photons of the bottom side of the \apuf chip to reveal all its internal delay values \cite{Tajik2014PhysicalPUFs}.
-% With these values the attacker can create an exact model of the \apuf as explained in Sec. \ref{sec:theoretical}.
+% With these values the attacker can create an exact model of the \apuf as explained in Sec.\ \ref{sec:theoretical}.
 % Different combinations of machine learning attacks and side channel attacks have been proposed as well \cite{Mahmoud2013CombinedPUFs, Xu2014Hybrid}.
 % However, in this work I focus only on non-invasive machine learning attacks as they do not require physical access to the \apuf chip.
 
@@ -431,9 +438,9 @@ Here introduced models are used in both to simulate attackable \apuf instances i
 % Many attacks on \apufs can also be applied to \xpufs.
 % As main differences the attacks additionally have to cope with the added non-linearity by the \ac{XOR} function, the increasing number of \apufs, and the fact that the responses of all \apufs are not individually accessible.
 % The increasing number of \apufs make the time consumed by the attack and its growth rate an important factor for building secure \xpufs that can not be successfully modeled in reasonable time.
-% On the one hand, this time grows with the number of used \apufs for the most attacks exponentially and on the other hand, the size $\gls{k}$ of a \xpuf is limited by the growing total noise as explained in Sec. \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}.
+% On the one hand, this time grows with the number of used \apufs for the most attacks exponentially and on the other hand, the size $\gls{k}$ of a \xpuf is limited by the growing total noise as explained in Sec.\ \ref{sec:xorarbiterpufs} \cite{Ruhrmair2010ModelingFunctions}.
 % The reports about current effective attacks on \xpufs differ in the maximum size $\gls{k}$ by $4$ to $6$ \cite{Ganji2015WhyPUFs, Xu2014Hybrid}.
-% Under these conditions Ganji et al. developed a \ac{PAC} learning algorithm to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
+% Under these conditions Ganji et al.\ developed a \ac{PAC} learning algorithm to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
 % Using \ac{ANN} and \ac{SVM} proved to be rather inefficient when $\gls{k} > 2$ \cite{Hospodar2012MachineUsability}.
 % Equally bad performed the \ac{ES} attack.
 % However, the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.

@@ -3,7 +3,7 @@
 
 Different \ac{ML} attacks are used to attack \pufs.
 This section gives an overview of the techniques used in these attacks including the attack that is examined in this thesis. %+
-First, required the inputs for the \ac{ML} attacks and the problem they are solving are explained.
+First, the required inputs for the \ac{ML} attacks and the problem they are solving are explained.
 After that, each \ac{ML} technique is outlined by its own.
 
 The \ac{ML} attack creates a \puf model of the attacked \puf, which acts as binary classifier.
@@ -12,15 +12,16 @@ A binary classifier divides the samples, in the case of \pufs these are challeng
 % To build this model a training set $D = \{(z, e)_1, ..., (z,e)_i\}$ with samples $d = (z, e)_i$ that are already classified by the attacked \puf are required.
 % A sample $d$ is defined by its values $z$ and is classified into the class $e$. %+
 To build this model a training set $D = \{(z_1, e_1), ..., (z_i,e_i)\}$ is necessary, whereas the integer $i$ is the number of training set samples $d_i = (z_i, e_i)$ that are already classified by the attacked \puf.
-Let $l$ be the number of input values of a sample $d_i$ then is this sample defined by its values $z_i = (z_{i,1}, ...,z_{i,l})$ and is classified into the class $e_i$. 
+Let $l$ be the number of input values of a sample $d_i$.
+This sample is then defined by its values $z_i = (z_{i,1}, ...,z_{i,l})$ and is classified into the class $e_i$. 
 %+
 
 With that training set the model can be trained by the \ac{ML} algorithm.
-To evaluate the build model, a test set is build the same way and used to compare the output of the \puf model and the attacked \puf.
+To evaluate the built model, a test set is created the same way and used to compare the output of the \puf model and the attacked \puf.
 
-The most \pufs, know by the year 2014, which can be build by an electrical circuit, are related to internal values of the circuit \cite{Ruhrmair2014PUFOverview}.
+The most \pufs, known by the year 2014, which can be built by an electrical circuit, are related to internal values of the circuit \cite{Ruhrmair2014PUFOverview}.
 These values determine the response for a given challenge. %+
-The goal of the \ac{ML} attacks is to find a representation of these values, so that the build model classifies samples in the same way as the attacked \puf. % values b
+The goal of the \ac{ML} attacks is to find a representation of these values, so that the created model classifies samples in the same way as the attacked \puf. % values b
 How man samples of the test set the model classifies the same way as the \puf defines how precise the model has been trained. %+
 Accordingly, the values learned by the \ac{ML} attack do not have to be exact the same values that defined the attacked \puf to classify samples of a set the same way as the \puf.
 
@@ -68,14 +69,14 @@ As there are different modifications and configurations used, only the \ac{ML} a
 
 The \acf{ES} is an optimization technique that is inspired by the evolution process of the nature.
 In this process every species can adapt to the environmental conditions by changing its genes and only the fittest survive.
-From these fittest individuals the next generation will be build and inherits the attributes of their fittest parents genes. %+
+From these fittest individuals the next generation will be built and inherits the attributes of their fittest parents genes. %+
 
 This repeating process of classification by rating the fitness of every individual, inheriting the genes of the previous generation and modifying them leads to an approximation of the optimal solution for the specific environment.
 Every repetition of this evolutionary cycle counts as one generation and every individual represents a model with its own fitness value	\cite{Becker2015ThePUFs}. % wiki
 
 The model that is rated to be the fittest model after the last generation is the result of the algorithm and the best learned model by this time.
 It is also possible to approximate the at least optimal solution by letting the at least fittest survive. %+
-The procedure of the \ac{ES} attack, in the case of finding the optimal solution, is displayed in the Alg. \ref{alg:es}.
+The procedure of the \ac{ES} attack, in the case of finding the optimal solution, is displayed in the Alg.\ \ref{alg:es}.
 
 % \IncMargin{1em}
 \SetAlCapHSkip{0.2em}
@@ -103,11 +104,11 @@ To initialize the models of the first generation in line $1$, often random chose
 In the step of the lines $6$ and $7$ of the attack, it is determined how the number of models changes in the evolution process. %+
 There are options to define how many of the fittest models are selected and how many new models are created per generation.
 
-Additionally, in the step of creating the next generation it can be defined if models of the old generation should be kept and if new randomly created models should be added. %+
+Additionally, in the step of creating the next generation it can be defined if models of the old generation should be kept and if new randomly built models should be added. %+
 Adding new random models makes it possible for the attack to approximate a more optimal solution even if all models are already approximated to another solution \cite{Rechenberg1994EvolutionsstrategiePrinzipien}.
 Keeping old models ensures not to lose an individual of the previous generation, which outperforms the next generations models.
 
-How the models are modified in the beginning of every generation in line $3$ of the Alg. \ref{alg:es} is not specified.
+How the models are modified in the beginning of every generation in line $3$ of the Alg.\ \ref{alg:es} is not specified.
 One way of modification is to add a random chosen value to all values of the individual. %+
 The fitness function in line $4$ rates the fitness value of every individual and represents the above mentioned environmental conditions that the models get adapted to. %+
 
@@ -129,7 +130,7 @@ Nevertheless, it can approximate not linear separable problems and does not need
 \section{CMA-ES}
 \label{sec:cma-es}
 
-The \acf{CMA-ES} is based on the principles of the \ac{ES}, which is shown in Sec. \ref{sec:evolutionstrategies}.
+The \acf{CMA-ES} is based on the principles of the \ac{ES}, which is shown in Sec.\ \ref{sec:evolutionstrategies}.
 Additional, the \ac{CMA-ES} algorithm uses a covariance matrix to learn a second order model of the underlying function.
 
 For this reason every value that defines the model and is learned by the algorithm has its own distribution, which will be optimized.
@@ -155,7 +156,7 @@ To control the step size value the second evolution path is used.
 The step size is adjusted by \ac{CSA} that reduces the importance of a step with the increasing number of taken steps \cite{Chotard2012CumulativeFunctions}.
 This allows the algorithm to approximate the optimal solution fast and prevents the \ac{CMA-ES} algorithm from to early adaptations. 
 
-The \ac{CMA} is build to solve non-separable and ill-conditioned problems \cite{Hansen2011TheTutorial}.
+The \ac{CMA} is built to solve non-separable and ill-conditioned problems \cite{Hansen2011TheTutorial}.
 Problems are ill-conditioned when making little changes to their input lead to significant changes in their output \cite{Belsley1980RegressionCollinearity}.
 
 % principal components analysis
@@ -248,7 +249,7 @@ As a last point is has to be mentioned that the classification problems solved b
 
 The perceptron is a supervised learning algorithm of binary classifiers and the simplest form of an \ac{ANN} \cite{Rosenblatt1957TheAutomaton}. 
 
-In case of a single-layer perceptron the values $z_i$ of a sample $d_i$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec. \ref{sec:lr}.
+In case of a single-layer perceptron the values $z_i$ of a sample $d_i$, which is going to be classified, are combined with the weights $\beta =(\beta_1, ..., \beta_l)$ and a bias $\beta_0$ is added, similar to \ac{LR} shown in Sec.\ \ref{sec:lr}.
 However, the output value $f(z_i)$ of the perceptron is calculated by
 
 \begin{align*}
@@ -259,7 +260,7 @@ f(z_i) &= \begin{cases}
 \end{align*}
 
 and classifies the sample $d_i$ in the classes $0$ or $1$.
-To obtain the weights and the bias, which define the perceptron model, the model is trained by the Alg. \ref{alg:perceptron} and a training set with the samples $d_i$ and their desired output $e_i$.
+To obtain the weights and the bias, which define the perceptron model, the model is trained by the Alg.\ \ref{alg:perceptron} and a training set with the samples $d_i$ and their desired output $e_i$.
 
 \SetAlCapHSkip{0.2em}
 \begin{algorithm}[H]
