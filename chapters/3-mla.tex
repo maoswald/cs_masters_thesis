@@ -93,7 +93,7 @@ initialization of the models of the first generation\\
 modify all models\\
 rate fitness of all models\\
 sort all models by their fitness values\\
-select number of fittest models\\
+select number of the fittest models\\
 create new generation from selected models\\
 }
 \end{algorithm}
@@ -105,7 +105,7 @@ There are options to define how many of the fittest models are selected and how 
 
 Additionally, in the step of creating the next generation it can be defined if models of the old generation should be kept and if new randomly created models should be added. %+
 Adding new random models makes it possible for the attack to approximate a more optimal solution even if all models are already approximated to another solution \cite{Rechenberg1994EvolutionsstrategiePrinzipien}.
-Keeping old models ensures not to lose a individual of the previous generation, which outperforms the next generations models.
+Keeping old models ensures not to lose an individual of the previous generation, which outperforms the next generations models.
 
 How the models are modified in the beginning of every generation in line $3$ of the Alg. \ref{alg:es} is not specified.
 One way of modification is to add a random chosen value to all values of the individual. %+
@@ -113,7 +113,7 @@ The fitness function in line $4$ rates the fitness value of every individual and
 
 The sort function of line $5$ sorts the results by their fitness values.
 The \ac{ES} attack approximates an optimal solution if the models are sorted descending and vice versa. %+
-The attack ends when the termination criteria is fulfilled, which could be e.g.\ a maximum number of generations.
+An attack ends when a termination criteria is fulfilled, which could be e.g.\ a maximum number of generations.
 
 The \ac{ES} attack is a randomized algorithm and therefore does not always determines.
 Nevertheless, it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
@@ -142,16 +142,16 @@ To update the values used in the \ac{CMA-ES} algorithm two principles are applie
 
 The first principle is the maximum-likelihood method.
 It is used to maximize the likelihood of previous models with the highest fitness values when updating the mean values.
-When updating the covariance matrix the likelihood of previous search steps that lead to fitter models is increased.
+When updating the covariance matrix, the likelihood of previous search steps that lead to fitter models is increased.
 % principal components analysis
 
 The second principle captures two paths of the time progress of the distribution mean values.
 These two paths are called evolution paths.
-They are used to gain information on correlations between consecutive steps of the mean values modification.
+They are used to gaining information on correlations between consecutive steps of the mean values modification.
 The evolution paths becomes longer when consecutive step are taken in the same direction. %+
 The \ac{CMA} process uses the first path to promote longer paths, which represent preferred directions of the distribution mean values modification, by the possibility of a faster distribution variance increase. %+
 
-The second evolution path is used to control the step size value.
+To control the step size value the second evolution path is used.
 The step size is adjusted by \ac{CSA} that reduces the importance of a step with the increasing number of taken steps \cite{Chotard2012CumulativeFunctions}.
 This allows the algorithm to approximate the optimal solution fast and prevents the \ac{CMA-ES} algorithm from to early adaptations. 
 
@@ -175,7 +175,7 @@ It classifies samples into two categories with dividing their multidimensional s
 The number of dimensions of the space is defined by the number of values $z$ of the samples.
 The model is trained the way that it divides the two categories by the largest possible gap. %+
 To achieve this, the training algorithm maximizes the distance from the hyperplane to the nearest samples of each category.
-If there exists such a hyperplane, known as maximum-margin hyperplane, it will has the larges margin to the closest samples of both categories. %+
+If there exists such a hyperplane, known as maximum-margin hyperplane, it will have the larges margin to the closest samples of both categories. %+
 
 Not all samples have to be considered when training the model.
 Samples that are located behind other samples of the same classification and are more far away of the hyperplane do not affect the location of the hyperplane, since they never become the closest samples. %+
@@ -184,7 +184,7 @@ New samples are then predicted to belong to the same category as the samples tha
 A complete separation into two categories by a linear hyperplane is only possible if the training data is linear separable.
 To make it possible to classify non-linear problems \acp{SVM} use the kernel method. %+
 In doing so, all training data and the $z$ dimensional space is transformed to a space with a higher number of dimensions.
-Every data transformed into a space with enough higher number of dimensions is linear separable.
+All data transformed into a space with enough higher number of dimensions is linear separable.
 That can be even an infinite number of dimensions. %+
 The hyperplane is then determined in this higher dimensional space and transformed back to the original dimensional space where it represents a non-linear hyperplane. %+
 As these transformations are high in computational cost, the kernel method provides the possibility to define the hyperplane in a higher dimensional space and use it in the lower dimensional space without the transformations \cite{Cristianini2000AnMethods}.
@@ -229,7 +229,7 @@ To calculate the binary classification, the likelihood is then divided into the 
 
 The \ac{LR} model is defined by the weights $\beta + \beta_0$. % whereas the bias $\beta_0$ is the value which determines the likelihood $\Pr[Y = 1 | Z = z_i]$ when all values $z_i$ are zero. % https://en.wikipedia.org/wiki/Logistic_regression
 These weights must be estimated from the training data that includes already classified samples.
-A usually approach is the maximum likelihood estimation whereas the goal is that the likelihood, predicted by the \ac{LR} model, is very close to $1$ if the sample belongs to this class and the way round. %+
+A usual approach is the maximum likelihood estimation whereas the goal is that the likelihood, predicted by the \ac{LR} model, is very close to $1$ if the sample belongs to this class and the way round. %+
 
 The maximum likelihood estimation does that by minimizing the error in the likelihood predicted by the model for the training data. % Probably cut out http://machinelearningmastery.com/logistic-regression-for-machine-learning/
 For more detailed information I refer the reader to \cite{Aldrich1997RA1922}.

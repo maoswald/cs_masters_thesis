@@ -6,8 +6,7 @@ Consequently, it can be claimed that arbitrary large \xpufs would constitute a s
 This is possible because only linear enlargement of \xpufs will lead to exponential growth in attack effort, even with the fastest known attack.
 
 To overcome the stability problem of \xpufs, mentioned in Sec. \ref{sec:xorarbiterpufs}, which currently deter them from been enlarged we introduce the concept of \ac{MV} \cite{Majzoobi2010FPGALines}. %+
-The concept of \ac{MV} has been already mentioned by Ruhrmair et al. \cite{Ruhrmair2013PUFData}.
-Though, they did not further investigate its impact on the possibility to build large \xpufs. %+
+The concept of \ac{MV} has been already mentioned by Ruhrmair et al., though they did not further investigate its impact on the possibility to build large \xpufs \cite{Ruhrmair2013PUFData}. %+
 \ac{MV} can also be used by the attacker as a technique to obtain responses with high stability of a \puf when required \cite{Ganji2016PACPUFs, Ozturk2008TowardsDevices}.
 As the attacks of this work are not based on \ac{MV}, this purpose of \ac{MV} is not part of this thesis.
 
@@ -25,7 +24,7 @@ Afterwards, the most occurring response is the final response for that challenge
 We define the combination of \ac{MV} and \apuf to be a \mpuf.
 
 In this way the total number of unstable challenges, as explained in Sec. \ref{sec:arbiter}, gets reduced and the stability of the \apuf increases. %+
-Every challenge has a different stability, as defined in Eq. (\ref{equ:stability}).% which is the likelihood to not flip its response.
+Every challenge has a different stability, as defined in Eq. (\ref{equ:stability}). % which is the likelihood to not flip its response.
 These values vary between $50\ \%$ and $100\ \%$.
 The closer the value is to $50\ \%$, the more votes are necessary to get a more stable response for this challenge. %+
 Accordingly, how many votes are needed depends on the stability of the \apuf that is required. 
@@ -65,7 +64,8 @@ A more detailed report on the relations between the stability values of the chal
 % \label{sec:majoritybentarbiter}
 
 Beside the \ac{XOR} function other Boolean functions could be used to combine multiple \apuf.
-In addition to being a Boolean function it is important that the function obfuscates the single responses of the \apufs. Otherwise the \apufs are directly vulnerable to modeling attacks on \apufs.
+In addition to being a Boolean function it is important that the function obfuscates the single responses of the \apufs. 
+Otherwise, the \apufs are directly vulnerable to modeling attacks on \apufs.
 % [https://en.wikipedia.org/wiki/Avalanche_effect#Strict_avalanche_criterion]
 % Bent functions are a type of Boolean function which meets these requirements for example. 
 % They are highly non-linear which is desired in this case as the \apuf itself is linear and can therefore badly resist machine learning attacks.

@@ -43,9 +43,9 @@ For a physical \apuf implementation, the distribution of the delay difference va
 The ratio between $\sigmaSNoise$ and $\sigmaModel$ and the value of $\sigmaANoise$ can affect the stability of the challenges of the \apuf by promoting wrong \puf evaluations if the noise is relatively high.
 As this work studies the impact of adding \ac{MV} to \apufs in a comparison, the real value of the ratio does not matter.
 The impact of changing the ratio is not part of this work and could be the subject of another thesis. 
-Though, it crucial to not change the ratio during the simulation to obtain results that are comparable.
+Yet it is crucial to not change the ratio during the simulation to obtain results that are comparable.
 
-The response of the \apuf model is simulated by Eqs. (\ref{equ:pufmodelc}) or (\ref{equ:pufmodelw}) before the noise values are added.
+The response of the \apuf model is simulated by Eq. (\ref{equ:pufmodelc}) or Eq. (\ref{equ:pufmodelw}) before the noise values are added.
 All other implementations of \puf concepts used in this thesis, e.g.\ the \mpuf, are based on these \apuf equations.
 For the attack simulation of the \ac{CMA-ES} attack Eq. (\ref{equ:pufmodelw}) is used, since the delay vector $\gls{w}$ is approximated, as outlined in Sec. \ref{sec:machinelearningdesign}.
 
@@ -128,7 +128,7 @@ h_i &= |\frac{j}{2} - \sum_{l = 1}^{j}r_l|. \label{equ:reliability}
 
 %old: In Eq. (\ref{equ:reliability}) it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with the same response $r$, either $0$ or $1$, for all $j$ times of evaluations. %+
 In Eq. (\ref{equ:reliability}) it can be seen that the reliability value of a challenge $c$ has its maximum of $\frac{j}{2}$ when the \puf evaluates with all $\gls{r}_i$, $i \le j$, are simultaneously $0$ or $1$, for all $j$ times of evaluations. %+
-A challenges that evaluates one or more times of $j$ evaluations to a different response as the other responses has a lowered reliability and is called unreliable challenge.
+A challenge that evaluates one or more times of $j$ evaluations to a different response as the other responses has a lowered reliability and is called unreliable challenge.
 Consequently, $h = (h_1, ..., h_v)$ is the reliability vector of $v$ challenges from the training set evaluated by the attacked \puf.
 
 Becker's fitness function uses also the hypothetical reliability values of challenges evaluated by the modeled \pufs.
@@ -151,7 +151,7 @@ g_i &=
 \end{equation}
 
 The hypothetical reliability categorizes every challenge for the model defined by $w$ into hypothetical reliable and hypothetical unreliable. %+
-The challenge is defined to be hypothetical reliable when its delay difference computed by $\langle w, \gls{x} \rangle$ is greater than the error boundary $\epsilon$ and results in $g_i = 1$.
+A challenge is defined to be hypothetical reliable when its delay difference computed by $\langle w, \gls{x} \rangle$ is greater than the error boundary $\epsilon$ and results in $g_i = 1$.
 The challenge is defined to be hypothetical unreliable when its delay difference is lower than the error boundary $\epsilon$ and results in $g_i = 0$. %+
 This relies on the facilitation of a low delay difference value being changed by noise, which results in a different sign of the value and thus a different response, as outlined in Sec. \ref{sec:arbiter}. 
 
@@ -169,7 +169,7 @@ The hypothetical reliability vector is $g = (g_1, ..., g_v)$ for $v$ evaluated c
 As last step Becker's fitness function computes the Pearson correlation coefficient between the reliability values $\gls{h}_i$ and the hypothetical reliability values $g_i$ of all challenges evaluated by the attacked \puf.
 The number of evaluated challenges by the attacked \puf is the size of the training set, which is outlined in Chap. \ref{cap:mla}.
 The correlation coefficient represents the linear dependency of the vectors to each other.
-For the attack it is assumed that a higher linear dependency between these vectors means a more well performing model. %+
+For the attack it is assumed that a higher linear dependency between these vectors implies a more well performing model. %+
 The attacked \puf is approximated by adapting its reliability behavior of the responses of every evaluated challenge.
 The correlation coefficients are computed of the combinations between the one reliability vector and all hypothetical reliability vectors of all models that exist in the current generation of the algorithm.
 
@@ -222,7 +222,7 @@ After all models are created and their fitness rated, they are sorted descending
 
 Since the \ac{ES} algorithm requires a selection process of the fittest models in every generation, this is done by the \ac{CMA}.
 The \ac{CMA} adapts the values that are used for creating new models in the next generation by the values of models of the current generation in line 11 and 12. %+
-The descending sorted models of the current generation are combined with weights to rank their importance for adapting these values.
+Descending sorted models of the current generation are combined with weights to rank their importance for adapting these values.
 The impact of a model on the values, used to create the models of the next generation, depends on its fitness value through these weights.
 This makes sure that the algorithm approximates fitter models.
 

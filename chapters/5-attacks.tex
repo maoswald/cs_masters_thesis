@@ -10,7 +10,7 @@ Both methods can then be used to impersonate the attacked \puf.
 This section first names attacks on \apufs occurring in the current literature.
 It separates them into different classes of attacks to distinguish the attacks studied in this work from other attacks.
 Then attacks on \xpufs and their success are mentioned.
-Finally the relevant attacks for this thesis are named in addition to the reasons for their choice.
+Finally, the relevant attacks for this thesis are named in addition to the reasons for their choice.
 
 %========================================
 
@@ -27,7 +27,7 @@ Therefore, the attacker has to be able to evaluate chosen challenges. %+
 Another option is using an algorithm to learn noisy linear threshold function, as Blum et al. showed can be done in polynomial time \cite{Blum1998AlgorithmicaNoisy}.
 
 The linear programming attack is a non-invasive modeling attack where the attacker needs to collect \acp{CRP} to build a model of the \puf for example by a \ac{ML} algorithm.
-Subsequently, the model can predict responses for new challenges, which have not be used to create the model itself.
+Subsequently, the model can predict responses for new challenges, which have not been used to create the model itself.
 How precise these predictions are depends on the number of captured \acp{CRP} and used parameters to build the model. %+
 The result and the model building performance vary for different \ac{ML} techniques.
 How the attacker gets to know the \acp{CRP} in a real use case depends on the way the \puf is used and the \acp{CRP} transmitted and is therefore not part of this work. %+
@@ -81,7 +81,7 @@ The reports about current effective attacks on \xpufs differ in the maximum size
 
 Under these conditions Ganji et al. developed a \ac{PAC} analysis algorithm to successfully model \xpufs \cite{Ganji2015WhyPUFs}.
 Using \ac{ANN} and \ac{SVM} proved to be rather inefficient when $\gls{k} > 2$ \cite{Hospodar2012MachineUsability}.
-Equally bad performed the \ac{ES} attack.
+Equal bad performed the \ac{ES} attack.
 However, the \ac{LR} algorithm is able to model \xpufs of size $k \le 6$ by $n = 64$ \cite{Ruhrmair2010ModelingFunctions}.
 
 % All attacks mentioned so far grow exponentially in their execution time for linear increasing $k$.

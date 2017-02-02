@@ -58,14 +58,14 @@ One stage for itself has 4 different signal paths:
 
 Nevertheless, there are just two combinations possible, as the stage input is a Boolean value.
 Either its top input to top output and bottom output to bottom output or its top input to bottom output and bottom input to top output.
-These combinations leads to the delay differences $\gls{t}_0 - \gls{t}_1 = \delta_0$ and $\gls{t}_2 - \gls{t}_3 = \delta_1$ for the possible input 0 or 1 per stage. %+
+These combinations lead to the delay differences $\gls{t}_0 - \gls{t}_1 = \delta_0$ and $\gls{t}_2 - \gls{t}_3 = \delta_1$ for the possible input 0 or 1 per stage. %+
 Additional, to the delay differences, which remain constant, deviations are occurring during the \apuf is queried.
 These deviations are noise and one way to model them is to use two distinct random variables.
 Both variables are normally distributed with mean zero and can be described as follows:
 
 \begin{itemize}
 \item At every stage of the \apuf, additionally to the chosen delay differences $\delta_0$ or $\delta_1$, normally distributed noise with zero mean and give variance occurs.
-\item At the arbiter normally distributed noise with zero mean and given variance leads to a different output of the comparison some of the time.
+\item At the arbiter normally distributed noise with zero mean and given variance leads to a different output of the comparison sometimes.
 \end{itemize}
 
 % This internal noise leads to a certain amount of so called ‘‘unstable’’ challenges for a specific \apuf. 
@@ -81,7 +81,7 @@ Is the stability value below this limit the challenge is called unstable.
 
 These are all parts to evaluate and to specify an \apuf.
 The \xpuf, which is build on \apufs, will be outlined in Sec. \ref{sec:xorarbiterpufs}.
-One way how a \apuf can be built and its possible internal structure will be presented in Sec. \ref{sec:physical}.
+One way how an \apuf can be built and its possible internal structure will be presented in Sec. \ref{sec:physical}.
 %A more detailed description how it is build and what the physical features are will be presented in Sec. \ref{sec:physical}.
 The theoretical characterizations, a prerequisite for attacks, are part of Sec. \ref{sec:theoretical}.
 Successful attacks on \apufs have been already developed and will be mentioned in Sec. \ref{sec:attacksonarbiter}.
@@ -93,7 +93,7 @@ Successful attacks on \apufs have been already developed and will be mentioned i
 \label{sec:xorarbiterpufs}
 
 The \xpuf is one attempt to improve the security of \apufs and has been proposed by Suh and Devadas in 2007 \cite{Suh2007PhysicalGeneration}.
-It combines multiple individual \apufs with a \acf{XOR} function to a \xpuf, as shown in Figure \ref{fig:xorarbiter}.
+It combines multiple individual \apufs with an \acf{XOR} function to a \xpuf, as shown in Figure \ref{fig:xorarbiter}.
 
 As the \ac{XOR} function is not a linear separable function, as defined in Chap. \ref{cap:mla}, it adds non-linearity to the \puf. 
 % https://en.wikipedia.org/wiki/Exclusive_or
@@ -129,7 +129,7 @@ The stability of an \apuf designed on a 65 nm technology is supposed to be $96\ 
 This relation between the production technology and the stability, as Rostami et al. mentioned, is not part of this work and will therefore not be further studied \cite{Rostami2014RobustMatching}. %+
 Using $12$ \apufs in a \xpuf leads to a total stability of approximately $50\ \%$, as the noise of $4\ \%$ of every \apuf gets added up and is not usable, since the response is not stable reproducible, as Ganji et al. implied \cite{Ganji2015WhyPUFs}. %+
 
-Though, Yu et al. suggested that the accumulation of the \apuf noise values to obtain the \xpuf noise value, done by Ganji et al., is not precise enough.
+Yet Yu et al. suggested that the accumulation of the \apuf noise values to obtain the \xpuf noise value, done by Ganji et al., is not precise enough.
 Accordingly, the stability of a \xpuf with $\gls{k} = 12$ is $67\ \%$ for an even lower stability of $95.7\ \%$ for the included \apufs \cite{Yu2016AAuthentication}. %+
 % Considering that, if there exists a limit for size $\gls{k}$ of a \xpuf, it will depend on the required stability and the stability of the used \apufs.
 Considering that, the limit for size $\gls{k}$ of a \xpuf depends on the required stability and the stability of the used \apufs.
@@ -148,7 +148,7 @@ It is so far unproved that each input bit of an \apuf has a different high likel
 But, by transforming the challenge in this way, the likelihood of every bit to affect the response becomes more balanced, which makes the \puf less predictable and more difficult to attack.
 
 As this challenge transformation is part of Lightweight \pufs, it will not be part of this work.
-For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoobi2008LightweightPUFs} .
+For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoobi2008LightweightPUFs}.
 
 %========================================
 % Further points
@@ -164,7 +164,7 @@ For more detailed information I refer the reader to Majzoobi et al. \cite{Majzoo
 
 An \apuf and so its intrinsic secret can be manifested in different ways.
 % In this work the physical model and theoretical model are studied. %+
-This sections explains a physical implementation of \apufs to provide an insight of \apuf implementations for real purpose. %+
+The following section explains a physical implementation of \apufs to provide an insight of \apuf implementations for real purpose. %+
 
 Furthermore, the theoretical models of \apufs are defined, since they are used by the simulation of \apufs.
 They serve also as representation for the results of attacks stated in Sec. \ref{cap:mla}.
@@ -184,7 +184,7 @@ There are different possible engineering techniques to realize them.
 An \ac{ASIC}, \ac{FPGA} or \ac{CPLD} are the most common ones \cite{Maes2012ExperimentalCMOS, Majzoobi2010FPGALines, Soybali2011ImplementationFPGA, Tajik2014PhysicalPUFs}.
 
 The solution provided by an \ac{ASIC} fits the logical layout of an \apuf best and is therefore the most accurate one. %+
-Though, for development purpose this technique is very expensive.
+Yet for development purpose this technique is very expensive.
 Every time the layout changes a new wafer as core of an \ac{ASIC} has to be produced.
 This manufacturing process is very costly and mainly used for the final product.
 Consequently, \ac{ASIC} are used when high quantities of chips is needed.
@@ -201,7 +201,7 @@ In the compilation process the compiler determines, which physical gates on the 
 This defines the used circuit traces between the used gates and lead to asymmetric routes. %+ % makes exact symmetric routing in most cases not realizable.
 
 Asymmetries in routing means that the trace to connect two gates is different in its physical length to its parallel opponent.
-This can lead to bias in the mean of the distribution of the delay differences of a \apuf, explained in Sec. \ref{sec:arbiter}, making the responses predictable and introduces a lack of randomness \cite{Majzoobi2010FPGALines, Morozov2010AnFPGA}. %+
+This can lead to bias in the mean of the distribution of the delay differences of an \apuf, explained in Sec. \ref{sec:arbiter}, making the responses predictable and introduces a lack of randomness \cite{Majzoobi2010FPGALines, Morozov2010AnFPGA}. %+
 The variation of the traces can be even higher than the manufacturing variations of the stage implementations, so that the response is mainly decided by the routing delays instead of the different variation combination of the used stage paths \cite{Majzoobi2009TechniquesPUFs}.
 
 To counter these problems a concept of multiple combined \apuf called Double \apuf has been suggested \cite{Machida2015ImplementationFPGA, Machida2015AFPGA}.
@@ -288,7 +288,7 @@ The final response $\gls{r}$ is then calculated by the signum function of the su
 r &= \operatorname{sgn}(\Delta D_{\mathrm{Model}}(c) + \Delta D_{\mathrm{Noise Stage}} + \Delta D_{\mathrm{Noise Arbiter}}). \label{equ:pufresponse}
 \end{align}
 
-The model $\Delta D_{\mathrm{Model}}(c)$, which is the noise free \apuf representation, is the sum of all delay differences chosen according to the current challenge $\gls{c}$.
+The model $\Delta D_{\mathrm{Model}}(c)$, which is the noise free \apuf representation, is the sum of all delay differences that are chosen to accord with the current challenge $\gls{c}$.
 % As the signal propagates though every stage after another each delay difference of the sum depends on all following challenge bits including its own.
 The sign of delay difference of every stage in the sum depends on the challenge bit of the current stage and all following stages. %+
 The current stage and every following stage could swap the signals and change the final response.
@@ -339,7 +339,7 @@ To define these unstable challenges precisely, we define the stability $\Stab(\g
 For a realistic model of an \apuf, noise has to added, as described. 
 However, the noise free model $\Delta D_{\mathrm{Model}}(c)$ is the part with the hidden information, which an attacker want to expose. %+
 As widely common and used in attacks on \apuf, the noise free model can be specified in a case-distinction-free form and as linear function of dimension $\gls{n} + 1$ also called linear threshold function \cite{Majzoobi2008TestingSecurity, Majzoobi2008LightweightPUFs, Ruhrmair2010ModelingFunctions, Becker2015ThePUFs, Gassend2004IdentificationCircuits, Ganji2016PACPUFs}.
-An equally representation is used in this work to attack different types of \apufs.
+An equal representation is used in this work to attack different types of \apufs.
 The function is definite by
 
 \begin{align}

@@ -10,7 +10,7 @@ This section presents the results of the simulations to verify the success of th
 First, the dependency between the number of vote used for \ac{MV} and the number of collected unreliable challenges is examined, as the attack is based on the unreliability of challenges.
 % old: After that, the success of the normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to build the \mxpuf.
 The normal reliability based \ac{CMA-ES} attack is part of the combined attack on \mxpufs and attacks the underlying \mpufs.
-Hence, in the simulation the success of this normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to build the \mxpuf.
+Hence, in the simulation the success of this normal reliability based \ac{CMA-ES} attack on \mpufs in comparison to \apufs is evaluated, since they are used to building the \mxpuf.
 Finally, the \ac{CMA-ES} attack is applied to \xpufs and \mxpufs of different size to study whether \ac{MV} can prevent the attack through enabling large \mxpufs. 
 
 % same configuration as for stability simulation, repeat and ref
@@ -85,9 +85,9 @@ However, the linear course of the graph, showed by the logarithmic Fig. \ref{fig
 \label{fig:cmamajorityvotemeasurementrelationloglog}
 \end{figure}
 
-The slight difference between the graphs in both figures shows that increasing the number of evaluation $\gls{j}$ does not necessarily provides more challenges with lowered reliability $\gls{h}$.
+The slight difference between the graphs in both figures shows that increasing the number of evaluation $\gls{j}$ does not necessarily provide more challenges with lowered reliability $\gls{h}$.
 Without \ac{MV} there is a little increase of found challenges with lowered reliability $\gls{h}$.
-Though, with applying \ac{MV} this increase disappears with growing $\gls{m}$.
+Yet with applying \ac{MV} this increase disappears with growing $\gls{m}$.
 
 The results presented in this section verify that the number of unreliable challenges decreases with an increase of used \ac{MV} votes.
 Despite the use of \ac{MV}, unreliable challenges are occurring.
@@ -190,13 +190,13 @@ Finally, the modifications of the preconditions for the attack and the according
 To gain comparable results the simulation uses the same preconditions for the attacks on \xpufs and \mxpufs.
 All \pufs in this simulation have $n = 32$ stages.
 The number of challenges in the training set increases linear with the growth of the number of $k$ \apufs or $k$ \mpufs.
-The simulations starts with $5000$ training set challenges for $k = 2$ and doubles the number of training set challenges for the double number of $k$.
+The simulations start with $5000$ training set challenges for $k = 2$ and doubles the number of training set challenges for the double number of $k$.
 All training set challenges are individually randomly chosen for all attacks.
 
 A test set is used to evaluate the performance of the learned model.
 The attack is successful when the learned model evaluates $80\ \%$ of the test set challenges correct and thus is defined to perform well.
-The test set contains $2000$ individually randomly chosen challenges for all measurements, since only the complexity of the attack grows for a similar results.
-The number of $5000$ training set challenges in combination with $2000$ test set challenges were chosen for the reason that attacks on \xpufs with $k = 2$ and $k = 4$ with accordingly $10000$ training set challenges were able to build well performing models.
+The test set contains $2000$ individually randomly chosen challenges for all measurements, since only the complexity of the attack grows for similar results.
+A number of $5000$ training set challenges in combination with $2000$ test set challenges were chosen for the reason that attacks on \xpufs with $k = 2$ and $k = 4$ with accordingly $10000$ training set challenges were able to build well performing models.
 
 % Backup:
 % \begin{figure}[ht]
@@ -218,7 +218,7 @@ The number of $5000$ training set challenges in combination with $2000$ test set
 	\fi
 \fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
-\caption[Proportion of correct evaluated test set challenges for \acs{XOR} Arbiter \puf models and Majority \acs{XOR} Arbiter \puf models]{Proportion of correct evaluated test set challenges of \xpuf models and \mxpuf models. All values are average values of 10 independent attacks. The number of used training set challenges and votes $\gls{m}$ is chosen according to the Tab. \ref{tab:cmamultinumbervotes}. The test set contains for all attack $2000$ challenges.}
+\caption[Proportion of correct evaluated test set challenges for \acs{XOR} Arbiter \puf models and Majority \acs{XOR} Arbiter \puf models]{Proportion of correct evaluated test set challenges of \xpuf models and \mxpuf models. All values are average values of 10 independent attacks. The number of used training set challenges and votes $\gls{m}$ is chosen to accord with the Tab. \ref{tab:cmamultinumbervotes}. The test set contains for all attack $2000$ challenges.}
 \label{fig:cmamultiattackmodelperformance}
 \end{figure}
 
@@ -229,10 +229,10 @@ Since the attack is not deterministic, only attack executions that approximate w
 The number of required attack executions for a successful attack are similar for all attacks on \xpufs.
 % In the case of \mxpufs the number of attack executions needed to obtain a well performing model rose significant for $k = 4$ and $k = 6$.
 In the case of \mxpufs the number of attack executions needed to obtain a well performing model rose between $k = 3$ and $k = 4$ by the factor $5$.
-Though, for $k = 4$ and $k = 6$ similar numbers of attack executions per well performing model are necessary.
+Yet for $k = 4$ and $k = 6$ similar numbers of attack executions per well performing model are necessary.
 
 The numbers of \ac{MV} votes $\gls{m}$ used for the \mxpufs in Fig. \ref{fig:cmamultiattackmodelperformance} are determined by the results of the simulations in Sec. \ref{sec:majorityvotegrowth}.
-This simulations approximated the required numbers of votes to gain stable large \mxpufs, which means to reach $\Pr[\protect\Stab(\gls{c}) \ge 95\ \%] \ge 95\ \%$, for different $\gls{k}$.
+These simulations approximated the required numbers of votes to gain stable large \mxpufs, which means to reach $\Pr[\protect\Stab(\gls{c}) \ge 95\ \%] \ge 95\ \%$, for different $\gls{k}$.
 In Tab. \ref{tab:cmamultinumbervotes} the used values $\gls{m}$ for different values of $\gls{k}$ and the number of training set challenges that are similar to \xpufs and \mxpufs are displayed.
 
 \begin{table}[ht]
