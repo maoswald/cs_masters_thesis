@@ -1,8 +1,6 @@
 \chapter{Attack Simulation}
 \label{cap:attacksimulations}
 
-% point out comparison better! check whole chapter
-
 % old: The combined reliability based \ac{CMA-ES} is the only attack, which is claimed to have a linear increasing complexity for successful attacks on \xpufs that grow linear in their number of used \apufs, as explained in Sec. \ref{sec:essentialattacks} \cite{Becker2015ThePUFs}.
 The combined reliability based \ac{CMA-ES} is the only attack, which is claimed to have a linear increasing complexity for successful attacks on \xpufs of arbitrary size, as indicated in Sec. \ref{sec:essentialattacks} \cite{Becker2015ThePUFs}.
 Successfully attacked here means to build a model that can predict $80\ \%$ of the challenges from a test set, which contains randomly chosen challenges, correct.
@@ -34,19 +32,54 @@ Accordingly, Fig. \ref{fig:cmamajorityvotemeasurementrelation} shows the relatio
 In this case, a lowered reliability is already reached if a challenge $\gls{c}$ evaluates one or multiple times different to the rest of the $\gls{j}$ evaluations and is thus called unreliable.
 There are four line graphs for the different numbers of evaluations $\gls{j}$.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Proportion of unreliable challenges]{Proportion of unreliable challenges for different values of $\gls{m}$ \acp{MV}. The different line graphs represent the number of evaluations $\gls{j}$ in $200, 400, 800, 1600$. The slight distance between the graphs in the beginning shows the very little increase of found unreliable challenges with increasing number of evaluations $\gls{j}$ and how this gap resolves with introducing of \ac{MV}.}
+% \label{fig:cmamajorityvotemeasurementrelation}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Proportion of unreliable challenges]{Proportion of unreliable challenges for different values of $\gls{m}$ \acp{MV}. The different line graphs represent the number of evaluations $\gls{j}$ in $200, 400, 800, 1600$. The slight distance between the graphs in the beginning shows the very little increase of found unreliable challenges with increasing number of evaluations $\gls{j}$ and how this gap resolves with introducing of \ac{MV}.}
 \label{fig:cmamajorityvotemeasurementrelation}
 \end{figure}
 
+
 % Old and wrong: The raising gradient of all four graphs could lead to the same assumption display the subsiding impact of \ac{MV} with rising $\gls{m}$ as explained in Sec. \ref{sec:stabilityimprovementbymajorityvote}.
 The raising gradient of all four graphs could lead to the same assumption of the subsiding impact of \ac{MV} with rising $\gls{m}$, as mentioned in Sec. \ref{sec:stabilityimprovementbymajorityvote}.
 However, the linear course of the graph, showed by the logarithmic Fig. \ref{fig:cmamajorityvotemeasurementrelationloglog}, suggest that this is not the case and supports the result of Sec. \ref{sec:stabilityimprovementbymajorityvote}.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges_loglog.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Proportion of unreliable challenges logarithmic]{The line graphs show the proportions of unreliable challenges for different values of $\gls{m}$ \acp{MV} similar to Fig. \ref{fig:cmamajorityvotemeasurementrelation} yet in logarithmic scale. The linear course of the graphs suggest that there is no decline of the stability improving impact of \ac{MV} with increasing $\gls{m}$ used for \mpufs.}
+% \label{fig:cmamajorityvotemeasurementrelationloglog}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges_loglog.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges_loglog.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/mv-measurements-unstableChallenges_loglog_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Proportion of unreliable challenges logarithmic]{The line graphs show the proportions of unreliable challenges for different values of $\gls{m}$ \acp{MV} similar to Fig. \ref{fig:cmamajorityvotemeasurementrelation} yet in logarithmic scale. The linear course of the graphs suggest that there is no decline of the stability improving impact of \ac{MV} with increasing $\gls{m}$ used for \mpufs.}
 \label{fig:cmamajorityvotemeasurementrelationloglog}
@@ -83,8 +116,25 @@ The growing gradient of the graph shows the growing exponential increase of need
 From $\gls{m} = 80$ \acp{MV} on the gradient of the graph is greater than $1$.
 Hence, the slope of the number of attack executions is greater than the polynomial degree $1$.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Needed \acs{CMA-ES} attack executions for \mpufs]{Number of attack executions per approximation to a well performing model. A well performing model evaluates $80\ \%$ of the $10000$ test set \acp{CRP} correct. The rising gradient of the graph shows the growing exponential increase of the number of attack executions.}
+% \label{fig:cmasingleattackcorrelation}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correlation_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Needed \acs{CMA-ES} attack executions for \mpufs]{Number of attack executions per approximation to a well performing model. A well performing model evaluates $80\ \%$ of the $10000$ test set \acp{CRP} correct. The rising gradient of the graph shows the growing exponential increase of the number of attack executions.}
 \label{fig:cmasingleattackcorrelation}
@@ -95,8 +145,25 @@ The graph displays how the proportion of correct evaluated challenges $\gls{c}$ 
 This indirect correlation implies that with growing number of \ac{MV} $\gls{m}$ the proportion of the correct evaluated challenges $\gls{c}$ of the test set decreases for well performing models build by the \ac{CMA-ES} attack.
 The values of both Fig. \ref{fig:cmasingleattackcorrelation} and Fig. \ref{fig:cmasingleattackcorrectness} are average values of minimum $10$ well performing models.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Proportion of correct evaluated test set challenges for Arbiter \puf models and Majority Arbiter \puf models]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by a \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
+% \label{fig:cmasingleattackcorrectness}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/single-mv-classification-cma-attack-correctness_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Proportion of correct evaluated test set challenges for Arbiter \puf models and Majority Arbiter \puf models]{Proportion of correct evaluated test set \acp{CRP} of a well performing model build by a \ac{CMA-ES} attack. The linear decrease of the graph shows the decrease of the proportion of correct evaluated challenges $\gls{c}$ by a well performing model. The values used are average values of minimum $10$ well performing model or at least $2000$ attack executions.}
 \label{fig:cmasingleattackcorrectness}
@@ -131,8 +198,25 @@ The attack is successful when the learned model evaluates $80\ \%$ of the test s
 The test set contains $2000$ individually randomly chosen challenges for all measurements, since only the complexity of the attack grows for a similar results.
 The number of $5000$ training set challenges in combination with $2000$ test set challenges were chosen for the reason that attacks on \xpufs with $k = 2$ and $k = 4$ with accordingly $10000$ training set challenges were able to build well performing models.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-performance.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Proportion of correct evaluated test set challenges for \acs{XOR} Arbiter \puf models and Majority \acs{XOR} Arbiter \puf models]{Proportion of correct evaluated test set challenges of \xpuf models and \mxpuf models. All values are average values of 10 independent attacks. The number of used training set challenges and votes $\gls{m}$ is chosen according to the Tab. \ref{tab:cmamultinumbervotes}. The test set contains for all attack $2000$ challenges.}
+% \label{fig:cmamultiattackmodelperformance}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-performance.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-performance.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-performance_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Proportion of correct evaluated test set challenges for \acs{XOR} Arbiter \puf models and Majority \acs{XOR} Arbiter \puf models]{Proportion of correct evaluated test set challenges of \xpuf models and \mxpuf models. All values are average values of 10 independent attacks. The number of used training set challenges and votes $\gls{m}$ is chosen according to the Tab. \ref{tab:cmamultinumbervotes}. The test set contains for all attack $2000$ challenges.}
 \label{fig:cmamultiattackmodelperformance}
@@ -181,8 +265,25 @@ To study the success of the attack on \mxpufs, we approximate the required train
 In Fig. \ref{fig:cmamultiattackrequiredcrp} a comparison between the required training set challenges of the attack on \xpufs and \mxpufs is shown.
 The raising gradient of the graph states the exponential increase in demanded \acp{CRP} for a successful attack on \mxpufs that use the according number of votes $\gls{m}$, as display in Tab. \ref{tab:cmamultinumbervotes}.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-crps.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Number of used training set challenges]{Number of used training set challenges to attack different \pufs. The necessary number of training set challenges for well performing model with a continuous performance are approximated by binary search.}
+% \label{fig:cmamultiattackrequiredcrp}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-crps.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-crps.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-crps_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Number of used training set challenges]{Number of used training set challenges to attack different \pufs. The necessary number of training set challenges for well performing model with a continuous performance are approximated by binary search.}
 \label{fig:cmamultiattackrequiredcrp}
@@ -195,8 +296,25 @@ Then the average proportion of correct evaluated test set challenges by the well
 The continuous high performance of the models, which are learned with the approximated number of training set challenges, shows that the large increase of required challenge in Fig. \ref{fig:cmamultiattackrequiredcrp} are needed to obtain well performing models of the attacks.
 This is important, since otherwise with a growing number $\gls{k}$ the performance of the models would subside and the attack would not be successful.
 
+% Backup:
+% \begin{figure}[ht]
+% \includegraphics[width=1.00\textwidth]{images/xor-cma-attack-approx.pdf}
+% % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
+% \caption[Proportion of correct evaluated test set challenges for Majority \acs{XOR} \puf models with approximated required number of training set challenges]{Proportion of correct evaluated test set challenges of well performing models trained with an approximated number of training set challenges. To measure the performance of the model a test set with $2000$ \acp{CRP} is used and the results are compared with the results of the attack simulations of Fig. \ref{fig:cmamultiattackmodelperformance}. The number of used training set challenges is displayed by Fig. \ref{fig:cmamultiattackrequiredcrp}.}
+% \label{fig:cmamultiattackmvmodelperformance}
+% \end{figure}
+
 \begin{figure}[ht]
-\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-approx.eps}
+\ifx\coloredfigures\undefined
+\todo{Defined variable coloredfigures to be 0 or 1}
+\else
+	\if\coloredfigures1
+	\centering
+	\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-approx.pdf}
+	\else
+	\includegraphics[width=1.00\textwidth]{images/xor-cma-attack-approx_mono.pdf}
+	\fi
+\fi
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
 \caption[Proportion of correct evaluated test set challenges for Majority \acs{XOR} \puf models with approximated required number of training set challenges]{Proportion of correct evaluated test set challenges of well performing models trained with an approximated number of training set challenges. To measure the performance of the model a test set with $2000$ \acp{CRP} is used and the results are compared with the results of the attack simulations of Fig. \ref{fig:cmamultiattackmodelperformance}. The number of used training set challenges is displayed by Fig. \ref{fig:cmamultiattackrequiredcrp}.}
 \label{fig:cmamultiattackmvmodelperformance}
