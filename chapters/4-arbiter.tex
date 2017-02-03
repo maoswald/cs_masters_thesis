@@ -33,6 +33,7 @@ If the bit is 0, both signals will flow parallel through the stage.
 If the bit is 1, the stage will swap the signal flow.
 So the paths for the signals through the stages exclusively depends on the challenge $\gls{c} = (c_1, c_2, \cdots, c_n)$.
 
+\vspace{0.25cm}
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1.00\textwidth]{images/arbiter_puf.eps}
@@ -102,6 +103,7 @@ This non-linearity increases the effort on the side of the attacker and makes ma
 % This non-linearity increases the complexity to make machine learning attacks more difficult since we can not prevent them \cite{Greibach2010OnBifurcation, Lim2005ExtractingCircuits}.
 Another approach to add non-linearity are Feed-forward \apufs proposed by Lim et al.\ \cite{Lim2005ExtractingCircuits}.
 
+\vspace{0.25cm}
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1.00\textwidth]{images/xor_arbiter.eps}
@@ -228,6 +230,7 @@ Fig.\ \ref{fig:multiplexer} shows a single analog \ac{CMOS} \ac{MUX} and how two
 The signals $\gls{s}_1$ and $\gls{s}_2$ are connected to the output $\gls{o}_1$ and $\gls{o}_2$ depending on the challenge bit $c_i$.
 Additional, there are some buffers used in the \ac{ASIC} design, which yet are not needed for understanding.
 
+\vspace{0.10cm}
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.70\textwidth]{images/stage_circuit.eps}
@@ -246,14 +249,8 @@ The ends of the stage chains are the same as the inputs of the arbiter. %+
 To provide this function a \ac{SR-latch} is used that can be realized in different ways with NOR, NAND, or AND-OR logic gates \cite{Mano2008Logicfundamentals}.
 Using NAND logic gates is the method of choice, since it has a symmetric construction and because of that it is unbiased \cite{Lin2010Low-powerFunctions,Maes2013PhysicallyApplications}.
 
-Fig.\ \ref{fig:nandarbiter} displays the switching circuit built with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{Mano2008Logicfundamentals}.
-The internal states of the outputs $r$ and $rb$ are initial high. 
-A rising edge of a signal occurring on $\gls{s}_1$ will pull down $r$ and the other way round.
-The output states low or high are equal to the response values of the \puf $0$ or $1$. %+
-Ensured by the cross-coupling, only one competing transition can win and the symmetric layout prevents circuit design based bias.
-NOR logic gates could be used likewise, as their \ac{SR-latch} implementation is also symmetric.
-
-\begin{figure}[ht]
+\vspace{0.10cm}
+\begin{figure}[H]
 \centering
 \includegraphics[width=0.80\textwidth]{images/arbiter_circuit.eps}
 % \noindent\includegraphics[width=1.00\textwidth, height=3cm, draft]{example-image-a}
@@ -262,6 +259,13 @@ NOR logic gates could be used likewise, as their \ac{SR-latch} implementation is
 \caption[Arbiter circuit]{Arbiter switching circuit realized with \ac{CMOS} NAND gates. The outputs $r$ and $rb$ start with the initial state high. If signal $\gls{s}_1$ appears first, the output $r$ will change to low, whereas $rb$ stays high. If signal $\gls{s}_2$ arrives first, it will behave the other way round.}
 \label{fig:nandarbiter}
 \end{figure}
+
+Fig.\ \ref{fig:nandarbiter} displays the switching circuit built with two cross-coupled \ac{CMOS} NAND gates for an arbiter \cite{Mano2008Logicfundamentals}.
+The internal states of the outputs $r$ and $rb$ are initial high. 
+A rising edge of a signal occurring on $\gls{s}_1$ will pull down $r$ and the other way round.
+The output states low or high are equal to the response values of the \puf $0$ or $1$. %+
+Ensured by the cross-coupling, only one competing transition can win and the symmetric layout prevents circuit design based bias.
+NOR logic gates could be used likewise, as their \ac{SR-latch} implementation is also symmetric.
 
 All presented \apuf \ac{ASIC} implementation properties are considered when creating the \apuf simulation in Sec.\ \ref{sec:pufsimulation}.
 This work does not examine physical \apuf implementations further, since they are not needed for understanding of \ac{ML} attacks.

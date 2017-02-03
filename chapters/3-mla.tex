@@ -80,7 +80,7 @@ The procedure of the \ac{ES} attack, in the case of finding the optimal solution
 
 % \IncMargin{1em}
 \SetAlCapHSkip{0.2em}
-\begin{algorithm}[H] % t let them float - H argument forces the algorithm to stay in place
+\begin{algorithm}[ht] % t let them float - H argument forces the algorithm to stay in place
 \Indm
 \SetAlgoLined
 \caption{\acl{ES}}
@@ -118,7 +118,8 @@ An attack ends when a termination criteria is fulfilled, which could be e.g.\ a 
 
 The \ac{ES} attack is a randomized algorithm and therefore does not always determines.
 Nevertheless, it can approximate not linear separable problems and does not need a differentiable model \cite{Ruhrmair2010ModelingFunctions}.
-	
+\pagebreak
+
 %========================================
 % The computation time required by ES is determined by the following factors: \cite{Ruhrmair2013PUFData}
 % ES is a randomized method that neither requires an (approximately) linearly separable problem (like Support VectorMachines), nor a differentiable model (such as LR with gradient descent); a merely param- eterizable model suffic. \cite{Ruhrmair2010ModelingFunctions}
