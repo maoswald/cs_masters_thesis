@@ -10,15 +10,15 @@ Depending on the aim, different parts can be considered more extensively.
 
 Despite the clear principles of \apufs, a way to create them as circuit has only been summarized.
 For real physical implementations the required electronic components and their interplay has to be examined.
-Possibilities to overcome the problems that \ac{FPGA} implementations of \apufs face can be an issue of research.
+Possibilities to overcome the problems that \ac{FPGA} implementations of \apufs face is be an issue of research \cite{Majzoobi2010FPGALines,Morozov2010AnFPGA,Machida2015AFPGA,Machida2015ImplementationFPGA}.
 % Apart from more modified versions of \apufs, e.g.\ loop \pufs, other types of \pufs can  be interesting alternatives to study the field of physical implementations \cite{Jouini2013EvaluationFPGA}.
-Apart from modified versions of \apufs, other types of \pufs, e.g.\ controlled \pufs, can be interesting alternatives to study in the field of physical implementations.
+Apart from modified versions of \apufs, other types of \pufs, e.g.\ controlled \pufs, can be interesting alternatives to study in the field of physical implementations \cite{Gassend2007ControlledFunctions}.
 
-This work focus on a specific class of attacks on \pufs.
-The field of \ac{ML} attacks received more attention in the last three year \cite{Google2017MachineTrends}.
+This work focuses on a specific class of attacks on \pufs.
+The field of \ac{ML} attacks received more attention in the last three years \cite{Google2017MachineTrends}.
 For this reason and in combination with a continuous raising available processing power, more \ac{ML} attack possibilities that are worth examining can occur in the future.
 Another field of study are invasive attacks that can be applied to real \puf implementations.
-How successful these attacks are and how \pufs can be protected are still crucial topics of research for using \pufs in the real world.
+The success of those attacks and how \pufs can be protected are still crucial topics of research for using \pufs in the real world.
 
 The security of all \pufs is based on their intrinsic information, which they contain.
 Yet the entropy of this information does not serve as attribute to compare their security quality \cite{Ruhrmair2010ModelingFunctions}.
@@ -33,20 +33,24 @@ In addition, \pufs are not clear defined and due to this a question of research 
 \section{Final Comments}
 
 To conclude this thesis, we would like to point out the main insights that have been disclosed.
-Started with the principle of \ac{MV} applied to \apufs and \xpufs to improve their stability and resistance against successful attacks.
-The idea behind \ac{MV} is to evaluate the same \puf multiple times, whereas the most occurring response the final response is.
+The principle of \ac{MV} applied to \apufs and \xpufs has been introduced to improve their stability and resistance against successful attacks.
+The idea behind \ac{MV} is to evaluate the same \puf multiple times, where the most occurring response the final response is.
 
-By simulation, it was verified that with the concept of \ac{MV} it becomes possible to build large stable \mxpufs.
-All non-invasive attacks, known by the year 2017, on \xpufs can thus be prevented by increasing their complexity exponentially through a linear growth of the number of used \mpufs.
-As a consequence, large \mxpufs are machine learning resistant \pufs.
+By simulations, it was verified that with the concept of \ac{MV} it becomes possible to build large stable \mxpufs.
+All non-invasive attacks on \xpufs, known at the time of writing, can thus be prevented by increasing their complexity exponentially through a linear growth of the number of used \mpufs.
+As a consequence, large \mxpufs are resistant to all known machine learning attacks.
 
 This gives the opportunity to use them as physical implementation of one-way hash functions or secret key memory to keep a key secret.
 Many goals of the information security base on the secrecy of the key.
 Hence, preventing machine learning attacks creates a foundation to met these goals and to keep connections, data, and other things that are worth protecting secure.
 
-However, certain is that there exist no absolute secure system.
-In addition, capabilities of attackers raise as well and allegedly secure systems become vulnerable.
-As an example, the design of the studied \apuf includes no additional protection against invasive attacks.
+However, it is certain is that there exist no absolute secure system.
+In addition, capabilities of attackers raise as well as allegedly secure systems become vulnerable through e.g.\ new attacks that may show up.
+% In contrast, new security proofs 
+On the contrary, new security proofs could reveal the security of systems.
+% In this thesis machine learning attacks known by the time of writing are studied and physical attacks on \apufs were 
+Yet physical attacks, as an alternative to machine learning attacks, were possible by the time of writing and often not considered by the design of systems \cite{Tajik2014PhysicalPUFs,Tajik2015Laserfunctions}.
+As an example, the design of the studied \apuf includes no additional protection against invasive attacks \cite{Tajik2015AFamily}.
 With that said there is still a lot to improve till most of the vulnerabilities can be controlled.
 \pufs are one way to help us reach a greater level of security.
 

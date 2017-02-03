@@ -3,9 +3,14 @@
 
 \begin{abstract}
 
-Geheime Schlüssel sind die elementare Basis für Schutzziele der Informationssicherheit, wie z. B. Verschlüsselung oder Authentifizierung, und müssen aus diesem Grund vor Fremdzugriffen geschützt werden.
+Geheime Schlüssel sind die elementare Basis für Schutzziele der Informationssicherheit, wie z.\ B.\ Verschlüsselung oder Authentifizierung, und müssen aus diesem Grund vor Fremdzugriffen geschützt werden.
 Physical Unclonable Functions (\acsp{PUF}) sollen diesen Schutz durch intrinsische Abweichungen ihrer Hardware, welche zur Ableitung von geheimen Schlüsseln genutzt werden können, bieten.
-Sind diese Abweichungen eindeutig für eine Instanz und an jedes Gerät fest gekoppelt, wie es das Konzept von \acsp{PUF} vorsieht, ist außerdem eine Identifizierung von einzelnen Geräten möglich.
+% old: Sind diese Abweichungen eindeutig für eine Instanz und an jedes Gerät fest gekoppelt, wie es das Konzept von \acsp{PUF} vorsieht, ist außerdem eine Identifizierung von einzelnen Geräten möglich.
+% old: Diese Abweichungen können einfach zur Schlüsselableitung genutzt werden, sind jedoch sehr schwer auszulesen.
+Diese Abweichungen sind einfach zu nutzen, jedoch schwer auszulesen.
+Es besteht eine große Chance, dass die Abweichungen, die fest an die jeweiligen Geräte gekoppelt sind, eindeutig für eine Instanz des Gerätes sind.
+Trifft dies zu, ist eine eindeutige Identifizierung einzelner Geräte möglich.
+
 
 % Arbiter \acsp{PUF} und \acs{XOR} Arbiter \acsp{PUF} können jedoch mittels Machine Learning Angriffen erfolgreich angegriffen werden.
 % Machine Learning Angriffe nutzen Ein- und Ausgabepaare der zu angreifenden PUF, um ein Model dieser zu bilden.
@@ -15,11 +20,11 @@ Sind diese Abweichungen eindeutig für eine Instanz und an jedes Gerät fest gek
 % Zusätzlich wird der Erfolg von relevanten Angriffen auf Majority Arbiter \acsp{PUF} und Majority \acs{XOR} Arbiter \acsp{PUF} untersucht.
 Jedoch können bestimmte \acsp{PUF} mittels Machine Learning Angriffen erfolgreich angegriffen werden.
 Machine Learning Angriffe nutzen Ein- und Ausgabepaare der zu angreifenden \acs{PUF}, um ein Model dieser zu bilden.
-Das Model kann im Anschluss für das Vorhersagen von Ausgaben zu neuen Eingaben, der angegriffenen \acs{PUF}, genutzt werden.
-Arbiter \acsp{PUF} und kleine \acs{XOR} Arbiter \acsp{PUF} können somit erfolgreich angegriffen werden wohingegen große \acs{XOR} Arbiter \acsp{PUF} resistent wären, aber durch Instabilität unbrauchbar sind.
+Das Model kann im Anschluss für das Vorhersagen von Ausgaben zu unbekannten Eingaben, der angegriffenen \acs{PUF}, genutzt werden.
+Arbiter \acsp{PUF} und kleine \acs{XOR} Arbiter \acsp{PUF} können somit erfolgreich angegriffen werden, wohingegen große \acs{XOR} Arbiter \acsp{PUF} resistent wären, aber durch Instabilität unbrauchbar sind.
 
 Um diese Angriffe zu verhindern, wird das Prinzip Majority Vote in Kombination mit Arbiter \acsp{PUF}, die für \acs{XOR} Arbiter \acsp{PUF} genutzt werden, angewandt.
-Sein Einfluss auf die Stabilität von Arbiter \acsp{PUF}, \acs{XOR} Arbiter \acsp{PUF} und relevante Angriffe wird mit Hilfe von Simulationen verifiziert.
+Sein Einfluss auf die Stabilität von Arbiter \acsp{PUF} und \acs{XOR} Arbiter \acsp{PUF} sowie relevanten Angriffen wird mit Hilfe von Simulationen verifiziert.
 Es wird gezeigt, dass Realisierungen von großen Majority \acs{XOR} Arbiter \acsp{PUF} durch die Kombination von Majority Vote und Arbiter \acsp{PUF} möglich sind.
 Darüber hinaus wird nachgewiesen, dass für große Majority \acs{XOR} Arbiter \acsp{PUF} die Komplexität der nicht invasiven Angriffe exponentiell steigt bei einem linearen Wachstum ihrer Größe.
 Aus diesem Grund können große Majority \acs{XOR} Arbiter \acsp{PUF} als Fundament für Machine Learning resistente \acsp{PUF} dienen.
